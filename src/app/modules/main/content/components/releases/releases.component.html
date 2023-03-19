@@ -1,0 +1,90 @@
+<div class="w-full flex items-start px-4">
+    
+    <!-- Lists -->
+    <div class="w-7/12 p-3">
+        <div class="w-full p-3 border border-gray-200 rounded-md my-4">
+            
+            <!-- Title -->
+            <div class="w-full text-lg px-3 text-gray-800">All Releases</div>
+
+            <!-- Release List -->
+            <div class="w-full mt-4">
+                <div class="w-full flex justify-between items-center p-3 border-b border-gray-100 hover:bg-gray-50" *ngFor="let release of releaseItems">
+                    <div class="">
+                        <div class=" text-gray-800">{{release.title}}</div>
+                        <div class="text-gray-400 text-xs py-2">{{release.tag}}</div>
+                        <div class="text-gray-400 text-xs">{{release.instance}}</div>
+                    </div>
+                    <div class="flex content-center">
+                        <div class="">
+                            <div class="text-right">
+                                <span class="text-right text-xs px-3 rounded-full" [ngClass]="getStatusStyle(release.status)">{{release.status}}</span>
+                            </div>
+                            <div class="mt-1 text-gray-400 text-xs flex content-center"><mat-icon class="text-xs">date_range</mat-icon>Closing On {{release.closeDate}}</div>
+                        </div>
+                        <div class="ml-4">
+                            <button mat-icon-button class="text-gray-600">
+                                <mat-icon>keyboard_arrow_right</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Associations -->
+    <div class="w-5/12 p-3">
+        <!-- Release Stats -->
+        <div class="w-full p-3 border border-gray-200 rounded-md my-4">
+            <!-- Title -->
+            <div class="w-full text-lg px-2 text-gray-800">Release Stats</div>
+
+            <!-- Stats Block -->
+            <div class="w-full flex mt-4 p-1">
+                <div class="w-3/12 p-1">
+                    <div class="rounded-md p-4 py-2" [ngClass]="getStatusStyle('Completed')">
+                        <div class="text-xs">Completed</div>
+                        <div class="mt-6 text-3xl text-right">2</div>
+                    </div>
+                </div>
+                <div class="w-3/12 p-1">
+                    <div class="rounded-md p-4 py-2" [ngClass]="getStatusStyle('On Track')">
+                        <div class="text-xs">On Track</div>
+                        <div class="mt-6 text-3xl text-right">16</div>
+                    </div>
+                </div>
+                <div class="w-3/12 p-1">
+                    <div class="rounded-md p-4 py-2" [ngClass]="getStatusStyle('On Hold')">
+                        <div class="text-xs">On Hold</div>
+                        <div class="mt-6 text-3xl text-right">7</div>
+                    </div>
+                </div>
+                <div class="w-3/12 p-1">
+                    <div class="rounded-md p-4 py-2" [ngClass]="getStatusStyle('Delayed')">
+                        <div class="text-xs">Delayed</div>
+                        <div class="mt-6 text-3xl text-right">3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Release Notes -->
+        <div class="w-full p-3 border border-gray-200 rounded-md my-4">
+            <!-- Title -->
+            <div class="w-full text-lg px-2 text-gray-800">Release Notes</div>
+
+            <!-- Notes List -->
+            <div class="w-full py-4 px-2">
+                <div class="p-3 border border-gray-200 rounded-lg bg-gray-50 mb-3" *ngFor="let note of releaseNotes">
+                    <div class="font-bold text-xs">{{note.title}}</div>
+                    <div class="py-4 text-gray-400 text-xs">{{note.description}}</div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400 text-xs">{{note.createdDate}}</span>
+                        <span class="text-gray-400 text-xs">{{note.createdBy}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

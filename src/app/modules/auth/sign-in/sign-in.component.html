@@ -1,0 +1,90 @@
+<div class="w-full h-screen custom-bg-1 overflow-y-auto">
+
+    <!-- Logo Text -->
+    <div class="w-full pt-28 text-4xl logo-f1 text-center text-white">RELEASE <span class="text-blue-300 logo-f1">TRACKER</span></div>
+
+    <!-- Sign In Quick Brief Text -->
+    <div class="w-full text-center text-gray-300 text-2xl pt-12">
+        Get more things done by tracking and managing <br> your software release.
+    </div>
+
+    <!-- Sign In Form -->
+    <div class="w-full flex justify-center my-10">
+        <!-- Sign In Form -->
+        <form [formGroup]="signinForm" class="w-3/12" *ngIf="isRegisterFormEnabled === 'sign-in'">
+            <!-- Email -->
+            <mat-form-field class="w-full" appearance="outline">
+                <!-- <mat-label>Email</mat-label> -->
+                <input class=" bg-gray-500" type="email" matInput placeholder="Enter your Email ID" formControlName="email">
+                <mat-error>Email is <strong>Required!</strong></mat-error>
+            </mat-form-field>
+
+            <!-- Password -->
+            <mat-form-field class="w-full" appearance="outline">
+                <input [type]="hideLoginPassword ? 'password' : 'text'" matInput placeholder="Enter the Password" formControlName="password">
+                <button mat-icon-button matSuffix (click)="hideLoginPassword = !hideLoginPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideLoginPassword">
+                    <mat-icon>{{hideLoginPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                <mat-error>Password is <strong>Required!</strong>. Min 4 Characters.</mat-error>
+            </mat-form-field>
+
+            <!-- Sign In Button -->
+            <div class="w-full flex justify-center mt-3">
+                <button mat-flat-button class="" color="primary">Sign In</button>
+            </div>
+
+            <!-- Register Form Navigate -->
+            <div class="w-full text-center mt-10 text-white">
+                Not a member yet ? <span class="text-green-400 font-bold cursor-pointer" (click)="toggleRegisterForm('register')">Register Now!</span>
+            </div>
+        </form>
+
+        <!-- Register Form -->
+        <form [formGroup]="registerForm" class="w-3/12" *ngIf="isRegisterFormEnabled === 'register'">
+            <div class="w-full flex justify-between">
+                <!-- First Name -->
+                <mat-form-field class="w-6/12 pr-2" appearance="outline">
+                    <!-- <mat-label>Email</mat-label> -->
+                    <input class=" bg-gray-500" type="text" matInput placeholder="First Name" formControlName="firstName">
+                    <mat-error>First Name is <strong>Required!</strong></mat-error>
+                </mat-form-field>
+
+                <!-- Last Name -->
+                <mat-form-field class="w-6/12 pl-2" appearance="outline">
+                    <!-- <mat-label>Email</mat-label> -->
+                    <input class=" bg-gray-500" type="text" matInput placeholder="Last Name" formControlName="lastName">
+                    <mat-error>Last Name is <strong>Required!</strong></mat-error>
+                </mat-form-field>
+            </div>
+            
+
+            <!-- Email -->
+            <mat-form-field class="w-full" appearance="outline">
+                <!-- <mat-label>Email</mat-label> -->
+                <input class=" bg-gray-500" type="email" matInput placeholder="Email ID" formControlName="email">
+                <mat-error>Email is <strong>Required!</strong></mat-error>
+            </mat-form-field>
+
+            <!-- Password -->
+            <mat-form-field class="w-full" appearance="outline">
+                <input [type]="hideLoginPassword ? 'password' : 'text'" matInput placeholder="Password" formControlName="password">
+                <button mat-icon-button matSuffix (click)="hideLoginPassword = !hideLoginPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideLoginPassword">
+                    <mat-icon>{{hideLoginPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                <mat-error>Password is <strong>Required!</strong></mat-error>
+            </mat-form-field>
+
+            <!-- Register Button -->
+            <div class="w-full flex justify-center mt-3">
+                <button mat-flat-button class="bg-green-400">Register</button>
+            </div>
+
+            <!-- Register Form Navigate -->
+            <div class="w-full text-center mt-6 text-white">
+                Already have an account ? <span class="text-blue-300 font-bold cursor-pointer" (click)="toggleRegisterForm('sign-in')">Sign In Now!</span>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- A release tracker is a tool or system used to manage the process of releasing software or other products. It typically includes features such as version control, issue tracking, and project management to ensure that releases are completed on time, within budget, and with minimal errors. The release tracker helps to keep track of the status of each release, including bugs or issues that have been identified, fixes that have been implemented, and testing results. It may also include features for managing user feedback and communicating with stakeholders. Overall, a release tracker is essential for managing the complex process of releasing software or products to ensure a successful and timely launch. -->
