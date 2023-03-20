@@ -1,22 +1,27 @@
 export const contentMenu = [
     {
         icon: 'linear_scale',
-        name: 'Releases'
+        name: 'Releases',
+        route: 'releases'
     },
     {
         icon: 'leak_add',
-        name: 'Instances'
+        name: 'Instances',
+        route: 'instances'
     },
     {
         icon: 'pages',
-        name: 'Projects'
+        name: 'Projects',
+        route: 'projects'
     },
     {
         icon: 'timeline',
-        name: 'Timelines'
+        name: 'Timelines',
+        route: 'timelines'
     },
     {
         icon: 'event_seat',
-        name: 'Admin'
+        name: 'Admin',
+        route: 'admin'
     }
 ];

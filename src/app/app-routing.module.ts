@@ -5,7 +5,12 @@ import { MainComponent } from './modules/main/main.component';
 
 const routes: Routes = [
   {
-    component: MainComponent, path: 'main'
+    component: MainComponent, path: 'main',
+    children : [
+      {
+        path: '', loadChildren: () => import('./modules/main/main.module').then(m => m.MainModule)
+      }
+    ]
   },
   {
     component: SignInComponent, path: ''
