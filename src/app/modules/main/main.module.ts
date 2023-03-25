@@ -16,6 +16,10 @@ import { ReleaseViewComponent } from './content/components/releases/components/r
     CommonModule,
     MainRoutingModule,
     SharedModule
+  ],
+  exports: [
+    ReleasesComponent,
+    ReleaseViewComponent
   ]
 })
 export class MainModule { }
