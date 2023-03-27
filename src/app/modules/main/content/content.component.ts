@@ -12,7 +12,15 @@ export class ContentComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+    // Set Menu Active style by validating if the URL has the required menu route.
+    for(const menu of this.contentMenuOption) {
+      if(window.location.href.includes(menu.route)) {
+        this.activeContentMenu = menu.name;
+      }
+    }
+  }
 
 
   
