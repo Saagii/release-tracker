@@ -40,3 +40,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-form-field-appearance-outline:not(.mat-form-field-disabled) .mat-form-field-flex:hover .mat-form-field-outline {
     opacity: 1!important;
 }
+
+.mat-expansion-panel:not([class*=mat-elevation-z]) {
+    box-shadow: none;
+}
+
+.mat-expansion-indicator ng-tns-c162-1 ng-trigger ng-trigger-indicatorRotate ng-star-inserted::after {
+    border-color: #2d2e2f !important;
+}
+
+.mat-expansion-panel-header-description, 
+.mat-expansion-indicator::after {
+    color: rgb(119, 119, 119);
+}
+
+.mat-expansion-indicator::after {
+    color: green;
+  }

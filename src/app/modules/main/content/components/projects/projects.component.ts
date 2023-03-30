@@ -11,7 +11,7 @@ export class ProjectsComponent implements OnInit {
 
   projectsList: any[] = projectsListMockData;
   projectDataSource: any = new MatTableDataSource([]);
-  projectDisplayColumns: any = ['projectName', 'members', 'lastUpdatedOn'];
+  projectDisplayColumns: string[] = ['projectName', 'members', 'lastUpdatedOn'];
 
   constructor(
     private statusService: StatusService

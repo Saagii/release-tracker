@@ -2,7 +2,7 @@
     <div class="w-full p-2 rounded-xl border border-gray-200">
         <!-- Title -->
         <div class="w-full my-2 px-4 text-blue-500 text-lg font-bold text-center">Create New</div>
-        <div class="flex p-4 items-center hover:text-blue-500 hover:rounded-xl cursor-pointer" *ngFor="let menu of navMenuOptions">
+        <div class="flex p-4 items-center hover:text-blue-500 hover:rounded-xl cursor-pointer" *ngFor="let menu of navMenuOptions" mat-dialog-close [routerLink]="['../', 'main', 'projects', 'create']">
             <div class="p-4 flex items-center rounded-xl bg-gray-100">
                 <mat-icon class="">{{menu.icon}}</mat-icon>
             </div>

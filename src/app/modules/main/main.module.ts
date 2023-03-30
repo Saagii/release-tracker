@@ -5,6 +5,7 @@ import { MainRoutingModule } from './main-routing.module';
 import { ReleasesComponent } from './content/components/releases/releases.component';
 import { ReleaseViewComponent } from './content/components/releases/components/release-view/release-view.component';
 import { ProjectViewComponent } from './content/components/projects/components/project-view/project-view.component';
+import { ProjectCreateEditComponent } from './content/components/projects/components/project-create-edit/project-create-edit.component';
 
 
 
@@ -12,7 +13,8 @@ import { ProjectViewComponent } from './content/components/projects/components/p
   declarations: [
     ReleasesComponent,
     ReleaseViewComponent,
-    ProjectViewComponent
+    ProjectViewComponent,
+    ProjectCreateEditComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,9 @@ import { ProjectViewComponent } from './content/components/projects/components/p
   ],
   exports: [
     ReleasesComponent,
-    ReleaseViewComponent
+    ReleaseViewComponent,
+    ProjectViewComponent,
+    ProjectCreateEditComponent
   ]
 })
 export class MainModule { }

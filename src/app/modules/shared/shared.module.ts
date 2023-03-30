@@ -8,6 +8,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatExpansionModule} from '@angular/material/expansion';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
@@ -23,6 +24,7 @@ import { CommonModule } from '@angular/common';
     MatFormFieldModule,
     MatTooltipModule,
     CommonModule,
+    MatExpansionModule
   ],
   exports: [
     MatIconModule,
@@ -34,7 +36,8 @@ import { CommonModule } from '@angular/common';
     MatInputModule,
     MatFormFieldModule,
     MatTooltipModule,
-    CommonModule
+    CommonModule,
+    MatExpansionModule
   ]
 })
 export class SharedModule { }
