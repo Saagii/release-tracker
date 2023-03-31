@@ -10,6 +10,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [],
@@ -24,7 +27,10 @@ import { CommonModule } from '@angular/common';
     MatFormFieldModule,
     MatTooltipModule,
     CommonModule,
-    MatExpansionModule
+    MatExpansionModule,
+    FormsModule, ReactiveFormsModule,
+    MatSelectModule,
+    MatDatepickerModule
   ],
   exports: [
     MatIconModule,
@@ -37,7 +43,10 @@ import { CommonModule } from '@angular/common';
     MatFormFieldModule,
     MatTooltipModule,
     CommonModule,
-    MatExpansionModule
+    MatExpansionModule,
+    FormsModule, ReactiveFormsModule,
+    MatSelectModule,
+    MatDatepickerModule
   ]
 })
 export class SharedModule { }

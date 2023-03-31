@@ -8,11 +8,15 @@ import { ProjectsComponent } from './content/components/projects/projects.compon
 import { ReleaseViewComponent } from './content/components/releases/components/release-view/release-view.component';
 import { ReleasesComponent } from './content/components/releases/releases.component';
 import { TimelinesComponent } from './content/components/timelines/timelines.component';
+import { ReleaseCreateEditComponent } from './content/components/releases/components/release-create-edit/release-create-edit.component';
 
 const mainRoutes: Routes = [
   { path: '', redirectTo: 'releases', pathMatch: 'full' },
   {
     path: 'releases', component: ReleasesComponent
+  },
+  {
+    path: 'releases/create', component: ReleaseCreateEditComponent
   },
   {
     path: 'instances', component: InstancesComponent

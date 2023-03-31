@@ -17,6 +17,144 @@
                     <div class="text-2xl text-gray-700 flex items-center">Create New Project</div>
                 </div>
             </div>
+
+            <!-- Create / Edit Form -->
+            <div class="w-full mt-10">
+                <form class="w-full" [formGroup]="projectCreateEditForm">
+                    <!-- Client Selection -->
+                    <div class="w-full flex justify-start items-start pb-4 border-b border-gray-200">
+                        <div class="w-3/12">
+                            <div class="w-full text-lg">Client</div>
+                            <div class="w-full text-xs text-gray-500">Select client for the project.</div>
+                        </div>
+                        <div class="w-4/12">
+                            <!-- Client -->
+                            <mat-form-field class="w-full" appearance="outline">
+                                <mat-select placeholder="Select Client" required>
+                                    <mat-option *ngFor="let client of [0,1,2,3,4]; let i=index;" [value]="i+1">
+                                      Client {{i+1}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>Client is <strong>Required!</strong></mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <!-- Project Details -->
+                    <div class="w-full flex justify-start items-start mt-10 pb-4 border-b border-gray-200">
+                        <div class="w-3/12">
+                            <div class="w-full text-lg">Basic Details</div>
+                            <div class="w-full text-xs text-gray-500">Enter all the required details and initiate the project. </div>
+                        </div>
+                        <div class="w-4/12">
+                            <!-- Project Name -->
+                            <mat-form-field class="w-full" appearance="outline">
+                                <input type="text" matInput placeholder="Project Name" formControlName="projectName" required>
+                                <mat-error>Project Name is <strong>Required!</strong></mat-error>
+                            </mat-form-field>
+
+                            <!-- Project Summary -->
+                            <mat-form-field class="w-full mt-4" appearance="outline">
+                                <textarea matInput placeholder="Project Summary" formControlName="projectSummary" required></textarea>
+                                <mat-error>Project Summary is <strong>Required!</strong></mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <!-- Team Members -->
+                    <div class="w-full flex justify-start items-start mt-10 pb-10 border-b border-gray-200">
+                        <div class="w-3/12">
+                            <div class="w-full text-lg">Team Members</div>
+                            <div class="w-full text-xs text-gray-500">Add respective team member to your project.</div>
+                        </div>
+                        <div class="w-8/12">
+                            <div class="w-full border border-gray-200 rounded-md">
+
+                                <!-- Front-end Developers -->
+                                <div class="w-full p-6 border-b border-gray-200">
+                                    <div class="w-full flex justify-between">
+                                        <span>Front-end Developers</span>
+                                    </div>
+                                    <div class="w-full flex justify-start mt-4">
+                                        <button mat-stroked-button class="text-xs">+ Add</button>
+                                        <span class="text-white bg-blue-500 rounded-full pl-4 pr-2 py-1 ml-4 text-xs flex items-center">Sagar <mat-icon class="text-base ml-2">cancel</mat-icon></span>
+                                        <span class="text-white bg-blue-500 rounded-full pl-4 pr-2 py-1 ml-4 text-xs flex items-center">Sagar <mat-icon class="text-base ml-2">cancel</mat-icon></span>
+                                        <span class="text-white bg-blue-500 rounded-full pl-4 pr-2 py-1 ml-4 text-xs flex items-center">Sagar <mat-icon class="text-base ml-2">cancel</mat-icon></span>
+                                    </div>
+                                </div>
+
+                                <!-- Backend Developers -->
+                                <div class="w-full p-6 border-b border-gray-200">
+                                    <div class="w-full flex justify-between">
+                                        <span>Backed-end Developers</span>
+                                    </div>
+                                    <div class="w-full flex justify-start mt-4">
+                                        <button mat-stroked-button class="text-xs">+ Add</button>
+                                        <span class="text-white bg-blue-500 rounded-full pl-4 pr-2 py-1 ml-4 text-xs flex items-center">Sagar <mat-icon class="text-base ml-2">cancel</mat-icon></span>
+                                        <span class="text-white bg-blue-500 rounded-full pl-4 pr-2 py-1 ml-4 text-xs flex items-center">Sagar <mat-icon class="text-base ml-2">cancel</mat-icon></span>
+                                        <span class="text-white bg-blue-500 rounded-full pl-4 pr-2 py-1 ml-4 text-xs flex items-center">Sagar <mat-icon class="text-base ml-2">cancel</mat-icon></span>
+                                        <span class="text-white bg-blue-500 rounded-full pl-4 pr-2 py-1 ml-4 text-xs flex items-center">Sagar <mat-icon class="text-base ml-2">cancel</mat-icon></span>
+                                        <span class="text-white bg-blue-500 rounded-full pl-4 pr-2 py-1 ml-4 text-xs flex items-center">Sagar <mat-icon class="text-base ml-2">cancel</mat-icon></span>
+                                        <span class="text-white bg-blue-500 rounded-full pl-4 pr-2 py-1 ml-4 text-xs flex items-center">Sagar <mat-icon class="text-base ml-2">cancel</mat-icon></span>
+                                    </div>
+                                </div>
+
+                                <!-- QA -->
+                                <div class="w-full p-6 border-b border-gray-200">
+                                    <div class="w-full flex justify-between">
+                                        <span>QA (Quality Analysts)</span>
+                                    </div>
+                                    <div class="w-full flex justify-start mt-4">
+                                        <button mat-stroked-button class="text-xs">+ Add</button>
+                                        <span class="text-white bg-blue-500 rounded-full pl-4 pr-2 py-1 ml-4 text-xs flex items-center">Sagar <mat-icon class="text-base ml-2">cancel</mat-icon></span>
+                                        <span class="text-white bg-blue-500 rounded-full pl-4 pr-2 py-1 ml-4 text-xs flex items-center">Sagar <mat-icon class="text-base ml-2">cancel</mat-icon></span>
+                                    </div>
+                                </div>
+
+                                <!-- Configurations & Support -->
+                                <div class="w-full p-6 border-b border-gray-200">
+                                    <div class="w-full flex justify-between">
+                                        <span>Configurations & Support</span>
+                                    </div>
+                                    <div class="w-full flex justify-start mt-4">
+                                        <button mat-stroked-button class="text-xs">+ Add</button>
+                                        <span class="text-white bg-blue-500 rounded-full pl-4 pr-2 py-1 ml-4 text-xs flex items-center">Sagar <mat-icon class="text-base ml-2">cancel</mat-icon></span>
+                                    </div>
+                                </div>
+
+                                <!-- Project Manager -->
+                                <div class="w-full p-6 border-b border-gray-200">
+                                    <div class="w-full flex justify-between">
+                                        <span>Project Manager</span>
+                                    </div>
+                                    <div class="w-full flex justify-start mt-4">
+                                        <button mat-stroked-button class="text-xs">+ Add</button>
+                                        <span class="text-white bg-blue-500 rounded-full pl-4 pr-2 py-1 ml-4 text-xs flex items-center">Sagar <mat-icon class="text-base ml-2">cancel</mat-icon></span>
+                                    </div>
+                                </div>
+
+                                <!-- Project Lead -->
+                                <div class="w-full p-6">
+                                    <div class="w-full flex justify-between">
+                                        <span>Project Lead</span>
+                                    </div>
+                                    <div class="w-full flex justify-start mt-4">
+                                        <button mat-stroked-button class="text-xs">+ Add</button>
+                                        <span class="text-white bg-blue-500 rounded-full pl-4 pr-2 py-1 ml-4 text-xs flex items-center">Sagar <mat-icon class="text-base ml-2">cancel</mat-icon></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="w-full flex justify-end p-6">
+                        <button mat-button class="">Cancel</button>
+                        <button mat-flat-button class="bg-blue-500 text-white" style="margin-left: 3%;">Create Project</button>
+                    </div>
+                </form>
+                
+            </div>
         </div>
     </div>
 </div>
