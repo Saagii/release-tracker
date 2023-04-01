@@ -7,6 +7,7 @@ import { ReleaseViewComponent } from './content/components/releases/components/r
 import { ProjectViewComponent } from './content/components/projects/components/project-view/project-view.component';
 import { ProjectCreateEditComponent } from './content/components/projects/components/project-create-edit/project-create-edit.component';
 import { ReleaseCreateEditComponent } from './content/components/releases/components/release-create-edit/release-create-edit.component';
+import { InstanceCreateEditComponent } from './content/components/instances/components/instances-create-edit/instances-create-edit.component';
 
 
 
@@ -16,7 +17,8 @@ import { ReleaseCreateEditComponent } from './content/components/releases/compon
     ReleaseViewComponent,
     ProjectViewComponent,
     ProjectCreateEditComponent,
-    ReleaseCreateEditComponent
+    ReleaseCreateEditComponent,
+    InstanceCreateEditComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +30,8 @@ import { ReleaseCreateEditComponent } from './content/components/releases/compon
     ReleaseViewComponent,
     ProjectViewComponent,
     ProjectCreateEditComponent,
-    ReleaseCreateEditComponent
+    ReleaseCreateEditComponent,
+    InstanceCreateEditComponent
   ]
 })
 export class MainModule { }

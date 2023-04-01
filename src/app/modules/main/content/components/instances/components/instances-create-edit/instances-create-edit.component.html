@@ -1,0 +1,99 @@
+<div class="w-full px-4">
+    <div class="w-full my-2 p-4">
+        <!-- Back to Instances list Navigation-->
+        <div class="" style="width: fit-content">
+            <a class=""  [routerLink]="['../']">
+                <div class="flex items-center hover:text-blue-500">
+                    <mat-icon class="text-base -ml-1 -mr-1">keyboard_arrow_left</mat-icon>Back
+                </div>
+            </a>
+        </div>
+
+        <!-- Create Instance Content -->
+        <div class="w-full mt-4">
+            <!-- Title -->
+            <div class="w-full flex justify-between items-center">
+                <div class="">
+                    <div class="text-2xl text-gray-700 flex items-center">Create New Instance</div>
+                </div>
+            </div>
+
+            <!-- Create / Edit Form -->
+            <div class="w-full mt-10">
+                <form class="w-full" [formGroup]="instanceCreateEditForm">
+                    <!-- Client Selection -->
+                    <div class="w-full flex justify-start items-start pb-4 border-b border-gray-200">
+                        <div class="w-3/12">
+                            <div class="w-full text-lg">Client</div>
+                            <div class="w-full text-xs text-gray-500">Select client for the Instance.</div>
+                        </div>
+                        <div class="w-4/12">
+                            <!-- Client -->
+                            <mat-form-field class="w-full" appearance="outline">
+                                <mat-label>Client</mat-label>
+                                <mat-select placeholder="Select Client" required>
+                                    <mat-option *ngFor="let client of [0,1,2,3,4]; let i=index;" [value]="i+1">
+                                      Client {{i+1}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>Client is <strong>Required!</strong></mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <!-- Instance Details -->
+                    <div class="w-full flex justify-start items-start mt-10 pb-4 border-b border-gray-200">
+                        <div class="w-3/12">
+                            <div class="w-full text-lg">Instance Details</div>
+                            <div class="w-full text-xs text-gray-500">Enter all the required details. </div>
+                        </div>
+                        <div class="w-4/12">
+                            <!-- Instance URL -->
+                            <mat-form-field class="w-full" appearance="outline">
+                                <mat-label>Instance URL</mat-label>
+                                <input type="text" matInput placeholder="Instance URL" formControlName="instanceURL" required>
+                                <mat-error>Instance URL is <strong>Required!</strong></mat-error>
+                            </mat-form-field>
+
+                            <!-- Instance Type -->
+                            <mat-form-field class="w-full" appearance="outline">
+                                <mat-label>Instance Type</mat-label>
+                                <mat-select placeholder="Select Instance Type" required>
+                                    <mat-option *ngFor="let instance of ['UAT','Dev','QA','Pre-prod','Production']; let i=index;" [value]="i+1">
+                                      {{instance}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>Instance Type is <strong>Required!</strong></mat-error>
+                            </mat-form-field>
+
+                            <!-- Instance Status -->
+                            <mat-form-field class="w-full" appearance="outline">
+                                <mat-label>Instance Status</mat-label>
+                                <mat-select placeholder="Select Instance Status" required>
+                                    <mat-option *ngFor="let status of ['Active','Stalled','Stopped']; let i=index;" [value]="i+1">
+                                      {{status}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>Instance Type is <strong>Required!</strong></mat-error>
+                            </mat-form-field>
+
+                            <!-- Instance Branch -->
+                            <mat-form-field class="w-full" appearance="outline">
+                                <mat-label>Instance Branch</mat-label>
+                                <input type="text" matInput placeholder="Instance Branch" formControlName="instanceBranch" required>
+                                <mat-error>Instance Branch is <strong>Required!</strong></mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="w-full flex justify-end p-6">
+                        <button mat-button class="">Cancel</button>
+                        <button mat-flat-button class="bg-blue-500 text-white" style="margin-left: 3%;">Create Instance</button>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>

@@ -9,6 +9,7 @@ import { ReleaseViewComponent } from './content/components/releases/components/r
 import { ReleasesComponent } from './content/components/releases/releases.component';
 import { TimelinesComponent } from './content/components/timelines/timelines.component';
 import { ReleaseCreateEditComponent } from './content/components/releases/components/release-create-edit/release-create-edit.component';
+import { InstanceCreateEditComponent } from './content/components/instances/components/instances-create-edit/instances-create-edit.component';
 
 const mainRoutes: Routes = [
   { path: '', redirectTo: 'releases', pathMatch: 'full' },
@@ -20,6 +21,9 @@ const mainRoutes: Routes = [
   },
   {
     path: 'instances', component: InstancesComponent
+  },
+  {
+    path: 'instances/create', component: InstanceCreateEditComponent
   },
   {
     path: 'projects', component: ProjectsComponent

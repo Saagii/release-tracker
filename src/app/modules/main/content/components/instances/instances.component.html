@@ -11,9 +11,12 @@
                     <div class="w-full p-4 border border-gray-200 hover:bg-gray-50 hover:border-gray-300 rounded-lg">
                         <div class="w-full flex justify-between items-center">
                             <div class="text-gray-800 text-lg mb-2">{{instance.client}}</div>
-                            <button mat-icon-button class="">
-                                <mat-icon class="text-blue-500" matTooltip="Add New Instance">add_circle</mat-icon>
-                            </button>
+                            <a [routerLink]="['create']">
+                                <button mat-icon-button class="">
+                                    <mat-icon class="text-blue-500" matTooltip="Add New Instance">add_circle</mat-icon>
+                                </button>
+                            </a>
+                            
                         </div>
                         <div class="mb-4 flex justify-between items-end border-b border-gray-100 " *ngFor="let url of instance.instances">
                             <div class="">
