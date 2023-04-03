@@ -15,6 +15,11 @@ export const contentMenu = [
         route: 'projects'
     },
     {
+        icon: 'streetview',
+        name: 'Clients',
+        route: 'clients'
+    },
+    {
         icon: 'timeline',
         name: 'Timelines',
         route: 'timelines'

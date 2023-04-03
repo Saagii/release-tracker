@@ -14,13 +14,19 @@ export const navigationNewMenu = [
     {
         icon: 'pages',
         name: 'Project',
-        description: 'Kick off new Project with quick and easy road map.',
+        description: 'Kick off new Project with quick and easy tracking.',
         route: ['projects', 'create']
+    },
+    {
+        icon: 'streetview',
+        name: 'Client',
+        description: 'Add new client and start off new project.',
+        route: ['clients', 'create']
     },
     {
         icon: 'account_circle',
         name: 'Member',
         description: 'Create a new Member and be a part of project.',
-        route: ['member', 'create']
+        route: ['members', 'create']
     }
 ];

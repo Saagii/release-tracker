@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { StatusService } from 'src/app/modules/shared/services/status.service';
-import { projectsListMockData } from '../../data/projects-list-mock-data';
+import { clientsProjectMockData } from '../../data/clients-project-mock-data';
 
 @Component({
   selector: 'app-projects',
@@ -9,7 +9,7 @@ import { projectsListMockData } from '../../data/projects-list-mock-data';
 })
 export class ProjectsComponent implements OnInit {
 
-  projectsList: any[] = projectsListMockData;
+  projectsList: any[] = clientsProjectMockData;
   projectDataSource: any = new MatTableDataSource([]);
   projectDisplayColumns: string[] = ['projectName', 'members', 'lastUpdatedOn'];
 
@@ -17,9 +17,7 @@ export class ProjectsComponent implements OnInit {
     private statusService: StatusService
   ) {}
 
-  ngOnInit(): void {
-    this.projectDataSource.data = projectsListMockData;
-  }
+  ngOnInit(): void {}
 
   /*
     Get Status Style
