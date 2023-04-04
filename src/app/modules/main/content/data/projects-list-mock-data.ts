@@ -1,45 +1,44 @@
-export const projectsListMockData = [
-    {
-        clientId: '123',
-        clientName: 'Client ABC',
-        projects: [
-            {
-                projectName: 'Project Bazaar',
-                lastUpdatedDate: '23rd March 2023',
-                totalMembers: 12,
-                leadMember: 'Sagar'
-            },
-            {
-                projectName: 'Project Bazaar',
-                lastUpdatedDate: '23rd March 2023',
-                totalMembers: 12,
-                leadMember: 'Sagar'
-            },
-            {
-                projectName: 'Project Bazaar',
-                lastUpdatedDate: '23rd March 2023',
-                totalMembers: 12,
-                leadMember: 'Sagar'
-            }
-        ]
-    },
-    {
-        clientId: '789879',
-        clientName: 'Client XYZ',
-        projects: [
-            {
-                projectName: 'Project Bazaar',
-                lastUpdatedDate: '23rd March 2023',
-                totalMembers: 12,
-                leadMember: 'Sagar'
-            },
-            {
-                projectName: 'Project Bazaar',
-                lastUpdatedDate: '23rd March 2023',
-                totalMembers: 12,
-                leadMember: 'Sagar'
-            }
-        ]
-    }
-    
-];
+export const projectsListMockData = {
+    projects: [
+        {
+            id: '456',
+            projectName: 'Project Bazaar',
+            totalMembers: 12,
+            projectManager: 'Sagar Desai',
+            projectManagerId: '2344',
+            projectType: 'GL',
+            clientId: 345,
+            clientName: 'Client Name'
+        },
+        {
+            id: '456',
+            projectName: 'Project Bazaar',
+            totalMembers: 12,
+            projectManager: 'Sagar Desai',
+            projectManagerId: '2344',
+            projectType: 'GL',
+            clientId: 345,
+            clientName: 'Client Name'
+        },
+        {
+            id: '456',
+            projectName: 'Project Bazaar',
+            totalMembers: 12,
+            projectManager: 'Sagar Desai',
+            projectManagerId: '2344',
+            projectType: 'GL',
+            clientId: 345,
+            clientName: 'Client Name'
+        },
+        {
+            id: '456',
+            projectName: 'Project Bazaar',
+            totalMembers: 12,
+            projectManager: 'Sagar Desai',
+            projectManagerId: '2344',
+            projectType: 'GL',
+            clientId: 345,
+            clientName: 'Client Name'
+        }
+    ]
+};
