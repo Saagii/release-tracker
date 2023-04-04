@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { StatusService } from 'src/app/modules/shared/services/status.service';
-import { clientsMockData } from '../../data/clients-project-mock-data';
+import { clientsMockData } from '../../../../data/clients-mock-data';
 
 @Component({
   selector: 'app-client-profile',

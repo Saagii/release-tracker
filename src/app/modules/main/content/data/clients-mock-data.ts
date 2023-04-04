@@ -1,4 +1,4 @@
-export const clientsProjectMockData = [
+export const clientsMockData = [
     {
         clientName: 'Client Name 1',
         clientId: '345',
