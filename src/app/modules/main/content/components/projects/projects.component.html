@@ -4,31 +4,14 @@
     <div class="w-full p-3">
         <div class="w-full p-3 border border-gray-200 rounded-md my-4">
             <!-- Title -->
-            <div class="w-full text-lg px-3 text-gray-800">Projects</div>
-
-            <!-- List -->
-            <!-- <div class="w-full flex flex-wrap justify-start my-8" *ngFor="let project of projectsList">
-                <div class="w-full px-3">{{project.clientName}}</div>
-                <div class="w-full px-3 text-xs text-gray-500">{{project.projects.length}} Projects</div>
-                <div class="w-3/12 p-2 mt-2" *ngFor="let item of project.projects">
-                    <div class="w-full p-3 border border-gray-200 rounded-md hover:border-gray-300 hover:shadow-lg">
-                        <div class="text-blue-500 text-base">{{item.projectName}}</div>
-                        <div class="text-xs text-gray-400">{{item.totalMembers}} Members</div>
-                        <div class="mt-4 flex justify-between items-center">
-                            <div class="">
-                                <span class="text-xs text-gray-400 ">Manager</span>
-                                <br>
-                                <span class="text-sm text-gray-600">{{item.projectManager}}</span>
-                            </div>
-                            <div class="">
-                                <button mat-icon-button color="primary" [routerLink]="['./', 567]">
-                                    <mat-icon>chevron_right</mat-icon>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+            <div class="w-full flex justify-between">
+              <div class="text-lg px-3 text-gray-800">Projects</div>
+              <div class="px-3">
+                  <button mat-button class="text-xs">
+                      <mat-icon class="text-lg -mt-1 -ml-2">filter_list</mat-icon> Filter
+                  </button>
+              </div>
+            </div>
 
             <div class="w-full p-3">
                 <table mat-table [dataSource]="projectsList" class="w-full border border-gray-200 rounded-md">
@@ -60,7 +43,7 @@
                     <!-- Weight Column -->
                     <ng-container matColumnDef="totalMembers">
                       <th mat-header-cell *matHeaderCellDef class="text-xs font-bold"> Total Members </th>
-                      <td mat-cell *matCellDef="let element" class="text-gray-600"> {{element.totalMembers}} Members </td>
+                      <td mat-cell *matCellDef="let element" class="text-gray-600"> {{element.totalMembers}} <span class="text-xs">Members</span> </td>
                     </ng-container>
 
                     <!-- Weight Column -->
@@ -69,7 +52,7 @@
                       <td mat-cell *matCellDef="let element" class="text-gray-600"> <button mat-icon-button class=""><mat-icon>more_vert</mat-icon></button> </td>
                     </ng-container>
                   
-                    <tr mat-header-row *matHeaderRowDef="projectDisplayColumns" class="bg-gray-50"></tr>
+                    <tr mat-header-row *matHeaderRowDef="projectDisplayColumns" class="bg-gray-50 text-gray-500"></tr>
                     <tr mat-row *matRowDef="let row; columns: projectDisplayColumns;" class="cursor-pointer hover:bg-gray-50"></tr>
                 </table>
             </div>

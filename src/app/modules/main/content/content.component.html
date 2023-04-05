@@ -2,12 +2,12 @@
     <!-- Content Navigation -->
     <div class="w-full flex bg-gray-700 px-6 py-2">
         <div 
-        class="text-white mr-10 rounded-md cursor-pointer border border-gray-700 hover:border-gray-500" 
-        [ngClass]="{'bg-gray-550 border-gray-600': activeContentMenu === menu.name}" 
+        class="text-white mr-10"  
         *ngFor="let menu of contentMenuOption"
         (click)="activeContentMenu = menu.name" >
             <a [routerLink]="[menu.route]">
-                <div class="flex content-center px-4 pt-1  ">
+                <div class="flex content-center px-4 pt-1 rounded-md cursor-pointer border border-gray-700 hover:border-gray-500"
+                [ngClass]="{'bg-gray-550 border-gray-600': activeContentMenu === menu.name}">
                     <div class="">
                         <mat-icon class=" text-sm">{{menu.icon}}</mat-icon>
                     </div>

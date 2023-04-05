@@ -8,6 +8,8 @@ import { ProjectViewComponent } from './content/components/projects/components/p
 import { ProjectCreateEditComponent } from './content/components/projects/components/project-create-edit/project-create-edit.component';
 import { ReleaseCreateEditComponent } from './content/components/releases/components/release-create-edit/release-create-edit.component';
 import { InstanceCreateEditComponent } from './content/components/instances/components/instances-create-edit/instances-create-edit.component';
+import { ClientsComponent } from './content/components/clients/clients.component';
+import { ClientProfileComponent } from './content/components/clients/components/client-profile/client-profile.component';
 
 
 
@@ -18,7 +20,9 @@ import { InstanceCreateEditComponent } from './content/components/instances/comp
     ProjectViewComponent,
     ProjectCreateEditComponent,
     ReleaseCreateEditComponent,
-    InstanceCreateEditComponent
+    InstanceCreateEditComponent,
+    ClientsComponent,
+    ClientProfileComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +35,9 @@ import { InstanceCreateEditComponent } from './content/components/instances/comp
     ProjectViewComponent,
     ProjectCreateEditComponent,
     ReleaseCreateEditComponent,
-    InstanceCreateEditComponent
+    InstanceCreateEditComponent,
+    ClientsComponent,
+    ClientProfileComponent
   ]
 })
 export class MainModule { }

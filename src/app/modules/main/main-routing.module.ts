@@ -10,6 +10,8 @@ import { ReleasesComponent } from './content/components/releases/releases.compon
 import { TimelinesComponent } from './content/components/timelines/timelines.component';
 import { ReleaseCreateEditComponent } from './content/components/releases/components/release-create-edit/release-create-edit.component';
 import { InstanceCreateEditComponent } from './content/components/instances/components/instances-create-edit/instances-create-edit.component';
+import { ClientsComponent } from './content/components/clients/clients.component';
+import { ClientProfileComponent } from './content/components/clients/components/client-profile/client-profile.component';
 
 const mainRoutes: Routes = [
   { path: '', redirectTo: 'releases', pathMatch: 'full' },
@@ -32,6 +34,9 @@ const mainRoutes: Routes = [
     path: 'projects/create', component: ProjectCreateEditComponent
   },
   {
+    path: 'clients', component: ClientsComponent
+  },
+  {
     path: 'timelines', component: TimelinesComponent
   },
   {
@@ -42,7 +47,10 @@ const mainRoutes: Routes = [
   },
   {
     path: 'projects/:id', component: ProjectViewComponent
-  }
+  },
+  {
+    path: 'clients/:id', component: ClientProfileComponent
+  },
 
 ];
 
