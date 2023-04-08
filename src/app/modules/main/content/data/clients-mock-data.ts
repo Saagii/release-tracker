@@ -2,7 +2,7 @@ export const clientsMockData = [
     {
         clientName: 'Client Name 1',
         clientId: '345',
-        tags: ['GL'],
+        lables: ['GL'],
         projects: [
             {
                 id: '456',
@@ -66,7 +66,7 @@ export const clientsMockData = [
     {
         clientName: 'Client Name 2',
         clientId: '345',
-        tags: ['PL', 'BL'],
+        lables: ['PL', 'BL'],
         projects: [
             {
                 id: '456',
@@ -116,7 +116,7 @@ export const clientsMockData = [
     {
         clientName: 'Client Name 3',
         clientId: '345',
-        tags: ['LOC', 'VCL'],
+        lables: ['LOC', 'VCL'],
         projects: [
             {
                 id: '456',

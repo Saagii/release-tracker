@@ -9,7 +9,7 @@ import { clientsMockData } from '../../data/clients-mock-data';
 export class ClientsComponent implements OnInit {
 
     clientsList: any[] = clientsMockData;
-    clientsDisplayColumns: string[] = ['clientName', 'tags', 'totalProjects', 'totalReleases', 'actions'];
+    clientsDisplayColumns: string[] = ['clientName', 'lables', 'totalProjects', 'totalReleases', 'actions'];
 
   constructor(
     private statusService: StatusService

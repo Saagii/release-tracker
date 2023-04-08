@@ -1,11 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { StatusService } from 'src/app/modules/shared/services/status.service';
+import { clientProfileMockData } from '../../../../data/client-profile-mock-data';
 
 @Component({
   selector: 'app-client-profile',
   templateUrl: './client-profile.component.html'
 })
 export class ClientProfileComponent implements OnInit {
+  
+  clientProfileData: any = clientProfileMockData;
 
   constructor(
     private statusService: StatusService

@@ -31,5 +31,65 @@
                 <mat-icon class="text-lg -mt-1">person</mat-icon> Sagar Desai
             </div>
         </div>
+
+        <!-- Client Associations: Projects, Instances, Releases, Demos -->
+        <div class="w-full py-6">
+            <mat-tab-group class=" border border-gray-200 rounded-md" mat-align-tabs="start">
+                <mat-tab label="Projects">
+                    <div class="w-full p-4 flex flex-wrap">
+                        <div class="w-4/12 p-4" *ngFor="let data of clientProfileData.projects">
+                            <div class="w-full border border-gray-200 rounded-md p-4 hover:border-gray-400">
+                                <div class="text-lg flex items-center">{{data.projectName}} <span class="bg-gray-100 px-1 text-xs rounded-md ml-2 border border-gray-200">{{data.projectType}}</span></div>
+                                <div class="text-gray-500 text-xs">{{data.totalMembers}} Members</div>
+                                <div class="w-full flex justify-between items-center mt-8">
+                                    <div class="">
+                                        <div class="text-gray-500 text-xs">Manager</div>
+                                        <div class="">Sagar Desai</div>
+                                    </div>
+                                    <div class="">
+                                        <button mat-icon-button class=""  [routerLink]="['../../', 'projects', 567]">
+                                            <mat-icon>chevron_right</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Instances">
+                    <div class="w-full p-4 flex flex-wrap">
+                        <div class="w-6/12 p-4" *ngFor="let instance of clientProfileData.instances">
+                            <div class="flex justify-between items-center w-full border border-gray-200 rounded-md p-4 hover:border-gray-400">
+                                <div class="">
+                                    <span class="text-xs text-xs rounded-lg">{{instance.type}}</span>
+                                    <div class="text-blue-500 font-bold pt-4">{{instance.path}}</div>
+                                    <div class="text-gray-500 text-xs text-gray-400 py-1">Branch: {{instance.branch}}</div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="">
+                                        <div class="text-right">
+                                            <span class="text-right text-xs px-3 rounded-full" [ngClass]="getStatusStyle(instance.status)">{{instance.status}}</span>
+                                        </div>
+                                        <div class="pt-1 text-gray-400 text-xs flex content-center"><mat-icon class="text-xs">date_range</mat-icon>Release Date {{instance.createdDate}}</div>
+                                    </div>
+                                    <div class="ml-4">
+                                        <button mat-icon-button [matMenuTriggerFor]="instanceMenu">
+                                            <mat-icon class="text-gray-700">more_vert</mat-icon>
+                                        </button>
+                                        <mat-menu #instanceMenu="matMenu">
+                                            <button mat-menu-item>Edit</button>
+                                            <button mat-menu-item>Delete</button>
+                                          </mat-menu>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </mat-tab>
+                <mat-tab label="Releases">Content 3</mat-tab>
+                <mat-tab label="Demos">Content 3</mat-tab>
+            </mat-tab-group>
+        </div>
     </div>
 </div>

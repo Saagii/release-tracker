@@ -57,3 +57,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-expansion-indicator::after {
     color: green;
   }
+
+::ng-deep mat-tab-header {
+  align-self: center;
+}
