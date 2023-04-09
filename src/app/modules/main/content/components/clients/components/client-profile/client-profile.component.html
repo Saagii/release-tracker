@@ -35,11 +35,13 @@
         <!-- Client Associations: Projects, Instances, Releases, Demos -->
         <div class="w-full py-6">
             <mat-tab-group class=" border border-gray-200 rounded-md" mat-align-tabs="start">
+
+                <!-- Projects Tab -->
                 <mat-tab label="Projects">
                     <div class="w-full p-4 flex flex-wrap">
                         <div class="w-4/12 p-4" *ngFor="let data of clientProfileData.projects">
                             <div class="w-full border border-gray-200 rounded-md p-4 hover:border-gray-400">
-                                <div class="text-lg flex items-center">{{data.projectName}} <span class="bg-gray-100 px-1 text-xs rounded-md ml-2 border border-gray-200">{{data.projectType}}</span></div>
+                                <div class="text-base flex items-center">{{data.projectName}} <span class="bg-gray-100 px-1 text-xs rounded-md ml-2 border border-gray-200">{{data.projectType}}</span></div>
                                 <div class="text-gray-500 text-xs">{{data.totalMembers}} Members</div>
                                 <div class="w-full flex justify-between items-center mt-8">
                                     <div class="">
@@ -56,6 +58,8 @@
                         </div>
                     </div>
                 </mat-tab>
+
+                <!-- Instances Tab -->
                 <mat-tab label="Instances">
                     <div class="w-full p-4 flex flex-wrap">
                         <div class="w-6/12 p-4" *ngFor="let instance of clientProfileData.instances">
@@ -68,9 +72,9 @@
                                 <div class="flex items-start">
                                     <div class="">
                                         <div class="text-right">
-                                            <span class="text-right text-xs px-3 rounded-full" [ngClass]="getStatusStyle(instance.status)">{{instance.status}}</span>
+                                            <span class="text-right text-xs px-3 py-0.5 rounded-full uppercase" [ngClass]="getStatusStyle(instance.status)">{{instance.status}}</span>
                                         </div>
-                                        <div class="pt-1 text-gray-400 text-xs flex content-center"><mat-icon class="text-xs">date_range</mat-icon>Release Date {{instance.createdDate}}</div>
+                                        <div class="pt-1 text-gray-400 text-xs flex content-center"><mat-icon class="text-xs">date_range</mat-icon>Release Date: {{instance.createdDate}}</div>
                                     </div>
                                     <div class="ml-4">
                                         <button mat-icon-button [matMenuTriggerFor]="instanceMenu">
@@ -84,11 +88,124 @@
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
                 </mat-tab>
-                <mat-tab label="Releases">Content 3</mat-tab>
-                <mat-tab label="Demos">Content 3</mat-tab>
+
+                <!-- Releases Tab -->
+                <mat-tab label="Releases">
+                    <div class="w-full flex justify-between px-6 mt-4 -mb-4">
+                        <div class="text-lg px-3 text-gray-800">All Releases</div>
+                        <button mat-button class="text-xs">
+                            <mat-icon class="text-lg -mt-1 -ml-2">filter_list</mat-icon> Filter
+                        </button>
+                    </div>
+                    <div class="w-full p-4 flex justify-between items-start">
+
+                        <!-- Releases List -->
+                        <div class="w-6/12 p-4">
+                            <div class="w-full border border-gray-200 rounded-md">
+                                <div class="w-full flex justify-between items-center p-4 cursor-pointer border-b border-gray-200 hover:bg-gray-50" *ngFor="let release of clientProfileData.releases">
+                                    <div class="">
+                                        <div class=" text-gray-800">{{release.releaseTitle}}</div>
+                                        <div class="text-gray-400 text-xs py-2">{{release.releaseTag}}</div>
+                                        <div class="text-gray-400 text-xs">{{release.releaseInstance}}</div>
+                                    </div>
+                                    <div class="flex content-center">
+                                        <div class="">
+                                            <div class="text-right">
+                                                <span class="text-right text-xs px-3 py-0.5 rounded-full uppercase" [ngClass]="getStatusStyle(release.releaseStatus)">{{release.releaseStatus}}</span>
+                                            </div>
+                                            <div class="mt-1 text-gray-400 text-xs flex content-center"><mat-icon class="text-xs">date_range</mat-icon>Release Date {{release.releaseDate}}</div>
+                                        </div>
+                                        <div class="ml-4">
+                                            <button mat-icon-button class="text-gray-600"  [routerLink]="['../../', 'releases', 567]">
+                                                <mat-icon>keyboard_arrow_right</mat-icon>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <!-- Release Details Quick View -->
+                        <div class="w-6/12 p-4">
+                            <div class="w-full border border-gray-200 rounded-md p-4">
+                                <div class="w-full flex justify-between items-center">
+                                    <div class="text-lg">Release Quick View</div>
+                                    <span class="text-blue-500 text-xs cursor-pointer hover:text-blue-800"   [routerLink]="['../../', 'releases', 567]">View More</span>
+                                </div>
+                                <div class="w-full">
+                                    <div class="w-full mt-6">
+                                        <div class="w-full text-base text-blue-800">#Release Version 1</div>
+                                        <div class="flex justify-between mt-4">
+                                            <span class="">Client</span>
+                                            <span class="text-gray-500">Client Name</span>
+                                        </div>
+                                        <div class="flex justify-between mt-4">
+                                            <span class="">Target Release</span>
+                                            <span class="text-gray-500">Platform</span>
+                                        </div>
+                                        <div class="flex justify-between mt-4">
+                                            <span class="">Release Type</span>
+                                            <span class=""><span class="px-3 bg-gray-50 border border-gray-200 rounded-full text-xs ml-2 italic">Patch</span></span>
+                                        </div>
+                                        <div class="flex justify-between mt-4">
+                                            <span class="">Release Date</span>
+                                            <span class="text-gray-500">31st March 2023</span>
+                                        </div>
+                                        <div class="flex justify-between mt-4">
+                                            <span class="">Release Owner</span>
+                                            <span class="text-gray-500">Sagar Desai</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+
+                <!-- Requirements Tab -->
+                <mat-tab label="Requirements">
+                    <div class="w-full flex flex-wrap items-center px-4">
+
+                        <!-- In Pgoress -->
+                        <div class="w-full flex justify-center p-3 mt-6">
+                            <img class="w-3/12" src="assets/gifs/dev-progress.gif">
+                        </div>
+                        <div class="w-full text-center text-gray-600 -mt-28 font-bold">
+                            Development in progress...
+                        </div>
+                    </div>
+                </mat-tab>
+
+                <!-- Demos Tab -->
+                <mat-tab label="Demos">
+                    <div class="w-full flex flex-wrap items-center px-4">
+
+                        <!-- In Pgoress -->
+                        <div class="w-full flex justify-center p-3 mt-6">
+                            <img class="w-3/12" src="assets/gifs/dev-progress.gif">
+                        </div>
+                        <div class="w-full text-center text-gray-600 -mt-28 font-bold">
+                            Development in progress...
+                        </div>
+                    </div>
+                </mat-tab>
+
+                <!-- Timeline Tab -->
+                <mat-tab label="Timeline">
+                    <div class="w-full flex flex-wrap items-center px-4">
+
+                        <!-- In Pgoress -->
+                        <div class="w-full flex justify-center p-3 mt-6">
+                            <img class="w-3/12" src="assets/gifs/dev-progress.gif">
+                        </div>
+                        <div class="w-full text-center text-gray-600 -mt-28 font-bold">
+                            Development in progress...
+                        </div>
+                    </div>
+                </mat-tab>
             </mat-tab-group>
         </div>
     </div>
