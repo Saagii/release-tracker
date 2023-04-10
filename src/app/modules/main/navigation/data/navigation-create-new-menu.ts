@@ -28,5 +28,11 @@ export const navigationNewMenu = [
         name: 'Member',
         description: 'Create a new Member and be a part of project.',
         route: ['members', 'create']
+    },
+    {
+        icon: 'assignment',
+        name: 'Phase Requirements',
+        description: 'Create a new Phase requirements.',
+        route: ['clients', 'createRequirement']
     }
 ];

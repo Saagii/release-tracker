@@ -1,0 +1,177 @@
+<div class="w-full px-4">
+    <div class="w-full my-2 p-4">
+        <!-- Back to client profile Navigation-->
+        <div class="" style="width: fit-content">
+            <a class=""  [routerLink]="['../']">
+                <div class="flex items-center hover:text-blue-500">
+                    <mat-icon class="text-base -ml-1 -mr-1">keyboard_arrow_left</mat-icon>Back
+                </div>
+            </a>
+        </div>
+
+        <!-- Create Requirement Content -->
+        <div class="w-full mt-4">
+            <!-- Title -->
+            <div class="w-full flex justify-between items-center">
+                <div class="">
+                    <div class="text-2xl text-gray-700 flex items-center">Create New Phase & Requirements</div>
+                </div>
+            </div>
+
+            <!-- Create / Edit Form -->
+            <div class="w-full mt-10">
+                <form class="w-full" [formGroup]="clientCreateRequirementsForm">
+                    <!-- Client Selection -->
+                    <div class="w-full flex justify-start items-start pb-4 border-b border-gray-200">
+                        <div class="w-3/12">
+                            <div class="w-full text-lg">Client</div>
+                            <div class="w-full text-xs text-gray-500">Select client for the project.</div>
+                        </div>
+                        <div class="w-4/12">
+                            <!-- Client -->
+                            <mat-form-field class="w-full" appearance="outline">
+                                <mat-select placeholder="Select Client" required   formControlName="client">
+                                    <mat-option *ngFor="let client of [0,1,2,3,4]; let i=index;" [value]="i+1">
+                                      Client {{i+1}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>Client is <strong>Required!</strong></mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <!-- Project Details -->
+                    <div class="w-full flex justify-start items-start mt-10 pb-4 border-b border-gray-200">
+                        <div class="w-3/12">
+                            <div class="w-full text-lg">Phase Details</div>
+                            <div class="w-full text-xs text-gray-500">Enter all the required fields. </div>
+                        </div>
+                        <div class="w-4/12">
+                            <!-- Phase Number -->
+                            <mat-form-field class="w-full" appearance="outline">
+                                <mat-select placeholder="Select Phase" required  formControlName="phaseNumber">
+                                    <mat-option *ngFor="let number of [0,1,2,3,4]; let i=index;" [value]="i+1">
+                                      Phase {{i+1}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>Phase Number is <strong>Required!</strong></mat-error>
+                            </mat-form-field>
+
+                            <!-- Phase Start Date -->
+                            <mat-form-field class="w-full mt-4" appearance="outline">
+                                <mat-label>Choose Phase Start date</mat-label>
+                                <input matInput [matDatepicker]="phaseStartDate" formControlName="phaseStartDate">
+                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matIconSuffix [for]="phaseStartDate"></mat-datepicker-toggle>
+                                <mat-datepicker #phaseStartDate></mat-datepicker>
+                            </mat-form-field>
+
+                            <!-- Phase End Date -->
+                            <mat-form-field class="w-full mt-4" appearance="outline">
+                                <mat-label>Choose Phase End date</mat-label>
+                                <input matInput [matDatepicker]="phaseEndDate" formControlName="phaseEndDate">
+                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matIconSuffix [for]="phaseEndDate"></mat-datepicker-toggle>
+                                <mat-datepicker #phaseEndDate></mat-datepicker>
+                            </mat-form-field>
+
+                            <!-- Phase Category -->
+                            <mat-form-field class="w-full" appearance="outline">
+                                <mat-select placeholder="Select Phase Category" required  formControlName="phaseCategory">
+                                    <mat-option *ngFor="let category of ['Web', 'Mobile', 'Tablets']; let i=index;" [value]="i+1">
+                                      {{category}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>Phase Category is <strong>Required!</strong></mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <!-- Requirement Details -->
+                    <div class="w-full flex justify-start items-start mt-10 pb-10 border-b border-gray-200">
+                        <div class="w-3/12">
+                            <div class="w-full text-lg">Requirement Details</div>
+                            <div class="w-full text-xs text-gray-500">Add all the requirement's important details.</div>
+                        </div>
+                        <div class="w-8/12">
+                            <div class="w-full">
+
+                                <!-- Requirement Type -->
+                                <mat-form-field class="w-full" appearance="outline">
+                                    <mat-select placeholder="Select Requirement Type" required  formControlName="requirementType">
+                                        <mat-option *ngFor="let type of ['UI', 'Configuration', 'Backend']; let i=index;" [value]="i+1">
+                                        {{type}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>Requirement Type is <strong>Required!</strong></mat-error>
+                                </mat-form-field>
+
+                                <!-- Requirement Project -->
+                                <mat-form-field class="w-full" appearance="outline">
+                                    <mat-select placeholder="Select Project" required  formControlName="project">
+                                        <mat-option *ngFor="let type of ['UI', 'Configuration', 'Backend']; let i=index;" [value]="i+1">
+                                        Project {{i+1}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>Project is <strong>Required!</strong></mat-error>
+                                </mat-form-field>
+
+                                <!-- Requirement Label -->
+                                <mat-form-field class="w-full" appearance="outline">
+                                    <mat-select placeholder="Select Label" required  formControlName="label">
+                                        <mat-option *ngFor="let type of ['UI', 'Configuration', 'Backend']; let i=index;" [value]="i+1">
+                                        Label {{i+1}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>Label is <strong>Required!</strong></mat-error>
+                                </mat-form-field>
+
+                                <!-- Requirement Title -->
+                                <mat-form-field class="w-full" appearance="outline">
+                                    <input type="text" matInput placeholder="Requirement Title" formControlName="requirementTitle" required>
+                                    <mat-error>Requirement Title is <strong>Required!</strong></mat-error>
+                                </mat-form-field>
+
+                                <!-- Requirement Description -->
+                                <mat-form-field class="w-full mt-4" appearance="outline">
+                                    <textarea matInput placeholder="Requirement Description" formControlName="requirementDescription" required></textarea>
+                                    <mat-error>Requirement Description is <strong>Required!</strong></mat-error>
+                                </mat-form-field>
+
+                                <!-- Requirement Start Date -->
+                                <mat-form-field class="w-full mt-4" appearance="outline">
+                                    <mat-label>Choose Requirement Start date</mat-label>
+                                    <input matInput [matDatepicker]="requirementStartDate" formControlName="requirementStartDate">
+                                    <mat-hint>MM/DD/YYYY</mat-hint>
+                                    <mat-datepicker-toggle matIconSuffix [for]="requirementStartDate"></mat-datepicker-toggle>
+                                    <mat-datepicker #requirementStartDate></mat-datepicker>
+                                </mat-form-field>
+
+                                <!-- PhRequirementase End Date -->
+                                <mat-form-field class="w-full mt-4" appearance="outline">
+                                    <mat-label>Choose Requirement End date</mat-label>
+                                    <input matInput [matDatepicker]="requirementEndDate" formControlName="requirementEndDate">
+                                    <mat-hint>MM/DD/YYYY</mat-hint>
+                                    <mat-datepicker-toggle matIconSuffix [for]="requirementEndDate"></mat-datepicker-toggle>
+                                    <mat-datepicker #requirementEndDate></mat-datepicker>
+                                </mat-form-field>
+
+                                <!-- Requirement Links -->
+                                <mat-form-field class="w-full" appearance="outline">
+                                    <input type="text" matInput placeholder="Requirement Links" formControlName="links">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="w-full flex justify-end p-6">
+                        <button mat-button class="">Cancel</button>
+                        <button mat-flat-button class="bg-blue-500 text-white" style="margin-left: 3%;">Create Phase Requirements</button>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>

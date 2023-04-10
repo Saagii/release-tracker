@@ -10,6 +10,7 @@ import { ReleaseCreateEditComponent } from './content/components/releases/compon
 import { InstanceCreateEditComponent } from './content/components/instances/components/instances-create-edit/instances-create-edit.component';
 import { ClientsComponent } from './content/components/clients/clients.component';
 import { ClientProfileComponent } from './content/components/clients/components/client-profile/client-profile.component';
+import { ClientCreateRequirementsComponent } from './content/components/clients/components/client-create-requirements/client-create-requirements.component';
 
 
 
@@ -22,7 +23,8 @@ import { ClientProfileComponent } from './content/components/clients/components/
     ReleaseCreateEditComponent,
     InstanceCreateEditComponent,
     ClientsComponent,
-    ClientProfileComponent
+    ClientProfileComponent,
+    ClientCreateRequirementsComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +39,8 @@ import { ClientProfileComponent } from './content/components/clients/components/
     ReleaseCreateEditComponent,
     InstanceCreateEditComponent,
     ClientsComponent,
-    ClientProfileComponent
+    ClientProfileComponent,
+    ClientCreateRequirementsComponent
   ]
 })
 export class MainModule { }

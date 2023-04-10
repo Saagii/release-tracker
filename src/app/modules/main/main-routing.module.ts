@@ -12,6 +12,7 @@ import { ReleaseCreateEditComponent } from './content/components/releases/compon
 import { InstanceCreateEditComponent } from './content/components/instances/components/instances-create-edit/instances-create-edit.component';
 import { ClientsComponent } from './content/components/clients/clients.component';
 import { ClientProfileComponent } from './content/components/clients/components/client-profile/client-profile.component';
+import { ClientCreateRequirementsComponent } from './content/components/clients/components/client-create-requirements/client-create-requirements.component';
 
 const mainRoutes: Routes = [
   { path: '', redirectTo: 'releases', pathMatch: 'full' },
@@ -35,6 +36,9 @@ const mainRoutes: Routes = [
   },
   {
     path: 'clients', component: ClientsComponent
+  },
+  {
+    path: 'clients/createRequirement', component: ClientCreateRequirementsComponent
   },
   {
     path: 'timelines', component: TimelinesComponent
