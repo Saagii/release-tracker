@@ -169,13 +169,63 @@
                 <mat-tab label="Requirements">
                     <div class="w-full flex flex-wrap items-center px-4">
 
-                        <!-- In Pgoress -->
-                        <div class="w-full flex justify-center p-3 mt-6">
-                            <img class="w-3/12" src="assets/gifs/dev-progress.gif">
-                        </div>
-                        <div class="w-full text-center text-gray-600 -mt-28 font-bold">
-                            Development in progress...
-                        </div>
+                        <mat-accordion class="w-full my-4 border border-gray-200 rounded-md">
+                            <mat-expansion-panel (opened)="requirementsPanelOpenState = true"
+                                                 (closed)="requirementsPanelOpenState = false">
+                              <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                  #Phase 1
+                                </mat-panel-title>
+                                <mat-panel-description class="text-xs">
+                                  23rd March 2023 - 20th April 2023
+                                </mat-panel-description>
+                              </mat-expansion-panel-header>
+                              
+                              <!-- Panel Content -->
+                              <div class="w-full">
+                                <div class="w-full flex justify-between items-center p-4 border mb-4 border-gray-200 rounded-md">
+                                    <div class="w-11/12">
+                                        <!-- Title, Desc, Project, Type, Links, Start Date, End Date, Status -->
+                                        <div class="w-full text-lg">Requirement Title</div>
+                                        <div class="w-full text-xs text-gray-500">Requirement description with all the required details related to the requirment and possible enhancements on the same.</div>
+                                        <div class="w-full flex mt-8">
+                                            <div class="mr-24">
+                                                <div class="text-xs uppercase">Requirement Type</div>
+                                                <div class="mt-2">UI</div>
+                                            </div>
+                                            <div class="mr-24">
+                                                <div class="text-xs uppercase">Project</div>
+                                                <div class="mt-2">Project Name</div>
+                                            </div>
+                                            <div class="mr-24">
+                                                <div class="text-xs uppercase">Label</div>
+                                                <div class="mt-2">GL</div>
+                                            </div>
+                                            <div class="mr-24">
+                                                <div class="text-xs uppercase">Start Date</div>
+                                                <div class="mt-2">23rd March 2023</div>
+                                            </div>
+                                            <div class="mr-24">
+                                                <div class="text-xs uppercase">End Date</div>
+                                                <div class="mt-2">20th March 2023</div>
+                                            </div>
+                                            <div class="mr-24">
+                                                <div class="text-xs uppercase">Status</div>
+                                                <div class=" mt-2">
+                                                    <span class="text-right text-xs px-3 py-0.5 rounded-full uppercase" [ngClass]="getStatusStyle('In Progress')">In Progress</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="w-1/12 flex justify-end ">
+                                        <button mat-icon-button class="">
+                                            <mat-icon>more_vert</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                              </div>
+                            </mat-expansion-panel>
+                        </mat-accordion>
                     </div>
                 </mat-tab>
 

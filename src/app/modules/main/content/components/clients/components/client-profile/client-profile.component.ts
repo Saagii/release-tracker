@@ -9,6 +9,7 @@ import { clientProfileMockData } from '../../../../data/client-profile-mock-data
 export class ClientProfileComponent implements OnInit {
   
   clientProfileData: any = clientProfileMockData;
+  requirementsPanelOpenState = false;
 
   constructor(
     private statusService: StatusService
