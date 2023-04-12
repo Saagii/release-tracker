@@ -17,6 +17,7 @@ export class NavigationComponent implements OnInit {
   */
   navigationActions(): any {
     this.dialog.open(DialogSharedComponent, {
+      panelClass: ['w-8/12'],
       data: {
         type: 'navMenu'
       },

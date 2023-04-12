@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StatusService } from 'src/app/modules/shared/services/status.service';
+import { requirementsListMockData } from '../../../../data/requirements-list-mock-data';
 
 @Component({
   selector: 'app-client-create-requirements',
