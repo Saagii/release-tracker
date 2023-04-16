@@ -9,7 +9,7 @@
             <!-- Position Column -->
             <ng-container matColumnDef="name">
               <th mat-header-cell *matHeaderCellDef class="text-xs font-bold"> Member Name </th>
-              <td mat-cell *matCellDef="let element" class="text-blue-600"> {{element.firstName}} {{element.lastName}} </td>
+              <td mat-cell *matCellDef="let element" class="text-blue-600" [routerLink]="['members', 56]"> {{element.firstName}} {{element.lastName}} </td>
             </ng-container>
           
             <!-- Name Column -->

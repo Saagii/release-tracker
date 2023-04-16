@@ -1,0 +1,91 @@
+<div class="w-full px-4">
+    <div class="w-full my-2 p-4">
+        <!-- Back to Members list Navigation-->
+        <div class="" style="width: fit-content">
+            <a class=""  [routerLink]="['../../']">
+                <div class="flex items-center hover:text-blue-500">
+                    <mat-icon class="text-base -ml-1 -mr-1">keyboard_arrow_left</mat-icon>Back
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- View Memeber Content -->
+    <div class="w-full px-4 pb-12">
+        <!-- Member Name & Description. -->
+        <div class="w-full flex items-center justify-between">
+            <div class="w-10/12 flex items-start">
+                <span class="p-4 bg-yellow-600 font-bold text-white rounded-full border-4 border-gray-200">SD</span>
+                <div class="ml-4">
+                    <div class="text-2xl">Sagar Desai</div>
+                    <div class="text-gray-500 w-10/12 mt-1">Member</div>
+                </div>
+            </div>
+            <div class="2/12">
+                <button mat-stroked-button class="text-xs">
+                    <mat-icon class="text-sm mt-1 mr-1 -ml-2">edit</mat-icon> Edit
+                </button>
+            </div>
+        </div>
+
+        <!-- Member About -->
+        <div class="w-full mt-8 pb-4 border-b border-gray-200">
+            <div class="text-lg">About</div>
+            <div class="w-full text-xs text-gray-500 mt-4">I'm Software Developer, specialized majorly on UI development, providing simple solution to complex issues.</div>
+            <div class="flex mt-4 text-xs">
+                <div class="">
+                    <div class="text-gray-500">Email</div>
+                    <div class="">sagardesai@email.com</div>
+                </div>
+                <div class="ml-12">
+                    <div class="text-gray-500 text-xs">Team</div>
+                    <div class="">Team Name</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project Contribution -->
+        <div class="w-full mt-8 pb-4 border-b border-gray-200">
+            <div class="text-lg">Projects</div>
+            <div class="w-full flex flex-wrap">
+                <div class="w-3/12 pr-4 py-4" *ngFor="let data of [0,1,2,3,4]">
+                    <div class="w-full border border-gray-200 rounded-md p-4 hover:border-blue-700">
+                        <div class="text-base flex items-center">Project Name <span class="bg-gray-100 px-1 text-xs rounded-md ml-2 border border-gray-200">GL</span></div>
+                        <div class="text-gray-500 text-xs">12 Members</div>
+                        <div class="w-full flex justify-between items-center mt-8">
+                            <div class="">
+                                <div class="text-gray-500 text-xs">Manager</div>
+                                <div class="">Sagar Desai</div>
+                            </div>
+                            <div class="">
+                                <button mat-icon-button class=""  [routerLink]="['../../../', 'projects', 567]">
+                                    <mat-icon>chevron_right</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Member Activity -->
+        <div class="w-full mt-8 pb-10">
+            <div class="text-lg">Activity</div>
+            <div class="w-full p-4">
+                <div class="w-full">
+                    <div class="border-l border-gray-200 p-4" *ngFor="let activity of [1,2,3,4,5]">
+                        <div class="flex items-center">
+                            <div class="mr-4 bg-white flex items-center p-1 rounded-full -ml-8">
+                                <mat-icon>label</mat-icon>
+                            </div>
+                            <div class="">
+                                <div class="">Activity Name</div>
+                                <div class="text-xs text-gray-500">Performed something on this page.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

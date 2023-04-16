@@ -11,6 +11,7 @@ import { InstanceCreateEditComponent } from './content/components/instances/comp
 import { ClientsComponent } from './content/components/clients/clients.component';
 import { ClientProfileComponent } from './content/components/clients/components/client-profile/client-profile.component';
 import { ClientCreateRequirementsComponent } from './content/components/clients/components/client-create-requirements/client-create-requirements.component';
+import { MemberProfileComponent } from './content/components/admin/child-components/member-profile/member-profile.component';
 
 
 
@@ -24,7 +25,8 @@ import { ClientCreateRequirementsComponent } from './content/components/clients/
     InstanceCreateEditComponent,
     ClientsComponent,
     ClientProfileComponent,
-    ClientCreateRequirementsComponent
+    ClientCreateRequirementsComponent,
+    MemberProfileComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +42,8 @@ import { ClientCreateRequirementsComponent } from './content/components/clients/
     InstanceCreateEditComponent,
     ClientsComponent,
     ClientProfileComponent,
-    ClientCreateRequirementsComponent
+    ClientCreateRequirementsComponent,
+    MemberProfileComponent
   ]
 })
 export class MainModule { }
