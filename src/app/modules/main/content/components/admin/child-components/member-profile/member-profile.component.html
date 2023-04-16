@@ -18,7 +18,7 @@
                 <span class="p-4 bg-yellow-600 font-bold text-white rounded-full border-4 border-gray-200">SD</span>
                 <div class="ml-4">
                     <div class="text-2xl">Sagar Desai</div>
-                    <div class="text-gray-500 w-10/12 mt-1">Member</div>
+                    <div class="text-gray-500 mt-1">Front-end Developer</div>
                 </div>
             </div>
             <div class="2/12">
@@ -28,64 +28,115 @@
             </div>
         </div>
 
-        <!-- Member About -->
-        <div class="w-full mt-8 pb-4 border-b border-gray-200">
-            <div class="text-lg">About</div>
-            <div class="w-full text-xs text-gray-500 mt-4">I'm Software Developer, specialized majorly on UI development, providing simple solution to complex issues.</div>
-            <div class="flex mt-4 text-xs">
-                <div class="">
-                    <div class="text-gray-500">Email</div>
-                    <div class="">sagardesai@email.com</div>
-                </div>
-                <div class="ml-12">
-                    <div class="text-gray-500 text-xs">Team</div>
-                    <div class="">Team Name</div>
-                </div>
-            </div>
-        </div>
+        
 
-        <!-- Project Contribution -->
-        <div class="w-full mt-8 pb-4 border-b border-gray-200">
-            <div class="text-lg">Projects</div>
-            <div class="w-full flex flex-wrap">
-                <div class="w-3/12 pr-4 py-4" *ngFor="let data of [0,1,2,3,4]">
-                    <div class="w-full border border-gray-200 rounded-md p-4 hover:border-blue-700">
-                        <div class="text-base flex items-center">Project Name <span class="bg-gray-100 px-1 text-xs rounded-md ml-2 border border-gray-200">GL</span></div>
-                        <div class="text-gray-500 text-xs">12 Members</div>
-                        <div class="w-full flex justify-between items-center mt-8">
-                            <div class="">
-                                <div class="text-gray-500 text-xs">Manager</div>
-                                <div class="">Sagar Desai</div>
+        <div class="w-full py-6">
+            <mat-tab-group class=" border border-gray-200 rounded-md" mat-align-tabs="start">
+
+                <!-- About Tab -->
+                <mat-tab label="About">
+                    <!-- Member About -->
+                    <div class="w-full p-4 flex flex-wrap">
+                        <div class="w-full text-gray-800 mt-4">I'm Software Developer, specialized majorly on UI development, designing, creating, and maintaining software application.</div>
+                        <div class="my-4 border border-gray-200 rounded-md w-4/12">
+                            <div class="flex justify-between p-4 border-b border-gray-200">
+                                <div class="text-gray-500">Title</div>
+                                <div class="">Front-end Developer</div>
                             </div>
-                            <div class="">
-                                <button mat-icon-button class=""  [routerLink]="['../../../', 'projects', 567]">
-                                    <mat-icon>chevron_right</mat-icon>
-                                </button>
+                            <div class="flex justify-between p-4 border-b border-gray-200">
+                                <div class="text-gray-500">Email</div>
+                                <div class="">sagardesai@email.com</div>
+                            </div>
+                            <div class="flex justify-between p-4 border-b border-gray-200">
+                                <div class="text-gray-500">Team</div>
+                                <div class="">Team Name</div>
+                            </div>
+                            <div class="flex justify-between p-4">
+                                <div class="text-gray-500">Role</div>
+                                <div class="">Member</div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+                </mat-tab>
 
-        <!-- Member Activity -->
-        <div class="w-full mt-8 pb-10">
-            <div class="text-lg">Activity</div>
-            <div class="w-full p-4">
-                <div class="w-full">
-                    <div class="border-l border-gray-200 p-4" *ngFor="let activity of [1,2,3,4,5]">
-                        <div class="flex items-center">
-                            <div class="mr-4 bg-white flex items-center p-1 rounded-full -ml-8">
-                                <mat-icon>label</mat-icon>
-                            </div>
-                            <div class="">
-                                <div class="">Activity Name</div>
-                                <div class="text-xs text-gray-500">Performed something on this page.</div>
+                <!-- Projects Tab -->
+                <mat-tab label="Projects">
+                    <!-- Project Contribution -->
+                    <div class="w-full p-4 border-b border-gray-200">
+                        <div class="w-full flex flex-wrap">
+                            <div class="w-3/12 p-4" *ngFor="let data of [0,1,2,3,4]">
+                                <div class="w-full border border-gray-200 rounded-md p-4 hover:border-blue-700">
+                                    <div class="text-base flex items-center">Project Name <span class="bg-gray-100 px-1 text-xs rounded-md ml-2 border border-gray-200">GL</span></div>
+                                    <div class="text-gray-500 text-xs">12 Members</div>
+                                    <div class="w-full flex justify-between items-center mt-8">
+                                        <div class="">
+                                            <div class="text-gray-500 text-xs">Manager</div>
+                                            <div class="">Sagar Desai</div>
+                                        </div>
+                                        <div class="">
+                                            <button mat-icon-button class=""  [routerLink]="['../../../', 'projects', 567]">
+                                                <mat-icon>chevron_right</mat-icon>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </mat-tab>
+
+                <!-- Activity Tab -->
+                <mat-tab label="Activity">
+                    <!-- Member Activity -->
+                    <div class="w-full p-4">
+                        <div class="w-full p-4 px-6">
+                            <div class="w-full">
+                                <div class="border-l border-gray-200 p-4" *ngFor="let activity of [1,2,3,4,5]">
+                                    <div class="flex items-center">
+                                        <div class="mr-4 bg-white flex items-center p-1 rounded-full -ml-8">
+                                            <mat-icon>label</mat-icon>
+                                        </div>
+                                        <div class="">
+                                            <div class="">Activity Name</div>
+                                            <div class="text-xs text-gray-500">Performed something on this page.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+
+                <!-- Settings Tab -->
+                <mat-tab label="Settings">
+                    <div class="w-full p-4">
+                        <div class="flex justify-start w-full">
+                            <div class="w-5/12 p-4">
+                                <div class="w-full border border-gray-200 rounded-md p-4 flex items-center cursor-pointer hover:text-blue-500">
+                                    <div class="bg-gray-100 p-3 rounded-md flex items-center">
+                                        <mat-icon>restore</mat-icon>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="">Change Password</div>
+                                        <div class="text-xs text-gray-500">Update your password once in every 60 days.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-5/12 p-4">
+                                <div class="w-full border border-gray-200 rounded-md p-4 flex items-center cursor-pointer hover:text-blue-500">
+                                    <div class="bg-gray-100 p-3 rounded-md flex items-center">
+                                        <mat-icon>remove_circle_outline</mat-icon>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="">Deactivate Account</div>
+                                        <div class="text-xs text-gray-500">Restricts user from login, modifying roles and permissions.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
         </div>
     </div>
 </div>
