@@ -14,6 +14,7 @@ import { ClientsComponent } from './content/components/clients/clients.component
 import { ClientProfileComponent } from './content/components/clients/components/client-profile/client-profile.component';
 import { ClientCreateRequirementsComponent } from './content/components/clients/components/client-create-requirements/client-create-requirements.component';
 import { MemberProfileComponent } from './content/components/admin/child-components/member-profile/member-profile.component';
+import { MemberCreateEditComponent } from './content/components/admin/child-components/member-create-edit/member-create-edit.component';
 
 const mainRoutes: Routes = [
   { path: '', redirectTo: 'releases', pathMatch: 'full' },
@@ -46,6 +47,9 @@ const mainRoutes: Routes = [
   },
   {
     path: 'admin', component: AdminComponent
+  },
+  {
+    path: 'admin/members/create', component: MemberCreateEditComponent
   },
   {
     path: 'admin/members/:id', component: MemberProfileComponent

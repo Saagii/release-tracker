@@ -1,0 +1,122 @@
+<div class="w-full px-4">
+    <div class="w-full my-2 p-4">
+        <!-- Back to members list Navigation-->
+        <div class="" style="width: fit-content">
+            <a class=""  [routerLink]="['../']">
+                <div class="flex items-center hover:text-blue-500">
+                    <mat-icon class="text-base -ml-1 -mr-1">keyboard_arrow_left</mat-icon>Back
+                </div>
+            </a>
+        </div>
+
+        <!-- Create Member Content -->
+        <div class="w-full mt-4">
+            <!-- Title -->
+            <div class="w-full flex justify-between items-center">
+                <div class="">
+                    <div class="text-2xl text-gray-700 flex items-center">Create New Member</div>
+                </div>
+            </div>
+
+            <!-- Create / Edit Form -->
+            <div class="w-full mt-10">
+                <form class="w-full" [formGroup]="memberCreateEditForm">
+                    <!-- Member Type Selection -->
+                    <div class="w-full flex justify-start items-start pb-4 border-b border-gray-200">
+                        <div class="w-3/12">
+                            <div class="w-full text-lg">Member Type</div>
+                            <div class="w-full text-xs text-gray-500">Choose the type of the member.</div>
+                        </div>
+                        <div class="w-4/12">
+                            <!-- Client -->
+                            <mat-form-field class="w-full" appearance="outline">
+                                <mat-select placeholder="Select Member Type" required formControlName="memberType">
+                                    <mat-option *ngFor="let type of ['Internal', 'External']; let i=index;" [value]="i+1">
+                                      {{type}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>Member Type is <strong>Required!</strong></mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <!-- Member Details -->
+                    <div class="w-full flex justify-start items-start mt-10 pb-4 border-b border-gray-200">
+                        <div class="w-3/12">
+                            <div class="w-full text-lg">Member Details</div>
+                            <div class="w-full text-xs text-gray-500">Enter all the required details.</div>
+                        </div>
+                        <div class="w-4/12">
+                            <!-- Member First Name -->
+                            <mat-form-field class="w-full" appearance="outline">
+                                <mat-label>First Name</mat-label>
+                                <input type="text" matInput placeholder="First Name" formControlName="firstName" required>
+                                <mat-error>First Name is <strong>Required!</strong></mat-error>
+                            </mat-form-field>
+
+                            <!-- Member Last Name -->
+                            <mat-form-field class="w-full" appearance="outline">
+                                <input type="text" matInput placeholder="Last Name" formControlName="lastName" required>
+                                <mat-error>Last Name is <strong>Required!</strong></mat-error>
+                            </mat-form-field>
+
+                            <!-- Member Email -->
+                            <mat-form-field class="w-full" appearance="outline">
+                                <input type="text" matInput placeholder="Email" formControlName="email" required>
+                                <mat-error>Email is <strong>Required!</strong></mat-error>
+                            </mat-form-field>
+
+                            <!-- Member Title -->
+                            <mat-form-field class="w-full mt-4" appearance="outline">
+                                <mat-select placeholder="Select Member Title" required  formControlName="title">
+                                    <mat-option *ngFor="let title of ['Front-end Developer','QA','Back-end Developer', 'Project Manager', 'Project Lead', 'Business Analysts']; let i=index;" [value]="i+1">
+                                      {{title}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>Member Title is <strong>Required!</strong></mat-error>
+                            </mat-form-field>
+
+                            <!-- Release Type -->
+                            <mat-form-field class="w-full mt-4" appearance="outline">
+                                <mat-select placeholder="Select Member Title" required  formControlName="title">
+                                    <mat-option *ngFor="let title of ['Front-end Developer','QA','Back-end Developer', 'Project Manager', 'Project Lead', 'Business Analysts']; let i=index;" [value]="i+1">
+                                      {{title}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>Member Title is <strong>Required!</strong></mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <!-- Member Roles -->
+                    <div class="w-full flex justify-start items-start mt-10 border-b border-gray-200 pb-24">
+                        <div class="w-3/12">
+                            <div class="w-full text-lg">Roles & Permissions</div>
+                            <div class="w-full text-xs text-gray-500">Choose a role for a member.</div>
+                        </div>
+                        <div class="w-4/12">
+                            <!-- Member Role Options -->
+                            <mat-radio-group aria-label="Select an option" color="primary">
+                                <mat-radio-button value="1">
+                                    <div class="">Viewer</div>
+                                    <div class="text-xs text-gray-500 mt-1">Member can only view the contents. Restricts from performing any kind of actions.</div>
+                                </mat-radio-button>
+                                <mat-radio-button value="2" class="mt-8">
+                                    <div class="">Admin</div>
+                                    <div class="text-xs text-gray-500 mt-1">Member has authority to view and perform actions on all the pages.</div>
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="w-full flex justify-end p-6">
+                        <button mat-button class="">Cancel</button>
+                        <button mat-flat-button class="bg-blue-500 text-white" style="margin-left: 3%;">Create Release</button>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>

@@ -12,6 +12,7 @@ import { ClientsComponent } from './content/components/clients/clients.component
 import { ClientProfileComponent } from './content/components/clients/components/client-profile/client-profile.component';
 import { ClientCreateRequirementsComponent } from './content/components/clients/components/client-create-requirements/client-create-requirements.component';
 import { MemberProfileComponent } from './content/components/admin/child-components/member-profile/member-profile.component';
+import { MemberCreateEditComponent } from './content/components/admin/child-components/member-create-edit/member-create-edit.component';
 
 
 
@@ -26,7 +27,8 @@ import { MemberProfileComponent } from './content/components/admin/child-compone
     ClientsComponent,
     ClientProfileComponent,
     ClientCreateRequirementsComponent,
-    MemberProfileComponent
+    MemberProfileComponent,
+    MemberCreateEditComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +45,8 @@ import { MemberProfileComponent } from './content/components/admin/child-compone
     ClientsComponent,
     ClientProfileComponent,
     ClientCreateRequirementsComponent,
-    MemberProfileComponent
+    MemberProfileComponent,
+    MemberCreateEditComponent
   ]
 })
 export class MainModule { }
