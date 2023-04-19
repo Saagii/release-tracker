@@ -6,6 +6,20 @@
             <!-- Title -->
             <!-- <div class="w-full text-lg px-3 text-gray-800">Admin</div> -->
 
+            <div class="w-full flex flex-wrap justify-between p-4">
+                <div class="w-6/12 p-4" *ngFor="let menu of adminMenu">
+                    <div class="w-full flex items-center border border-gray-200 rounded-md p-4 cursor-pointer text-gray-800 hover:text-blue-500 hover:border-gray-300">
+                        <div class="flex justify-start items-center bg-gray-100 p-4 rounded-md">
+                            <mat-icon>{{menu.icon}}</mat-icon>
+                        </div>
+                        <div class="ml-5">
+                            <div class="">{{menu.title}}</div>
+                            <div class="text-gray-500 text-xs">{{menu.subtitle}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="">
                 <mat-tab-group class="" mat-align-tabs="start">
                     <mat-tab label="Members">
