@@ -33,7 +33,6 @@ import { SignInComponent } from './modules/auth/sign-in/sign-in.component';
     ProjectsComponent,
     TimelinesComponent,
     AdminComponent,
-    MembersComponent,
     SignInComponent,
     // ReleaseViewComponent
   ],

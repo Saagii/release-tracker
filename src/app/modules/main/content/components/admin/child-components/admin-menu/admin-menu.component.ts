@@ -1,23 +1,21 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { StatusService } from 'src/app/modules/shared/services/status.service';
-import { membersListMockData } from '../../../../data/members-mock-data';
+import { adminMenu } from '../../../../data/admin-menu-mock-data';
 
 @Component({
-  selector: 'app-members',
-  templateUrl: './members.component.html'
+  selector: 'app-admin-menu',
+  templateUrl: './admin-menu.component.html'
 })
-export class MembersComponent implements OnInit {
+export class AdminMenuComponent implements OnInit {
 
-  membersList: any = new MatTableDataSource([]);
-  displayedColumns: string[] = ['name', 'title', 'email', 'role'];
+  adminMenu: any[] = adminMenu;
 
   constructor(
     private statusService: StatusService
   ) {}
 
   ngOnInit(): void {
-    this.membersList.data = membersListMockData;
   }
 
   /*

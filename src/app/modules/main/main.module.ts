@@ -11,9 +11,11 @@ import { InstanceCreateEditComponent } from './content/components/instances/comp
 import { ClientsComponent } from './content/components/clients/clients.component';
 import { ClientProfileComponent } from './content/components/clients/components/client-profile/client-profile.component';
 import { ClientCreateRequirementsComponent } from './content/components/clients/components/client-create-requirements/client-create-requirements.component';
-import { MemberProfileComponent } from './content/components/admin/child-components/member-profile/member-profile.component';
-import { MemberCreateEditComponent } from './content/components/admin/child-components/member-create-edit/member-create-edit.component';
+import { MemberProfileComponent } from './content/components/admin/child-components/members/member-profile/member-profile.component';
+import { MemberCreateEditComponent } from './content/components/admin/child-components/members/member-create-edit/member-create-edit.component';
 import { ClientCreateEditComponent } from './content/components/clients/components/client-create-edit/client-create-edit.component';
+import { MembersComponent } from './content/components/admin/child-components/members/members.component';
+import { AdminMenuComponent } from './content/components/admin/child-components/admin-menu/admin-menu.component';
 
 
 
@@ -28,6 +30,8 @@ import { ClientCreateEditComponent } from './content/components/clients/componen
     ClientsComponent,
     ClientProfileComponent,
     ClientCreateRequirementsComponent,
+    AdminMenuComponent,
+    MembersComponent,
     MemberProfileComponent,
     MemberCreateEditComponent,
     ClientCreateEditComponent
@@ -47,6 +51,8 @@ import { ClientCreateEditComponent } from './content/components/clients/componen
     ClientsComponent,
     ClientProfileComponent,
     ClientCreateRequirementsComponent,
+    AdminMenuComponent,
+    MembersComponent,
     MemberProfileComponent,
     MemberCreateEditComponent,
     ClientCreateEditComponent
