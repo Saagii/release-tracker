@@ -9,7 +9,8 @@ import { membersListMockData } from '../../../../data/members-mock-data';
 })
 export class MembersComponent implements OnInit {
 
-  membersList: any = new MatTableDataSource([]);
+  // membersList: any = new MatTableDataSource([]);
+  membersList: any = membersListMockData;
   displayedColumns: string[] = ['name', 'title', 'email', 'role'];
 
   constructor(
@@ -17,7 +18,7 @@ export class MembersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.membersList.data = membersListMockData;
+    // this.membersList.data = membersListMockData;
   }
 
   /*

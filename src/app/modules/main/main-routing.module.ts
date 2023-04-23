@@ -62,14 +62,14 @@ const mainRoutes: Routes = [
       },
       {
         path: 'members', component: MembersComponent
-      }
+      },
+      {
+        path: 'members/:id', component: MemberProfileComponent
+      },
     ]
   },
   {
     path: 'admin/members/create', component: MemberCreateEditComponent
-  },
-  {
-    path: 'admin/members/:id', component: MemberProfileComponent
   },
   {
     path: 'releases/:id', component: ReleaseViewComponent

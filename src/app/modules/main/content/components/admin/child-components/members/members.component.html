@@ -1,37 +1,156 @@
-<div class="w-full p-4 mt-4">
+<div class="w-full flex flex-wrap items-start px-4">
 
-    <div class="w-full mt-1">
-        <table mat-table [dataSource]="membersList" class="w-full border border-gray-200 rounded-md">
+  <!-- Lists -->
+  <div class="w-full p-3">
+    <div class="w-full border border-gray-200 rounded-md my-4">
+      <!-- Bread Crumbs -->
+      <div class="w-full px-4 pt-4">
+        <div class="text-blue-500 text-xs">
+          <span class="cursor-pointer hover:font-bold hover:text-blue-800" [routerLink]="['../']">Admin > </span><span class="text-gray-500">Members & Invites</span>
+        </div>
+      </div>
 
-            <!--- Note that these columns can be defined in any order.
-                  The actual rendered columns are set as a property on the row definition" -->
-          
-            <!-- Position Column -->
-            <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef class="text-xs font-bold"> Member Name </th>
-              <td mat-cell *matCellDef="let element" class="text-blue-600" [routerLink]="['members', 56]"> {{element.firstName}} {{element.lastName}} </td>
-            </ng-container>
-          
-            <!-- Name Column -->
-            <ng-container matColumnDef="title">
-              <th mat-header-cell *matHeaderCellDef class="text-xs font-bold"> Title </th>
-              <td mat-cell *matCellDef="let element" class="text-gray-600"> {{element.title}} </td>
-            </ng-container>
-          
-            <!-- Weight Column -->
-            <ng-container matColumnDef="email">
-              <th mat-header-cell *matHeaderCellDef class="text-xs font-bold"> Email </th>
-              <td mat-cell *matCellDef="let element" class="text-gray-600"> {{element.email}} </td>
-            </ng-container>
-          
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="role">
-              <th mat-header-cell *matHeaderCellDef class="text-xs font-bold"> Role </th>
-              <td mat-cell *matCellDef="let element" class="text-gray-600"> {{element.role}} </td>
-            </ng-container>
-          
-            <tr mat-header-row *matHeaderRowDef="displayedColumns" class="bg-gray-50"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="cursor-pointer hover:bg-gray-50"></tr>
-          </table>
+      <!-- Title -->
+      <div class="w-full p-4">
+        <div class="text-xl">Members & Invites</div>
+        <div class="text-xs text-gray-500">View Members & Invite new member to your team.</div>
+      </div>
+
+      <!-- Members & Invites Content -->
+      <div class="w-full p-4">
+        
+        <!-- Members Block -->
+        <div class="w-full flex justify-between border-b border-gray-200 pb-6">
+          <!-- Description -->
+          <div class="w-4/12">
+            <div class="">Members</div>
+            <div class="text-xs text-gray-500 mt-4">
+              Manage members to collaborate easily and work faster by adding new member or inviting them to join respective teams.
+            </div>
+            <div class="w-full flex mt-6">
+              <button mat-flat-button color="primary" class="">+ Invite a new Member</button>
+            </div>
+          </div>
+
+          <!-- List -->
+          <div class="w-7/12">
+            <!-- Filter Members List -->
+            <div class="w-full flex justify-between mb-2">
+              <div class=""></div>
+              <div class="">
+                <button mat-button class="text-xs">
+                  <mat-icon class="text-lg -mt-1 -ml-2">filter_list</mat-icon> Filter
+                </button>
+              </div>
+            </div>
+            <div class="w-full border border-gray-200 rounded-md">
+              <div class="w-full flex justify-start text-xs text-gray-500 px-3 py-2 uppercase">
+                <div class="w-5/12">Name</div>
+                <div class="w-4/12">Title</div>
+                <div class="w-2/12">Role</div>
+                <div class="w-1/12">Action</div>
+              </div>
+              <div class="w-full h-80 overflow-y-auto">
+                <div class="w-full flex justify-start items-center p-3 border-b border-gray-200 hover:bg-gray-50" *ngFor="let member of membersList">
+                  <div class="w-5/12 cursor-pointer hover:text-blue-500" [routerLink]="[56]">{{member.firstName}} {{member.lastName}} <br> <span class="text-xs text-gray-500">{{member.email}}</span></div>
+                  <div class="w-4/12 text-xs">{{member.title}}</div>
+                  <div class="w-2/12 text-xs">{{member.role}}</div>
+                  <div class="w-1/12 text-center">
+                    <button mat-icon-button class=""><mat-icon>more_vert</mat-icon></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+        <!-- External Members Block -->
+        <div class="w-full flex justify-between border-b border-gray-200 pb-6 mt-10">
+          <!-- Description -->
+          <div class="w-4/12">
+            <div class="">External Members</div>
+            <div class="text-xs text-gray-500 mt-4">
+              Manage all your external accounts collaborating with your projects, teams and releases.
+            </div>
+            <div class="w-full flex mt-6">
+              <button mat-flat-button color="primary" class="">+ Invite a new External Member</button>
+            </div>
+          </div>
+
+          <!-- List -->
+          <div class="w-7/12">
+            <!-- Filter Members List -->
+            <div class="w-full flex justify-between mb-2">
+              <div class=""></div>
+              <div class="">
+                <button mat-button class="text-xs">
+                  <mat-icon class="text-lg -mt-1 -ml-2">filter_list</mat-icon> Filter
+                </button>
+              </div>
+            </div>
+            <div class="w-full border border-gray-200 rounded-md">
+              <div class="w-full flex justify-start text-xs text-gray-500 px-3 py-2 uppercase">
+                <div class="w-5/12">Name</div>
+                <div class="w-4/12">Title</div>
+                <div class="w-2/12">Role</div>
+                <div class="w-1/12">Action</div>
+              </div>
+              <div class="w-full h-80 overflow-y-auto">
+                <div class="w-full flex justify-start items-center p-3 border-b border-gray-200 hover:bg-gray-50" *ngFor="let member of membersList">
+                  <div class="w-5/12 cursor-pointer hover:text-blue-500" [routerLink]="[56]">{{member.firstName}} {{member.lastName}} <br> <span class="text-xs text-gray-500">{{member.email}}</span></div>
+                  <div class="w-4/12 text-xs">{{member.title}}</div>
+                  <div class="w-2/12 text-xs">{{member.role}}</div>
+                  <div class="w-1/12 text-center">
+                    <button mat-icon-button class=""><mat-icon>more_vert</mat-icon></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Pending Invites block -->
+        <div class="w-full flex justify-between border-b border-gray-200 pb-6 mt-10">
+          <!-- Description -->
+          <div class="w-4/12">
+            <div class="">Pending Invites</div>
+            <div class="text-xs text-gray-500 mt-4">
+              View all pending invites and manage revoking or re-inviting whilst invited members joins the team.
+            </div>
+          </div>
+
+          <!-- List -->
+          <div class="w-7/12">
+            <!-- Filter Members List -->
+            <div class="w-full flex justify-between mb-2">
+              <div class=""></div>
+              <div class="">
+                <button mat-button class="text-xs">
+                  <mat-icon class="text-lg -mt-1 -ml-2">filter_list</mat-icon> Filter
+                </button>
+              </div>
+            </div>
+            <div class="w-full border border-gray-200 rounded-md">
+              <div class="w-full flex justify-start text-xs text-gray-500 px-3 py-2 uppercase">
+                <div class="w-6/12">Name</div>
+                <div class="w-6/12">Action</div>
+              </div>
+              <div class="w-full h-80 overflow-y-auto">
+                <div class="w-full flex justify-start items-center p-3 border-b border-gray-200 hover:bg-gray-50" *ngFor="let member of [0,1,2]">
+                  <div class="w-6/12">Sagar Desai <br> <span class="text-xs text-gray-500">sagar@email.com</span></div>
+                  <div class="w-6/12 text-center flex justify-start">
+                    <button mat-flat-button color="primary" class="">Re-send Invite</button>
+                    <button mat-stroked-button style="margin-left: 10%">Revoke Invite</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
+  </div>
 </div>
