@@ -10,7 +10,7 @@ import { releaseMockDataMenu } from '../../data/release-mock-data';
 export class ReleasesComponent implements OnInit {
 
   releaseItems: any[] = releaseMockDataMenu;
-  releaseNotes: any[] = notesMockDataMenu;
+  releaseComments: any[] = notesMockDataMenu;
 
   constructor(
     private statusService: StatusService
