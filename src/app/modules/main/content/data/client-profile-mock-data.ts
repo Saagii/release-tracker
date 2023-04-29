@@ -75,7 +75,7 @@ export const clientProfileMockData = {
             projectName: 'Project Bazaar',
         }
     ],
-    instances: [
+    domains: [
         {
             path: 'test.xyz.in',
             branch: 'develop',

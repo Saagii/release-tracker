@@ -1,7 +1,7 @@
-export const instancesMockData = [
+export const domainsMockData = [
     {
         client: 'Client XYZ',
-        instances: [
+        domains: [
             {
                 path: 'test.xyz.in',
                 branch: 'develop',
@@ -31,7 +31,7 @@ export const instancesMockData = [
     },
     {
         client: 'Client XYZ',
-        instances: [
+        domains: [
             {
                 path: 'test.xyz.in',
                 branch: 'develop',
@@ -49,7 +49,7 @@ export const instancesMockData = [
     },
     {
         client: 'Client XYZ',
-        instances: [
+        domains: [
             {
                 path: 'test.xyz.in',
                 branch: 'develop',
@@ -61,7 +61,7 @@ export const instancesMockData = [
     },
     {
         client: 'Client XYZ',
-        instances: [
+        domains: [
             {
                 path: 'test.xyz.in',
                 branch: 'develop',

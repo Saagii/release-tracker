@@ -1,14 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { StatusService } from 'src/app/modules/shared/services/status.service';
-import { instancesMockData } from '../../data/instances-mock-data';
+import { domainsMockData } from '../../data/domains-mock-data';
 
 @Component({
-  selector: 'app-instances',
-  templateUrl: './instances.component.html'
+  selector: 'app-domains',
+  templateUrl: './domains.component.html'
 })
-export class InstancesComponent implements OnInit {
+export class DomainsComponent implements OnInit {
 
-    instanceList: any[] = instancesMockData;
+  domainList: any[] = domainsMockData;
 
   constructor(
     private statusService: StatusService

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './content/components/admin/admin.component';
-import { InstancesComponent } from './content/components/instances/instances.component';
 import { ProjectCreateEditComponent } from './content/components/projects/components/project-create-edit/project-create-edit.component';
 import { ProjectViewComponent } from './content/components/projects/components/project-view/project-view.component';
 import { ProjectsComponent } from './content/components/projects/projects.component';
@@ -9,7 +8,6 @@ import { ReleaseViewComponent } from './content/components/releases/components/r
 import { ReleasesComponent } from './content/components/releases/releases.component';
 import { TimelinesComponent } from './content/components/timelines/timelines.component';
 import { ReleaseCreateEditComponent } from './content/components/releases/components/release-create-edit/release-create-edit.component';
-import { InstanceCreateEditComponent } from './content/components/instances/components/instances-create-edit/instances-create-edit.component';
 import { ClientsComponent } from './content/components/clients/clients.component';
 import { ClientProfileComponent } from './content/components/clients/components/client-profile/client-profile.component';
 import { ClientCreateRequirementsComponent } from './content/components/clients/components/client-create-requirements/client-create-requirements.component';
@@ -18,6 +16,8 @@ import { MemberCreateEditComponent } from './content/components/admin/child-comp
 import { ClientCreateEditComponent } from './content/components/clients/components/client-create-edit/client-create-edit.component';
 import { MembersComponent } from './content/components/admin/child-components/members/members.component';
 import { AdminMenuComponent } from './content/components/admin/child-components/admin-menu/admin-menu.component';
+import { DomainsComponent } from './content/components/domains/domains.component';
+import { DomainCreateEditComponent } from './content/components/domains/components/domains-create-edit/domains-create-edit.component';
 
 const mainRoutes: Routes = [
   { path: '', redirectTo: 'releases', pathMatch: 'full' },
@@ -28,10 +28,10 @@ const mainRoutes: Routes = [
     path: 'releases/create', component: ReleaseCreateEditComponent
   },
   {
-    path: 'instances', component: InstancesComponent
+    path: 'domains', component: DomainsComponent
   },
   {
-    path: 'instances/create', component: InstanceCreateEditComponent
+    path: 'domains/create', component: DomainCreateEditComponent
   },
   {
     path: 'projects', component: ProjectsComponent
@@ -61,15 +61,15 @@ const mainRoutes: Routes = [
         path: '', component: AdminMenuComponent
       },
       {
-        path: 'members', component: MembersComponent
+        path: 'members/create', component: MemberCreateEditComponent, pathMatch: 'full'
       },
       {
-        path: 'members/:id', component: MemberProfileComponent
+        path: 'members', component: MembersComponent, pathMatch: 'full'
       },
+      {
+        path: 'members/:id', component: MemberProfileComponent, pathMatch: 'full'
+      }
     ]
-  },
-  {
-    path: 'admin/members/create', component: MemberCreateEditComponent
   },
   {
     path: 'releases/:id', component: ReleaseViewComponent

@@ -6,8 +6,8 @@ export const contentMenu = [
     },
     {
         icon: 'leak_add',
-        name: 'Instances',
-        route: 'instances'
+        name: 'Domains',
+        route: 'domains'
     },
     {
         icon: 'pages',

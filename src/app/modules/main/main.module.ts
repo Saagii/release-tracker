@@ -7,7 +7,6 @@ import { ReleaseViewComponent } from './content/components/releases/components/r
 import { ProjectViewComponent } from './content/components/projects/components/project-view/project-view.component';
 import { ProjectCreateEditComponent } from './content/components/projects/components/project-create-edit/project-create-edit.component';
 import { ReleaseCreateEditComponent } from './content/components/releases/components/release-create-edit/release-create-edit.component';
-import { InstanceCreateEditComponent } from './content/components/instances/components/instances-create-edit/instances-create-edit.component';
 import { ClientsComponent } from './content/components/clients/clients.component';
 import { ClientProfileComponent } from './content/components/clients/components/client-profile/client-profile.component';
 import { ClientCreateRequirementsComponent } from './content/components/clients/components/client-create-requirements/client-create-requirements.component';
@@ -16,6 +15,7 @@ import { MemberCreateEditComponent } from './content/components/admin/child-comp
 import { ClientCreateEditComponent } from './content/components/clients/components/client-create-edit/client-create-edit.component';
 import { MembersComponent } from './content/components/admin/child-components/members/members.component';
 import { AdminMenuComponent } from './content/components/admin/child-components/admin-menu/admin-menu.component';
+import { DomainCreateEditComponent } from './content/components/domains/components/domains-create-edit/domains-create-edit.component';
 
 
 
@@ -26,7 +26,7 @@ import { AdminMenuComponent } from './content/components/admin/child-components/
     ProjectViewComponent,
     ProjectCreateEditComponent,
     ReleaseCreateEditComponent,
-    InstanceCreateEditComponent,
+    DomainCreateEditComponent,
     ClientsComponent,
     ClientProfileComponent,
     ClientCreateRequirementsComponent,
@@ -47,7 +47,7 @@ import { AdminMenuComponent } from './content/components/admin/child-components/
     ProjectViewComponent,
     ProjectCreateEditComponent,
     ReleaseCreateEditComponent,
-    InstanceCreateEditComponent,
+    DomainCreateEditComponent,
     ClientsComponent,
     ClientProfileComponent,
     ClientCreateRequirementsComponent,

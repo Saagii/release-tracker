@@ -7,9 +7,9 @@ export const navigationNewMenu = [
     },
     {
         icon: 'leak_add',
-        name: 'Instance',
-        description: 'Add new Instance and its details to link with release.',
-        route: ['../', 'main', 'instances', 'create']
+        name: 'Domains',
+        description: 'Add new Domain and its details to link with release.',
+        route: ['../', 'main', 'domains', 'create']
     },
     {
         icon: 'pages',
