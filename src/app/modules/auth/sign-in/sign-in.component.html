@@ -1,7 +1,7 @@
-<div class="w-full h-screen custom-bg-1 overflow-y-auto">
+<div class="w-full h-screen flex flex-wrap content-center justify-center custom-bg-1 overflow-y-auto">
 
     <!-- Logo Text -->
-    <div class="w-full pt-28 text-4xl logo-f1 text-center text-white">RELEASE <span class="text-blue-300 logo-f1">TRACKER</span></div>
+    <div class="w-full  text-4xl logo-f1 text-center text-white">RELEASE <span class="text-blue-300 logo-f1">TRACKER</span></div>
 
     <!-- Sign In Quick Brief Text -->
     <div class="w-full text-center text-gray-300 text-2xl pt-12">
@@ -24,7 +24,7 @@
                 <input [type]="hideLoginPassword ? 'password' : 'text'" matInput placeholder="Enter the Password" formControlName="password">
                 <button mat-icon-button matSuffix (click)="hideLoginPassword = !hideLoginPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideLoginPassword">
                     <mat-icon>{{hideLoginPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-                  </button>
+                </button>
                 <mat-error>Password is <strong>Required!</strong>. Min 4 Characters.</mat-error>
             </mat-form-field>
 
@@ -70,7 +70,7 @@
                 <input [type]="hideLoginPassword ? 'password' : 'text'" matInput placeholder="Password" formControlName="password">
                 <button mat-icon-button matSuffix (click)="hideLoginPassword = !hideLoginPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideLoginPassword">
                     <mat-icon>{{hideLoginPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-                  </button>
+                </button>
                 <mat-error>Password is <strong>Required!</strong></mat-error>
             </mat-form-field>
 
@@ -85,6 +85,8 @@
             </div>
         </form>
     </div>
+
+    
 </div>
 
 <!-- A release tracker is a tool or system used to manage the process of releasing software or other products. It typically includes features such as version control, issue tracking, and project management to ensure that releases are completed on time, within budget, and with minimal errors. The release tracker helps to keep track of the status of each release, including bugs or issues that have been identified, fixes that have been implemented, and testing results. It may also include features for managing user feedback and communicating with stakeholders. Overall, a release tracker is essential for managing the complex process of releasing software or products to ensure a successful and timely launch. -->
