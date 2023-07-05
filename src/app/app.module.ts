@@ -19,6 +19,7 @@ import { AdminComponent } from './modules/main/content/components/admin/admin.co
 import { MembersComponent } from './modules/main/content/components/admin/child-components/members/members.component';
 import { SignInComponent } from './modules/auth/sign-in/sign-in.component';
 import { DomainsComponent } from './modules/main/content/components/domains/domains.component';
+import { OnboardingComponent } from './modules/auth/onboarding/onboarding.component';
 // import { ReleaseViewComponent } from './modules/main/content/components/releases/components/release-view/release-view.component';
 
 @NgModule({
@@ -34,6 +35,7 @@ import { DomainsComponent } from './modules/main/content/components/domains/doma
     TimelinesComponent,
     AdminComponent,
     SignInComponent,
+    OnboardingComponent,
     // ReleaseViewComponent
   ],
   imports: [
