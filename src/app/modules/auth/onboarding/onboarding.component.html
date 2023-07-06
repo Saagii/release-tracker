@@ -13,12 +13,58 @@
     </div>
 
     <!-- Right Block -->
-    <div class="w-8/12 p-12">
+    <div class="w-8/12 py-20 px-24">
 
         <!-- Tabs -->
-        <div class="w-full flex border">
+        <div class="w-full flex justify-between items-center font-semibold">
             
             <!-- Org Info, Primary User Info, Confirmation -->
+            <div class="">
+                <div class="text-center">1</div>
+                <div class="mt-3">Organisation Info</div>
+            </div>
+            <div class="flex items-center">
+                <span class="px-6 border"></span>
+            </div>
+            <div class="">
+                <div class="text-center">2</div>
+                <div class="mt-3">Admin Info</div>
+            </div>
+            <div class="flex items-center">
+                <span class="px-6 border"></span>
+            </div>
+            <div class="">
+                <div class="text-center">3</div>
+                <div class="mt-3">Confirmation</div>
+            </div>
+        </div>
+
+        <!-- Tab Contents -->
+        <div class="w-full">
+            
+            <!-- Organisation Info Content -->
+            <div class="w-10/12 mt-20">
+                <div class="font-bold text-2xl">Tell us about your Organisation</div>
+                <form [formGroup]="orgInfoForm" class="mt-10">
+                    <!-- Org Name -->
+                    <mat-form-field class="w-full" appearance="outline">
+                        <mat-label>Organisation Name</mat-label>
+                        <input class="" type="text" matInput placeholder="Enter your Organisation Name" formControlName="orgName" required>
+                        <mat-error>Organisation Name is <strong>Required!</strong></mat-error>
+                    </mat-form-field>
+
+                    <!-- Org Category -->
+                    <mat-form-field class="w-full mt-6" appearance="outline">
+                        <mat-label>Organisation Type</mat-label>
+                        <mat-select placeholder="Organisation Type" required formControlName="orgType">
+                            <mat-option *ngFor="let type of ['Corporate & IT', 'Franchise', 'Sole Proprietorship', 'Government']; let i=index;" [value]="i+1">
+                              {{type}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>Organisation Type is <strong>Required!</strong></mat-error>
+                    </mat-form-field>
+                </form>
+            </div>
         </div>
     </div>
 </div>
