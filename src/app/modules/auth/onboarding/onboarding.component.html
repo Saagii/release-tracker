@@ -13,7 +13,7 @@
     </div>
 
     <!-- Right Block -->
-    <div class="w-8/12 py-20 px-24">
+    <div class="w-8/12 px-24 h-full flex flex-wrap content-center">
 
         <!-- Tabs -->
         <div class="w-full flex justify-between items-center font-semibold">
@@ -43,7 +43,7 @@
         <div class="w-full">
             
             <!-- Organisation Info Content -->
-            <div class="w-10/12 mt-20">
+            <div class="w-10/12 my-20">
                 <div class="font-bold text-2xl">Tell us about your Organisation</div>
                 <form [formGroup]="orgInfoForm" class="mt-10">
                     <!-- Org Name -->
@@ -54,7 +54,7 @@
                     </mat-form-field>
 
                     <!-- Org Category -->
-                    <mat-form-field class="w-full mt-6" appearance="outline">
+                    <mat-form-field class="w-full mt-2" appearance="outline">
                         <mat-label>Organisation Type</mat-label>
                         <mat-select placeholder="Organisation Type" required formControlName="orgType">
                             <mat-option *ngFor="let type of ['Corporate & IT', 'Franchise', 'Sole Proprietorship', 'Government']; let i=index;" [value]="i+1">
@@ -63,6 +63,13 @@
                         </mat-select>
                         <mat-error>Organisation Type is <strong>Required!</strong></mat-error>
                     </mat-form-field>
+
+                    <!-- Stepper Button -->
+                    <div class="w-full flex justify-end mt-6">
+                        <button mat-flat-button color="primary">
+                            Next <mat-icon class="text-base -mt-0.5 ml-1 -mr-2">arrow_forward</mat-icon>
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
