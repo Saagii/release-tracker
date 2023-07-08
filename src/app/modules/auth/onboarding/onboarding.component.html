@@ -9,6 +9,11 @@
         <!-- Sign In Quick Brief Text -->
         <div class="w-full text-gray-300 text-xl mt-6">
             Get more things done by tracking and managing your software release.
+
+            <!-- Sign-in Link -->
+            <div class="w-full mt-20 text-gray-300 text-sm">
+                Already have an account ? <span class="cursor-pointer text-blue-300 font-bold hover:underline">Login here.</span>
+            </div>
         </div>
     </div>
 
@@ -16,26 +21,32 @@
     <div class="w-8/12 px-24 h-full flex flex-wrap content-center">
 
         <!-- Tabs -->
-        <div class="w-full flex justify-between items-center font-semibold">
+        <div class="w-full flex justify-between items-center">
             
             <!-- Org Info, Primary User Info, Confirmation -->
-            <div class="">
-                <div class="text-center">1</div>
+            <div class="font-bold" [ngClass]="{'text-blue-600': onBoardingState > 1}">
+                <div class="text-center">
+                    <span *ngIf="onBoardingState === 1">1</span>
+                    <mat-icon *ngIf="onBoardingState > 1">check_circle</mat-icon>
+                </div>
                 <div class="mt-3">Organisation Info</div>
             </div>
             <div class="flex items-center">
                 <span class="px-6 border"></span>
             </div>
-            <div class="">
-                <div class="text-center">2</div>
+            <div [ngClass]="{'text-blue-600 font-bold': onBoardingState > 2, 'text-gray-400': onBoardingState < 2, 'font-bold': onBoardingState >= 2}">
+                <div class="text-center">
+                    <span *ngIf="onBoardingState <= 2">2</span>
+                    <mat-icon *ngIf="onBoardingState > 2">check_circle</mat-icon>
+                </div>
                 <div class="mt-3">Admin Info</div>
             </div>
             <div class="flex items-center">
                 <span class="px-6 border"></span>
             </div>
-            <div class="">
+            <div [ngClass]="{'text-gray-400': onBoardingState < 3, 'font-bold': onBoardingState === 3}">
                 <div class="text-center">3</div>
-                <div class="mt-3">Confirmation</div>
+                <div class="mt-3">Verification</div>
             </div>
         </div>
 
@@ -43,7 +54,7 @@
         <div class="w-full">
             
             <!-- Organisation Info Content -->
-            <div class="w-10/12 my-20">
+            <div class="w-10/12 mt-16" *ngIf="onBoardingState === 1">
                 <div class="font-bold text-2xl">Tell us about your Organisation</div>
                 <form [formGroup]="orgInfoForm" class="mt-10">
                     <!-- Org Name -->
@@ -63,14 +74,74 @@
                         </mat-select>
                         <mat-error>Organisation Type is <strong>Required!</strong></mat-error>
                     </mat-form-field>
-
-                    <!-- Stepper Button -->
-                    <div class="w-full flex justify-end mt-6">
-                        <button mat-flat-button color="primary">
-                            Next <mat-icon class="text-base -mt-0.5 ml-1 -mr-2">arrow_forward</mat-icon>
-                        </button>
-                    </div>
                 </form>
+            </div>
+
+            <!-- Admin Info Content -->
+            <div class="w-10/12 mt-16" *ngIf="onBoardingState === 2">
+                <div class="font-bold text-2xl">Primary Admin Details</div>
+                <form [formGroup]="adminInfoForm" class="mt-10">
+
+                    <div class="w-full flex justify-between">
+                        <!-- First Name -->
+                        <mat-form-field class="w-6/12 pr-2" appearance="outline">
+                            <mat-label>First Name</mat-label>
+                            <input class="" type="text" matInput placeholder="Enter your First Name" formControlName="firstName" required>
+                            <mat-error>First Name is <strong>Required!</strong></mat-error>
+                        </mat-form-field>
+
+                        <!-- Last Name -->
+                        <mat-form-field class="w-6/12 pl-2" appearance="outline">
+                            <mat-label>Last Name</mat-label>
+                            <input class="" type="text" matInput placeholder="Enter your Last Name" formControlName="lastName" required>
+                            <mat-error>Last Name is <strong>Required!</strong></mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <!-- Email -->
+                    <mat-form-field class="w-full" appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input class="" type="email" matInput placeholder="Enter your Email" formControlName="email" required>
+                        <mat-error>Email is <strong>Required!</strong></mat-error>
+                    </mat-form-field>
+
+                    <!-- Password -->
+                    <mat-form-field class="w-full" appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input class="" [type]="hidePassword ? 'password' : 'text' " matInput placeholder="Enter your Password" formControlName="password" required>
+                        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide'" [attr.aria-pressed]="hidePassword">
+                            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                          </button>
+                        <mat-error>Password is <strong>Required!</strong></mat-error>
+                    </mat-form-field>
+                </form>
+            </div>
+
+            <!-- Verification Content -->
+            <div class="w-10/12 mt-20" *ngIf="onBoardingState === 3">
+                <div class="font-bold text-2xl">Verify your email address</div>
+                <div class="text-gray-500 text-sm my-3">We emailed you a verification code to <span class="text-blue-600 font-bold"></span>{{adminInfoForm.controls.email.value ? adminInfoForm.controls.email.value : '--'}}. Enter the code below to confirm your email address.</div>
+                <form [formGroup]="verificationForm" class="mt-10">
+                    <!-- Verification -->
+                    <mat-form-field class="w-full" appearance="outline">
+                        <mat-label>Verification Code</mat-label>
+                        <input class="" type="text" matInput placeholder="Enter Verification Code" formControlName="verificationCode" required>
+                        <mat-error>Verification Code is <strong>Required!</strong></mat-error>
+                    </mat-form-field>
+                </form>
+            </div>
+
+            <!-- Stepper Button -->
+            <div class="w-10/12 flex mt-6 mb-10" [ngClass]="{'justify-end' : onBoardingState === 1, 'justify-between' : onBoardingState !== 1}">
+                <button mat-button color="primary" *ngIf="onBoardingState !== 1" (click)="tabNavigation(-1)">
+                    <mat-icon class="text-base -mt-0.5 -ml-1">arrow_backward</mat-icon> Previous
+                </button>
+                <button mat-flat-button color="primary" *ngIf="onBoardingState !== 3" (click)="tabNavigation(1)" [disabled]="!validateForm()">
+                    Next <mat-icon class="text-base -mt-0.5 ml-1 -mr-2">arrow_forward</mat-icon>
+                </button>
+                <button mat-flat-button color="primary" class="w-5/12" *ngIf="onBoardingState === 3" (click)="verifyAndCreateAccount()">
+                    Verify & Create Account
+                </button>
             </div>
         </div>
     </div>
