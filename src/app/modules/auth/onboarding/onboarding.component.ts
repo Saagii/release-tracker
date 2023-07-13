@@ -20,7 +20,8 @@ export class OnboardingComponent implements OnInit {
     // Organization info
     this.orgInfoForm = this.fb.group({
       orgName: [null, Validators.required],
-      orgType: [null, Validators.required]
+      orgType: [null, Validators.required],
+      orgUniqueTag: [null, Validators.required]
     });
 
     // Admin info

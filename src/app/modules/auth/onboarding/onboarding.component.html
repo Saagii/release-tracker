@@ -29,7 +29,7 @@
                     <span *ngIf="onBoardingState === 1">1</span>
                     <mat-icon *ngIf="onBoardingState > 1">check_circle</mat-icon>
                 </div>
-                <div class="mt-3">Organisation Info</div>
+                <div class="mt-3">Organization Info</div>
             </div>
             <div class="flex items-center">
                 <span class="px-6 border"></span>
@@ -53,27 +53,38 @@
         <!-- Tab Contents -->
         <div class="w-full">
             
-            <!-- Organisation Info Content -->
+            <!-- Organization Info Content -->
             <div class="w-10/12 mt-16" *ngIf="onBoardingState === 1">
-                <div class="font-bold text-2xl">Tell us about your Organisation</div>
+                <div class="font-bold text-2xl">Tell us about your Organization</div>
                 <form [formGroup]="orgInfoForm" class="mt-10">
                     <!-- Org Name -->
                     <mat-form-field class="w-full" appearance="outline">
-                        <mat-label>Organisation Name</mat-label>
-                        <input class="" type="text" matInput placeholder="Enter your Organisation Name" formControlName="orgName" required>
-                        <mat-error>Organisation Name is <strong>Required!</strong></mat-error>
+                        <mat-label>Organization Name</mat-label>
+                        <input class="" type="text" matInput placeholder="Enter your Organization Name" formControlName="orgName" required>
+                        <mat-error>Organization Name is <strong>Required!</strong></mat-error>
                     </mat-form-field>
 
                     <!-- Org Category -->
                     <mat-form-field class="w-full mt-2" appearance="outline">
-                        <mat-label>Organisation Type</mat-label>
-                        <mat-select placeholder="Organisation Type" required formControlName="orgType">
+                        <mat-label>Organization Type</mat-label>
+                        <mat-select placeholder="Organization Type" required formControlName="orgType">
                             <mat-option *ngFor="let type of ['Corporate & IT', 'Franchise', 'Sole Proprietorship', 'Government']; let i=index;" [value]="i+1">
                               {{type}}
                             </mat-option>
                         </mat-select>
-                        <mat-error>Organisation Type is <strong>Required!</strong></mat-error>
+                        <mat-error>Organization Type is <strong>Required!</strong></mat-error>
                     </mat-form-field>
+
+                    <!-- Org Unique Tag -->
+                    <div class="w-full flex items-center">
+                        <mat-form-field class="w-9/12" appearance="outline">
+                            <mat-label>Add Unique Tag</mat-label>
+                            <input class="" type="text" matInput placeholder="Add Unique Tag" formControlName="orgUniqueTag" required>
+                            <mat-error>Organization Unique Tag is <strong>Required!</strong></mat-error>
+                        </mat-form-field>
+
+                        <button mat-flat-button color="primary" style="margin-top: -1.3rem; margin-left: 3%">Verify Unique Tag</button>
+                    </div>
                 </form>
             </div>
 
