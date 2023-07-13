@@ -17,9 +17,10 @@ import { ProjectsComponent } from './modules/main/content/components/projects/pr
 import { TimelinesComponent } from './modules/main/content/components/timelines/timelines.component';
 import { AdminComponent } from './modules/main/content/components/admin/admin.component';
 import { MembersComponent } from './modules/main/content/components/admin/child-components/members/members.component';
-import { SignInComponent } from './modules/auth/sign-in/sign-in.component';
 import { DomainsComponent } from './modules/main/content/components/domains/domains.component';
-import { OnboardingComponent } from './modules/auth/onboarding/onboarding.component';
+import { SignInComponent } from './modules/auth/components/sign-in/sign-in.component';
+import { OnboardingComponent } from './modules/auth/components/onboarding/onboarding.component';
+import { AuthService } from './modules/auth/services/auth.service';
 // import { ReleaseViewComponent } from './modules/main/content/components/releases/components/release-view/release-view.component';
 
 @NgModule({
@@ -47,7 +48,7 @@ import { OnboardingComponent } from './modules/auth/onboarding/onboarding.compon
     ReactiveFormsModule,
     CommonModule
   ],
-  providers: [StatusService],
+  providers: [StatusService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

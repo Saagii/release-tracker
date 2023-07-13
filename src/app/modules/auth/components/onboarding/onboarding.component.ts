@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-onboarding',
@@ -14,14 +15,15 @@ export class OnboardingComponent implements OnInit {
   onBoardingState: number = 1;
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private authService: AuthService
   ) {
 
     // Organization info
     this.orgInfoForm = this.fb.group({
       orgName: [null, Validators.required],
       orgType: [null, Validators.required],
-      orgUniqueTag: [null, Validators.required]
+      orgUniqueTag: ['', Validators.required]
     });
 
     // Admin info
@@ -59,6 +61,16 @@ export class OnboardingComponent implements OnInit {
     }
     
     return false;
+  }
+
+
+  /*
+    Verify Unique Tag
+  */
+  verifyUniqueTag(): void {
+    this.authService.verifyUniqueTag(this.orgInfoForm.get('orgUniqueTag')?.value).subscribe((respose: any) => {
+      console.log(respose);
+    });
   }
 
 

@@ -83,14 +83,14 @@
                             <mat-error>Organization Unique Tag is <strong>Required!</strong></mat-error>
                         </mat-form-field>
 
-                        <button mat-flat-button color="primary" style="margin-top: -1.3rem; margin-left: 3%">Verify Unique Tag</button>
+                        <button mat-flat-button color="primary" style="margin-top: -1.3rem; margin-left: 3%" (click)="verifyUniqueTag()">Verify Unique Tag</button>
                     </div>
                 </form>
             </div>
 
             <!-- Admin Info Content -->
             <div class="w-10/12 mt-16" *ngIf="onBoardingState === 2">
-                <div class="font-bold text-2xl">Primary Admin Details</div>
+                <div class="font-bold text-2xl">Primary Admin Details</div> 
                 <form [formGroup]="adminInfoForm" class="mt-10">
 
                     <div class="w-full flex justify-between">

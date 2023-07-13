@@ -15,10 +15,12 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [],
   imports: [
+    HttpClientModule,
     MatIconModule,
     MatButtonModule,
     MatMenuModule,
@@ -37,6 +39,7 @@ import {MatRadioModule} from '@angular/material/radio';
     MatRadioModule
   ],
   exports: [
+    HttpClientModule,
     MatIconModule,
     MatButtonModule,
     MatMenuModule,
