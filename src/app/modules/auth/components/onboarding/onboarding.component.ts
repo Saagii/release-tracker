@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { verifyAndCreateAccount } from '../../model/verifyAndAccountCreation.model';
 
 @Component({
   selector: 'app-onboarding',
@@ -13,6 +14,9 @@ export class OnboardingComponent implements OnInit {
   verificationForm: FormGroup;
   hidePassword = true;
   onBoardingState: number = 1;
+  isUniqueTagVerified: boolean = false
+  isAccountVerified: boolean = false;
+  accountVerificationLoader: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -54,9 +58,9 @@ export class OnboardingComponent implements OnInit {
     Validate form to enable tab navigation.
   */
   validateForm(): boolean {
-    if(this.onBoardingState === 1) {
+    if(this.onBoardingState === 1 && this.isUniqueTagVerified) {
       return this.orgInfoForm.valid;
-    } else if(this.onBoardingState === 2) {
+    } else if(this.onBoardingState === 2 && this.isUniqueTagVerified) {
       return this.adminInfoForm.valid;
     }
     
@@ -68,8 +72,10 @@ export class OnboardingComponent implements OnInit {
     Verify Unique Tag
   */
   verifyUniqueTag(): void {
-    this.authService.verifyUniqueTag(this.orgInfoForm.get('orgUniqueTag')?.value).subscribe((respose: any) => {
-      console.log(respose);
+    this.authService.verifyUniqueTag(this.orgInfoForm.get('orgUniqueTag')?.value).subscribe((response: any) => {
+      console.log(response);
+
+      this.isUniqueTagVerified = !response.tagExists;
     });
   }
 
@@ -79,6 +85,29 @@ export class OnboardingComponent implements OnInit {
   */
   verifyAndCreateAccount(): void {
     console.log('Account Created...');
+
+    this.accountVerificationLoader = true;
+
+    const tenantCreationPayload: verifyAndCreateAccount = {
+      tenants: [{
+          orgName: this.orgInfoForm.get('orgName')?.value,
+          orgType: this.orgInfoForm.get('orgType')?.value,
+          tag: this.orgInfoForm.get('orgUniqueTag')?.value,
+          memberType: this.adminInfoForm.get('memberType')?.value,
+          firstName: this.adminInfoForm.get('firstName')?.value,
+          lastName: this.adminInfoForm.get('lastName')?.value,
+          email: this.adminInfoForm.get('email')?.value,
+          password: this.adminInfoForm.get('password')?.value,
+          verificationCode: this.verificationForm.get('verificationCode')?.value
+        }
+      ]
+    }
+
+    this.authService.verifyAndCreateTenant(tenantCreationPayload).subscribe((response: any) => {
+      console.log(response);
+
+      this.accountVerificationLoader = false;
+    });
   }
   
 }

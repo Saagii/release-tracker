@@ -154,6 +154,13 @@
                     Verify & Create Account
                 </button>
             </div>
+
+            <div class="w-10/12 flex justify-end mt-6 mb-10" *ngIf="accountVerificationLoader">
+                <div class="flex items-center">
+                    <mat-spinner [diameter]="20"></mat-spinner>
+                    <span class="ml-2">Verfiying. Please Wait ...</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>
