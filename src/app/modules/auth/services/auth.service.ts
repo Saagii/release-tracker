@@ -11,6 +11,20 @@ export class AuthService {
         private _router:Router
     ){}
 
+
+    /*
+        Set & Get Token from local storage.
+    */
+    set token(token: any) {
+        localStorage.setItem('token', JSON.stringify(token));
+    }
+
+    get tokenValue(): string | null {
+        const token = localStorage.getItem('token') ?? null;
+
+        return token ? token : null;
+    }
+
     
     /*
         Verify Unique Tag

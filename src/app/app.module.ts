@@ -21,6 +21,9 @@ import { DomainsComponent } from './modules/main/content/components/domains/doma
 import { SignInComponent } from './modules/auth/components/sign-in/sign-in.component';
 import { OnboardingComponent } from './modules/auth/components/onboarding/onboarding.component';
 import { AuthService } from './modules/auth/services/auth.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './modules/shared/interceptor/token.interceptor';
+import { AuthGuard } from './modules/shared/authGaurd/auth.gaurd';
 // import { ReleaseViewComponent } from './modules/main/content/components/releases/components/release-view/release-view.component';
 
 @NgModule({
@@ -48,7 +51,13 @@ import { AuthService } from './modules/auth/services/auth.service';
     ReactiveFormsModule,
     CommonModule
   ],
-  providers: [StatusService, AuthService],
+  providers: [StatusService, AuthService, AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
