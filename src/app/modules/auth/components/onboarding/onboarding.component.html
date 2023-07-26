@@ -44,8 +44,11 @@
             <div class="flex items-center">
                 <span class="px-6 border"></span>
             </div>
-            <div [ngClass]="{'text-gray-400': onBoardingState < 3, 'font-bold': onBoardingState === 3}">
-                <div class="text-center">3</div>
+            <div [ngClass]="{'text-gray-400': onBoardingState < 3, 'font-bold': onBoardingState === 3, 'text-blue-600 font-bold': onBoardingState > 3}">
+                <div class="text-center">
+                    <span *ngIf="onBoardingState <= 3">3</span>
+                    <mat-icon *ngIf="onBoardingState > 3">check_circle</mat-icon>
+                </div>
                 <div class="mt-3">Verification</div>
             </div>
         </div>
@@ -68,7 +71,7 @@
                     <mat-form-field class="w-full mt-2" appearance="outline">
                         <mat-label>Organization Type</mat-label>
                         <mat-select placeholder="Organization Type" required formControlName="orgType">
-                            <mat-option *ngFor="let type of ['Corporate & IT', 'Franchise', 'Sole Proprietorship', 'Government']; let i=index;" [value]="i+1">
+                            <mat-option *ngFor="let type of ['Corporate & IT', 'Franchise', 'Sole Proprietorship', 'Government']" [value]="type">
                               {{type}}
                             </mat-option>
                         </mat-select>
@@ -129,21 +132,32 @@
             </div>
 
             <!-- Verification Content -->
-            <div class="w-10/12 mt-20" *ngIf="onBoardingState === 3">
-                <div class="font-bold text-2xl">Verify your email address</div>
-                <div class="text-gray-500 text-sm my-3">We emailed you a verification code to <span class="text-blue-600 font-bold"></span>{{adminInfoForm.controls.email.value ? adminInfoForm.controls.email.value : '--'}}. Enter the code below to confirm your email address.</div>
-                <form [formGroup]="verificationForm" class="mt-10">
-                    <!-- Verification -->
-                    <mat-form-field class="w-full" appearance="outline">
-                        <mat-label>Verification Code</mat-label>
-                        <input class="" type="text" matInput placeholder="Enter Verification Code" formControlName="verificationCode" required>
-                        <mat-error>Verification Code is <strong>Required!</strong></mat-error>
-                    </mat-form-field>
-                </form>
+            <div class="w-10/12 mt-20" *ngIf="onBoardingState >= 3">
+                <div class="w-full" *ngIf="!accountVerificationResponse">
+                    <div class="font-bold text-2xl">Verify your email address</div>
+                    <div class="text-gray-500 text-sm my-3">We emailed you a verification code to <span class="text-blue-600 font-bold"></span>{{adminInfoForm.controls.email.value ? adminInfoForm.controls.email.value : '--'}}. Enter the code below to confirm your email address.</div>
+                    <form [formGroup]="verificationForm" class="mt-10">
+                        <!-- Verification -->
+                        <mat-form-field class="w-full" appearance="outline">
+                            <mat-label>Verification Code</mat-label>
+                            <input class="" type="text" matInput placeholder="Enter Verification Code" formControlName="verificationCode" required>
+                            <mat-error>Verification Code is <strong>Required!</strong></mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+                <div class="w-full py-4" *ngIf="accountVerificationResponse?.isTenantCreated">
+                    <div class=""><mat-icon class="text-4xl text-green-400">verified_user</mat-icon></div>
+                    <div class="text-2xl mt-2 font-bold">Verified</div>
+                    <div class="text-gray-500 py-2">You have successfully verified your account.</div>
+                    <div class="my-6">
+                        <button mat-flat-button class="w-8/12" color="primary">Log in to your Account</button>
+                    </div>
+                </div>
+                
             </div>
 
             <!-- Stepper Button -->
-            <div class="w-10/12 flex mt-6 mb-10" [ngClass]="{'justify-end' : onBoardingState === 1, 'justify-between' : onBoardingState !== 1}">
+            <div class="w-10/12 flex mt-6 mb-10" [ngClass]="{'justify-end' : onBoardingState === 1, 'justify-between' : onBoardingState !== 1}" *ngIf="!accountVerificationResponse">
                 <button mat-button color="primary" *ngIf="onBoardingState !== 1" (click)="tabNavigation(-1)">
                     <mat-icon class="text-base -mt-0.5 -ml-1">arrow_backward</mat-icon> Previous
                 </button>

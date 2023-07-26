@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { verifyAndCreateAccount } from '../../model/verifyAndAccountCreation.model';
+import { AccountVerificationResponse } from '../../model/accountCreationResponse.model';
 
 @Component({
   selector: 'app-onboarding',
@@ -17,6 +18,7 @@ export class OnboardingComponent implements OnInit {
   isUniqueTagVerified: boolean = false
   isAccountVerified: boolean = false;
   accountVerificationLoader: boolean = false;
+  accountVerificationResponse: AccountVerificationResponse | undefined;
 
   constructor(
     private fb: FormBuilder,
@@ -103,10 +105,13 @@ export class OnboardingComponent implements OnInit {
       ]
     }
 
-    this.authService.verifyAndCreateTenant(tenantCreationPayload).subscribe((response: any) => {
+    this.authService.verifyAndCreateTenant(tenantCreationPayload).subscribe((response: AccountVerificationResponse) => {
       console.log(response);
 
       this.accountVerificationLoader = false;
+      this.onBoardingState = 4;
+
+      this.accountVerificationResponse = response;
     });
   }
   
