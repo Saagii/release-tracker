@@ -1,4 +1,7 @@
 export interface AccountVerificationResponse {
     isTenantCreated: boolean;
-    token: string;
+    token: {
+        memberDetails: object;
+        token: string;
+    };
 }

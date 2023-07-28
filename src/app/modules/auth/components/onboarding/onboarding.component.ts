@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { verifyAndCreateAccount } from '../../model/verifyAndAccountCreation.model';
 import { AccountVerificationResponse } from '../../model/accountCreationResponse.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-onboarding',
@@ -14,6 +15,7 @@ export class OnboardingComponent implements OnInit {
   adminInfoForm: FormGroup;
   verificationForm: FormGroup;
   hidePassword = true;
+  navCount: number = 5;
   onBoardingState: number = 1;
   isUniqueTagVerified: boolean = false
   isAccountVerified: boolean = false;
@@ -22,7 +24,8 @@ export class OnboardingComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router,
   ) {
 
     // Organization info
@@ -112,7 +115,27 @@ export class OnboardingComponent implements OnInit {
       this.onBoardingState = 4;
 
       this.accountVerificationResponse = response;
+
+      if(this.accountVerificationResponse.isTenantCreated) {
+        this.authService.token = response.token;
+        this.onboardingNavigationTimer();
+      }
     });
+  }
+
+
+  /*
+    Onboarding to Dashboard navigation timer.
+  */
+  onboardingNavigationTimer(): any {
+    if(this.navCount) {
+      setTimeout(() => {
+        this.navCount-= 1;
+        this.onboardingNavigationTimer();
+      }, 1000);
+    } else {
+      this.router.navigate(['../', 'main', 'releases']);
+    }
   }
   
 }
