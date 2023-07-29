@@ -1,0 +1,30 @@
+<div class="w-full h-screen flex">
+
+    <!-- Left Block -->
+    <div class="w-4/12 flex flex-wrap custom-bg-1 p-12">
+
+        <!-- Logo Text -->
+        <div class="w-full flex items-end text-4xl logo-f1 text-white">RELEASE <span class="text-blue-300 logo-f1 pl-2">TRACKER</span></div>
+
+        <!-- Sign In Quick Brief Text -->
+        <div class="w-full text-gray-300 text-xl mt-6">
+            Get more things done by tracking and managing your software release.
+
+            <!-- Log-in Link -->
+            <div class="w-full mt-20 text-gray-300 text-sm" *ngIf="!isLoginPage">
+                Already have an account ? <span class="cursor-pointer text-blue-300 font-bold hover:underline" [routerLink]="['login']" (click)="isLoginPage = true;">Login here.</span>
+            </div>
+
+            <!-- Onboard Link -->
+            <div class="w-full mt-20 text-gray-300 text-sm" *ngIf="isLoginPage">
+                Don't have an account ? <span class="cursor-pointer text-blue-300 font-bold hover:underline" [routerLink]="['onboard']" (click)="isLoginPage = false;">Create Now</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Block -->
+    <div class="w-8/12 h-full">
+        <!-- Auth Module Routes -->
+        <router-outlet></router-outlet>
+    </div>
+</div>

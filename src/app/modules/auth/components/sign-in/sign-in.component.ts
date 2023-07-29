@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -8,12 +9,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class SignInComponent implements OnInit {
 
   signinForm: FormGroup;
-  registerForm: FormGroup;
+  orgSearchForm: FormGroup;
   hideLoginPassword: boolean = true;
+  isUniqueTagVerified: boolean = false
   isRegisterFormEnabled: string = 'sign-in';
 
   constructor(
     private fb: FormBuilder,
+    private authService: AuthService,
   ) {
       // Prepare Sign In Form
       this.signinForm = this.fb.group({
@@ -21,12 +24,9 @@ export class SignInComponent implements OnInit {
           password: [null, [Validators.required, Validators.minLength(4)]]
       });
 
-      // Prepare Register Form
-      this.registerForm = this.fb.group({
-          firstName: [null, [Validators.required, Validators.email]],
-          lastName: [null, [Validators.required, Validators.email]],
-          email: [null, [Validators.required, Validators.email]],
-          password: [null, [Validators.required, Validators.minLength(4)]]
+      // Prepare Org Search Form
+      this.orgSearchForm = this.fb.group({
+        orgUniqueTag: [null, [Validators.required, Validators.email]]
       });
   }
 
@@ -39,7 +39,19 @@ export class SignInComponent implements OnInit {
   toggleRegisterForm(formType: string): any {
     this.isRegisterFormEnabled = formType;
     this.signinForm.reset();
-    this.registerForm.reset();
+    this.orgSearchForm.reset();
+  }
+
+
+  /*
+    Verify Unique Tag
+  */
+  verifyUniqueTag(): void {
+    this.authService.verifyUniqueTag(this.orgSearchForm.get('orgUniqueTag')?.value).subscribe((response: any) => {
+      console.log(response);
+
+      this.isUniqueTagVerified = response.tagExists;
+    });
   }
   
 }
