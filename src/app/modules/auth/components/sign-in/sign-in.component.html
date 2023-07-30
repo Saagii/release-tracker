@@ -3,25 +3,29 @@
     <!-- Title -->
     <div class="w-7/12">
         <div class="w-full font-bold text-xl">Welcome back!</div>
-        <div class="w-full text-gray-500 text-lg"><span class="text-blue-500 font-bold">Sign in</span> to your account & start tracking your releases.</div>
+        <div class="w-full text-gray-500 text-lg"><span class="text-blue-500 font-bold">Sign in</span> to your account & start tracking your project releases.</div>
     </div>
 
     <!-- Org Search Form -->
-    <div class="w-7/12 flex justify-center my-10" *ngIf="!isUniqueTagVerified">
+    <div class="w-7/12 flex flex-wrap justify-center my-10" *ngIf="!isUniqueTagVerified">
         <!-- Org Search Form -->
         <form [formGroup]="orgSearchForm" class="w-full flex flex-wrap justify-center">
             <!-- Organization -->
             <mat-form-field class="w-full" appearance="outline">
                 <mat-label>Organization Unique Tag</mat-label>
                 <input class=" bg-gray-500" type="text" matInput placeholder="Enter your Organization Unique Tag" formControlName="orgUniqueTag">
-                <mat-error>Organization Unique Tag is <strong>Required!</strong></mat-error>
+                <mat-error>{{isUniqueTagVerifiedText}}</mat-error>
             </mat-form-field>
-
-            <!-- Org Search Button -->
-            <div class="w-full flex justify-end mt-3">
-                <button mat-flat-button class="w-3/12" color="primary" (click)="verifyUniqueTag()">Verify</button>
-            </div>
         </form>
+
+        <!-- Org Search Button -->
+        <div class="w-full flex justify-end mt-3">
+            <button mat-flat-button class="w-3/12" color="primary" [disabled]="orgSearchForm.invalid" (click)="verifyUniqueTag()" *ngIf="!orgUniqueTagVerificationLoader">Verify</button>
+            <div class="flex items-center" *ngIf="orgUniqueTagVerificationLoader">
+                <mat-spinner [diameter]="20"></mat-spinner>
+                <span class="ml-2">Verfiying ...</span>
+            </div>
+        </div>
     </div>
 
     <!-- Sign In Form -->
@@ -46,7 +50,7 @@
 
             <!-- Sign In Button -->
             <div class="w-full flex justify-end mt-3">
-                <button mat-flat-button class="w-full" color="primary">Sign In</button>
+                <button mat-flat-button class="w-full" color="primary" [disabled]="signinForm.invalid">Sign In</button>
             </div>
         </form>
     </div>

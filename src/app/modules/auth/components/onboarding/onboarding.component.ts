@@ -4,6 +4,8 @@ import { AuthService } from '../../services/auth.service';
 import { verifyAndCreateAccount } from '../../model/verifyAndAccountCreation.model';
 import { AccountVerificationResponse } from '../../model/accountCreationResponse.model';
 import { Router } from '@angular/router';
+import * as bcrypt from 'bcryptjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-onboarding',
@@ -88,7 +90,7 @@ export class OnboardingComponent implements OnInit {
   /*
     Verfiy and Create Account Method
   */
-  verifyAndCreateAccount(): void {
+  async verifyAndCreateAccount() {
     console.log('Account Created...');
 
     this.accountVerificationLoader = true;
@@ -102,11 +104,13 @@ export class OnboardingComponent implements OnInit {
           firstName: this.adminInfoForm.get('firstName')?.value,
           lastName: this.adminInfoForm.get('lastName')?.value,
           email: this.adminInfoForm.get('email')?.value,
-          password: this.adminInfoForm.get('password')?.value,
+          password: await this.encryptPassword(this.adminInfoForm.get('password')?.value),
           verificationCode: this.verificationForm.get('verificationCode')?.value
         }
       ]
     }
+
+    console.log(tenantCreationPayload);
 
     this.authService.verifyAndCreateTenant(tenantCreationPayload).subscribe((response: AccountVerificationResponse) => {
       console.log(response);
@@ -121,6 +125,14 @@ export class OnboardingComponent implements OnInit {
         this.onboardingNavigationTimer();
       }
     });
+  }
+
+
+  /*
+    Encrypt password.
+  */
+  encryptPassword(password: string): any {
+    return bcrypt.hash(password, environment.bcryptSaltRounds);
   }
 
 

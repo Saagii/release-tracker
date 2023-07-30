@@ -12,7 +12,9 @@ export class SignInComponent implements OnInit {
   orgSearchForm: FormGroup;
   hideLoginPassword: boolean = true;
   isUniqueTagVerified: boolean = false
+  orgUniqueTagVerificationLoader: boolean = false;
   isRegisterFormEnabled: string = 'sign-in';
+  isUniqueTagVerifiedText: string = 'Required!!';
 
   constructor(
     private fb: FormBuilder,
@@ -26,7 +28,7 @@ export class SignInComponent implements OnInit {
 
       // Prepare Org Search Form
       this.orgSearchForm = this.fb.group({
-        orgUniqueTag: [null, [Validators.required, Validators.email]]
+        orgUniqueTag: ['', [Validators.required]]
       });
   }
 
@@ -44,13 +46,39 @@ export class SignInComponent implements OnInit {
 
 
   /*
+    Validate Form
+  */
+  validateFormStatus(formType: string): boolean {
+    if(formType === 'orgUniqueTagForm' ) {
+      return this.orgSearchForm.get('orgUniqueTag')?.value !== '' ? false : true;
+    } else {
+      return this.signinForm.valid;
+    }
+  }
+
+
+  /*
     Verify Unique Tag
   */
   verifyUniqueTag(): void {
+    this.orgUniqueTagVerificationLoader = true;
+    this.isUniqueTagVerifiedText = '';
+
+    this.orgSearchForm.disable();
     this.authService.verifyUniqueTag(this.orgSearchForm.get('orgUniqueTag')?.value).subscribe((response: any) => {
       console.log(response);
 
-      this.isUniqueTagVerified = response.tagExists;
+      this.orgSearchForm.enable();
+
+      setTimeout(() => {
+        this.orgUniqueTagVerificationLoader = false;
+
+        if(response.tagExists) {
+          this.isUniqueTagVerified = response.tagExists;
+        } else {
+          this.isUniqueTagVerifiedText = "Org. Unique Tag doesn't exist";
+        }
+      }, 2000);
     });
   }
   
