@@ -40,4 +40,12 @@ export class AuthService {
     verifyAndCreateTenant(tenantPayload: verifyAndCreateAccount): any {
         return this._httpClient.post(`http://localhost:3000/api/onboarding`, tenantPayload);
     }
+
+
+    /*
+        Member login.
+    */
+    memberSignin(signinPayload: any): any {
+        return this._httpClient.post(`http://localhost:3000/api/auth/login`, signinPayload);
+    }
 }

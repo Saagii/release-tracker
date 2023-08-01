@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import * as bcrypt from 'bcryptjs';
+import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -13,12 +16,14 @@ export class SignInComponent implements OnInit {
   hideLoginPassword: boolean = true;
   isUniqueTagVerified: boolean = false
   orgUniqueTagVerificationLoader: boolean = false;
+  signInLoader: boolean = false;
   isRegisterFormEnabled: string = 'sign-in';
   isUniqueTagVerifiedText: string = 'Required!!';
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
+    private router: Router,
   ) {
       // Prepare Sign In Form
       this.signinForm = this.fb.group({
@@ -80,6 +85,43 @@ export class SignInComponent implements OnInit {
         }
       }, 2000);
     });
+  }
+
+
+  /*
+    Submit Sign In payload.
+  */
+  memberSignIn(): void {
+    this.signInLoader = true;
+
+    const signInPayload = {
+      email: this.signinForm.get('email')?.value,
+      password: this.signinForm.get('password')?.value,
+      orgUniqueTag: this.orgSearchForm.get('orgUniqueTag')?.value
+    };
+
+    this.signinForm.disable();
+
+    this.authService.memberSignin(signInPayload).subscribe((response: any) => {
+      console.log(response);
+
+      this.signInLoader = false;
+
+      if(response.token) {
+        this.authService.token = response.token;
+        this.router.navigate(['../', 'main', 'releases']);
+      } else {
+        this.signinForm.enable();
+      }
+    });
+  }
+
+
+  /*
+    Encrypt password.
+  */
+  encryptPassword(password: string): any {
+    return bcrypt.hash(password, environment.bcryptSaltRounds);
   }
   
 }
