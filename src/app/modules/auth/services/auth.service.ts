@@ -25,6 +25,14 @@ export class AuthService {
         return token ? token : null;
     }
 
+    /*
+        Remove token from local storage for logging out.
+    */
+    memberSignOut(): boolean {
+        localStorage.removeItem('token');
+        return true;
+    }
+
     
     /*
         Verify Unique Tag

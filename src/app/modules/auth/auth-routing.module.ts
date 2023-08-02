@@ -4,9 +4,9 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { OnboardingComponent } from './components/onboarding/onboarding.component';
 
 const authRoutes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'signIn', pathMatch: 'full' },
   {
-    path: 'login', component: SignInComponent
+    path: 'signIn', component: SignInComponent
   },
   {
     path: 'onboard', component: OnboardingComponent

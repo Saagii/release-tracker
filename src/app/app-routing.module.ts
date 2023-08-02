@@ -4,6 +4,7 @@ import { MainComponent } from './modules/main/main.component';
 import { OnboardingComponent } from './modules/auth/components/onboarding/onboarding.component';
 import { SignInComponent } from './modules/auth/components/sign-in/sign-in.component';
 import { AuthComponent } from './modules/auth/auth.component';
+import { AuthGuard } from './modules/shared/authGaurd/auth.gaurd';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
   },
   {
     component: MainComponent, path: 'main',
+    canActivate: [AuthGuard],
     children : [
       {
         path: '', loadChildren: () => import('./modules/main/main.module').then(m => m.MainModule)

@@ -12,11 +12,11 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean {
     if(this.authService.tokenValue) {
-      console.log('Yes')
+      console.log('Signing In');
       return true;
     } else {
-      console.log('No')
-      this._route.navigate(['login']);
+      console.log('Signing Out');
+      this._route.navigate(['/signIn']);
       return false;
     }
   }

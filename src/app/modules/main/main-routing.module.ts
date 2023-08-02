@@ -18,9 +18,12 @@ import { MembersComponent } from './content/components/admin/child-components/me
 import { AdminMenuComponent } from './content/components/admin/child-components/admin-menu/admin-menu.component';
 import { DomainsComponent } from './content/components/domains/domains.component';
 import { DomainCreateEditComponent } from './content/components/domains/components/domains-create-edit/domains-create-edit.component';
+import { AuthGuard } from '../shared/authGaurd/auth.gaurd';
 
 const mainRoutes: Routes = [
-  { path: '', redirectTo: 'releases', pathMatch: 'full' },
+  { 
+    path: '', redirectTo: 'releases', pathMatch: 'full'
+  },
   {
     path: 'releases', component: ReleasesComponent
   },
