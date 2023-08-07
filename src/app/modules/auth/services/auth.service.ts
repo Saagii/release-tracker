@@ -16,7 +16,7 @@ export class AuthService {
         Set & Get Token from local storage.
     */
     set token(token: any) {
-        localStorage.setItem('token', JSON.stringify(token));
+        localStorage.setItem('token', token);
     }
 
     get tokenValue(): string | null {
@@ -51,9 +51,17 @@ export class AuthService {
 
 
     /*
-        Member login.
+        Member SignIn.
     */
     memberSignin(signinPayload: any): any {
-        return this._httpClient.post(`http://localhost:3000/api/auth/login`, signinPayload);
+        return this._httpClient.post(`http://localhost:3000/api/auth/signIn`, signinPayload);
+    }
+
+
+    /* 
+        Sample Testing
+    */
+    getMemberDetails(): any {
+        return this._httpClient.get(`http://localhost:3000/api/members/64c94c600503fef7969a388f`);
     }
 }
