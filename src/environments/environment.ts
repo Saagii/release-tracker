@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  bcryptSaltRounds: 10
+  bcryptSaltRounds: 10,
+  basePath: 'http://localhost:3000'
 };
 
 /*

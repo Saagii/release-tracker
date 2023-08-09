@@ -4,6 +4,7 @@ import { DialogSharedComponent } from '../../shared/components/dialog/dialog.com
 import { AuthService } from '../../auth/services/auth.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MembersService } from '../services/members.service';
 
 @Component({
   selector: 'app-navigation',
@@ -11,14 +12,21 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class NavigationComponent implements OnInit {
 
+  memberDetails: any;
+
   constructor(
     public dialog: MatDialog,
     private authService: AuthService,
     private router: Router,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private membersService: MembersService
     ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+    // Get Signed In member details.
+    this.getSignedInMemberDetails();
+  }
 
   /*
     Dialog Method: Nav New Menu
@@ -29,6 +37,20 @@ export class NavigationComponent implements OnInit {
       data: {
         type: 'navMenu'
       },
+    });
+  }
+
+
+  /*
+    Get Signed In member details.
+  */
+  getSignedInMemberDetails(): void {
+    console.log(this.authService.memberIdValue);
+
+    this.membersService.getMemberDetails(this.authService.memberIdValue).subscribe((response: any) => {
+      console.log(response.memberDetails);
+
+      this.memberDetails = response.memberDetails;
     });
   }
 

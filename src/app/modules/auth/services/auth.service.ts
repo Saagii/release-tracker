@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { verifyAndCreateAccount } from "../model/verifyAndAccountCreation.model";
+import { environment } from "src/environments/environment";
 
 @Injectable()
 export class AuthService {
@@ -26,6 +27,19 @@ export class AuthService {
     }
 
     /*
+        Set & Get Token from local storage.
+    */
+    set memberId(memberId: any) {
+        localStorage.setItem('memberId', memberId);
+    }
+
+    get memberIdValue(): string | null {
+        const token = localStorage.getItem('memberId') ?? null;
+
+        return token ? token : null;
+    }
+
+    /*
         Remove token from local storage for logging out.
     */
     memberSignOut(): boolean {
@@ -38,7 +52,7 @@ export class AuthService {
         Verify Unique Tag
     */
     verifyUniqueTag(tag: string): any {
-        return this._httpClient.get(`http://localhost:3000/api/onboarding/${tag}`);
+        return this._httpClient.get(`${environment.basePath}/api/onboarding/${tag}`);
     }
 
 
@@ -46,7 +60,7 @@ export class AuthService {
         Code Verification & Creating a new Tenant
     */
     verifyAndCreateTenant(tenantPayload: verifyAndCreateAccount): any {
-        return this._httpClient.post(`http://localhost:3000/api/onboarding`, tenantPayload);
+        return this._httpClient.post(`${environment.basePath}/api/onboarding`, tenantPayload);
     }
 
 
@@ -54,14 +68,6 @@ export class AuthService {
         Member SignIn.
     */
     memberSignin(signinPayload: any): any {
-        return this._httpClient.post(`http://localhost:3000/api/auth/signIn`, signinPayload);
-    }
-
-
-    /* 
-        Sample Testing
-    */
-    getMemberDetails(): any {
-        return this._httpClient.get(`http://localhost:3000/api/members/64c94c600503fef7969a388f`);
+        return this._httpClient.post(`${environment.basePath}/api/auth/signIn`, signinPayload);
     }
 }

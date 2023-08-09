@@ -9,27 +9,12 @@ export class MainComponent implements OnInit {
   
   overlayOnclick = false;
 
-  constructor(
-    private authService: AuthService
-  ) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    // Get Member Details
-    this.getMemberDetails();
-  }
+  ngOnInit(): void {}
 
   hideNavMenu(): any {
     console.log('Working');
     this.overlayOnclick = false;
-  }
-
-
-  /*
-    Get Member Details.
-  */
-  getMemberDetails(): void {
-    this.authService.getMemberDetails().subscribe((member: any) => {
-      console.log('Member Details', member);
-    })
   }
 }

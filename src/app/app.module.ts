@@ -21,6 +21,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './modules/shared/interceptor/token.interceptor';
 import { AuthGuard } from './modules/shared/authGaurd/auth.gaurd';
 import { AuthComponent } from './modules/auth/auth.component';
+import { MembersService } from './modules/main/services/members.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { AuthComponent } from './modules/auth/auth.component';
     ReactiveFormsModule,
     CommonModule
   ],
-  providers: [StatusService, AuthService, AuthGuard,
+  providers: [StatusService, AuthService, MembersService, AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

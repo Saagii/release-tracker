@@ -109,6 +109,7 @@ export class SignInComponent implements OnInit {
 
       if(response.token) {
         this.authService.token = response.token;
+        this.authService.memberId = response.memberDetails.id;
         this.router.navigate(['../', 'main', 'releases']);
       } else {
         this.signinForm.enable();
