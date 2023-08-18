@@ -121,7 +121,7 @@ export class OnboardingComponent implements OnInit {
       this.accountVerificationResponse = response;
 
       if(this.accountVerificationResponse.isTenantCreated) {
-        this.authService.token = response.token;
+        this.authService.token = response.token.token;
         this.onboardingNavigationTimer();
       }
     });

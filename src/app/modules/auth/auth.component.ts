@@ -11,7 +11,7 @@ export class AuthComponent implements OnInit {
     isLoginPage: boolean = false;
 
     constructor() {
-        if(window.location.href.includes('/login')) {
+        if(window.location.href.includes('/signIn')) {
             this.isLoginPage = true;
         }
     }
