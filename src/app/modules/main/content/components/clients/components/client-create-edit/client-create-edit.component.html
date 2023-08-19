@@ -43,6 +43,17 @@
                                 <mat-error>Client About is <strong>Required!</strong></mat-error>
                             </mat-form-field>
 
+                            <!-- Client Type -->
+                            <mat-form-field class="w-full mt-4" appearance="outline">
+                                <mat-label>Client Type</mat-label>
+                                <mat-select placeholder="Select Client Type" required  formControlName="clientType">
+                                    <mat-option *ngFor="let type of clientConfig?.types" [value]="type._id">
+                                      {{type.value}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>Client type is <strong>Required!</strong></mat-error>
+                            </mat-form-field>
+
                             <!-- Client Website -->
                             <mat-form-field class="w-full" appearance="outline">
                                 <mat-label>Client Website</mat-label>
@@ -52,28 +63,31 @@
 
                             <!-- Client Email -->
                             <mat-form-field class="w-full" appearance="outline">
-                                <input type="text" matInput placeholder="Email" formControlName="email" required>
-                                <mat-error>Email is <strong>Required!</strong></mat-error>
+                                <mat-label>Client Contact Email</mat-label>
+                                <input type="text" matInput placeholder="Client Contact Email" formControlName="email" required>
+                                <mat-error>Client Contact Email is <strong>Required!</strong></mat-error>
                             </mat-form-field>
 
                             <!-- Client Representative -->
-                            <mat-form-field class="w-full mt-4" appearance="outline">
+                            <mat-form-field class="w-full mt-4" appearance="outline" *ngIf="membersList">
+                                <mat-label>Client Representative</mat-label>
                                 <mat-select placeholder="Select Client Representative" required  formControlName="representative">
-                                    <mat-option *ngFor="let representative of ['Client Representative 1','Client Representative 2','Client Representative 3']; let i=index;" [value]="i+1">
-                                      {{representative}}
+                                    <mat-option *ngFor="let representative of membersList" [value]="representative._id">
+                                      {{representative.firstName}} {{representative.lastName}}
                                     </mat-option>
                                 </mat-select>
                                 <mat-error>Client Representative is <strong>Required!</strong></mat-error>
                             </mat-form-field>
 
-                            <!-- Project Label -->
+                            <!-- Client Status -->
                             <mat-form-field class="w-full mt-4" appearance="outline">
-                                <mat-select placeholder="Select Project Label" required  formControlName="projectLabel">
-                                    <mat-option *ngFor="let label of ['Label 1', 'Label 2', 'Label 3']; let i=index;" [value]="i+1">
-                                      {{label}}
+                                <mat-label>Client Status</mat-label>
+                                <mat-select placeholder="Select Client Status" required  formControlName="clientStatus">
+                                    <mat-option *ngFor="let status of clientConfig?.status" [value]="status">
+                                      {{status}}
                                     </mat-option>
                                 </mat-select>
-                                <mat-error>Project Label is <strong>Required!</strong></mat-error>
+                                <mat-error>Client Status is <strong>Required!</strong></mat-error>
                             </mat-form-field>
                         </div>
                     </div>

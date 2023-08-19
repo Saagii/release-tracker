@@ -18,4 +18,12 @@ export class ClientsService {
     getClientsConfig(): any {
         return this._httpClient.get(`${environment.basePath}/api/clientConfig`);
     }
+
+    
+    /*
+        Save Client details.
+    */
+    saveClientDetails(): void {
+        
+    }
 }
