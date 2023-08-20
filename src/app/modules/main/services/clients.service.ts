@@ -19,11 +19,19 @@ export class ClientsService {
         return this._httpClient.get(`${environment.basePath}/api/clientConfig`);
     }
 
+
+    /* 
+        Get Clients List
+    */
+    getClientsList(): any {
+        return this._httpClient.get(`${environment.basePath}/api/clients`);
+    }
+
     
     /*
         Save Client details.
     */
-    saveClientDetails(): void {
-        
+    saveClientDetails(clientPayload: any): any {
+        return this._httpClient.post(`${environment.basePath}/api/clients`, clientPayload);
     }
 }

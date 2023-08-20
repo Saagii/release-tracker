@@ -5,6 +5,7 @@ import { MembersService } from 'src/app/modules/main/services/members.service';
 import { StatusService } from 'src/app/modules/shared/services/status.service';
 import { ClientConfigurationResponse } from '../../../../model/clientConfigurationResponse.model';
 import { MembersListResponse } from '../../../../model/membersListResponse.model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-create-edit',
@@ -21,7 +22,9 @@ export class ClientCreateEditComponent implements OnInit {
     private statusService: StatusService,
     private fb: FormBuilder,
     private membersService: MembersService,
-    private clientsService: ClientsService
+    private clientsService: ClientsService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
      // Prepare Sign In Form
      this.clientCreateEditForm = this.fb.group({
@@ -89,6 +92,13 @@ export class ClientCreateEditComponent implements OnInit {
       clientStatus:  this.clientCreateEditForm.get('clientStatus')?.value
     };
 
+    console.log(clientPayload);
+
+    this.clientsService.saveClientDetails(clientPayload).subscribe((response: any) => {
+      console.log(response);
+
+      this.router.navigate(['../'], {relativeTo: this.activatedRoute});
+    });
 
   }
 
