@@ -40,7 +40,10 @@ export class ClientsComponent implements OnInit {
     this.clientsService.getClientsList().subscribe((response: any[]) => {
       console.log(response);
 
-      this.clientsList = response;
+      
+      setTimeout(() => {
+        this.clientsList = response;
+      }, 400);
     });
   }
 

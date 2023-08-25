@@ -42,10 +42,18 @@
                       
                     </div>
                     <div class="w-full px-4 py-2 bg-gray-50 mt-auto rounded-b-2xl flex justify-end border-t border-gray-200">
-                      <button mat-button color="primary">View</button>
+                      <button mat-button color="primary" [routerLink]="[client._id]">View</button>
                     </div>
                   </div>
                 </div>
+
+                <!-- Loader -->
+                <div class="w-full flex justify-center py-28" *ngIf="!clientsList">
+                  <div class="flex items-center">
+                      <mat-spinner [diameter]="20"></mat-spinner>
+                      <span class="ml-2">Loading Clients. Please Wait ...</span>
+                  </div>
+              </div>
               </div>
             </div>
         </div>
