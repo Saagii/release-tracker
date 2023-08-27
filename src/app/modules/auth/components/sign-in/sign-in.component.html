@@ -50,7 +50,7 @@
 
             <!-- Sign In Button -->
             <div class="w-full flex justify-end mt-3">
-                <button mat-flat-button class="w-full" color="primary" [disabled]="signinForm.invalid" (click)="memberSignIn()" *ngIf="!signInLoader">Sign In</button>
+                <button mat-flat-button class="w-3/12" color="primary" [disabled]="signinForm.invalid" (click)="memberSignIn()" *ngIf="!signInLoader">Sign In</button>
                 <div class="flex items-center" *ngIf="signInLoader">
                     <mat-spinner [diameter]="20"></mat-spinner>
                     <span class="ml-2">Signing In ...</span>
