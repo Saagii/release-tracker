@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import * as bcrypt from 'bcryptjs';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-sign-in',
@@ -24,6 +25,7 @@ export class SignInComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
+    private _snackBar: MatSnackBar
   ) {
       // Prepare Sign In Form
       this.signinForm = this.fb.group({
@@ -73,17 +75,18 @@ export class SignInComponent implements OnInit {
     this.authService.verifyUniqueTag(this.orgSearchForm.get('orgUniqueTag')?.value).subscribe((response: any) => {
       console.log(response);
 
-      this.orgSearchForm.enable();
-
       setTimeout(() => {
         this.orgUniqueTagVerificationLoader = false;
 
         if(response.tagExists) {
           this.isUniqueTagVerified = response.tagExists;
         } else {
-          this.isUniqueTagVerifiedText = "Org. Unique Tag doesn't exist";
+          this._snackBar.open('Org. Unique Tag does not exist', 'OK', {
+            duration: 3000
+          });
+          this.orgSearchForm.enable();
         }
-      }, 2000);
+      }, 800);
     });
   }
 
@@ -114,6 +117,10 @@ export class SignInComponent implements OnInit {
       } else {
         this.signinForm.enable();
       }
+    }, (error: Error) => {
+      this.signInLoader = false;
+      this.signinForm.enable();
+      this.signinForm.updateValueAndValidity();
     });
   }
 
