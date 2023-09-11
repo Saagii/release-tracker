@@ -21,7 +21,7 @@ export const adminMenu = [
         icon: 'featured_play_list',
         title: 'System Configurations',
         subtitle: 'Set up your own system configurations that alligns with your progress.',
-        route: 'clients'
+        route: 'system-configurations'
     },
     {
         icon: 'play_for_work',

@@ -16,6 +16,7 @@ import { ClientCreateEditComponent } from './content/components/clients/componen
 import { MembersComponent } from './content/components/admin/child-components/members/members.component';
 import { AdminMenuComponent } from './content/components/admin/child-components/admin-menu/admin-menu.component';
 import { DomainCreateEditComponent } from './content/components/domains/components/domains-create-edit/domains-create-edit.component';
+import { SystemConfigurationsComponent } from './content/components/admin/child-components/system-configurations/system-configurations.component';
 
 
 
@@ -34,7 +35,8 @@ import { DomainCreateEditComponent } from './content/components/domains/componen
     MembersComponent,
     MemberProfileComponent,
     MemberCreateEditComponent,
-    ClientCreateEditComponent
+    ClientCreateEditComponent,
+    SystemConfigurationsComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +57,8 @@ import { DomainCreateEditComponent } from './content/components/domains/componen
     MembersComponent,
     MemberProfileComponent,
     MemberCreateEditComponent,
-    ClientCreateEditComponent
+    ClientCreateEditComponent,
+    SystemConfigurationsComponent
   ]
 })
 export class MainModule { }

@@ -19,6 +19,7 @@ import { AdminMenuComponent } from './content/components/admin/child-components/
 import { DomainsComponent } from './content/components/domains/domains.component';
 import { DomainCreateEditComponent } from './content/components/domains/components/domains-create-edit/domains-create-edit.component';
 import { AuthGuard } from '../shared/authGaurd/auth.gaurd';
+import { SystemConfigurationsComponent } from './content/components/admin/child-components/system-configurations/system-configurations.component';
 
 const mainRoutes: Routes = [
   { 
@@ -71,6 +72,9 @@ const mainRoutes: Routes = [
       },
       {
         path: 'members/:id', component: MemberProfileComponent, pathMatch: 'full'
+      },
+      {
+        path: 'system-configurations', component: SystemConfigurationsComponent, pathMatch: 'full'
       }
     ]
   },
