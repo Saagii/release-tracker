@@ -1,7 +1,7 @@
 <div class="w-full flex flex-wrap items-start px-4">
 
     <div class="w-full p-3">
-      <div class="w-full border border-gray-200 rounded-md my-4">
+      <div class="w-full">
         <!-- Bread Crumbs -->
         <div class="w-full px-4 pt-4">
           <div class="text-blue-500 flex items-center">
@@ -13,6 +13,20 @@
         <div class="w-full p-4">
           <div class="text-xl">System Configurations</div>
           <div class="text-xs text-gray-500">Set up your own system configurations that alligns with your progress.</div>
+        </div>
+
+        <!-- System Configurations Content -->
+        <div class="w-full flex justify-between">
+          
+          <!-- System Configurations Menu -->
+          <div class="w-2/12">
+            <div class="py-2 px-4 cursor-pointer hover:text-blue-600 hover:bg-gray-50" *ngFor="let menu of systemConfigurationsMenu">{{menu.title}}</div>
+          </div>
+
+          <!-- System Configuration Menu Contents -->
+          <div class="w-10/12">
+            <ng-container *ngComponentOutlet="systemConfigurationsMenu[0].component"></ng-container>
+          </div>
         </div>
       </div>
     </div>
