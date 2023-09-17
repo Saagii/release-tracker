@@ -1,1 +1,73 @@
-<p>Members Configurations ....</p>
+<div class="w-full px-16 pb-24">
+
+    <!-- Title -->
+    <div class="w-full">
+        <div class="text-xl">Members Configuration</div>
+    </div>
+
+    <!-- Memeber Title Config Content -->
+    <div class="w-full mt-10 pb-10 border-b border-gray-200">
+        <div class="text-base">Member Titles</div>
+        <div class="text-gray-500 text-xs">Defines member based on their title in the project.</div>
+
+        <div class="w-6/12 flex items-center my-3" [formGroup]="memberConfigTitleForm">
+            <mat-form-field class="w-9/12" appearance="outline">
+                <input type="text" matInput placeholder="Add Member Title" #memberTypeInput formControlName="memberType" >
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="!memberConfigTitleLoader" [disabled]="memberTypeInput.value === '' " (click)="addMemberConfigTitle()">+ Add</button>
+            <div class="flex items-center" *ngIf="memberConfigTitleLoader">
+                <mat-spinner [diameter]="20"></mat-spinner>
+                <span class="ml-2">Adding Member Title ...</span>
+            </div>
+        </div>
+
+        <div class="w-6/12 mt-3" *ngIf="memberConfig?.titles?.length">
+            <div class="w-full flex justify-between items-center py-1 border-b border-gray-100" *ngFor="let title of memberConfig.titles">
+                <div class="w-6/12">{{title.value}}</div>
+                <div class="w-auto flex items-center">
+                    <div class="rounded-full px-3 py-0.5 flex items-center text-xs" [ngClass]="getStatusStyle(title.status)">{{title.status}}</div>
+                    <button mat-icon-button class="!ml-3" [matMenuTriggerFor]="memberTypeMenu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #memberTypeMenu="matMenu">
+                        <div mat-menu-item>De-activate</div>
+                        <div mat-menu-item>Remove</div>
+                    </mat-menu>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Memeber Types Config Content -->
+    <div class="w-full mt-10 pb-10 border-b border-gray-200">
+        <div class="text-base">Member Types</div>
+        <div class="text-gray-500 text-xs">Defines the type of member under which member can be categorized.</div>
+
+        <div class="w-6/12 mt-6" *ngIf="memberConfig?.types?.length">
+            <div class="w-full flex justify-between items-center py-3 border-b border-gray-100" *ngFor="let type of memberConfig.types">
+                <div class="w-6/12">{{type.value}}</div>
+                <div class="w-auto flex items-center">
+                    <div class="rounded-full px-3 py-0.5 flex items-center text-xs" [ngClass]="getStatusStyle(type.status)">{{type.status}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Memeber Roles Config Content -->
+    <div class="w-full mt-10 pb-10 border-b border-gray-200">
+        <div class="text-base">Member Roles</div>
+        <div class="text-gray-500 text-xs">Defines member's accessibility to the pages or modules on this application.</div>
+
+        <div class="w-6/12 mt-6" *ngIf="memberConfig?.roles?.length">
+            <div class="w-full flex justify-between items-center py-3 border-b border-gray-100" *ngFor="let role of memberConfig.roles">
+                <div class="w-6/12">{{role.value}}</div>
+                <div class="w-auto flex items-center">
+                    <div class="rounded-full px-3 py-0.5 flex items-center text-xs" [ngClass]="getStatusStyle(role.status)">{{role.status}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

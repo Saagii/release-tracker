@@ -1,4 +1,8 @@
+import { ClientsConfigurationComponent } from "../child-components/system-configurations/clients-configuration/clients-configuration.component";
+import { DomainsConfigurationComponent } from "../child-components/system-configurations/domains-configuration/domains-configuration.component";
 import { MembersConfigurationComponent } from "../child-components/system-configurations/members-configuration/members-configuration.component";
+import { ProjectsConfigurationComponent } from "../child-components/system-configurations/projects-configuration/projects-configuration.component";
+import { ReleasesConfigurationComponent } from "../child-components/system-configurations/releases-configuration/releases-configuration.component";
 
 export const systemConfigurationsMenu = [
     {
@@ -7,22 +11,22 @@ export const systemConfigurationsMenu = [
     },
     {
         title: 'Clients',
-        component: MembersConfigurationComponent
+        component: ClientsConfigurationComponent
     },
     {
         title: 'Projects',
-        component: MembersConfigurationComponent
+        component: ProjectsConfigurationComponent
     },
     {
         title: 'Releases',
-        component: MembersConfigurationComponent
+        component: ReleasesConfigurationComponent
     },
     {
         title: 'Domains',
-        component: MembersConfigurationComponent
+        component: DomainsConfigurationComponent
     },
-    {
-        title: 'Timelines',
-        component: MembersConfigurationComponent
-    }
+    // {
+    //     title: 'Timelines',
+    //     component: MembersConfigurationComponent
+    // }
 ];

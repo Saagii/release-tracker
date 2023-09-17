@@ -16,16 +16,19 @@
         </div>
 
         <!-- System Configurations Content -->
-        <div class="w-full flex justify-between">
+        <div class="w-full flex justify-between p-4">
           
           <!-- System Configurations Menu -->
           <div class="w-2/12">
-            <div class="py-2 px-4 cursor-pointer hover:text-blue-600 hover:bg-gray-50" *ngFor="let menu of systemConfigurationsMenu">{{menu.title}}</div>
+            <div class="py-2 px-4 cursor-pointer text-gray-500 border border-white rounded-md hover:border-gray-300" 
+            [ngClass]="{'bg-gray-100 !text-blue-600 font-bold' : menu.title === activeMenuItem.title}"
+            *ngFor="let menu of systemConfigurationsMenu" 
+            (click)="systemConfigurationsMenuOnClick(menu)">{{menu.title}}</div>
           </div>
 
           <!-- System Configuration Menu Contents -->
           <div class="w-10/12">
-            <ng-container *ngComponentOutlet="systemConfigurationsMenu[0].component"></ng-container>
+            <ng-container *ngComponentOutlet="activeMenuItem.component"></ng-container>
           </div>
         </div>
       </div>

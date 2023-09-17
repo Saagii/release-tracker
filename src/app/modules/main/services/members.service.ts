@@ -26,4 +26,20 @@ export class MembersService {
     getMembersList(memberType: string): any {
         return this._httpClient.get(`${environment.basePath}/api/members/${memberType}`);
     }
+
+
+    /* 
+        Get Members Configurations
+    */
+    getMembersConfig(): any {
+        return this._httpClient.get(`${environment.basePath}/api/memberConfig`);
+    }
+
+
+    /*
+        Add Member Configuration Type.
+    */
+    addMemberConfigTitle(memberTitlePayload: any): any {
+        return this._httpClient.post(`${environment.basePath}/api/memberConfig/titles`, memberTitlePayload);
+    }
 }
