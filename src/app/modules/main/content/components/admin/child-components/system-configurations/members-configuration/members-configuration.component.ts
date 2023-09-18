@@ -65,7 +65,10 @@ export class MembersConfigurationComponent implements OnInit {
       ]
     }
 
+    // Enable Loaded
     this.memberConfigTitleLoader = true;
+
+    // Diable title form.
     this.memberConfigTitleForm.disable();
 
     this.membersService.addMemberConfigTitle(memberConfigTypePayload).subscribe((response: any) => {
@@ -89,6 +92,28 @@ export class MembersConfigurationComponent implements OnInit {
 
       // Enable the form.
       this.memberConfigTitleForm.enable();
+    });
+  }
+
+
+  /*
+    Delete Member Config Type.
+  */
+  deleteMemberConfigTitle(memberTitleId: string): void {
+
+    const memberConfigTypePayload = {
+      memberConfigId: this.memberConfig._id,
+      titleId: memberTitleId
+    }
+
+    this.membersService.deleteMemberConfigTitle(memberConfigTypePayload).subscribe((response: any) => {
+      console.log(response);
+
+      // Get the member config details.
+      this.getMembersConfigurations();
+
+    }, (error: Error) => {
+      console.log(error);
     });
   }
   

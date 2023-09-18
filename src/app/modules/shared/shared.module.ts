@@ -18,9 +18,13 @@ import {MatRadioModule} from '@angular/material/radio';
 import { HttpClientModule } from '@angular/common/http';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { NavMenuComponent } from './components/dialog/child-components/nav-menu/nav-menu.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    NavMenuComponent
+  ],
   imports: [
     HttpClientModule,
     MatIconModule,
@@ -40,7 +44,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatNativeDateModule,
     MatRadioModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    RouterModule
   ],
   exports: [
     HttpClientModule,
@@ -61,7 +66,10 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatNativeDateModule,
     MatRadioModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    RouterModule,
+
+    NavMenuComponent
   ]
 })
 export class SharedModule { }

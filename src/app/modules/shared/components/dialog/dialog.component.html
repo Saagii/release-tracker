@@ -1,18 +1,27 @@
-<div *ngIf="data.type === 'navMenu' ">
-    <div class="w-full p-2 rounded-xl border border-gray-200">
-        <!-- Title -->
-        <div class="w-full my-2 px-4 text-blue-500 text-lg font-bold text-center">Create New</div>
-        <div class="w-full flex flex-wrap justify-between mt-8 mb-6">
-            <div class="w-6/12 flex p-4 items-center hover:text-blue-500 hover:rounded-xl cursor-pointer" *ngFor="let menu of navMenuOptions" mat-dialog-close [routerLink]="menu.route">
-                <div class="p-4 flex items-center rounded-xl bg-gray-100">
-                    <mat-icon class="">{{menu.icon}}</mat-icon>
-                </div>
-                <div class="px-4">
-                    <div class="font-bold">{{menu.name}}</div>
-                    <div class="text-xs text-gray-500">{{menu.description}}</div>
-                </div>
-            </div>
+<div class="-mx-6 px-6 -mt-2 border-b border-gray-200 pb-4">
+
+    <!-- Header -->
+    <div class="w-full flex items-center justify-between">
+
+        <!-- Title Block -->
+        <div class="w-10/12">
+
+            <!-- Title -->
+            <div class="text-lg font-bold text-blue-600">{{data.dialogMetaData.title}}</div>
+
+            <!-- Subtitle -->
+            <div class="text-xs text-gray-500">{{data.dialogMetaData.subtitle}}</div>
         </div>
-        
+
+        <!-- Close Button -->
+        <div class="w-1/12 flex justify-end">
+            <button mat-icon-button class="" mat-dialog-close>
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
     </div>
+</div>
+
+<div *ngIf="data.type === 'navMenu' ">
+    <dialog-nav-menu></dialog-nav-menu>
 </div>

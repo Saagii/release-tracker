@@ -37,9 +37,17 @@ export class MembersService {
 
 
     /*
-        Add Member Configuration Type.
+        Add Member Configuration Title.
     */
     addMemberConfigTitle(memberTitlePayload: any): any {
         return this._httpClient.post(`${environment.basePath}/api/memberConfig/titles`, memberTitlePayload);
+    }
+
+
+    /*
+        Delete Member Configuration Title.
+    */
+    deleteMemberConfigTitle(memberTitlePayload: any): any {
+        return this._httpClient.put(`${environment.basePath}/api/memberConfig/titles`, memberTitlePayload);
     }
 }
