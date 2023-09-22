@@ -22,6 +22,12 @@
     </div>
 </div>
 
+<!-- Nav-menu -->
 <div *ngIf="data.type === 'navMenu' ">
     <dialog-nav-menu></dialog-nav-menu>
+</div>
+
+<!-- Confirmation -->
+<div *ngIf="data.type === 'confirmation' ">
+    <dialog-confirmation></dialog-confirmation>
 </div>

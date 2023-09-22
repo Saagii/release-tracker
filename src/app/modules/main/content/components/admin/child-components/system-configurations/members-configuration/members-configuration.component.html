@@ -28,7 +28,8 @@
                 <div class="w-6/12">{{title.value}}</div>
                 <div class="w-auto flex items-center">
                     <div class="rounded-full px-3 py-0.5 flex items-center text-xs" [ngClass]="getStatusStyle(title.status)">{{title.status}}</div>
-                    <button mat-icon-button color="warn" class="!ml-3" (click)="deleteMemberConfigTitle(title._id)">
+                    <!-- <button mat-icon-button color="warn" class="!ml-3" (click)="deleteMemberConfigTitle(title._id)"> -->
+                    <button mat-icon-button color="warn" class="!ml-3" (click)="navigationActions(title.value)">
                         <mat-icon>remove_circle_outline</mat-icon>
                     </button>
                 </div>

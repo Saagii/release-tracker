@@ -20,10 +20,12 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { NavMenuComponent } from './components/dialog/child-components/nav-menu/nav-menu.component';
 import { RouterModule } from '@angular/router';
+import { ConfirmationComponent } from './components/dialog/child-components/confirmation/confirmation.component';
 
 @NgModule({
   declarations: [
-    NavMenuComponent
+    NavMenuComponent,
+    ConfirmationComponent
   ],
   imports: [
     HttpClientModule,
@@ -48,6 +50,8 @@ import { RouterModule } from '@angular/router';
     RouterModule
   ],
   exports: [
+
+    // Modules Exports
     HttpClientModule,
     MatIconModule,
     MatButtonModule,
@@ -69,7 +73,9 @@ import { RouterModule } from '@angular/router';
     MatSnackBarModule,
     RouterModule,
 
-    NavMenuComponent
+    // Components Exports
+    NavMenuComponent,
+    ConfirmationComponent
   ]
 })
 export class SharedModule { }

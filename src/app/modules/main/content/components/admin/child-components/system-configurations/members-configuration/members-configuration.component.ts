@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MembersService } from 'src/app/modules/main/services/members.service';
+import { DialogSharedComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
 import { StatusService } from 'src/app/modules/shared/services/status.service';
 
 @Component({
@@ -17,6 +19,7 @@ export class MembersConfigurationComponent implements OnInit {
     private statusService: StatusService,
     private membersService: MembersService,
     private fb: FormBuilder,
+    public dialog: MatDialog,
   ) {
     // Prepare Sign In Form
     this.memberConfigTitleForm = this.fb.group({
@@ -114,6 +117,23 @@ export class MembersConfigurationComponent implements OnInit {
 
     }, (error: Error) => {
       console.log(error);
+    });
+  }
+
+
+  /*
+    Dialog Method: Nav New Menu
+  */
+  navigationActions(titleData: string): any {
+    this.dialog.open(DialogSharedComponent, {
+      panelClass: ['w-5/12'],
+      data: {
+        type: 'confirmation',
+        confirmationContent: {
+          title: 'Are you sure you want to delete ' + titleData + ' from member titles ?',
+          subtitle: ''
+        }
+      },
     });
   }
   
