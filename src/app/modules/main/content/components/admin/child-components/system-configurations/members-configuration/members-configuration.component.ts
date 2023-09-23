@@ -124,16 +124,20 @@ export class MembersConfigurationComponent implements OnInit {
   /*
     Dialog Method: Nav New Menu
   */
-  navigationActions(titleData: string): any {
+  navigationActions(titleData: any): any {
     this.dialog.open(DialogSharedComponent, {
       panelClass: ['w-5/12'],
       data: {
         type: 'confirmation',
         confirmationContent: {
-          title: 'Are you sure you want to delete ' + titleData + ' from member titles ?',
+          title: 'Are you sure you want to delete ' + titleData.value + ' from member titles ?',
           subtitle: ''
         }
       },
+    }).afterClosed().subscribe((result: boolean) => {
+      console.log(result);
+
+      this.deleteMemberConfigTitle(titleData._id);
     });
   }
   

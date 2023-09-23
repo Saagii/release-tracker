@@ -1,1 +1,38 @@
-<p>Clients Component Working ...</p>
+<div class="w-full px-16 pb-24">
+
+    <!-- Title -->
+    <div class="w-full">
+        <div class="text-xl">Clients Configuration</div>
+    </div>
+
+    <!-- Client Title Config Content -->
+    <div class="w-full mt-6 pb-10 border-b border-gray-200">
+        <div class="text-base">Client Titles</div>
+        <div class="text-gray-500 text-xs">Defines client based on their title in the project.</div>
+
+        <div class="w-6/12 flex items-center my-3" [formGroup]="clientConfigTypeForm">
+            <mat-form-field class="w-9/12" appearance="outline">
+                <mat-label>Add Client Title</mat-label>
+                <input type="text" matInput placeholder="Add Client Title" #clientTypeInput formControlName="clientType" >
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="!clientConfigTypeLoader" [disabled]="clientTypeInput.value !== '' " (click)="addClientConfigType()">+ Add</button>
+            <div class="flex items-center" *ngIf="clientConfigTypeLoader">
+                <mat-spinner [diameter]="20"></mat-spinner>
+                <span class="ml-2">Adding...</span>
+            </div>
+        </div>
+
+        <div class="w-6/12 mt-3 border border-gray-200 rounded-md" *ngIf="clientConfig?.types?.length">
+            <div class="w-full flex justify-between items-center py-1 px-3 border-b border-gray-200" *ngFor="let type of clientConfig.types">
+                <div class="w-6/12">{{type.value}}</div>
+                <div class="w-auto flex items-center">
+                    <div class="rounded-full px-3 py-0.5 flex items-center text-xs" [ngClass]="getStatusStyle(type.status)">{{type.status}}</div>
+                    <button mat-icon-button color="warn" class="!ml-3" (click)="navigationActions(type)">
+                        <mat-icon>remove_circle_outline</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
