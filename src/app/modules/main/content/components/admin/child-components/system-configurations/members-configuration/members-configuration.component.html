@@ -16,7 +16,7 @@
                 <input type="text" matInput placeholder="Add Member Title" #memberTypeInput formControlName="memberType" >
             </mat-form-field>
 
-            <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="!memberConfigTitleLoader" [disabled]="memberTypeInput.value !== '' " (click)="addMemberConfigTitle()">+ Add</button>
+            <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="!memberConfigTitleLoader" [disabled]="memberTypeInput.value === '' " (click)="addMemberConfigTitle()">+ Add</button>
             <div class="flex items-center" *ngIf="memberConfigTitleLoader">
                 <mat-spinner [diameter]="20"></mat-spinner>
                 <span class="ml-2">Adding...</span>

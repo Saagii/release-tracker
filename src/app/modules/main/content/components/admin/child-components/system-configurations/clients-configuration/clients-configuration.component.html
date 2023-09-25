@@ -7,16 +7,16 @@
 
     <!-- Client Title Config Content -->
     <div class="w-full mt-6 pb-10 border-b border-gray-200">
-        <div class="text-base">Client Titles</div>
-        <div class="text-gray-500 text-xs">Defines client based on their title in the project.</div>
+        <div class="text-base">Client Types</div>
+        <div class="text-gray-500 text-xs">Defines client based on their domains in the project.</div>
 
         <div class="w-6/12 flex items-center my-3" [formGroup]="clientConfigTypeForm">
             <mat-form-field class="w-9/12" appearance="outline">
-                <mat-label>Add Client Title</mat-label>
-                <input type="text" matInput placeholder="Add Client Title" #clientTypeInput formControlName="clientType" >
+                <mat-label>Add Client Type</mat-label>
+                <input type="text" matInput placeholder="Add Client Type" #clientTypeInput formControlName="clientType" >
             </mat-form-field>
 
-            <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="!clientConfigTypeLoader" [disabled]="clientTypeInput.value !== '' " (click)="addClientConfigType()">+ Add</button>
+            <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="!clientConfigTypeLoader" [disabled]="clientTypeInput.value === '' " (click)="addClientConfigType()">+ Add</button>
             <div class="flex items-center" *ngIf="clientConfigTypeLoader">
                 <mat-spinner [diameter]="20"></mat-spinner>
                 <span class="ml-2">Adding...</span>

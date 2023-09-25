@@ -20,6 +20,22 @@ export class ClientsService {
     }
 
 
+    /*
+        Add Client Configuration Types.
+    */
+    addClientConfigType(clientTypePayload: any): any {
+        return this._httpClient.post(`${environment.basePath}/api/clientConfig/types`, clientTypePayload);
+    }
+
+
+    /*
+        Delete Client Configuration Types.
+    */
+    deleteClientConfigType(clientTypePayload: any): any {
+        return this._httpClient.put(`${environment.basePath}/api/clientConfig/types`, clientTypePayload);
+    }
+
+
     /* 
         Get Clients List
     */

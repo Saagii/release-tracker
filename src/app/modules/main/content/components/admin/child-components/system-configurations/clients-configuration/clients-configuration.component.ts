@@ -30,7 +30,7 @@ export class ClientsConfigurationComponent implements OnInit {
   ngOnInit(): void {
 
     // Get Clients Configuration Details.
-    this.getMembersConfigurations();
+    this.getClientsConfigurations();
   }
 
   /*
@@ -44,7 +44,7 @@ export class ClientsConfigurationComponent implements OnInit {
   /*
     Get Clients Configurations.
   */
-  getMembersConfigurations(): void {
+  getClientsConfigurations(): void {
     this.clientService.getClientsConfig().subscribe((clientConfig: any) => {
       console.log(clientConfig);
 
@@ -58,6 +58,66 @@ export class ClientsConfigurationComponent implements OnInit {
   */
   addClientConfigType(): void {
 
+    const clientConfigTypePayload = {
+      memberConfigId: this.clientConfig._id,
+      types: [
+        {
+          value: this.clientConfigTypeForm.get('clientType')?.value,
+          status: 'Active'
+        }
+      ]
+    }
+
+    // Enable Loaded
+    this.clientConfigTypeLoader = true;
+
+    // Diable types form.
+    this.clientConfigTypeForm.disable();
+
+    this.clientService.addClientConfigType(clientConfigTypePayload).subscribe((response: any) => {
+      console.log(response);
+
+      // Disable Loader
+      this.clientConfigTypeLoader = false;
+
+      // Enable the form & reset.
+      this.clientConfigTypeForm.enable();
+      this.clientConfigTypeForm.reset();
+
+      // Get the member config details.
+      this.getClientsConfigurations();
+
+    }, (error: Error) => {
+      console.log(error);
+
+      // Disable Loader
+      this.clientConfigTypeLoader = false;
+
+      // Enable the form.
+      this.clientConfigTypeForm.enable();
+    });
+  }
+
+
+  /*
+    Delete Client Config Type.
+  */
+  deleteClientConfigType(clientTypeId: string): void {
+
+    const clientConfigTypePayload = {
+      clientConfigId: this.clientConfig._id,
+      typeId: clientTypeId
+    }
+
+    this.clientService.deleteClientConfigType(clientConfigTypePayload).subscribe((response: any) => {
+      console.log(response);
+
+      // Get the member config details.
+      this.getClientsConfigurations();
+
+    }, (error: Error) => {
+      console.log(error);
+    });
   }
 
 
@@ -77,7 +137,7 @@ export class ClientsConfigurationComponent implements OnInit {
     }).afterClosed().subscribe((result: boolean) => {
       console.log(result);
 
-      // this.deleteMemberConfigTitle(titleData._id);
+      this.deleteClientConfigType(typeData._id);
     });
   }
   
