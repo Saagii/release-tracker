@@ -18,6 +18,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { HttpClientModule } from '@angular/common/http';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatSliderModule} from '@angular/material/slider';
 import { NavMenuComponent } from './components/dialog/child-components/nav-menu/nav-menu.component';
 import { RouterModule } from '@angular/router';
 import { ConfirmationComponent } from './components/dialog/child-components/confirmation/confirmation.component';
@@ -47,6 +48,7 @@ import { ConfirmationComponent } from './components/dialog/child-components/conf
     MatRadioModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
+    MatSliderModule,
     RouterModule
   ],
   exports: [
@@ -71,6 +73,7 @@ import { ConfirmationComponent } from './components/dialog/child-components/conf
     MatRadioModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
+    MatSliderModule,
     RouterModule,
 
     // Components Exports

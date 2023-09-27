@@ -23,6 +23,7 @@ import { AuthGuard } from './modules/shared/authGaurd/auth.gaurd';
 import { AuthComponent } from './modules/auth/auth.component';
 import { MembersService } from './modules/main/services/members.service';
 import { ClientsService } from './modules/main/services/clients.service';
+import { ProjectsService } from './modules/main/services/projects.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import { ClientsService } from './modules/main/services/clients.service';
     ReactiveFormsModule,
     CommonModule
   ],
-  providers: [StatusService, AuthService, MembersService, ClientsService, AuthGuard,
+  providers: [StatusService, AuthService, MembersService, ClientsService, ProjectsService, AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
