@@ -12,6 +12,7 @@ import { StatusService } from 'src/app/modules/shared/services/status.service';
 export class ProjectsConfigurationComponent implements OnInit {
 
   projectConfig: any;
+  enableMembersLimitEditForm: boolean = false;
   projectConfigTypeForm: FormGroup;
   projectConfigStatusForm: FormGroup;
   projectConfigMembersLimitForm: FormGroup;

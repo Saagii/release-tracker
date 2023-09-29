@@ -72,7 +72,14 @@
         <div class="text-base">Project Members Limit</div>
         <div class="text-gray-500 text-xs">Sets maximum number of members to be mapped to a single project.</div>
 
-        <div class="w-6/12 flex items-center my-3" [formGroup]="projectConfigMembersLimitForm">
+        <div class="flex mt-6 items-center">
+            <div class="text-gray-700">Maximum : <span class="font-bold text-green-600">25</span> </div>
+            <button mat-icon-button class="!ml-4" [matTooltip]="!enableMembersLimitEditForm ? 'Edit' : 'Undo Edit'" (click)="enableMembersLimitEditForm = !enableMembersLimitEditForm;">
+                <mat-icon class="text-sm hover:text-blue-600">{{ !enableMembersLimitEditForm ? 'edit' : 'close'}}</mat-icon>
+            </button>
+        </div>
+
+        <div class="w-6/12 flex items-center my-3" [formGroup]="projectConfigMembersLimitForm" *ngIf="enableMembersLimitEditForm">
             <mat-form-field class="w-2/12" appearance="outline">
                 <input type="number" matInput placeholder="" #projectMembersLimitInput formControlName="projectMembersLimit" >
             </mat-form-field>
