@@ -8,7 +8,7 @@
     <!-- Project Types Config Content -->
     <div class="w-full mt-6 pb-10 border-b border-gray-200">
         <div class="text-base">Project Types</div>
-        <div class="text-gray-500 text-xs">Provides an option to set the type of project.</div>
+        <div class="text-gray-500 text-xs">Provides options to set the type of project.</div>
 
         <div class="w-6/12 flex items-center my-3" [formGroup]="projectConfigTypeForm">
             <mat-form-field class="w-9/12" appearance="outline">
@@ -28,7 +28,7 @@
                 <div class="w-6/12">{{type.value}}</div>
                 <div class="w-auto flex items-center">
                     <div class="rounded-full px-3 py-0.5 flex items-center text-xs" [ngClass]="getStatusStyle(type.status)">{{type.status}}</div>
-                    <button mat-icon-button color="warn" class="!ml-3" (click)="navigationActions(type)">
+                    <button mat-icon-button color="warn" class="!ml-3" (click)="navigationActions(type, 'type')">
                         <mat-icon>remove_circle_outline</mat-icon>
                     </button>
                 </div>
@@ -58,8 +58,7 @@
             <div class="w-full flex justify-between items-center py-1 px-3 border-b border-gray-200" *ngFor="let status of projectConfig.status">
                 <div class="w-6/12">{{status.value}}</div>
                 <div class="w-auto flex items-center">
-                    <div class="rounded-full px-3 py-0.5 flex items-center text-xs" [ngClass]="getStatusStyle(status.status)">{{status.status}}</div>
-                    <button mat-icon-button color="warn" class="!ml-3" (click)="navigationActions(status)">
+                    <button mat-icon-button color="warn" class="!ml-3" [disabled]="status.isMandatory" (click)="navigationActions(status, 'status')">
                         <mat-icon>remove_circle_outline</mat-icon>
                     </button>
                 </div>
@@ -73,7 +72,7 @@
         <div class="text-gray-500 text-xs">Sets maximum number of members to be mapped to a single project.</div>
 
         <div class="flex mt-6 items-center">
-            <div class="text-gray-700">Maximum : <span class="font-bold text-green-600">25</span> </div>
+            <div class="text-gray-700">Maximum : <span class="font-bold text-green-600">{{projectConfig?.membersLimit}}</span> </div>
             <button mat-icon-button class="!ml-4" [matTooltip]="!enableMembersLimitEditForm ? 'Edit' : 'Undo Edit'" (click)="enableMembersLimitEditForm = !enableMembersLimitEditForm;">
                 <mat-icon class="text-sm hover:text-blue-600">{{ !enableMembersLimitEditForm ? 'edit' : 'close'}}</mat-icon>
             </button>

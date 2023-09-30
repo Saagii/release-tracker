@@ -36,6 +36,22 @@ export class ProjectsService {
     }
 
 
+    /*
+        Delete project Configuration Status.
+    */
+    deleteProjectConfigStatus(projectStatusPayload: any): any {
+        return this._httpClient.put(`${environment.basePath}/api/projectConfig/status`, projectStatusPayload);
+    }
+
+
+    /*
+        Update project Configuration members limit.
+    */
+    deleteProjectConfigMembersLimit(projectMembersLimitPayload: any): any {
+        return this._httpClient.put(`${environment.basePath}/api/projectConfig/membersLimit`, projectMembersLimitPayload);
+    }
+
+
     /* 
         Get Projects List
     */

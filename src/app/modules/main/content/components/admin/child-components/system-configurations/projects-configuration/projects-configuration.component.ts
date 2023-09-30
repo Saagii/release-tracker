@@ -43,6 +43,9 @@ export class ProjectsConfigurationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    // Get Projects Configuration Details.
+    this.getProjectsConfigurations();
   }
 
   /*
@@ -54,7 +57,21 @@ export class ProjectsConfigurationComponent implements OnInit {
 
 
   /*
-    Add client type configuration.
+    Get Project Configurations.
+  */
+  getProjectsConfigurations(): void {
+    this.projectService.getProjectsConfig().subscribe((projectConfig: any) => {
+      console.log(projectConfig);
+
+      this.projectConfig = projectConfig;
+
+      this.projectConfigMembersLimitForm.get('projectMembersLimit')?.setValue(projectConfig.membersLimit);
+    });
+  }
+
+
+  /*
+    Add project type configuration.
   */
   addProjectConfigType(): void {
 
@@ -85,7 +102,7 @@ export class ProjectsConfigurationComponent implements OnInit {
       this.projectConfigTypeForm.reset();
 
       // Get the member config details.
-      // this.getProjectsConfigurations();
+      this.getProjectsConfigurations();
 
     }, (error: Error) => {
       console.log(error);
@@ -99,23 +116,70 @@ export class ProjectsConfigurationComponent implements OnInit {
   }
 
 
-    /*
+  /*
+    Delete Project Config Type.
+  */
+  deleteProjectConfigType(projectTypeId: string): void {
+
+    const projectConfigTypePayload = {
+      // projectConfigId: this.projectConfig._id,
+      typeId: projectTypeId
+    }
+
+    this.projectService.deleteProjectConfigType(projectConfigTypePayload).subscribe((response: any) => {
+      console.log(response);
+
+      // Get the member config details.
+      this.getProjectsConfigurations();
+
+    }, (error: Error) => {
+      console.log(error);
+    });
+  }
+
+
+  /*
+    Delete Project Config Status.
+  */
+  deleteProjectConfigStatus(projectStatusId: string): void {
+
+    const projectConfigStatusPayload = {
+      // projectConfigId: this.projectConfig._id,
+      statusId: projectStatusId
+    }
+
+    this.projectService.deleteProjectConfigStatus(projectConfigStatusPayload).subscribe((response: any) => {
+      console.log(response);
+
+      // Get the member config details.
+      this.getProjectsConfigurations();
+
+    }, (error: Error) => {
+      console.log(error);
+    });
+  }
+
+
+  /*
     Dialog Method: Nav New Menu
   */
-  navigationActions(typeData: any): any {
+  navigationActions(actionData: any, actionType: string): any {
     this.dialog.open(DialogSharedComponent, {
       panelClass: ['w-5/12'],
       data: {
         type: 'confirmation',
         confirmationContent: {
-          title: 'Are you sure you want to delete ' + typeData.value + ' from client types ?',
+          title: 'Are you sure you want to delete ' + actionData.value + ' from project ' + actionType + ' ?',
           subtitle: ''
         }
       },
     }).afterClosed().subscribe((result: boolean) => {
       console.log(result);
 
-      // this.deleteClientConfigType(typeData._id);
+      if(actionType === 'type') { this.deleteProjectConfigType(actionData._id); }
+
+      if(actionType === 'status') { this.deleteProjectConfigType(actionData._id); }
+      
     });
   }
   
