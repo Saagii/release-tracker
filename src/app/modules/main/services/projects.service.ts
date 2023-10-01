@@ -29,6 +29,22 @@ export class ProjectsService {
 
 
     /*
+        Add project Configuration Status.
+    */
+    addProjectConfigStatus(projectStatusPayload: any): any {
+        return this._httpClient.post(`${environment.basePath}/api/projectConfig/status`, projectStatusPayload);
+    }
+
+
+    /*
+        Update project Configuration Members Limit.
+    */
+    updateProjectConfigMembersLimit(projectMembersLimitPayload: any): any {
+        return this._httpClient.put(`${environment.basePath}/api/projectConfig/membersLimit`, projectMembersLimitPayload);
+    }
+
+
+    /*
         Delete project Configuration Types.
     */
     deleteProjectConfigType(projectTypePayload: any): any {
@@ -49,21 +65,5 @@ export class ProjectsService {
     */
     deleteProjectConfigMembersLimit(projectMembersLimitPayload: any): any {
         return this._httpClient.put(`${environment.basePath}/api/projectConfig/membersLimit`, projectMembersLimitPayload);
-    }
-
-
-    /* 
-        Get Projects List
-    */
-    getProjectsList(): any {
-        return this._httpClient.get(`${environment.basePath}/api/Projects`);
-    }
-
-    
-    /*
-        Save project details.
-    */
-    saveProjectDetails(projectPayload: any): any {
-        return this._httpClient.post(`${environment.basePath}/api/Projects`, projectPayload);
     }
 }

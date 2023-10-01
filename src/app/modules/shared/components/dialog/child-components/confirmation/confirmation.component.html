@@ -9,8 +9,8 @@
     <!-- Confirmation Actions -->
     <div class="w-full mt-6">
         <div class="w-full flex justify-end">
-            <button mat-stroked-button class="" color="warn">No</button>
-            <button mat-flat-button class="!ml-4" color="primary" (click)="onConfirm()">Confirm</button>
+            <button mat-stroked-button class="" color="warn" (click)="confirmationDialogAction('cancel')">No</button>
+            <button mat-flat-button class="!ml-4" color="primary" (click)="confirmationDialogAction('confirm')">Confirm</button>
         </div>
     </div>
 </div>

@@ -76,11 +76,11 @@ export class ProjectsConfigurationComponent implements OnInit {
   addProjectConfigType(): void {
 
     const projectConfigTypePayload = {
-      memberConfigId: this.projectConfig._id,
+      projectConfigId: this.projectConfig._id,
       types: [
         {
           value: this.projectConfigTypeForm.get('projectType')?.value,
-          status: 'Active'
+          isMandatory: true
         }
       ]
     }
@@ -112,6 +112,96 @@ export class ProjectsConfigurationComponent implements OnInit {
 
       // Enable the form.
       this.projectConfigTypeForm.enable();
+    });
+  }
+
+
+  /*
+    Add project status configuration.
+  */
+  addProjectConfigStatus(): void {
+
+    const projectConfigStatusPayload = {
+      projectConfigId: this.projectConfig._id,
+      status: [
+        {
+          value: this.projectConfigStatusForm.get('projectStatus')?.value,
+          isMandatory: true
+        }
+      ]
+    }
+
+    // Enable Loaded
+    this.projectConfigStatusLoader = true;
+
+    // Diable types form.
+    this.projectConfigStatusForm.disable();
+
+    this.projectService.addProjectConfigStatus(projectConfigStatusPayload).subscribe((response: any) => {
+      console.log(response);
+
+      // Disable Loader
+      this.projectConfigStatusLoader = false;
+
+      // Enable the form & reset.
+      this.projectConfigStatusForm.enable();
+      this.projectConfigStatusForm.reset();
+
+      // Get the member config details.
+      this.getProjectsConfigurations();
+
+    }, (error: Error) => {
+      console.log(error);
+
+      // Disable Loader
+      this.projectConfigStatusLoader = false;
+
+      // Enable the form.
+      this.projectConfigStatusForm.enable();
+    });
+  }
+
+
+  /*
+    Update project members limit configuration.
+  */
+  updateProjectConfigMembersLimit(): void {
+
+    const projectConfigMembersLimitPayload = {
+      projectConfigId: this.projectConfig._id,
+      membersLimit: this.projectConfigMembersLimitForm.get('projectMembersLimit')?.value
+    }
+
+    // Enable Loaded
+    this.projectConfigMembersLimitLoader = true;
+
+    // Diable types form.
+    this.projectConfigMembersLimitForm.disable();
+
+    this.projectService.updateProjectConfigMembersLimit(projectConfigMembersLimitPayload).subscribe((response: any) => {
+      console.log(response);
+
+      // Disable Loader
+      this.projectConfigMembersLimitLoader = false;
+
+      // Enable the form & reset.
+      this.projectConfigMembersLimitForm.enable();
+      this.projectConfigMembersLimitForm.reset();
+
+      // Hide MembersLimit Update Form.
+      this.enableMembersLimitEditForm = !this.enableMembersLimitEditForm;
+
+      // Get the member config details.
+      this.getProjectsConfigurations();
+
+    }, (error: Error) => {
+      console.log(error);
+
+      // Disable Loader
+      this.projectConfigMembersLimitLoader = false;
+
+      // Enable the form.
+      this.projectConfigMembersLimitForm.enable();
     });
   }
 
@@ -176,10 +266,11 @@ export class ProjectsConfigurationComponent implements OnInit {
     }).afterClosed().subscribe((result: boolean) => {
       console.log(result);
 
-      if(actionType === 'type') { this.deleteProjectConfigType(actionData._id); }
+      if(result) {
+        if(actionType === 'type') { this.deleteProjectConfigType(actionData._id); }
 
-      if(actionType === 'status') { this.deleteProjectConfigType(actionData._id); }
-      
+        if(actionType === 'status') { this.deleteProjectConfigStatus(actionData._id); }
+      }
     });
   }
   

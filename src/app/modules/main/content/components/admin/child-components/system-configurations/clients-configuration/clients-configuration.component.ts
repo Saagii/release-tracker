@@ -137,7 +137,10 @@ export class ClientsConfigurationComponent implements OnInit {
     }).afterClosed().subscribe((result: boolean) => {
       console.log(result);
 
-      this.deleteClientConfigType(typeData._id);
+      if(result) {
+        this.deleteClientConfigType(typeData._id);
+      }
+      
     });
   }
   

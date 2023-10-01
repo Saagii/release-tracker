@@ -137,7 +137,9 @@ export class MembersConfigurationComponent implements OnInit {
     }).afterClosed().subscribe((result: boolean) => {
       console.log(result);
 
-      this.deleteMemberConfigTitle(titleData._id);
+      if(result) {
+        this.deleteMemberConfigTitle(titleData._id);
+      }
     });
   }
   

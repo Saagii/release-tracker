@@ -14,7 +14,11 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
       console.log(data);
     }
 
-    onConfirm() {
-      this.dialogRef.close(true);
+    confirmationDialogAction(actionType: string) {
+      if(actionType === 'confirm') {
+        this.dialogRef.close(true);
+      } else {
+        this.dialogRef.close(false);
+      }
     }
   }
