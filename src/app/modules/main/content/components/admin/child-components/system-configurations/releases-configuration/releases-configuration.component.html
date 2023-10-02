@@ -1,1 +1,98 @@
-<p>Releases Component Working...</p>
+<div class="w-full px-16 pb-24">
+
+    <!-- Title -->
+    <div class="w-full">
+        <div class="text-xl">Releases Configuration</div>
+    </div>
+
+    <!-- Release Types Config Content -->
+    <div class="w-full mt-6 pb-10 border-b border-gray-200">
+        <div class="text-base">Release Types</div>
+        <div class="text-gray-500 text-xs">Provides list options to set the type of release.</div>
+
+        <div class="w-6/12 flex items-center my-3" [formGroup]="releaseConfigTypeForm">
+            <mat-form-field class="w-9/12" appearance="outline">
+                <mat-label>Add Release Type</mat-label>
+                <input type="text" matInput placeholder="Add Release Type" #releaseTypeInput formControlName="releaseType" >
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="!releaseConfigTypeLoader" [disabled]="releaseTypeInput.value === '' " (click)="addReleaseConfigType()">+ Add</button>
+            <div class="flex items-center" *ngIf="releaseConfigTypeLoader">
+                <mat-spinner [diameter]="20"></mat-spinner>
+                <span class="ml-2">Adding...</span>
+            </div>
+        </div>
+
+        <div class="w-6/12 mt-3 border border-gray-200 rounded-md" *ngIf="releaseConfig?.types?.length">
+            <div class="w-full flex justify-between items-center py-1 px-3 border-b border-gray-200" *ngFor="let type of releaseConfig.types">
+                <div class="w-6/12">{{type.value}}</div>
+                <div class="w-auto flex items-center">
+                    <div class="rounded-full px-3 py-0.5 flex items-center text-xs" [ngClass]="getStatusStyle(type.status)">{{type.status}}</div>
+                    <button mat-icon-button color="warn" class="!ml-3" (click)="navigationActions(type, 'type')">
+                        <mat-icon>remove_circle_outline</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Release Target Config Content -->
+    <div class="w-full mt-6 pb-10 border-b border-gray-200">
+        <div class="text-base">Release Target</div>
+        <div class="text-gray-500 text-xs">Sets release target.</div>
+
+        <div class="w-6/12 flex items-center my-3" [formGroup]="releaseConfigTargetForm">
+            <mat-form-field class="w-9/12" appearance="outline">
+                <mat-label>Add Release Target</mat-label>
+                <input type="text" matInput placeholder="Add Release Type" #releaseTargetInput formControlName="releaseTarget" >
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="!releaseConfigTargetLoader" [disabled]="releaseTargetInput.value === '' " (click)="addReleaseConfigStatus()">+ Add</button>
+            <div class="flex items-center" *ngIf="releaseConfigTargetLoader">
+                <mat-spinner [diameter]="20"></mat-spinner>
+                <span class="ml-2">Adding...</span>
+            </div>
+        </div>
+
+        <div class="w-6/12 mt-3 border border-gray-200 rounded-md" *ngIf="releaseConfig?.targets.length">
+            <div class="w-full flex justify-between items-center py-1 px-3 border-b border-gray-200" *ngFor="let target of releaseConfig.targets">
+                <div class="w-6/12">{{target.value}}</div>
+                <div class="w-auto flex items-center">
+                    <button mat-icon-button color="warn" class="!ml-3" (click)="navigationActions(target, 'target')">
+                        <mat-icon>remove_circle_outline</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Release Status Config Content -->
+    <div class="w-full mt-6 pb-10 border-b border-gray-200">
+        <div class="text-base">Release Status</div>
+        <div class="text-gray-500 text-xs">Defines release's ongoing status.</div>
+
+        <div class="w-6/12 flex items-center my-3" [formGroup]="releaseConfigStatusForm">
+            <mat-form-field class="w-9/12" appearance="outline">
+                <mat-label>Add Release Status</mat-label>
+                <input type="text" matInput placeholder="Add Release Type" #releaseStatusInput formControlName="releaseStatus" >
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="!releaseConfigStatusLoader" [disabled]="releaseStatusInput.value === '' " (click)="addReleaseConfigStatus()">+ Add</button>
+            <div class="flex items-center" *ngIf="releaseConfigStatusLoader">
+                <mat-spinner [diameter]="20"></mat-spinner>
+                <span class="ml-2">Adding...</span>
+            </div>
+        </div>
+
+        <div class="w-6/12 mt-3 border border-gray-200 rounded-md" *ngIf="releaseConfig?.status.length">
+            <div class="w-full flex justify-between items-center py-1 px-3 border-b border-gray-200" *ngFor="let status of releaseConfig.status">
+                <div class="w-6/12">{{status.value}}</div>
+                <div class="w-auto flex items-center">
+                    <button mat-icon-button color="warn" class="!ml-3" (click)="navigationActions(status, 'status')">
+                        <mat-icon>remove_circle_outline</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
