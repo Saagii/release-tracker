@@ -25,6 +25,7 @@ import { MembersService } from './modules/main/services/members.service';
 import { ClientsService } from './modules/main/services/clients.service';
 import { ProjectsService } from './modules/main/services/projects.service';
 import { ReleasesService } from './modules/main/services/releases.service';
+import { DomainsService } from './modules/main/services/domains.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,7 @@ import { ReleasesService } from './modules/main/services/releases.service';
     ReactiveFormsModule,
     CommonModule
   ],
-  providers: [StatusService, AuthService, MembersService, ClientsService, ProjectsService, ReleasesService, AuthGuard,
+  providers: [StatusService, AuthService, MembersService, ClientsService, ProjectsService, ReleasesService, DomainsService, AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

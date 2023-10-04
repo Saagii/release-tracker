@@ -1,1 +1,69 @@
-<p>Domains Component Working...</p>
+<div class="w-full px-16 pb-24">
+
+    <!-- Title -->
+    <div class="w-full">
+        <div class="text-xl">Domains Configuration</div>
+    </div>
+
+    <!-- Domain Types Config Content -->
+    <div class="w-full mt-6 pb-10 border-b border-gray-200">
+        <div class="text-base">Domain Types</div>
+        <div class="text-gray-500 text-xs">Provides options to set the type of domain.</div>
+
+        <div class="w-6/12 flex items-center my-3" [formGroup]="domainConfigTypeForm">
+            <mat-form-field class="w-9/12" appearance="outline">
+                <mat-label>Add Domain Type</mat-label>
+                <input type="text" matInput placeholder="Add Domain Type" #domainTypeInput formControlName="domainType" >
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="!domainConfigTypeLoader" [disabled]="domainTypeInput.value === '' " (click)="addDomainConfigType()">+ Add</button>
+            <div class="flex items-center" *ngIf="domainConfigTypeLoader">
+                <mat-spinner [diameter]="20"></mat-spinner>
+                <span class="ml-2">Adding...</span>
+            </div>
+        </div>
+
+        <div class="w-6/12 mt-3 border border-gray-200 rounded-md" *ngIf="domainConfig?.types?.length">
+            <div class="w-full flex justify-between items-center py-1 px-3 border-b border-gray-200" *ngFor="let type of domainConfig.types">
+                <div class="w-6/12">{{type.value}}</div>
+                <div class="w-auto flex items-center">
+                    <div class="rounded-full px-3 py-0.5 flex items-center text-xs" [ngClass]="getStatusStyle(type.status)">{{type.status}}</div>
+                    <button mat-icon-button color="warn" class="!ml-3" (click)="navigationActions(type, 'type')">
+                        <mat-icon>remove_circle_outline</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Domain Status Config Content -->
+    <div class="w-full mt-6 pb-10 border-b border-gray-200">
+        <div class="text-base">Domain Status</div>
+        <div class="text-gray-500 text-xs">Defines domain's ongoing status.</div>
+
+        <div class="w-6/12 flex items-center my-3" [formGroup]="domainConfigStatusForm">
+            <mat-form-field class="w-9/12" appearance="outline">
+                <mat-label>Add Domain Status</mat-label>
+                <input type="text" matInput placeholder="Add Domain Type" #domainStatusInput formControlName="domainStatus" >
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="!domainConfigStatusLoader" [disabled]="domainStatusInput.value === '' " (click)="addDomainConfigStatus()">+ Add</button>
+            <div class="flex items-center" *ngIf="domainConfigStatusLoader">
+                <mat-spinner [diameter]="20"></mat-spinner>
+                <span class="ml-2">Adding...</span>
+            </div>
+        </div>
+
+        <div class="w-6/12 mt-3 border border-gray-200 rounded-md" *ngIf="domainConfig?.status.length">
+            <div class="w-full flex justify-between items-center py-1 px-3 border-b border-gray-200" *ngFor="let status of domainConfig.status">
+                <div class="w-6/12">{{status.value}}</div>
+                <div class="w-auto flex items-center">
+                    <button mat-icon-button color="warn" class="!ml-3" (click)="navigationActions(status, 'status')">
+                        <mat-icon>remove_circle_outline</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
