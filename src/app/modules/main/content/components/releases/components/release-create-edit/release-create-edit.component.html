@@ -91,6 +91,20 @@
                                 </mat-select>
                                 <mat-error>Release Type is <strong>Required!</strong></mat-error>
                             </mat-form-field>
+
+                            <!-- Release Closing Date -->
+                            <mat-form-field class="w-full mt-4" appearance="outline">
+                                <mat-label>Release Closing Date</mat-label>
+                                <input class="w-full" matInput [matDatepicker]="closingDatePicker" required formControlName="releaseClosingDate">
+                                <!-- <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle [for]="closingDatePicker"></mat-datepicker-toggle>
+                                <mat-datepicker #closingDatePicker></mat-datepicker> -->
+
+                                <mat-datepicker-toggle matSuffix [for]="closingDatePicker">
+                                    <mat-icon matDatepickerToggleIcon>date_range</mat-icon>
+                                  </mat-datepicker-toggle>
+                                <mat-datepicker #closingDatePicker></mat-datepicker>
+                            </mat-form-field>
                         </div>
                     </div>
 
