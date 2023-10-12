@@ -30,9 +30,10 @@
                         <div class="w-4/12">
                             <!-- Client -->
                             <mat-form-field class="w-full" appearance="outline">
-                                <mat-select placeholder="Select Client" required>
-                                    <mat-option *ngFor="let client of [0,1,2,3,4]; let i=index;" [value]="i+1">
-                                      Client {{i+1}}
+                                <mat-label>Select Client</mat-label>
+                                <mat-select placeholder="Select Client" required formControlName="client">
+                                    <mat-option *ngFor="let client of clientsList" [value]="client._id">
+                                      {{client.clientName}}
                                     </mat-option>
                                 </mat-select>
                                 <mat-error>Client is <strong>Required!</strong></mat-error>
@@ -49,15 +50,17 @@
                         <div class="w-4/12">
                             <!-- Release Title -->
                             <mat-form-field class="w-full" appearance="outline">
+                                <mat-label>Release Title</mat-label>
                                 <input type="text" matInput placeholder="Release Title" formControlName="releaseTitle" required>
                                 <mat-error>Release Title is <strong>Required!</strong></mat-error>
                             </mat-form-field>
 
                             <!-- Release Type -->
                             <mat-form-field class="w-full mt-4" appearance="outline">
-                                <mat-select placeholder="Select Release Type" required>
-                                    <mat-option *ngFor="let type of ['Patch','Major','Minor']; let i=index;" [value]="i+1">
-                                      {{type}}
+                                <mat-label>Release Type</mat-label>
+                                <mat-select placeholder="Select Release Type" required formControlName="releaseType">
+                                    <mat-option *ngFor="let type of releaseConfigDetails?.types" [value]="type._id">
+                                      {{type.value}}
                                     </mat-option>
                                 </mat-select>
                                 <mat-error>Release Type is <strong>Required!</strong></mat-error>
@@ -65,26 +68,19 @@
 
                             <!-- Release Type -->
                             <mat-form-field class="w-full mt-4" appearance="outline">
-                                <mat-select placeholder="Select Release Target" required>
-                                    <mat-option *ngFor="let target of ['Platform','UI','Platform & UI']; let i=index;" [value]="i+1">
-                                      {{target}}
+                                <mat-label>Release Target</mat-label>
+                                <mat-select placeholder="Select Release Target" required formControlName="releaseTarget">
+                                    <mat-option *ngFor="let target of releaseConfigDetails?.targets" [value]="target._id">
+                                      {{target.value}}
                                     </mat-option>
                                 </mat-select>
                                 <mat-error>Release Type is <strong>Required!</strong></mat-error>
                             </mat-form-field>
 
-                            <!-- Release Closing Date -->
-                            <!-- <mat-form-field appearance="fill">
-                                <mat-label>Release Closing Date</mat-label>
-                                <input matInput [matDatepicker]="picker">
-                                <mat-hint>MM/DD/YYYY</mat-hint>
-                                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
-                            </mat-form-field> -->
-
                             <!-- Release Owner -->
                             <mat-form-field class="w-full mt-4" appearance="outline">
-                                <mat-select placeholder="Select Release Owner" required>
+                                <mat-label>Release Owner</mat-label>
+                                <mat-select placeholder="Select Release Owner" required formControlName="releaseOwner">
                                     <mat-option *ngFor="let owner of ['Sagar','Sagar','Sagar']; let i=index;" [value]="i+1">
                                       {{owner}}
                                     </mat-option>
@@ -104,33 +100,8 @@
                                     <mat-icon matDatepickerToggleIcon>date_range</mat-icon>
                                   </mat-datepicker-toggle>
                                 <mat-datepicker #closingDatePicker></mat-datepicker>
+                                <mat-error>Release Closing Date is <strong>Required!</strong></mat-error>
                             </mat-form-field>
-                        </div>
-                    </div>
-
-                    <!-- Release Objectives -->
-                    <div class="w-full flex justify-start items-start mt-10 pb-8 border-b border-gray-200">
-                        <div class="w-3/12">
-                            <div class="w-full text-lg">Release Objectives</div>
-                            <div class="w-full text-xs text-gray-500">Add all the release objectives to be achived.</div>
-                        </div>
-                        <div class="w-8/12">
-                            <!-- Release Objective Input -->
-                            <div class="w-full flex items-start">
-                                <mat-form-field class="w-full" appearance="outline">
-                                    <input type="text" matInput placeholder="Add Release Objective" formControlName="releaseObjective" required>
-                                    <mat-error>Release Objective is <strong>Required!</strong></mat-error>
-                                </mat-form-field>
-                                <button mat-flat-button class="bg-blue-500 text-white" style="margin-top: 0.6rem; margin-left: 1rem;">+ Add</button>
-                            </div>
-                            <div class="mt-4 border border-gray-200 rounded-md p-4">
-                                <div class="w-full text-lg">Added Release Objectives </div>
-                                <div class="w-full mb-3 text-xs text-gray-500">Total: 8</div>
-                                <div class="w-full py-5 px-3 flex justify-between items-center rounded-lg  hover:bg-gray-100" *ngFor="let objective of [0,1,2,3,4,5,6,7]; let i=index;">
-                                    <div class="w-10/12">{{i+1}}. Objective 1 is must feature to be implemented.</div>
-                                    <div class="w-2/12 text-right"><mat-icon class="text-red-300 cursor-pointer hover:text-red-600">cancel</mat-icon></div>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
