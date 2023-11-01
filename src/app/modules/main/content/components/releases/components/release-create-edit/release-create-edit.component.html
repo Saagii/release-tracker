@@ -77,12 +77,23 @@
                                 <mat-error>Release Type is <strong>Required!</strong></mat-error>
                             </mat-form-field>
 
+                            <!-- Release Priority -->
+                            <mat-form-field class="w-full mt-4" appearance="outline">
+                                <mat-label>Release Priority</mat-label>
+                                <mat-select placeholder="Select Release Priority" required formControlName="releasePriority">
+                                    <mat-option *ngFor="let priority of releaseConfigDetails?.priorities" [value]="priority._id">
+                                      {{priority.value}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>Release Priority is <strong>Required!</strong></mat-error>
+                            </mat-form-field>
+
                             <!-- Release Owner -->
                             <mat-form-field class="w-full mt-4" appearance="outline">
                                 <mat-label>Release Owner</mat-label>
                                 <mat-select placeholder="Select Release Owner" required formControlName="releaseOwner">
-                                    <mat-option *ngFor="let owner of ['Sagar','Sagar','Sagar']; let i=index;" [value]="i+1">
-                                      {{owner}}
+                                    <mat-option *ngFor="let owner of membersList" [value]="owner._id">
+                                      {{owner.firstName + ' ' + owner.lastName}}
                                     </mat-option>
                                 </mat-select>
                                 <mat-error>Release Type is <strong>Required!</strong></mat-error>
@@ -108,7 +119,7 @@
                     <!-- Action Buttons -->
                     <div class="w-full flex justify-end p-6">
                         <button mat-button class="">Cancel</button>
-                        <button mat-flat-button class="bg-blue-500 text-white" style="margin-left: 3%;">Create Release</button>
+                        <button mat-flat-button class="bg-blue-500 text-white" style="margin-left: 3%;" (click)="submiteReleaseDetails()">Create Release</button>
                     </div>
                 </form>
                 

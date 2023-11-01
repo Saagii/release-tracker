@@ -19,16 +19,16 @@
             <div class="w-full mt-4">
                 <div class="w-full flex justify-between items-center p-3 border-b border-gray-100 hover:bg-gray-50 hover:border-gray-200 hover:rounded-md" *ngFor="let release of releaseItems">
                     <div class="">
-                        <div class="text-base text-gray-700">{{release.title}}</div>
-                        <div class="text-gray-600 text-xs py-2">Tag: <span class="text-blue-600 cursor-pointer hover:underline">{{release.tag}}</span></div>
-                        <div class="text-gray-600 text-xs">Production URL: <span class="text-blue-600 cursor-pointer hover:underline">{{release.domain}}</span></div>
+                        <div class="text-base text-gray-700">{{release.releaseTitle}}</div>
+                        <div class="text-gray-600 text-xs py-2">Tag: <span class="text-blue-600 cursor-pointer hover:underline">{{release.releaseTag ? release.releaseTag : '--'}}</span></div>
+                        <div class="text-gray-600 text-xs">Client: <span class="text-blue-600 cursor-pointer hover:underline">{{filterRequiredIds('client', release.clientId)}}</span></div>
                     </div>
                     <div class="flex content-center">
                         <div class="">
                             <div class="text-right">
-                                <span class="text-right text-xs px-3 rounded-full" [ngClass]="getStatusStyle(release.status)">{{release.status}}</span>
+                                <span class="text-right text-xs px-3 rounded-full uppercase" [ngClass]="getStatusStyle(filterRequiredIds('status', release.releaseStatusId))">{{filterRequiredIds('status', release.releaseStatusId)}}</span>
                             </div>
-                            <div class="mt-1 text-gray-400 text-xs flex content-center"><mat-icon class="text-xs">date_range</mat-icon>Closing On {{release.closeDate}}</div>
+                            <div class="mt-2 text-gray-400 text-xs flex items-center"><mat-icon class="text-sm mt-1">date_range</mat-icon>Closing On: <span class="text-gray-500 ml-1">{{release.releaseClosingDate | date}}</span></div>
                         </div>
                         <div class="ml-4">
                             <button mat-icon-button class="text-gray-600"  [routerLink]="['./', 567]">
@@ -80,7 +80,7 @@
         <!-- Release Comments -->
         <div class="w-full p-3 border border-gray-200 rounded-md my-4">
             <!-- Title -->
-            <div class="w-full text-lg px-2 text-gray-800">Release Comments</div>
+            <div class="w-full text-lg px-2 text-gray-800">Release Feeds</div>
 
             <!-- Comments List -->
             <div class="w-full py-4 px-2">

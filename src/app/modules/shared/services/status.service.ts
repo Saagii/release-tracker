@@ -19,7 +19,7 @@ export class StatusService {
         if(['On Hold', 'Pending', 'Waiting', 'Stalled'].includes(statusValue)) {
             return 'bg-gray-100 text-gray-600 font-bold border border-gray-200'
         }
-        if(['Active', 'On Track', 'In Progress'].includes(statusValue)) {
+        if(['Active', 'On Track', 'In Progress', 'Initiated'].includes(statusValue)) {
             return 'bg-green-100 text-green-600 font-bold border border-green-200'
         }
     }

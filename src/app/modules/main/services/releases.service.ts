@@ -58,4 +58,36 @@ export class ReleasesService {
     deleteReleaseConfigStatus(releaseStatusPayload: any): any {
         return this._httpClient.put(`${environment.basePath}/api/releaseConfig/status`, releaseStatusPayload);
     }
+
+
+    /* 
+        Get release Details
+    */
+    getReleaseDetails(releaseId: string): any {
+        return this._httpClient.get(`${environment.basePath}/api/releases/${releaseId}`);
+    }
+
+
+    /* 
+        Get release list
+    */
+    getReleasesList(): any {
+        return this._httpClient.get(`${environment.basePath}/api/releases`);
+    }
+
+
+    /*
+        Add release Configuration Status.
+    */
+    createReleaseDetails(releaseDetailsPayload: any): any {
+        return this._httpClient.post(`${environment.basePath}/api/releases`, releaseDetailsPayload);
+    }
+
+
+    /*
+        Add release Configuration Status.
+    */
+    updateReleaseDetails(releaseDetailsPayload: any): any {
+        return this._httpClient.put(`${environment.basePath}/api/releases`, releaseDetailsPayload);
+    }
 }
