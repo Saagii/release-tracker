@@ -20,7 +20,7 @@
                 <div class="w-full flex justify-between items-center p-3 border-b border-gray-100 hover:bg-gray-50 hover:border-gray-200 hover:rounded-md" *ngFor="let release of releaseItems">
                     <div class="">
                         <div class="text-base text-gray-700">{{release.releaseTitle}}</div>
-                        <div class="text-gray-600 text-xs py-2">Tag: <span class="text-blue-600 cursor-pointer hover:underline">{{release.releaseTag ? release.releaseTag : '--'}}</span></div>
+                        <div class="text-gray-600 text-xs py-2">Tag: <span class="text-gray-400 italic">{{release.releaseTag ? release.releaseTag : '- NA -'}}</span></div>
                         <div class="text-gray-600 text-xs">Client: <span class="text-blue-600 cursor-pointer hover:underline">{{filterRequiredIds('client', release.clientId)}}</span></div>
                     </div>
                     <div class="flex content-center">
@@ -31,10 +31,18 @@
                             <div class="mt-2 text-gray-400 text-xs flex items-center"><mat-icon class="text-sm mt-1">date_range</mat-icon>Closing On: <span class="text-gray-500 ml-1">{{release.releaseClosingDate | date}}</span></div>
                         </div>
                         <div class="ml-4">
-                            <button mat-icon-button class="text-gray-600"  [routerLink]="['./', 567]">
+                            <button mat-icon-button class="text-gray-600"  [routerLink]="['./', release._id]">
                                 <mat-icon>keyboard_arrow_right</mat-icon>
                             </button>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Loader -->
+                <div class="w-full flex justify-center py-28" *ngIf="!releaseItems">
+                    <div class="flex items-center">
+                        <mat-spinner [diameter]="20"></mat-spinner>
+                        <span class="ml-2">Loading Release items. Please Wait ...</span>
                     </div>
                 </div>
             </div>

@@ -72,8 +72,10 @@ export class ReleasesComponent implements OnInit {
   getReleasesList(): any {
     this.releasesService.getReleasesList().subscribe((releasesList: any[]) => {
       console.log(releasesList);
-
-      this.releaseItems = releasesList;
+      
+      setTimeout(() => {
+        this.releaseItems = releasesList;
+      }, 500);
     });
   }
 
