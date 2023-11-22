@@ -14,7 +14,7 @@ import { MembersService } from 'src/app/modules/main/services/members.service';
 export class ReleaseViewComponent implements OnInit {
 
   statusListMenu: any;
-  tempStatusValue: string = 'On Track';
+  tempStatusValue: string = '';
   releaseNotes: any[] = notesMockDataMenu;
   releaseId: string = '';
   releaseDetails: any;
@@ -105,6 +105,9 @@ export class ReleaseViewComponent implements OnInit {
       
       setTimeout(() => {
         this.releaseDetails = releaseDetails;
+
+        // Set Status
+        this.tempStatusValue = this.releaseDetails.releaseStatusId;
       }, 500);
     });
   }

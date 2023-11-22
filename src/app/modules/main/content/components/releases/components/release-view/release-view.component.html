@@ -14,16 +14,16 @@
             <!-- Title -->
             <div class="w-full flex justify-between items-center">
                 <div class="">
-                    <span class="cursor-pointer text-blue-600">{{filterRequiredIds('client', releaseDetails.clientId)}} > Project Name</span>
+                    <!-- <span class="cursor-pointer text-blue-600">{{filterRequiredIds('client', releaseDetails.clientId)}} > Project Name</span> -->
                     <div class="text-2xl text-gray-700 flex items-center">Release Version 1.0</div>
                 </div>
                 <div class="flex">
-                    <div mat-flat-button class="rounded-full px-3 pr-2 py-1 flex items-center text-xs" [ngClass]="getStatusStyle(tempStatusValue)" [matMenuTriggerFor]="matStatusMenu">
-                        {{tempStatusValue}} <mat-icon class="cursor-pointer bg-white rounded-full ml-3">arrow_drop_down</mat-icon>
+                    <div mat-flat-button class="select-none cursor-pointer rounded-full px-3 pr-2 py-1 flex items-center text-xs uppercase" [ngClass]="getStatusStyle(filterRequiredIds('status', tempStatusValue))" [matMenuTriggerFor]="matStatusMenu">
+                        {{filterRequiredIds('status', tempStatusValue)}} <mat-icon class="cursor-pointer bg-white rounded-full ml-3">arrow_drop_down</mat-icon>
                     </div>
                     <mat-menu #matStatusMenu="matMenu">
                         <div class="" *ngFor="let status of releaseConfigDetails.status">
-                            <div class="text-xs p-3 hover:bg-gray-100 cursor-pointer hover:font-bold hover:text-blue-800" (click)="tempStatusValue = status.value;">{{status.value}}</div>
+                            <div class="text-xs p-3 uppercase hover:bg-gray-100 cursor-pointer hover:font-bold hover:text-blue-800 hover:border-l-2 hover:border-blue-800" (click)="tempStatusValue = status._id;">{{status.value}}</div>
                         </div>
                     </mat-menu>
                     <div class="ml-4">
@@ -171,7 +171,7 @@
                         <div class="w-full mt-6">
                             <div class="flex justify-between mt-4">
                                 <span class="">Client</span>
-                                <span class="text-gray-500">{{filterRequiredIds('client', releaseDetails.clientId)}}</span>
+                                <span class="text-gray-500 cursor-pointer hover:text-blue-600 hover:underline" [routerLink]="['../../clients', releaseDetails.clientId]">{{filterRequiredIds('client', releaseDetails.clientId)}}</span>
                             </div>
                             <div class="flex justify-between mt-4">
                                 <span class="">Target Release</span>
@@ -182,12 +182,12 @@
                                 <span class=""><span class="px-3 bg-gray-50 border border-gray-200 rounded-full text-xs ml-2 font-bold text-gray-700">{{filterRequiredIds('type', releaseDetails.releaseTypeId)}}</span></span>
                             </div>
                             <div class="flex justify-between mt-4">
-                                <span class="">Release Date</span>
+                                <span class="">Release Closing Date</span>
                                 <span class="text-gray-500">{{releaseDetails.releaseClosingDate | date}}</span>
                             </div>
                             <div class="flex justify-between mt-4">
                                 <span class="">Release Owner</span>
-                                <span class="text-gray-500">{{filterRequiredIds('owner', releaseDetails.releaseOwnerId)}}</span>
+                                <span class="text-gray-500 cursor-pointer hover:text-blue-600 hover:underline"  [routerLink]="['../../admin/members', releaseDetails.releaseOwnerId]">{{filterRequiredIds('owner', releaseDetails.releaseOwnerId)}}</span>
                             </div>
                         </div>
                     </div>

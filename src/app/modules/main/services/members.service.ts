@@ -27,6 +27,14 @@ export class MembersService {
         return this._httpClient.get(`${environment.basePath}/api/members/${memberType}`);
     }
 
+    
+    /*
+        Get Members List based on search payload.
+    */
+    getMembersListBySearch(memberSearchPayload: any): any {
+        return this._httpClient.post(`${environment.basePath}/api/members/search`, memberSearchPayload);
+    }
+
 
     /* 
         Get Members Configurations
