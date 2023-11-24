@@ -69,18 +69,8 @@
                         </div>
                         <div class="w-8/12">
                             <div class="w-full flex">
-                                <!-- Member Type -->
-                                <mat-form-field class="w-2/12" appearance="outline">
-                                    <mat-select placeholder="Member Type" formControlName="memberType">
-                                        <mat-option *ngFor="let type of memberConfig.types" [value]="type.value">
-                                        {{type.value}}
-                                        </mat-option>
-                                    </mat-select>
-                                    <mat-error>Member Type is <strong>Required!</strong></mat-error>
-                                </mat-form-field>
-
                                 <!-- Member Name -->
-                                <mat-form-field class="w-6/12 ml-4" appearance="outline">
+                                <mat-form-field class="w-6/12" appearance="outline">
                                     <input type="text" matInput placeholder="Enter First Name / Last Name / Email" formControlName="searchString" (keyup)="searchMember($event)" required>
                                     <mat-error><strong>Required!</strong></mat-error>
                                 </mat-form-field>
@@ -89,8 +79,8 @@
                             <!-- Display member based on response. -->
                             <div class="w-full">
                                 <div class="w-full flex flex-wrap">
-                                    <div class="w-3/12 border border-blue-200 rounded-lg bg-blue-50 p-2 mr-3" *ngFor="let member of membersList">
-                                        <div class="w-full flex items-center">
+                                    <div class="w-3/12 border border-blue-200 rounded-lg bg-blue-50 mr-3" *ngFor="let member of membersList">
+                                        <div class="w-full flex items-center px-2 py-4">
                                             <div class="">
                                                 <div class="rounded-full border-2 border-gray-300 p-4 bg-blue-600 text-white font-bold text-sm">
                                                     {{member.firstName[0]+member.lastName[0]}}
@@ -98,13 +88,27 @@
                                             </div>
                                             <div class="ml-3">
                                                 <div class="text-gray-800 text-xs font-bold">{{member.firstName + ' ' + member.lastName}}</div>
-                                                <div class="text-gray-400 text-xs">{{member.title}}</div>
+                                                <div class="text-gray-500 text-xs">{{member.title}}</div>
                                             </div>
                                         </div>
-                                        <div class="w-full flex justify-center mt-3">
-                                            <button mat-button color="primary">Add +</button>
+                                        <div class="w-full flex justify-end mt-1 p-2 bg-white rounded-b-lg border-t border-blue-200">
+                                            <button mat-button color="primary" (click)="manageTeamMembers(member._id, 'save')">Add +</button>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+
+                            <!-- Selected Team Members -->
+                            <div class="w-full mt-4" *ngIf="teamMembers.length">
+                                <div class="font-semibold">Selected Team Members</div>
+                                <div class="w-6/12 border border-gray-200 rounded-lg my-2">
+                                    <div class="flex justify-between items-center border-b border-gray-200 p-4" *ngFor="let member of teamMembers">
+                                        <div class="">{{member}}</div>
+                                        <div class="">
+                                            <button mat-button color="warn" class="">Remove</button>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>

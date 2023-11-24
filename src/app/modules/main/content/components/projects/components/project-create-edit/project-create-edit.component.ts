@@ -14,6 +14,7 @@ export class ProjectCreateEditComponent implements OnInit {
   clientsList: any;
   membersList: any;
   memberConfig: any;
+  teamMembers: any[] = [];
 
   constructor(
     private statusService: StatusService,
@@ -26,8 +27,6 @@ export class ProjectCreateEditComponent implements OnInit {
       client: ['', [Validators.required]],
       projectName: ['', [Validators.required]],
       projectSummary: ['', [Validators.required]],
-      projectMembers: ['', [Validators.required]],
-      memberType: ['', [Validators.required]],
       searchString: ['', [Validators.required]]
     });
   }
@@ -79,8 +78,13 @@ export class ProjectCreateEditComponent implements OnInit {
   searchMember(event: any): void {
     console.log(event.target.value);
 
+    if(event.target.value === '') {
+      this.membersList = [];
+      return;
+    }
+
     const membersSearchPayload = {
-      memberType: this.projectCreateEditForm.get('memberType')?.value,
+      memberType: '',
       firstName: this.projectCreateEditForm.get('searchString')?.value,
       lastName: this.projectCreateEditForm.get('searchString')?.value,
       email: this.projectCreateEditForm.get('searchString')?.value,
@@ -92,6 +96,40 @@ export class ProjectCreateEditComponent implements OnInit {
 
       this.membersList = response;
     });
+  }
+
+
+  /*
+    Manage Team Members: Update action.
+  */
+  manageTeamMembers(teamMemberId: any, action: string, index?: any): void {
+
+    if(action == 'save') {
+      this.teamMembers.push(teamMemberId);
+    }
+
+    if(action == 'remove') {
+      this.teamMembers.splice(index, teamMemberId);
+    }
+
+    if(action == 'update') {
+      this.teamMembers.splice(index, teamMemberId);
+    }
+    
+  }
+
+
+  /*
+    Submit Project Details.
+  */
+  submitProjectDetails(): void {
+    const projectDetailsPayload = {
+      projectName: this.projectCreateEditForm.get('projectName')?.value,
+      description: this.projectCreateEditForm.get('projectSummary')?.value,
+      clientId: this.projectCreateEditForm.get('client')?.value,
+      teamMembers: this.teamMembers,
+
+    }
   }
   
 }
