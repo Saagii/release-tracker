@@ -66,4 +66,21 @@ export class ProjectsService {
     deleteProjectConfigMembersLimit(projectMembersLimitPayload: any): any {
         return this._httpClient.put(`${environment.basePath}/api/projectConfig/membersLimit`, projectMembersLimitPayload);
     }
+
+
+    /*
+        Create project details.
+    */
+    createProjectDetails(projectDetailsPayload: any): any {
+        return this._httpClient.post(`${environment.basePath}/api/projects`, projectDetailsPayload);
+    }
+
+
+    /*
+        Get projects list.
+    */
+    getProjectsList(): any {
+        return this._httpClient.get(`${environment.basePath}/api/projects`);
+    }
+
 }

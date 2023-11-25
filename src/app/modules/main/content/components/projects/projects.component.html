@@ -13,48 +13,29 @@
               </div>
             </div>
 
-            <div class="w-full p-3">
-                <table mat-table [dataSource]="projectsList" class="w-full border border-gray-200 rounded-md">
-                  
-                    <!-- Position Column -->
-                    <ng-container matColumnDef="projectName">
-                      <th mat-header-cell *matHeaderCellDef class="text-xs font-bold"> Project </th>
-                      <td mat-cell *matCellDef="let element" class="text-blue-600" [routerLink]="['./', 567]"> {{element.projectName}} </td>
-                    </ng-container>
-                  
-                    <!-- Name Column -->
-                    <ng-container matColumnDef="clientName">
-                      <th mat-header-cell *matHeaderCellDef class="text-xs font-bold"> Client </th>
-                      <td mat-cell *matCellDef="let element" class="text-gray-600"> {{element.clientName}} </td>
-                    </ng-container>
-                  
-                    <!-- Weight Column -->
-                    <ng-container matColumnDef="projectType">
-                      <th mat-header-cell *matHeaderCellDef class="text-xs font-bold"> Project Type </th>
-                      <td mat-cell *matCellDef="let element" class="text-gray-600"> {{element.projectType}} </td>
-                    </ng-container>
-                  
-                    <!-- Symbol Column -->
-                    <ng-container matColumnDef="projectManager">
-                      <th mat-header-cell *matHeaderCellDef class="text-xs font-bold"> Project Manager </th>
-                      <td mat-cell *matCellDef="let element" class="text-gray-600"> {{element.projectManager}} </td>
-                    </ng-container>
+            <div class="w-full border border-gray-200 rounded-md">
+              <!-- Header -->
+              <div class="w-full flex bg-gray-100 font-bold text-xs text-gray-800 py-3 px-4 rounded-t-md">
+                <div class="w-3/12">Project Name</div>
+                <div class="w-3/12">Client</div>
+                <div class="w-3/12">Team Members</div>
+                <div class="w-3/12">Actions</div>
+              </div>
 
-                    <!-- Weight Column -->
-                    <ng-container matColumnDef="totalMembers">
-                      <th mat-header-cell *matHeaderCellDef class="text-xs font-bold"> Total Members </th>
-                      <td mat-cell *matCellDef="let element" class="text-gray-600"> {{element.totalMembers}} <span class="text-xs">Members</span> </td>
-                    </ng-container>
+              <!-- Content -->
+              <div class="w-full flex border-b border-gray-100 p-3 items-center" *ngFor="let project of projectsList">
+                <div class="w-3/12 cursor-pointer hover:text-blue-600" [routerLink]="[project._id]">{{project.projectName}}</div>
+                <div class="w-3/12">{{project.clientId}}</div>
+                <div class="w-3/12">{{project.teamMembers.length}} Members</div>
+                <div class="w-3/12">
+                  <button mat-icon-button>
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                </div>
+              </div>
 
-                    <!-- Weight Column -->
-                    <ng-container matColumnDef="actions">
-                      <th mat-header-cell *matHeaderCellDef class="text-xs font-bold"> Actions </th>
-                      <td mat-cell *matCellDef="let element" class="text-gray-600"> <button mat-icon-button class=""><mat-icon>more_vert</mat-icon></button> </td>
-                    </ng-container>
-                  
-                    <tr mat-header-row *matHeaderRowDef="projectDisplayColumns" class="bg-gray-50 text-gray-500"></tr>
-                    <tr mat-row *matRowDef="let row; columns: projectDisplayColumns;" class="cursor-pointer hover:bg-gray-50"></tr>
-                </table>
+              <!-- Project List not present -->
+              <div class="w-full p-10 text-center italic text-gray-500" *ngIf="!projectsList.length">** Projects Not Added. **</div>
             </div>
         </div>
         

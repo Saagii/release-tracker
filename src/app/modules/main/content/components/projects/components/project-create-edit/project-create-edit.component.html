@@ -30,7 +30,7 @@
                         <div class="w-4/12">
                             <!-- Client -->
                             <mat-form-field class="w-full" appearance="outline">
-                                <mat-select placeholder="Select Client" required>
+                                <mat-select placeholder="Select Client" formControlName="client" required>
                                     <mat-option *ngFor="let client of clientsList" [value]="client._id">
                                       {{client.clientName}}
                                     </mat-option>
@@ -71,28 +71,32 @@
                             <div class="w-full flex">
                                 <!-- Member Name -->
                                 <mat-form-field class="w-6/12" appearance="outline">
-                                    <input type="text" matInput placeholder="Enter First Name / Last Name / Email" formControlName="searchString" (keyup)="searchMember($event)" required>
-                                    <mat-error><strong>Required!</strong></mat-error>
+                                    <input type="text" matInput placeholder="Enter First Name / Last Name / Email" formControlName="searchString" (keyup)="searchMember($event)">
                                 </mat-form-field>
                             </div>
 
                             <!-- Display member based on response. -->
                             <div class="w-full">
                                 <div class="w-full flex flex-wrap">
-                                    <div class="w-3/12 border border-blue-200 rounded-lg bg-blue-50 mr-3" *ngFor="let member of membersList">
-                                        <div class="w-full flex items-center px-2 py-4">
-                                            <div class="">
-                                                <div class="rounded-full border-2 border-gray-300 p-4 bg-blue-600 text-white font-bold text-sm">
-                                                    {{member.firstName[0]+member.lastName[0]}}
+                                    <div class="w-3/12" *ngFor="let member of membersList">
+                                        <div class="border border-blue-200 rounded-lg bg-blue-50 mr-3" [ngClass]="{'bg-green-50 border-green-200' : !filterSelectedMembersFromSearchResults(member._id)}">
+                                            <div class="w-full flex items-center px-2 py-4">
+                                                <div class="">
+                                                    <div class="rounded-full border-2 border-gray-300 p-4 bg-blue-600 text-white font-bold text-sm" [ngClass]="{'bg-green-600' : !filterSelectedMembersFromSearchResults(member._id)}">
+                                                        {{member.firstName[0]+member.lastName[0]}}
+                                                    </div>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <div class="text-gray-800 text-xs font-bold">{{member.firstName + ' ' + member.lastName}}</div>
+                                                    <div class="text-gray-500 text-xs">{{member.title}}</div>
                                                 </div>
                                             </div>
-                                            <div class="ml-3">
-                                                <div class="text-gray-800 text-xs font-bold">{{member.firstName + ' ' + member.lastName}}</div>
-                                                <div class="text-gray-500 text-xs">{{member.title}}</div>
+                                            <div class="w-full flex justify-end mt-1 p-2 bg-white rounded-b-lg border-t border-blue-200" [ngClass]="{'border-green-200' : !filterSelectedMembersFromSearchResults(member._id)}">
+                                                <button mat-button color="primary" (click)="manageTeamMembers(member, 'save')"  *ngIf="filterSelectedMembersFromSearchResults(member._id)">Add +</button>
+                                                <button mat-icon-button class="text-green-600 pointer-events-none" *ngIf="!filterSelectedMembersFromSearchResults(member._id)">
+                                                    <mat-icon>check_circle</mat-icon>
+                                                </button>
                                             </div>
-                                        </div>
-                                        <div class="w-full flex justify-end mt-1 p-2 bg-white rounded-b-lg border-t border-blue-200">
-                                            <button mat-button color="primary" (click)="manageTeamMembers(member._id, 'save')">Add +</button>
                                         </div>
                                     </div>
                                 </div>
@@ -101,11 +105,17 @@
                             <!-- Selected Team Members -->
                             <div class="w-full mt-4" *ngIf="teamMembers.length">
                                 <div class="font-semibold">Selected Team Members</div>
+                                <div class="text-gray-500 text-xs">Total: {{teamMembers.length}} members</div>
                                 <div class="w-6/12 border border-gray-200 rounded-lg my-2">
-                                    <div class="flex justify-between items-center border-b border-gray-200 p-4" *ngFor="let member of teamMembers">
-                                        <div class="">{{member}}</div>
-                                        <div class="">
-                                            <button mat-button color="warn" class="">Remove</button>
+                                    <div class="flex justify-between items-center border-b border-gray-200 p-4" *ngFor="let member of teamMembers; let i = index;">
+                                        <div class="w-10/12">
+                                            <div class="">{{member.firstName + ' ' + member.lastName}}</div>
+                                            <div class="text-gray-500 text-xs">{{member.email}} <span class="mx-1">|</span> {{member.title}}</div>
+                                        </div>
+                                        <div class="w-2/12 flex justify-end items-center">
+                                            <button mat-icon-button color="warn" (click)="manageTeamMembers(member, 'remove', i)" matTooltip="Remove" matTooltipPosition="right">
+                                                <mat-icon>remove_circle_outline</mat-icon>
+                                            </button>
                                         </div>
                                     </div>
                                     
@@ -117,7 +127,7 @@
                     <!-- Action Buttons -->
                     <div class="w-full flex justify-end p-6">
                         <button mat-button class="">Cancel</button>
-                        <button mat-flat-button class="bg-blue-500 text-white" style="margin-left: 3%;">Create Project</button>
+                        <button mat-flat-button class="bg-blue-500 text-white" style="margin-left: 3%;" (click)="submitProjectDetails()">Create Project</button>
                     </div>
                 </form>
                 

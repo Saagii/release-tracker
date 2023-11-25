@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClientsService } from 'src/app/modules/main/services/clients.service';
 import { MembersService } from 'src/app/modules/main/services/members.service';
+import { ProjectsService } from 'src/app/modules/main/services/projects.service';
 import { StatusService } from 'src/app/modules/shared/services/status.service';
 
 @Component({
@@ -20,14 +22,17 @@ export class ProjectCreateEditComponent implements OnInit {
     private statusService: StatusService,
     private fb: FormBuilder,
     private clientsService: ClientsService,
-    private membersService: MembersService
+    private membersService: MembersService,
+    private projectsService: ProjectsService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
   ) {
      // Prepare Sign In Form
      this.projectCreateEditForm = this.fb.group({
       client: ['', [Validators.required]],
       projectName: ['', [Validators.required]],
       projectSummary: ['', [Validators.required]],
-      searchString: ['', [Validators.required]]
+      searchString: ['']
     });
   }
 
@@ -102,20 +107,29 @@ export class ProjectCreateEditComponent implements OnInit {
   /*
     Manage Team Members: Update action.
   */
-  manageTeamMembers(teamMemberId: any, action: string, index?: any): void {
-
-    if(action == 'save') {
-      this.teamMembers.push(teamMemberId);
+  manageTeamMembers(teamMember: any, action: string, index?: any): void {
+    if(action === 'save') {
+      this.teamMembers.push(teamMember);
+      this.membersList = [];
+      this.projectCreateEditForm.get('searchString')?.setValue('');
     }
 
-    if(action == 'remove') {
-      this.teamMembers.splice(index, teamMemberId);
+    if(action === 'remove') {
+      this.membersList = [];
+      this.projectCreateEditForm.get('searchString')?.setValue('');
+      this.teamMembers.splice(index, 1);
     }
+  }
 
-    if(action == 'update') {
-      this.teamMembers.splice(index, teamMemberId);
+
+  /*
+    Filter selected members from search results.
+  */
+  filterSelectedMembersFromSearchResults(memberId: string): boolean {
+    for(const member of this.teamMembers) {
+      if(member._id === memberId) { return false; }
     }
-    
+    return true;
   }
 
 
@@ -123,13 +137,29 @@ export class ProjectCreateEditComponent implements OnInit {
     Submit Project Details.
   */
   submitProjectDetails(): void {
+
+    // Filter Team members id into a list.
+    const teamMembersList = [];
+
+    for(const teamMember of this.teamMembers) {
+      teamMembersList.push(teamMember._id);
+    }
+
     const projectDetailsPayload = {
       projectName: this.projectCreateEditForm.get('projectName')?.value,
       description: this.projectCreateEditForm.get('projectSummary')?.value,
       clientId: this.projectCreateEditForm.get('client')?.value,
-      teamMembers: this.teamMembers,
-
+      teamMembers: teamMembersList,
     }
+
+    console.log(projectDetailsPayload);
+
+    this.projectsService.createProjectDetails(projectDetailsPayload).subscribe((response: any) => {
+      console.log(projectDetailsPayload);
+
+      // Route back to projects list page.
+      this.router.navigate(['../'], {relativeTo: this.activatedRoute});
+    });
   }
   
 }

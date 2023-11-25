@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { StatusService } from 'src/app/modules/shared/services/status.service';
 import { projectsListMockData } from '../../data/projects-list-mock-data';
+import { ProjectsService } from '../../../services/projects.service';
 
 @Component({
   selector: 'app-projects',
@@ -9,15 +10,17 @@ import { projectsListMockData } from '../../data/projects-list-mock-data';
 })
 export class ProjectsComponent implements OnInit {
 
-  projectsList: any = new MatTableDataSource([]);
-  projectDisplayColumns: string[] = ['projectName', 'clientName', 'projectType', 'projectManager', 'totalMembers', 'actions'];
+  projectsList: any;
 
   constructor(
-    private statusService: StatusService
+    private statusService: StatusService,
+    private projectsService: ProjectsService
   ) {}
 
   ngOnInit(): void {
-    this.projectsList.data = projectsListMockData.projects;
+
+    // Get projects list.
+    this.getProjectsList();
   }
 
   /*
@@ -25,6 +28,18 @@ export class ProjectsComponent implements OnInit {
   */
   getStatusStyle(statusValue: string): any {
     return this.statusService.getStatusStyle(statusValue);
+  }
+
+
+  /*
+    Get projects list.
+  */
+  getProjectsList(): void {
+    this.projectsService.getProjectsList().subscribe((projectsList: any) => {
+      console.log(projectsList);
+
+      this.projectsList = projectsList;
+    })
   }
   
 }
