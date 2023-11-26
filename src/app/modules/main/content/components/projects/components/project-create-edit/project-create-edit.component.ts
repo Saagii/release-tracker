@@ -16,6 +16,7 @@ export class ProjectCreateEditComponent implements OnInit {
   clientsList: any;
   membersList: any;
   memberConfig: any;
+  projectConfig: any;
   teamMembers: any[] = [];
 
   constructor(
@@ -43,6 +44,9 @@ export class ProjectCreateEditComponent implements OnInit {
 
     // Get members config.
     this.getMembersConfigurations();
+
+    // Get project config.
+    this.getProjectConfigurations();
   }
 
   /*
@@ -74,6 +78,18 @@ export class ProjectCreateEditComponent implements OnInit {
 
       this.memberConfig = memberConfig;
     });
+  }
+
+
+  /* 
+    Get Project Configurations.
+  */
+  getProjectConfigurations(): void {
+    this.projectsService.getProjectsConfig().subscribe((projectConfig: any) => {
+      console.log(projectConfig);
+
+      this.projectConfig = projectConfig;
+    })
   }
 
 
@@ -145,11 +161,19 @@ export class ProjectCreateEditComponent implements OnInit {
       teamMembersList.push(teamMember._id);
     }
 
+    // Get status Id of 'Initiated' project.
+    const status = this.projectConfig.status.filter((status: any) => {
+      return status.value === 'Initiated';
+    })[0];
+
     const projectDetailsPayload = {
       projectName: this.projectCreateEditForm.get('projectName')?.value,
       description: this.projectCreateEditForm.get('projectSummary')?.value,
       clientId: this.projectCreateEditForm.get('client')?.value,
+      projectManagerId: teamMembersList[0],
       teamMembers: teamMembersList,
+      statusId: status._id,
+      createdOn: new Date()
     }
 
     console.log(projectDetailsPayload);
