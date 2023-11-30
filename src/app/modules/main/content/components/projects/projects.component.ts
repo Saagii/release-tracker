@@ -14,7 +14,7 @@ export class ProjectsComponent implements OnInit {
 
   projectsList: any;
   clientsList: any;
-  membersList: any;
+  projectCount: number = 0;
 
   constructor(
     private statusService: StatusService,
@@ -25,14 +25,8 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // Get projects list.
-    this.getProjectsList();
-
     // Get Clients list.
     this.getClientsList();
-
-    // Get Members list.
-    this.getMembersList();
   }
 
   /*
@@ -51,6 +45,9 @@ export class ProjectsComponent implements OnInit {
       console.log(response);
       
       this.clientsList = response;
+
+      // Get projects list.
+      this.getProjectsList();
     });
   }
 
@@ -63,6 +60,8 @@ export class ProjectsComponent implements OnInit {
       console.log(projectsList);
 
       this.projectsList = projectsList;
+
+      this.getMemberDetails();
     })
   }
 
@@ -70,12 +69,22 @@ export class ProjectsComponent implements OnInit {
   /*
     Get Members List.
   */
-  getMembersList(): void {
-    this.membersService.getMembersList('Internal').subscribe((response: any[]) => {
-      console.log(response);
-      
-      this.membersList = response;
-    });
+  getMemberDetails(): void {
+    if(this.projectCount < this.projectsList.length) {
+      this.membersService.getMemberDetails(this.projectsList[this.projectCount].projectManagerId).subscribe((response: any[]) => {
+        console.log(response);
+
+        this.projectsList[this.projectCount]['projectManagerDetails'] = response;
+        
+        // Count Increment.
+        this.projectCount = this.projectCount + 1;
+
+        // Call method again until count is greater than the projects list length.
+        this.getMemberDetails();
+      });
+    } else {
+      console.log(this.projectsList);
+    }
   }
 
 
@@ -89,15 +98,6 @@ export class ProjectsComponent implements OnInit {
       return this.clientsList.filter((client: any) => {
          return client._id === id;
       })[0].clientName;
-    }
-
-    // Return Owner value.
-    if(type === 'member') {
-      const member = this.membersList.filter((member: any) => {
-         return member._id === id;
-      })[0];
-      console.log(member);
-      return (member.firstName + ' ' + member.lastName);
     }
   }
   
