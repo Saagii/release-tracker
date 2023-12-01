@@ -83,4 +83,12 @@ export class ProjectsService {
         return this._httpClient.get(`${environment.basePath}/api/projects`);
     }
 
+
+    /*
+        Get project details by client Id and project Id.
+    */
+    getProjectDetailsByProjectId(projectId: string): any {
+        return this._httpClient.get(`${environment.basePath}/api/projects/${projectId}`);
+    }
+
 }

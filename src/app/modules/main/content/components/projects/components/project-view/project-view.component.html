@@ -1,193 +1,55 @@
 <div class="w-full px-4">
     <div class="w-full my-2 p-4">
         <!-- Back to projects list Navigation-->
-        <div class="" style="width: fit-content">
-            <a class=""  [routerLink]="['../']">
+        <!-- <div class="" style="width: fit-content">
+            <a class="" >
                 <div class="flex items-center hover:text-blue-500">
                     <mat-icon class="text-base -ml-1 -mr-1">keyboard_arrow_left</mat-icon>Back
                 </div>
             </a>
-        </div>
+        </div> -->
 
-        <!-- Project Content -->
-        <div class="w-full mt-4">
-            <!-- Title -->
-            <div class="w-full flex justify-between items-center">
-                <div class="w-full flex justify-between">
-                    <div class="text-2xl text-gray-700 flex items-center">Project Bazaar</div>
-                    <div class="">
-                        <button mat-stroked-button class="text-gray-600 text-xs">
-                            <mat-icon class="text-sm mt-1 -ml-2">edit</mat-icon> Edit Project
-                        </button>
-                    </div>
+        <!-- Project Details Block -->
+        <div class="w-full mt-2" *ngIf="projectDetails">
+
+            <!-- Title & Project Actions -->
+            <div class="w-full flex justify-between">
+
+                <!-- Title Content -->
+                <div class="w-8/12">
+                    <div class="w-fit font-bold" [routerLink]="['../../clients', projectDetails.clientId]"><span class="text-gray-700 mr-1 cursor-pointer hover:underline" [routerLink]="['../']">Projects ></span><span class="text-blue-600 cursor-pointer hover:underline">{{filterRequiredIds('client', projectDetails.clientId)}}</span></div>
+                    <div class="w-full text-2xl mt-2">{{projectDetails.projectName}}</div>
                 </div>
-            </div>
 
-            <!-- Project View Body -->
-            <div class="w-full flex items-start mt-4">
-               <div class="w-8/12 pr-2">
+                <!-- Project Actions Content -->
+                <div class="w-4/12 flex justify-end items-center">
 
-                    <!-- Summary -->
-                    <div class="w-full">
-                        <div class="w-full p-4 border border-gray-200 rounded-md">
-                            <div class="w-full text-lg text-gray-800">Summary</div>
-                            <div class="w-full text-gray-500 py-2 text-xs">
-                                Bazaar is one of the oldest and largest hypermarket chains of India, housing about 300+ stores in over 120 cities and towns across the country. In February 2022, Reliance Industries took control of over 200 Future group stores and rebranded Big Bazaar as Reliance's Smart Bazaar Stores.
+                    <!-- Project Status -->
+                    <div class="" *ngIf="tempStatusValue !== '' ">
+                        <div mat-flat-button class="select-none cursor-pointer rounded-full px-3 pr-2 py-1 flex items-center text-xs uppercase" [ngClass]="getStatusStyle(filterRequiredIds('status', tempStatusValue))" [matMenuTriggerFor]="matStatusMenu">
+                            {{filterRequiredIds('status', tempStatusValue)}} <mat-icon class="cursor-pointer bg-white rounded-full ml-3">arrow_drop_down</mat-icon>
+                        </div>
+                        <mat-menu #matStatusMenu="matMenu">
+                            <div class="" *ngFor="let status of projectConfig.status">
+                                <div class="text-xs p-3 uppercase hover:bg-gray-100 cursor-pointer hover:font-bold hover:text-blue-800 hover:border-l-2 hover:border-blue-800" (click)="tempStatusValue = status._id;">{{status.value}}</div>
                             </div>
+                        </mat-menu>
+                    </div>
+
+                    <!-- Project Edit -->
+                    <div class="">
+                        <!-- <button mat-icon-button class="!ml-4">
+                            <mat-icon>more_vert</mat-icon>
+                        </button> -->
+                        <div class="ml-4">
+                            <button mat-stroked-button class="text-gray-600 text-xs">
+                                <mat-icon class="text-sm mt-1 -ml-2">edit</mat-icon> Edit Project
+                            </button>
                         </div>
                     </div>
 
-                    <!-- Instance Block -->
-                    <div class="w-full mt-5">
-                        <div class="w-full p-4 border border-gray-200 rounded-md">
-                            <div class="flex justify-between">
-                                <div class="w-full text-lg text-gray-800">Domains</div>
-                                <button mat-icon-button class="">
-                                    <mat-icon class="text-blue-500" matTooltip="Add New Instance">add_circle</mat-icon>
-                                </button>
-                            </div>
-                            <div class="w-full flex justify-center">
-                                <div class="w-full">
-                                    <div class="mb-4 flex justify-between items-end border-b border-gray-100 ">
-                                        <div class="">
-                                            <span class="text-xs text-xs rounded-lg">QA</span>
-                                            <div class="text-blue-500 font-bold pt-1">test.xyz.in</div>
-                                            <div class="text-gray-500 text-xs hover:text-blue-600 cursor-pointer text-gray-400 py-1">Branch: develop</div>
-                                        </div>
-                                        <div class="flex items-start">
-                                            <div class="">
-                                                <div class="text-right">
-                                                    <span class="text-right text-xs px-3 rounded-full" [ngClass]="getStatusStyle('Active')">Active</span>
-                                                </div>
-                                                <div class="pt-1 text-gray-400 text-xs flex content-center"><mat-icon class="text-xs">date_range</mat-icon>Created On 24th March 2023</div>
-                                            </div>
-                                            <div class="ml-4">
-                                                <button mat-icon-button [matMenuTriggerFor]="instanceMenu">
-                                                    <mat-icon class="text-gray-700">more_vert</mat-icon>
-                                                </button>
-                                                <mat-menu #instanceMenu="matMenu">
-                                                    <button mat-menu-item>Edit</button>
-                                                    <button mat-menu-item>Delete</button>
-                                                  </mat-menu>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-4 flex justify-between items-end border-b border-gray-100 ">
-                                        <div class="">
-                                            <span class="text-xs text-xs rounded-lg">UAT</span>
-                                            <div class="text-blue-500 font-bold pt-1">test.xyz.in</div>
-                                            <div class="text-gray-500 text-xs hover:text-blue-600 cursor-pointer text-gray-400 py-1">Branch: develop</div>
-                                        </div>
-                                        <div class="flex items-start">
-                                            <div class="">
-                                                <div class="text-right">
-                                                    <span class="text-right text-xs px-3 rounded-full" [ngClass]="getStatusStyle('Active')">Active</span>
-                                                </div>
-                                                <div class="pt-1 text-gray-400 text-xs flex content-center"><mat-icon class="text-xs">date_range</mat-icon>Created On 24th March 2023</div>
-                                            </div>
-                                            <div class="ml-4">
-                                                <button mat-icon-button [matMenuTriggerFor]="instanceMenu">
-                                                    <mat-icon class="text-gray-700">more_vert</mat-icon>
-                                                </button>
-                                                <mat-menu #instanceMenu="matMenu">
-                                                    <button mat-menu-item>Edit</button>
-                                                    <button mat-menu-item>Delete</button>
-                                                  </mat-menu>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-4 flex justify-between items-end border-b border-gray-100 ">
-                                        <div class="">
-                                            <span class="text-xs text-xs rounded-lg">Dev</span>
-                                            <div class="text-blue-500 font-bold pt-1">test.xyz.in</div>
-                                            <div class="text-gray-500 text-xs hover:text-blue-600 cursor-pointer text-gray-400 py-1">Branch: develop</div>
-                                        </div>
-                                        <div class="flex items-start">
-                                            <div class="">
-                                                <div class="text-right">
-                                                    <span class="text-right text-xs px-3 rounded-full" [ngClass]="getStatusStyle('Active')">Active</span>
-                                                </div>
-                                                <div class="pt-1 text-gray-400 text-xs flex content-center"><mat-icon class="text-xs">date_range</mat-icon>Created On 24th March 2023</div>
-                                            </div>
-                                            <div class="ml-4">
-                                                <button mat-icon-button [matMenuTriggerFor]="instanceMenu">
-                                                    <mat-icon class="text-gray-700">more_vert</mat-icon>
-                                                </button>
-                                                <mat-menu #instanceMenu="matMenu">
-                                                    <button mat-menu-item>Edit</button>
-                                                    <button mat-menu-item>Delete</button>
-                                                  </mat-menu>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- Project Releases -->
-                    <div class="w-full mt-5">
-                        <div class="w-full p-4 border border-gray-200 rounded-md">
-                            <div class="w-full text-lg text-gray-800">Releases</div>
-                            <div class="w-full flex justify-between items-center border-b border-gray-100 mt-4" *ngFor="let release of releaseItems">
-                                <div class="">
-                                    <div class=" text-gray-800">{{release.title}}</div>
-                                    <div class="text-gray-400 text-xs py-2">{{release.tag}}</div>
-                                    <div class="text-gray-400 text-xs">{{release.domain}}</div>
-                                </div>
-                                <div class="flex content-center">
-                                    <div class="">
-                                        <div class="text-right">
-                                            <span class="text-right text-xs px-3 rounded-full" [ngClass]="getStatusStyle(release.status)">{{release.status}}</span>
-                                        </div>
-                                        <div class="mt-1 text-gray-400 text-xs flex content-center"><mat-icon class="text-xs">date_range</mat-icon>Closing On {{release.closeDate}}</div>
-                                    </div>
-                                    <div class="ml-4">
-                                        <button mat-icon-button class="text-gray-600"  [routerLink]="['../../', 'releases', 567]">
-                                            <mat-icon>keyboard_arrow_right</mat-icon>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-               </div>
-               <div class="w-4/12 pl-1">
-                    <div class="w-full p-4 border border-gray-200 rounded-md">
-                        <div class="w-full">
-                            <div class="flex justify-between items-start">
-                                <div class="w-full text-lg text-gray-800">Members</div>
-                                <button mat-icon-button class="">
-                                    <mat-icon class="text-blue-500 text-lg" matTooltip="Add New Member">person_add</mat-icon>
-                                </button>
-                            </div>
-                            <div class="mt-3">
-                                <div class="">Front-End Developers</div>
-                                <span class="text-gray-500 text-xs hover:text-blue-600 cursor-pointer">4 Members</span>
-                            </div>
-                            <div class="mt-6">
-                                <div class="">Back-End Developers</div>
-                                <span class="text-gray-500 text-xs hover:text-blue-600 cursor-pointer">6 Members</span>
-                            </div>
-                            <div class="mt-6">
-                                <div class="">QA</div>
-                                <span class="text-gray-500 text-xs hover:text-blue-600 cursor-pointer">2 Members</span>
-                            </div>
-                            <div class="mt-6">
-                                <div class="">Configurations & Support</div>
-                                <span class="text-gray-500 text-xs hover:text-blue-600 cursor-pointer">2 Members</span>
-                            </div>
-                            <div class="mt-6">
-                                <div class="">Project Manager</div>
-                                <span class="text-gray-500 text-xs hover:text-blue-600 cursor-pointer">Sagar Desai</span>
-                            </div>
-                            <div class="mt-6">
-                                <div class="">Project Lead</div>
-                                <span class="text-gray-500 text-xs hover:text-blue-600 cursor-pointer">Sagar Desai</span>
-                            </div>
-                        </div>
-                    </div>
-               </div>
+                </div>
             </div>
         </div>
     </div>

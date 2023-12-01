@@ -14,6 +14,7 @@ export class ProjectsComponent implements OnInit {
 
   projectsList: any;
   clientsList: any;
+  projectConfig: any;
   projectCount: number = 0;
 
   constructor(
@@ -27,6 +28,9 @@ export class ProjectsComponent implements OnInit {
 
     // Get Clients list.
     this.getClientsList();
+
+    // Get project configurations.
+    this.getProjectConfigurations();
   }
 
   /*
@@ -49,6 +53,18 @@ export class ProjectsComponent implements OnInit {
       // Get projects list.
       this.getProjectsList();
     });
+  }
+
+
+  /* 
+    Get Project Configurations.
+  */
+  getProjectConfigurations(): void {
+    this.projectsService.getProjectsConfig().subscribe((projectConfig: any) => {
+      console.log(projectConfig);
+
+      this.projectConfig = projectConfig;
+    })
   }
 
 
@@ -98,6 +114,13 @@ export class ProjectsComponent implements OnInit {
       return this.clientsList.filter((client: any) => {
          return client._id === id;
       })[0].clientName;
+    }
+
+    // Return project status.
+    if(type === 'status') {
+      return this.projectConfig.status.filter((status: any) => {
+        return status._id === id;
+      })[0].value;
     }
   }
   

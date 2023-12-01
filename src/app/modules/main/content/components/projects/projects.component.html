@@ -13,26 +13,34 @@
               </div>
             </div>
 
-            <div class="w-full border border-gray-200 rounded-md">
+            <div class="w-full border border-gray-200 rounded-md mt-4">
               <!-- Header -->
               <div class="w-full flex bg-gray-100 font-bold text-xs text-gray-800 py-3 px-4 rounded-t-md">
                 <div class="w-3/12">Project Name</div>
-                <div class="w-3/12">Client</div>
-                <div class="w-2/12">Team Members</div>
+                <div class="w-2/12">Client</div>
+                <div class="w-2/12">Total Team Members</div>
                 <div class="w-2/12">Project Manager</div>
-                <div class="w-2/12">Actions</div>
+                <div class="w-2/12">Status</div>
+                <div class="w-1/12">Actions</div>
               </div>
 
               <!-- Content -->
               <div class="w-full flex border-b border-gray-100 p-3 items-center" *ngFor="let project of projectsList">
                 <div class="w-3/12 cursor-pointer hover:text-blue-600" [routerLink]="[project._id]">{{project.projectName}}</div>
-                <div class="w-3/12">{{filterRequiredIds('client', project.clientId)}}</div>
+                <div class="w-2/12">{{filterRequiredIds('client', project.clientId)}}</div>
                 <div class="w-2/12">{{project.teamMembers.length}} <span class="text-xs">Members</span></div>
                 <div class="w-2/12">{{project?.projectManagerDetails ? (project?.projectManagerDetails?.firstName + ' ' + project?.projectManagerDetails.lastName) : ''}}</div>
                 <div class="w-2/12">
-                  <button mat-icon-button>
+                  <span class="text-right text-xs px-3 rounded-full uppercase" [ngClass]="getStatusStyle(filterRequiredIds('status', project.statusId))">{{filterRequiredIds('status', project.statusId)}}</span>
+                </div>
+                <div class="w-1/12">
+                  <button mat-icon-button [matMenuTriggerFor]="menu">
                     <mat-icon>more_vert</mat-icon>
                   </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item>View</button>
+                    <button mat-menu-item>Edit</button>
+                  </mat-menu>
                 </div>
               </div>
 
