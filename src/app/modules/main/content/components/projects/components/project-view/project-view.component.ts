@@ -3,6 +3,7 @@ import { StatusService } from 'src/app/modules/shared/services/status.service';
 import { ProjectsService } from 'src/app/modules/main/services/projects.service';
 import { ActivatedRoute } from '@angular/router';
 import { ClientsService } from 'src/app/modules/main/services/clients.service';
+import { MembersService } from 'src/app/modules/main/services/members.service';
 
 @Component({
   selector: 'app-project-view',
@@ -15,12 +16,15 @@ export class ProjectViewComponent implements OnInit {
   projectConfig: any;
   clientsList: any;
   tempStatusValue: string = '';
+  teamMembersCount: number = 0;
+  teamMembersDetailsList: any = [];
 
   constructor(
     private statusService: StatusService,
     private projectsService: ProjectsService,
     private _activatedRoute: ActivatedRoute,
     private clientsService: ClientsService,
+    private membersService: MembersService
   ) {}
 
   ngOnInit(): void {
@@ -51,8 +55,13 @@ export class ProjectViewComponent implements OnInit {
 
       this.projectDetails = response;
 
+      this.projectDetails.teamMembers.push(this.projectDetails.projectManagerId);
+
       // Set Status
       this.tempStatusValue = this.projectDetails.statusId;
+
+      // Get project team members details.
+      this.getMemberDetails();
     })
   }
 
@@ -84,10 +93,33 @@ export class ProjectViewComponent implements OnInit {
 
 
     /*
+    Get Members List.
+  */
+  getMemberDetails(): void {
+    if(this.teamMembersCount < this.projectDetails.teamMembers.length) {
+      this.membersService.getMemberDetails(this.projectDetails.teamMembers[this.teamMembersCount]).subscribe((response: any) => {
+        console.log(response);
+
+        // Push member details.
+        this.teamMembersDetailsList.push(response);
+        
+        // Count Increment.
+        this.teamMembersCount = this.teamMembersCount + 1;
+
+        // Call method again until count is greater than the projects list length.
+        this.getMemberDetails();
+      });
+    } else {
+      console.log(this.teamMembersDetailsList);
+    }
+  }
+
+
+    /*
     Filter clients, release config IDs.
   */
   filterRequiredIds(type: string, id: string): any {
-
+    
     // Return client name.
     if(type === 'client') {
       return this.clientsList.filter((client: any) => {
@@ -100,6 +132,16 @@ export class ProjectViewComponent implements OnInit {
       return this.projectConfig.status.filter((status: any) => {
         return status._id === id;
       })[0].value;
+    }
+
+    // Return member name.
+    if(type === 'teamMember') {
+      console.log(this.teamMembersDetailsList);
+      const memberDetails = this.teamMembersDetailsList.filter((member: any) => {
+        return member.id === id;
+      })[0];
+
+      return memberDetails.firstName + ' ' + memberDetails.lastName;
     }
   }
   
