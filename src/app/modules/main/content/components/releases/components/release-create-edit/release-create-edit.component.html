@@ -25,24 +25,51 @@
                     <div class="w-full flex justify-start items-start pb-4 border-b border-gray-200">
                         <div class="w-3/12">
                             <div class="w-full text-lg">Client</div>
-                            <div class="w-full text-xs text-gray-500">Select client for the project.</div>
+                            <div class="w-full text-xs text-gray-500">Please choose the client followed by respective project.</div>
                         </div>
                         <div class="w-4/12">
                             <!-- Client -->
                             <mat-form-field class="w-full" appearance="outline">
                                 <mat-label>Select Client</mat-label>
-                                <mat-select placeholder="Select Client" required formControlName="client">
+                                <mat-select placeholder="Select Client" required formControlName="client" (selectionChange)="getClientIdOnSelection($event)">
                                     <mat-option *ngFor="let client of clientsList" [value]="client._id">
                                       {{client.clientName}}
                                     </mat-option>
                                 </mat-select>
                                 <mat-error>Client is <strong>Required!</strong></mat-error>
                             </mat-form-field>
+
+                            <!-- Render if projects are not available for selected client -->
+                            <div class="w-full mt-4" *ngIf="selectedClientId && !projectsList.length">
+                                <div class="w-full flex items-center border border-red-200 bg-red-50 text-red-500 rounded-lg p-4 font-bold">
+                                    <mat-icon class="mr-2">info</mat-icon> Note: <span class="font-normal ml-2">Projects are currently not available for selected client.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Selection -->
+                    <div class="w-full flex justify-start items-start mt-10 pb-4 border-b border-gray-200" *ngIf="projectsList.length">
+                        <div class="w-3/12">
+                            <div class="w-full text-lg">Project</div>
+                            <div class="w-full text-xs text-gray-500">Select project against which release has to be created.</div>
+                        </div>
+                        <div class="w-4/12">
+                            <!-- Project -->
+                            <mat-form-field class="w-full" appearance="outline">
+                                <mat-label>Select Project</mat-label>
+                                <mat-select placeholder="Select Project" required formControlName="project" (selectionChange)="getProjectIdOnSelection($event)">
+                                    <mat-option *ngFor="let project of projectsList" [value]="project._id">
+                                      {{project.projectName}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>Project is <strong>Required!</strong></mat-error>
+                            </mat-form-field>
                         </div>
                     </div>
 
                     <!-- Release Details -->
-                    <div class="w-full flex justify-start items-start mt-10 pb-4 border-b border-gray-200">
+                    <div class="w-full flex justify-start items-start mt-10 pb-4 border-b border-gray-200" *ngIf="isProjectIdSelected && projectsList.length">
                         <div class="w-3/12">
                             <div class="w-full text-lg">Release Details</div>
                             <div class="w-full text-xs text-gray-500">Enter all the required details and initiate the release. </div>

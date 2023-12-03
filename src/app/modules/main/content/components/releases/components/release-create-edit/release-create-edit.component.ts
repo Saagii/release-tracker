@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSelectChange } from '@angular/material/select';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { ClientsService } from 'src/app/modules/main/services/clients.service';
 import { MembersService } from 'src/app/modules/main/services/members.service';
+import { ProjectsService } from 'src/app/modules/main/services/projects.service';
 import { ReleasesService } from 'src/app/modules/main/services/releases.service';
 import { StatusService } from 'src/app/modules/shared/services/status.service';
 
@@ -18,7 +20,9 @@ export class ReleaseCreateEditComponent implements OnInit {
     membersList: any;
     releaseConfigDetails: any;
     memberId: any;
-
+    selectedClientId: string = '';
+    projectsList: any = [];
+    isProjectIdSelected: boolean = false;
 
   constructor(
     private statusService: StatusService,
@@ -27,12 +31,14 @@ export class ReleaseCreateEditComponent implements OnInit {
     private releaseService: ReleasesService,
     private membersService: MembersService,
     private activatedRoute: ActivatedRoute,
+    private projectsService: ProjectsService,
     private authService: AuthService,
     private router: Router,
   ) {
      // Prepare Sign In Form
      this.releaseCreateEditForm = this.fb.group({
       client: [null, [Validators.required]],
+      project: [null, [Validators.required]],
       releaseName: [null, [Validators.required]],
       releaseTitle: [null, [Validators.required]],
       releaseType: [null, [Validators.required]],
@@ -100,6 +106,40 @@ export class ReleaseCreateEditComponent implements OnInit {
       console.log(membersList);
 
       this.membersList = membersList;
+    });
+  }
+
+
+  /*
+    Get client id on selection.
+  */
+  getClientIdOnSelection(event: MatSelectChange): void {
+    console.log(event);
+
+    this.selectedClientId = event.value;
+
+    this.getProjectsListByClientId(this.selectedClientId);
+  }
+
+
+  /*
+    Get project id on selection.
+  */
+  getProjectIdOnSelection(event: MatSelectChange): void {
+    console.log(event);
+
+    this.isProjectIdSelected = true;
+  }
+
+
+  /*
+    Get project list based on the client selection.
+  */
+  getProjectsListByClientId(clientId: string): void {
+    this.projectsService.getProjectDetailsByClientId(clientId).subscribe((projectsList: any) => {
+      console.log(projectsList);
+
+      this.projectsList = projectsList;
     });
   }
 
