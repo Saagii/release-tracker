@@ -1,23 +1,15 @@
 <div class="w-full px-4">
     <div class="w-full my-2 p-4">
-        <!-- Back to projects list Navigation-->
-        <div class="" style="width: fit-content">
-            <a class="" >
-                <div class="flex items-center hover:text-blue-500 cursor-pointer" [routerLink]="['../']">
-                    <mat-icon class="text-base -ml-1 -mr-1">keyboard_arrow_left</mat-icon>Back
-                </div>
-            </a>
-        </div>
 
         <!-- Project Details Block -->
-        <div class="w-full mt-4" *ngIf="projectDetails">
+        <div class="w-full mt-2" *ngIf="projectDetails">
 
             <!-- Title & Project Actions -->
             <div class="w-full flex justify-between">
 
                 <!-- Title Content -->
                 <div class="w-8/12">
-                    <div class="w-fit font-bold" [routerLink]="['../../clients', projectDetails.clientId]"><span class="text-blue-600 cursor-pointer hover:underline">{{filterRequiredIds('client', projectDetails.clientId)}}</span></div>
+                    <div class="w-fit font-bold" [routerLink]="['../']"><span class="text-blue-600 cursor-pointer uppercase hover:underline">Projects</span></div>
                     <div class="w-full text-2xl mt-1">{{projectDetails.projectName}}</div>
                 </div>
 
@@ -61,6 +53,12 @@
                 <!-- Basic Details Content -->
                 <div class="w-full flex flex-wrap justify-between mt-4">
 
+                    <!-- Project Description -->
+                    <div class="w-full mb-8">
+                        <div class="text-xs uppercase text-gray-600">Project Description</div>
+                        <div class="mt-1">{{projectDetails.description}}</div>
+                    </div>
+
                     <!-- Project Name -->
                     <div class="w-3/12">
                         <div class="text-xs uppercase text-gray-600">Project Name</div>
@@ -89,12 +87,6 @@
                     <div class="w-2/12">
                         <div class="text-xs uppercase text-gray-600">Created By</div>
                         <div class="mt-1 hover:underline hover:text-blue-600 cursor-pointer w-fit" *ngIf="teamMembersDetailsList.length === projectDetails.teamMembers.length" [routerLink]="['../../admin/members', projectDetails.createdById]">{{filterRequiredIds('teamMember', projectDetails.createdById)}}</div>
-                    </div>
-
-                    <!-- Project Name -->
-                    <div class="w-full mt-8">
-                        <div class="text-xs uppercase text-gray-600">Project Description</div>
-                        <div class="mt-1">{{projectDetails.description}}</div>
                     </div>
                 </div>
             </div>

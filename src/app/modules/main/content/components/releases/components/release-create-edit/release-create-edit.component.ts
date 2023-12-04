@@ -102,7 +102,7 @@ export class ReleaseCreateEditComponent implements OnInit {
     Get members list.
   */
   getMembersList(): any {
-    this.membersService.getMembersList('Internal').subscribe((membersList: any) => {
+    this.membersService.getMembersListByType('Internal').subscribe((membersList: any) => {
       console.log(membersList);
 
       this.membersList = membersList;
@@ -152,6 +152,7 @@ export class ReleaseCreateEditComponent implements OnInit {
     // Release details payload.
     const releaseDetailsPayload = {
       clientId: this.releaseCreateEditForm.get('client')?.value,
+      projectId: this.releaseCreateEditForm.get('project')?.value,
       releaseTitle: this.releaseCreateEditForm.get('releaseTitle')?.value,
       releaseTypeId: this.releaseCreateEditForm.get('releaseType')?.value,
       releaseTargetId: this.releaseCreateEditForm.get('releaseTarget')?.value,
@@ -168,7 +169,7 @@ export class ReleaseCreateEditComponent implements OnInit {
     this.releaseService.createReleaseDetails(releaseDetailsPayload).subscribe((response: any) => {
       console.log(response);
 
-      this.router.navigate(['../releases'], {relativeTo: this.activatedRoute});
+      this.router.navigate(['../', response], {relativeTo: this.activatedRoute});
     });
   }
   

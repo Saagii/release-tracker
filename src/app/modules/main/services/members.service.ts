@@ -21,10 +21,18 @@ export class MembersService {
 
 
     /*
-        Get Members List based on type.
+        Get Members List
     */
     getMembersList(memberType: string): any {
         return this._httpClient.get(`${environment.basePath}/api/members/${memberType}`);
+    }
+
+
+    /*
+        Get Members List based on type.
+    */
+    getMembersListByType(memberType: string): any {
+        return this._httpClient.get(`${environment.basePath}/api/members/type/${memberType}`);
     }
 
     

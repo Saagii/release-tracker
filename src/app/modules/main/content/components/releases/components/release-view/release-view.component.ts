@@ -88,7 +88,7 @@ export class ReleaseViewComponent implements OnInit {
     Get Members List.
   */
   getMembersList(): void {
-    this.membersService.getMembersList('Internal').subscribe((response: any[]) => {
+    this.membersService.getMembersListByType('Internal').subscribe((response: any[]) => {
       console.log(response);
       
       this.membersList = response;
@@ -140,7 +140,7 @@ export class ReleaseViewComponent implements OnInit {
     }
 
     // Return Owner value.
-    if(type === 'owner') {
+    if(type === 'owner' || type === 'member') {
       const member = this.membersList.filter((member: any) => {
          return member._id === id;
       })[0];

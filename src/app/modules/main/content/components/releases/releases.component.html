@@ -38,6 +38,12 @@
                     </div>
                 </div>
 
+                <!-- No Release data illustration -->
+                <div class="w-full flex flex-wrap justify-center my-6" *ngIf="!releaseItems?.length">
+                    <img src="assets/illustrations/empty.png" class="w-4/12">
+                    <div class="w-full py-4 text-gray-600 text-center">** No release items available. **</div>
+                </div>
+
                 <!-- Loader -->
                 <div class="w-full flex justify-center py-28" *ngIf="!releaseItems">
                     <div class="flex items-center">

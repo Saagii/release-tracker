@@ -1,195 +1,86 @@
 <div class="w-full px-4">
     <div class="w-full my-2 p-4" *ngIf="releaseDetails">
-        <!-- Back to releases list Navigation-->
-        <div class="" style="width: fit-content">
-            <a class=""  [routerLink]="['../']">
-                <div class="flex items-center hover:text-blue-500">
-                    <mat-icon class="text-base -ml-1 -mr-1">keyboard_arrow_left</mat-icon>Back
-                </div>
-            </a>
-        </div>
 
         <!-- Release Content -->
-        <div class="w-full mt-4">
-            <!-- Title -->
-            <div class="w-full flex justify-between items-center">
-                <div class="">
-                    <!-- <span class="cursor-pointer text-blue-600">{{filterRequiredIds('client', releaseDetails.clientId)}} > Project Name</span> -->
-                    <div class="text-2xl text-gray-700 flex items-center">Release Version 1.0</div>
+        <div class="w-full mt-2">
+
+            <!-- Title & Release Actions -->
+            <div class="w-full flex justify-between">
+
+                <!-- Title Content -->
+                <div class="w-8/12">
+                    <div class="w-fit font-bold" [routerLink]="['../']"><span class="text-blue-600 cursor-pointer uppercase hover:underline">Releases</span></div>
+                    <div class="w-full text-2xl mt-1">{{releaseDetails.releaseTitle}}</div>
                 </div>
-                <div class="flex">
-                    <div mat-flat-button class="select-none cursor-pointer rounded-full px-3 pr-2 py-1 flex items-center text-xs uppercase" [ngClass]="getStatusStyle(filterRequiredIds('status', tempStatusValue))" [matMenuTriggerFor]="matStatusMenu">
-                        {{filterRequiredIds('status', tempStatusValue)}} <mat-icon class="cursor-pointer bg-white rounded-full ml-3">arrow_drop_down</mat-icon>
-                    </div>
-                    <mat-menu #matStatusMenu="matMenu">
-                        <div class="" *ngFor="let status of releaseConfigDetails.status">
-                            <div class="text-xs p-3 uppercase hover:bg-gray-100 cursor-pointer hover:font-bold hover:text-blue-800 hover:border-l-2 hover:border-blue-800" (click)="tempStatusValue = status._id;">{{status.value}}</div>
+
+                <!-- Release Actions Content -->
+                <div class="w-4/12 flex justify-end items-center">
+
+                    <!-- Release Status -->
+                    <div class="" *ngIf="tempStatusValue !== '' ">
+                        <div mat-flat-button class="select-none cursor-pointer rounded-full px-3 pr-2 py-1 flex items-center text-xs uppercase" [ngClass]="getStatusStyle(filterRequiredIds('status', tempStatusValue))" [matMenuTriggerFor]="matStatusMenu">
+                            {{filterRequiredIds('status', tempStatusValue)}} <mat-icon class="cursor-pointer bg-white rounded-full ml-3">arrow_drop_down</mat-icon>
                         </div>
-                    </mat-menu>
-                    <div class="ml-4">
-                        <button mat-stroked-button class="text-gray-600 text-xs">
-                            <mat-icon class="text-sm mt-1 -ml-2">edit</mat-icon> Edit Release
-                        </button>
+                        <mat-menu #matStatusMenu="matMenu">
+                            <div class="" *ngFor="let status of releaseConfigDetails.status">
+                                <div class="text-xs p-3 uppercase hover:bg-gray-100 cursor-pointer hover:font-bold hover:text-blue-800 hover:border-l-2 hover:border-blue-800" (click)="tempStatusValue = status._id;">{{status.value}}</div>
+                            </div>
+                        </mat-menu>
                     </div>
+
+                    <!-- Release Edit -->
+                    <div class="">
+                        <!-- <button mat-icon-button class="!ml-4">
+                            <mat-icon>more_vert</mat-icon>
+                        </button> -->
+                        <div class="ml-4">
+                            <button mat-stroked-button class="text-gray-600 text-xs">
+                                <mat-icon class="text-sm mt-1 -ml-2">edit</mat-icon> Edit Release
+                            </button>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
 
-            <!-- Release Content -->
-            <div class="w-full flex items-start mt-4">
-                <div class="w-9/12 border border-gray-200 rounded-md ">
+            <!-- Release Basic Details Content -->
+            <div class="w-full mt-4 border border-gray-200 rounded-lg p-4">
 
-                    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
-                        <mat-tab label="Objectives">
-                            <!-- Release Objective -->
-                            <div class="w-full p-4">
-                                <div class="w-full text-gray-700">
-                                    <div class="text-lg">Release Objectives</div>
-                                    <div class="w-full text-xs text-gray-400">Delivering the items achived under version release.</div>
-                                    <div class="w-full px-4 py-2 mt-4">
-                                        <ul class="list-decimal">
-                                            <li class="py-2">To Enable user permission on the pages.</li>
-                                            <li class="py-2">Have complete quality checks, in terms of permformance and scalability.</li>
-                                            <li class="py-2">Fix all the tasks related bugs.</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </mat-tab>
+                <!-- Title -->
+                <div class="w-full text-lg">Release basic details</div>
 
-                        <mat-tab label="Feature & Enhancements">
-                            <!-- Version Release Updates -->
-                            <div class="w-full p-4">
-                                <div class="w-full text-gray-700">
-                                    <div class="text-lg">Features & Enhancements</div>
-                                    <div class="w-full text-xs text-gray-400">Version Release associated with new development of features and enhancements.</div>
-                                    <div class="w-full mt-4 border border-gray-200 rounded-md">
-                                        <div class="w-full flex justify-between text-xs font-bold text-gray-600 border-b border-gray-200 py-3 px-4">
-                                            <div class="w-1/12">No.</div>
-                                            <div class="w-10/12">Items</div>
-                                            <div class="w-1/12">JIRA Link</div>
-                                        </div>
-                                        <div class="w-full flex justify-between items-center p-4 hover:bg-gray-100 cursor-pointer" *ngFor="let item of [1,2,3,4,5,6,7,8]; let i=index;">
-                                            <div class="w-1/12">{{i+1}}</div>
-                                            <div class="w-10/12">Search Feature added to search loan application and navigate to respective page.</div>
-                                            <div class="w-1/12">
-                                                <button mat-icon-button class="text-blue-500">
-                                                    <mat-icon>link</mat-icon>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </mat-tab>
+                <!-- Basic Details Content -->
+                <div class="w-full flex flex-wrap justify-between mt-4">
 
-                        <mat-tab label="Bugs / Deferred">
-                            <!-- Version Release Updates -->
-                            <div class="w-full p-4">
-                                <div class="w-full text-gray-700">
-                                    <div class="text-lg">Bug Fixes / Deferred Items</div>
-                                    <div class="w-full text-xs text-gray-400">Version Release associated with bug fixes or deferred items.</div>
-                                    <div class="w-full mt-4 border border-gray-200 rounded-md">
-                                        <div class="w-full flex justify-between text-xs font-bold text-gray-600 border-b border-gray-200 py-3 px-4">
-                                            <div class="w-1/12">No.</div>
-                                            <div class="w-10/12">Items</div>
-                                            <div class="w-1/12">JIRA Link</div>
-                                        </div>
-                                        <div class="w-full flex justify-between items-center p-4 hover:bg-gray-100 cursor-pointer" *ngFor="let item of [1,2,3,4,5,6,7,8]; let i=index;">
-                                            <div class="w-1/12">{{i+1}}</div>
-                                            <div class="w-10/12">Fixed bugs on page navigations.</div>
-                                            <div class="w-1/12">
-                                                <button mat-icon-button class="text-blue-500">
-                                                    <mat-icon>link</mat-icon>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </mat-tab>
+                    <!-- Client -->
+                    <div class="w-2/12">
+                        <div class="text-xs uppercase text-gray-600">Client</div>
+                        <div class="mt-1 hover:underline hover:text-blue-600 cursor-pointer w-fit" [routerLink]="['../../admin/members', releaseDetails.clientId]">{{filterRequiredIds('client', releaseDetails.clientId)}}</div>
+                    </div>
 
-                        <mat-tab label="Sign Off Updates">
-                            <!-- Release Sign Off Updates -->
-                            <div class="w-full p-4">
-                                <!-- Title -->
-                                <div class="w-full text-lg px-2 text-gray-800">Sign Off Updates</div>
-                                <div class="w-full text-xs px-2 text-gray-400">Version Release Sign off details</div>
+                    <!-- Release Manager -->
+                    <div class="w-2/12">
+                        <div class="text-xs uppercase text-gray-600">Release Owner</div>
+                        <div class="mt-1 hover:underline hover:text-blue-600 cursor-pointer w-fit" [routerLink]="['../../admin/members', releaseDetails.releaseOwnerId]">{{filterRequiredIds('member', releaseDetails.releaseOwnerId)}}</div>
+                    </div>
 
-                                <!-- Sign Off Conent -->
-                                <div class="w-full border border-gray-200 rounded-md mt-4">
-                                    <div class="w-full flex justify-between p-4 border-b border-gray-200">
-                                        <div class="w-3/12 text-gray-600">Sign Off Date</div>
-                                        <div class="w-8/12">31st March 2023</div>
-                                    </div>
-                                    <div class="w-full flex justify-between p-4 border-b border-gray-200">
-                                        <div class="w-3/12 text-gray-600">Sign Off By</div>
-                                        <div class="w-8/12">Client Name</div>
-                                    </div>
-                                    <div class="w-full flex justify-between p-4 border-b border-gray-200">
-                                        <div class="w-3/12 text-gray-600">Sign Off Mode</div>
-                                        <div class="w-8/12">Email</div>
-                                    </div>
-                                    <div class="w-full flex justify-between p-4 border-b border-gray-200">
-                                        <div class="w-3/12 text-gray-600">Remarks</div>
-                                        <div class="w-8/12"> -- </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </mat-tab>
+                    <!-- Create On -->
+                    <div class="w-2/12">
+                        <div class="text-xs uppercase text-gray-600">Created On</div>
+                        <div class="mt-1">{{releaseDetails.releaseCreatedOnDate | date:'medium'}}</div>
+                    </div>
 
-                        <mat-tab label="Release Notes">
-                            <!-- Release Notes -->
-                            <div class="w-full p-4">
-                                <!-- Title -->
-                                <div class="w-full text-lg px-2 text-gray-800">Release Notes</div>
-                                <div class="w-full text-xs px-2 text-gray-400">Notes associated with version release.</div>
+                    <!-- Closing On -->
+                    <div class="w-2/12">
+                        <div class="text-xs uppercase text-gray-600">Closing On</div>
+                        <div class="mt-1">{{releaseDetails.releaseClosingDate | date}}</div>
+                    </div>
 
-                                <!-- Notes List -->
-                                <div class="w-full py-4 px-2">
-                                    <div class="p-3 border border-gray-200 rounded-lg bg-gray-50 mb-3" *ngFor="let note of releaseNotes">
-                                        <div class="font-bold text-xs">{{note.title}}</div>
-                                        <div class="py-4 text-gray-400 text-xs">{{note.description}}</div>
-                                        <div class="flex justify-between">
-                                            <span class="text-gray-400 text-xs">{{note.createdDate}}</span>
-                                            <span class="text-gray-400 text-xs">{{note.createdBy}}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                        </mat-tab>
-                    </mat-tab-group>
-
-                    
-
-                    
-                </div>
-
-                <div class="w-3/12 pl-2">
-                    <div class="w-full border border-gray-200 rounded-md p-3">
-                        <div class="text-base">Basic Details</div>
-                        <div class="w-full mt-6">
-                            <div class="flex justify-between mt-4">
-                                <span class="">Client</span>
-                                <span class="text-gray-500 cursor-pointer hover:text-blue-600 hover:underline" [routerLink]="['../../clients', releaseDetails.clientId]">{{filterRequiredIds('client', releaseDetails.clientId)}}</span>
-                            </div>
-                            <div class="flex justify-between mt-4">
-                                <span class="">Target Release</span>
-                                <span class="text-gray-500">{{filterRequiredIds('target', releaseDetails.releaseTargetId)}}</span>
-                            </div>
-                            <div class="flex justify-between mt-4">
-                                <span class="">Release Type</span>
-                                <span class=""><span class="px-3 bg-gray-50 border border-gray-200 rounded-full text-xs ml-2 font-bold text-gray-700">{{filterRequiredIds('type', releaseDetails.releaseTypeId)}}</span></span>
-                            </div>
-                            <div class="flex justify-between mt-4">
-                                <span class="">Release Closing Date</span>
-                                <span class="text-gray-500">{{releaseDetails.releaseClosingDate | date}}</span>
-                            </div>
-                            <div class="flex justify-between mt-4">
-                                <span class="">Release Owner</span>
-                                <span class="text-gray-500 cursor-pointer hover:text-blue-600 hover:underline"  [routerLink]="['../../admin/members', releaseDetails.releaseOwnerId]">{{filterRequiredIds('owner', releaseDetails.releaseOwnerId)}}</span>
-                            </div>
-                        </div>
+                    <!-- Create By -->
+                    <div class="w-2/12">
+                        <div class="text-xs uppercase text-gray-600">Created By</div>
+                        <div class="mt-1 hover:underline hover:text-blue-600 cursor-pointer w-fit" [routerLink]="['../../admin/members', releaseDetails.releaseCreatedById]">{{filterRequiredIds('member', releaseDetails.releaseCreatedById)}}</div>
                     </div>
                 </div>
             </div>
