@@ -170,6 +170,8 @@ export class ReleaseCreateEditComponent implements OnInit {
       console.log(response);
 
       this.router.navigate(['../', response], {relativeTo: this.activatedRoute});
+
+      window.scrollTo(0, 0);
     });
   }
   
