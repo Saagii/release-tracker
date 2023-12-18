@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ReleasesService } from 'src/app/modules/main/services/releases.service';
 import { ClientsService } from 'src/app/modules/main/services/clients.service';
 import { MembersService } from 'src/app/modules/main/services/members.service';
+import { ProjectsService } from 'src/app/modules/main/services/projects.service';
 
 @Component({
   selector: 'app-release-view',
@@ -21,13 +22,15 @@ export class ReleaseViewComponent implements OnInit {
   clientsList: any;
   releaseConfigDetails: any;
   membersList: any;
+  projectDetails: any;
 
   constructor(
     private statusService: StatusService,
     private _activatedRoute: ActivatedRoute,
     private releasesService: ReleasesService,
     private clientsService: ClientsService,
-    private membersService: MembersService
+    private membersService: MembersService,
+    private projectsService: ProjectsService,
   ) {}
 
   ngOnInit(): void {
@@ -108,8 +111,23 @@ export class ReleaseViewComponent implements OnInit {
 
         // Set Status
         this.tempStatusValue = this.releaseDetails.releaseStatusId;
+
+        // Get Project Details by project Id.
+        this.getProjectDetailsByProjectId(this.releaseDetails.projectId);
       }, 500);
     });
+  }
+
+
+  /*
+    Get project details by project Id.
+  */
+  getProjectDetailsByProjectId(projectId: string): void {
+    this.projectsService.getProjectDetailsByProjectId(projectId).subscribe((response: any) => {
+      console.log(response);
+
+      this.projectDetails = response;
+    })
   }
 
 
