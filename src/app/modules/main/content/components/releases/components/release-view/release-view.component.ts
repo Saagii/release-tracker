@@ -7,6 +7,7 @@ import { ReleasesService } from 'src/app/modules/main/services/releases.service'
 import { ClientsService } from 'src/app/modules/main/services/clients.service';
 import { MembersService } from 'src/app/modules/main/services/members.service';
 import { ProjectsService } from 'src/app/modules/main/services/projects.service';
+import { releaseAdvancedDetailsMenu } from '../../data/release-advanced-details-menu';
 
 @Component({
   selector: 'app-release-view',
@@ -23,6 +24,7 @@ export class ReleaseViewComponent implements OnInit {
   releaseConfigDetails: any;
   membersList: any;
   projectDetails: any;
+  advancedDetailsMenu = releaseAdvancedDetailsMenu;
 
   constructor(
     private statusService: StatusService,
