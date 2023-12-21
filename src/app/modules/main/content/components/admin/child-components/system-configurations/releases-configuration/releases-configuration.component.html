@@ -2,7 +2,22 @@
 
     <!-- Title -->
     <div class="w-full">
-        <div class="text-xl">Releases Configuration</div>
+        <div class="text-xl px-2">Releases Configuration</div>
+    </div>
+
+    <!-- Configuration block -->
+    <div class="w-full flex flex-wrap justify-start">
+        <div class="w-6/12 p-2" *ngFor="let variant of releaseVariants.releases">
+            <div class="w-full border border-gray-200 rounded-lg p-4">
+                <div class="text-xs text-gray-600">{{variant.category}}</div>
+                <div class="text-lg mt-2">{{variant.title}}</div>
+                <div class="w-full flex justify-end mt-4">
+                    <button mat-icon-button class="" color="primary">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Release Types Config Content -->

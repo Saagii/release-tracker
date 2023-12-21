@@ -4,12 +4,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { ReleasesService } from 'src/app/modules/main/services/releases.service';
 import { DialogSharedComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
 import { StatusService } from 'src/app/modules/shared/services/status.service';
+import { systemConfigurationsVariants } from '../../../data/system-configurations-variants';
 
 @Component({
   selector: 'app-releases-configuration',
   templateUrl: './releases-configuration.component.html'
 })
 export class ReleasesConfigurationComponent implements OnInit {
+
+  releaseVariants = systemConfigurationsVariants;
 
   releaseConfig: any;
   enableTargetEditForm: boolean = false;
