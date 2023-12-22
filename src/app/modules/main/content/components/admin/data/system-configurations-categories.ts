@@ -1,32 +1,32 @@
-export const systemConfigurationsVariants = {
+export const systemConfigurationsCategories = {
     releases: [
         {
             title: 'Types, Targets, Status, Priority',
-            category: 'BASIC'
+            type: 'BASIC'
         },
         {
             title: 'Compatibility, Usablility, Localization',
-            category: 'BASIC'
+            type: 'BASIC'
         },
         {
             title: 'Objectives, Enhancements, Defects',
-            category: 'CORE'
+            type: 'CORE'
         },
         {
             title: 'Performance, Deployment',
-            category: 'STRATEGY'
+            type: 'STRATEGY'
         },
         {
             title: 'Version Control, Compilance, Security',
-            category: 'CORE'
+            type: 'CORE'
         },
         {
             title: 'Rollback Plan, User Support',
-            category: 'STRATEGY'
+            type: 'STRATEGY'
         },
         {
-            title: 'Sign-off',
-            category: 'CORE'
+            title: 'Release Sign-off',
+            type: 'CORE'
         }
     ],
     projects: [],
