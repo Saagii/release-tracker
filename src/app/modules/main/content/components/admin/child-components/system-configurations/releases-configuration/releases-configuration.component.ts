@@ -14,6 +14,7 @@ export class ReleasesConfigurationComponent implements OnInit {
 
   releaseCategories = systemConfigurationsCategories;
   activeReleaseCategory: string = '';
+  activeComponent: any;
 
   releaseConfig: any;
   enableTargetEditForm: boolean = false;
@@ -68,8 +69,6 @@ export class ReleasesConfigurationComponent implements OnInit {
       console.log(releaseConfig);
 
       this.releaseConfig = releaseConfig;
-
-      this.releaseConfigTargetForm.get('releaseTarget')?.setValue(releaseConfig.membersLimit);
     });
   }
 

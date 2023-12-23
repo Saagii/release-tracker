@@ -22,6 +22,7 @@ import { ClientsConfigurationComponent } from './content/components/admin/child-
 import { ProjectsConfigurationComponent } from './content/components/admin/child-components/system-configurations/projects-configuration/projects-configuration.component';
 import { ReleasesConfigurationComponent } from './content/components/admin/child-components/system-configurations/releases-configuration/releases-configuration.component';
 import { DomainsConfigurationComponent } from './content/components/admin/child-components/system-configurations/domains-configuration/domains-configuration.component';
+import { ReleaseConfigBasicCategoryComponent } from './content/components/admin/child-components/system-configurations/releases-configuration/categories/basic/basic.component';
 
 
 
@@ -46,7 +47,8 @@ import { DomainsConfigurationComponent } from './content/components/admin/child-
     ClientsConfigurationComponent,
     ProjectsConfigurationComponent,
     ReleasesConfigurationComponent,
-    DomainsConfigurationComponent
+    DomainsConfigurationComponent,
+    ReleaseConfigBasicCategoryComponent
   ],
   imports: [
     CommonModule,
@@ -73,7 +75,8 @@ import { DomainsConfigurationComponent } from './content/components/admin/child-
     ClientsConfigurationComponent,
     ProjectsConfigurationComponent,
     ReleasesConfigurationComponent,
-    DomainsConfigurationComponent
+    DomainsConfigurationComponent,
+    ReleaseConfigBasicCategoryComponent
   ]
 })
 export class MainModule { }

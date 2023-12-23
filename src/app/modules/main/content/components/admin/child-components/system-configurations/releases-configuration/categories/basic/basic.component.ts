@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ReleasesService } from 'src/app/modules/main/services/releases.service';
 import { StatusService } from 'src/app/modules/shared/services/status.service';
 
 @Component({
@@ -7,11 +9,38 @@ import { StatusService } from 'src/app/modules/shared/services/status.service';
 })
 export class ReleaseConfigBasicCategoryComponent implements OnInit {
 
+  releaseConfigBasicForm: FormGroup | any;
+  releaseConfig: any;
+
   constructor(
-    private statusService: StatusService
+    private statusService: StatusService,
+    private releaseService: ReleasesService,
+    private fb: FormBuilder,
   ) {}
 
   ngOnInit(): void {
+
+    // Set releaseConfigBasicForm.
+    this.setReleaseConfigBasicForm();
+
+    // Get Releases Configuration Details.
+    this.getReleasesConfigurations();
+  }
+
+
+  /*
+    Set Release config basic category form.
+  */
+  setReleaseConfigBasicForm(): void {
+    this.releaseConfigBasicForm = this.fb.group({
+      types: [''],
+      targets: [''],
+      status: [''],
+      priorities: [''],
+      compatibilities: [''],
+      usabilities: [''],
+      localization: ['']
+    });
   }
 
   /*
@@ -19,6 +48,48 @@ export class ReleaseConfigBasicCategoryComponent implements OnInit {
   */
   getStatusStyle(statusValue: string): any {
     return this.statusService.getStatusStyle(statusValue);
+  }
+
+
+    /*
+    Get Release Configurations.
+  */
+  getReleasesConfigurations(): void {
+    this.releaseService.getReleasesConfig().subscribe((releaseConfig: any) => {
+      console.log(releaseConfig);
+
+      this.releaseConfig = releaseConfig;
+    });
+  }
+
+
+    /*
+    Add release type configuration.
+  */
+  updateReleaseConfigBasicDetails(type: string): void {
+
+    // Validate form based on the release configuration type.
+
+
+    // Set the payload details.
+    const releaseConfigBasicTypePayload = {
+      [type] : this.releaseConfigBasicForm?.get(type)?.value
+    }
+
+    console.log(releaseConfigBasicTypePayload);
+
+    // this.releaseService.addReleaseConfigType(releaseConfigBasicTypePayload).subscribe((response: any) => {
+    //   console.log(response);
+
+    //   // Get the member config details.
+    //   this.getReleasesConfigurations();
+
+    // }, (error: Error) => {
+    //   console.log(error);
+
+    //   // Enable the form.
+    //   // this.releaseConfigTypeForm.enable();
+    // });
   }
   
 }

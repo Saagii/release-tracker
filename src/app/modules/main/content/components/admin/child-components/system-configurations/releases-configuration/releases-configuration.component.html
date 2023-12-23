@@ -4,29 +4,77 @@
     <div class="w-full">
         <div class="text-xl px-2">Release Configurations</div>
         <div class="px-2 mt-2">
-            <span class="font-bold text-blue-600" [ngClass]="{'hover:cursor-pointer' : activeReleaseCategory}" (click)="activeReleaseCategory = ''; ">Categories</span> <span class="font-bold mx-1" *ngIf="activeReleaseCategory != '' "> > </span> <span class="font-bold text-gray-600" *ngIf="activeReleaseCategory != '' ">{{activeReleaseCategory}}</span>
+            <span class="font-bold text-blue-600" [ngClass]="{'hover:cursor-pointer' : activeReleaseCategory}" (click)="activeReleaseCategory = ''; activeComponent = null; ">Categories</span> <span class="font-bold mx-1" *ngIf="activeReleaseCategory != '' "> > </span> <span class="font-bold text-gray-600" *ngIf="activeReleaseCategory != '' ">{{activeReleaseCategory}}</span>
         </div>
     </div>
 
     <!-- Configuration block -->
-    <div class="w-full flex flex-wrap justify-start mt-4">
-        <div class="w-6/12 p-2" *ngFor="let category of releaseCategories.releases">
-            <div class="w-full flex items-center border border-gray-200 rounded-lg p-4 cursor-pointer hover:text-blue-600 hover:border-gray-400 hover:font-bold"  (click)="activeReleaseCategory = category.title; ">
-                <div class="w-11/12">
-                    <div class="text-xs text-gray-600">{{category.type}}</div>
-                    <div class="mt-2">{{category.title}}</div>
+    <div class="w-full flex flex-wrap justify-start mt-4" *ngIf="!activeComponent">
+
+        <div class="w-6/12 p-2">
+
+            <!-- BASIC -->
+            <div class="w-full border border-gray-200 rounded-lg p-4">
+                <div class="text-xs text-gray-600">BASIC</div>
+                <div class="w-full cursor-pointer hover:text-blue-600 hover:font-bold"  *ngFor="let category of releaseCategories.releases.categories">
+                    <div class="w-full flex items-center" *ngIf="category.type === 'BASIC' " (click)="activeComponent = releaseCategories.releases.component; activeReleaseCategory = category.title; ">
+                        <div class="w-11/12">
+                            <div class="mt-2">{{category.title}}</div>
+                        </div>
+                        <div class="w-1/12 flex justify-end">
+                            <button mat-icon-button class="" color="primary">
+                                <mat-icon>keyboard_arrow_right</mat-icon>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div class="w-1/12 flex justify-end">
-                    <button mat-icon-button class="" color="primary">
-                        <mat-icon>keyboard_arrow_right</mat-icon>
-                    </button>
+            </div>
+
+            <!-- CORE -->
+            <div class="w-full border border-gray-200 rounded-lg p-4 mt-4">
+                <div class="text-xs text-gray-600">CORE</div>
+                <div class="w-full cursor-pointer hover:text-blue-600 hover:font-bold" (click)="activeReleaseCategory = category.title; "  *ngFor="let category of releaseCategories.releases.categories">
+                    <div class="w-full flex items-center" *ngIf="category.type === 'CORE' ">
+                        <div class="w-11/12">
+                            <div class="mt-2">{{category.title}}</div>
+                        </div>
+                        <div class="w-1/12 flex justify-end">
+                            <button mat-icon-button class="" color="primary" >
+                                <mat-icon>keyboard_arrow_right</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-6/12 p-2">
+
+            <!-- STRATEGY -->
+            <div class="w-full border border-gray-200 rounded-lg p-4">
+                <div class="text-xs text-gray-600">STRATEGY</div>
+                <div class="w-full cursor-pointer hover:text-blue-600 hover:font-bold" (click)="activeReleaseCategory = category.title; "  *ngFor="let category of releaseCategories.releases.categories">
+                    <div class="w-full flex items-center" *ngIf="category.type === 'STRATEGY' ">
+                        <div class="w-11/12">
+                            <div class="mt-2">{{category.title}}</div>
+                        </div>
+                        <div class="w-1/12 flex justify-end">
+                            <button mat-icon-button class="" color="primary">
+                                <mat-icon>keyboard_arrow_right</mat-icon>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="w-full p-2 mt-4" *ngIf="activeComponent != '' ">
+        <ng-container *ngComponentOutlet="activeComponent"></ng-container>
+    </div>
+
     <!-- Release Types Config Content -->
-    <div class="w-full mt-6 pb-10 border-b border-gray-200">
+    <div class="w-full mt-6 pb-10 border-b border-gray-200 hidden">
         <div class="text-base">Release Types</div>
         <div class="text-gray-500 text-xs">Provides list options to set the type of release.</div>
 
@@ -57,7 +105,7 @@
     </div>
 
     <!-- Release Target Config Content -->
-    <div class="w-full mt-6 pb-10 border-b border-gray-200">
+    <div class="w-full mt-6 pb-10 border-b border-gray-200 hidden">
         <div class="text-base">Release Target</div>
         <div class="text-gray-500 text-xs">Sets release target.</div>
 
@@ -87,7 +135,7 @@
     </div>
 
     <!-- Release Status Config Content -->
-    <div class="w-full mt-6 pb-10 border-b border-gray-200">
+    <div class="w-full mt-6 pb-10 border-b border-gray-200 hidden">
         <div class="text-base">Release Status</div>
         <div class="text-gray-500 text-xs">Defines release's ongoing status.</div>
 
