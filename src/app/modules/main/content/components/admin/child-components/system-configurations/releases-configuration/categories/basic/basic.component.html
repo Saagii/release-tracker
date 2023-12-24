@@ -1,6 +1,6 @@
 <!-- Release Types Config Content -->
 <div class="w-full p-4 border border-gray-200 rounded-lg">
-    <div class="text-base">Release Types</div>
+    <div class="text-base">Release <span class="text-gray-600 font-bold">Types</span></div>
     <div class="text-gray-500 text-xs">Provides list options to set the type of release.</div>
 
     <div class="w-6/12 flex items-center my-3" [formGroup]="releaseConfigBasicForm">
@@ -31,7 +31,7 @@
 
 <!-- Release Target Config Content -->
 <div class="w-full mt-4 p-4 border border-gray-200 rounded-lg">
-    <div class="text-base">Release Target</div>
+    <div class="text-base">Release  <span class="text-gray-600 font-bold">Targets</span></div>
     <div class="text-gray-500 text-xs">Sets release target.</div>
 
     <div class="w-6/12 flex items-center my-3" [formGroup]="releaseConfigBasicForm">
@@ -52,6 +52,66 @@
             <div class="w-6/12">{{target.value}}</div>
             <div class="w-auto flex items-center">
                 <button mat-icon-button color="warn" class="!ml-3" (click)="deleteReleaseConfigDetailsByTypeAndId('targets', target._id)">
+                    <mat-icon>remove_circle_outline</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Release Status Config Content -->
+<div class="w-full mt-4 p-4 border border-gray-200 rounded-lg">
+    <div class="text-base">Release  <span class="text-gray-600 font-bold">Status</span></div>
+    <div class="text-gray-500 text-xs">Defines release's ongoing status.</div>
+
+    <div class="w-6/12 flex items-center my-3" [formGroup]="releaseConfigBasicForm">
+        <mat-form-field class="w-9/12" appearance="outline">
+            <mat-label>Add Release Status</mat-label>
+            <input type="text" matInput placeholder="Add Status Type" #releaseStatusInput formControlName="status" >
+        </mat-form-field>
+
+        <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="releaseConfigActionStatus === '' " (click)="updateReleaseConfigBasicDetails('status')">+ Add</button>
+        <div class="flex items-center" *ngIf="releaseConfigActionStatus === 'status' ">
+            <mat-spinner [diameter]="20"></mat-spinner>
+            <span class="ml-2">Adding...</span>
+        </div>
+    </div>
+
+    <div class="w-6/12 mt-3 border border-gray-200 rounded-md" *ngIf="releaseConfig?.status.length">
+        <div class="w-full flex justify-between items-center py-1 px-3 border-b border-gray-200" *ngFor="let status of releaseConfig.status">
+            <div class="w-6/12">{{status.value}}</div>
+            <div class="w-auto flex items-center">
+                <button mat-icon-button color="warn" class="!ml-3" (click)="deleteReleaseConfigDetailsByTypeAndId('status', status._id)">
+                    <mat-icon>remove_circle_outline</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Release Priority Config Content -->
+<div class="w-full mt-4 p-4 border border-gray-200 rounded-lg">
+    <div class="text-base">Release  <span class="text-gray-600 font-bold">Priorities</span></div>
+    <div class="text-gray-500 text-xs">Provides the list of all required priorities for the release.</div>
+
+    <div class="w-6/12 flex items-center my-3" [formGroup]="releaseConfigBasicForm">
+        <mat-form-field class="w-9/12" appearance="outline">
+            <mat-label>Add Release Priority</mat-label>
+            <input type="text" matInput placeholder="Add Priority Type" #releasePriorityInput formControlName="priorities" >
+        </mat-form-field>
+
+        <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="releaseConfigActionStatus === '' " (click)="updateReleaseConfigBasicDetails('priorities')">+ Add</button>
+        <div class="flex items-center" *ngIf="releaseConfigActionStatus === 'priorities' ">
+            <mat-spinner [diameter]="20"></mat-spinner>
+            <span class="ml-2">Adding...</span>
+        </div>
+    </div>
+
+    <div class="w-6/12 mt-3 border border-gray-200 rounded-md" *ngIf="releaseConfig?.priorities.length">
+        <div class="w-full flex justify-between items-center py-1 px-3 border-b border-gray-200" *ngFor="let priority of releaseConfig.priorities">
+            <div class="w-6/12">{{priority.value}}</div>
+            <div class="w-auto flex items-center">
+                <button mat-icon-button color="warn" class="!ml-3" (click)="deleteReleaseConfigDetailsByTypeAndId('priorities', priority._id)">
                     <mat-icon>remove_circle_outline</mat-icon>
                 </button>
             </div>

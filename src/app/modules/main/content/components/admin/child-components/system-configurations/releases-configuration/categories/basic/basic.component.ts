@@ -97,7 +97,8 @@ export class ReleaseConfigBasicCategoryComponent implements OnInit {
 
       this.releaseConfigActionStatus = '';
 
-      // Enable the form.
+      // Reset & Enable the form.
+      this.releaseConfigBasicForm.reset();
       this.releaseConfigBasicForm.enable();
 
       // Get the member config details.
@@ -108,7 +109,8 @@ export class ReleaseConfigBasicCategoryComponent implements OnInit {
 
       this.releaseConfigActionStatus = '';
 
-      // Enable the form.
+      // Reset & Enable the form.
+      this.releaseConfigBasicForm.reset();
       this.releaseConfigBasicForm.enable();
     });
   }
