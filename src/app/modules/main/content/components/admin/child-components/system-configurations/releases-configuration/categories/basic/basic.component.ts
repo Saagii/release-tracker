@@ -11,6 +11,7 @@ export class ReleaseConfigBasicCategoryComponent implements OnInit {
 
   releaseConfigBasicForm: FormGroup | any;
   releaseConfig: any;
+  releaseConfigActionStatus: string = '';
 
   constructor(
     private statusService: StatusService,
@@ -63,10 +64,12 @@ export class ReleaseConfigBasicCategoryComponent implements OnInit {
   }
 
 
-    /*
-    Add release type configuration.
+  /*
+    Update release configuration based on param.
   */
   updateReleaseConfigBasicDetails(releaseConfigParam: string): void {
+
+    this.releaseConfigActionStatus = releaseConfigParam;
 
     // Validate form based on the release configuration type.
 
@@ -86,8 +89,16 @@ export class ReleaseConfigBasicCategoryComponent implements OnInit {
 
     console.log(releaseConfigBasicTypePayload);
 
+    // Disbaled the form until the response is received.
+    this.releaseConfigBasicForm.disable();
+
     this.releaseService.updateReleaseConfigDetails(releaseConfigBasicTypePayload).subscribe((response: any) => {
       console.log(response);
+
+      this.releaseConfigActionStatus = '';
+
+      // Enable the form.
+      this.releaseConfigBasicForm.enable();
 
       // Get the member config details.
       this.getReleasesConfigurations();
@@ -95,8 +106,27 @@ export class ReleaseConfigBasicCategoryComponent implements OnInit {
     }, (error: Error) => {
       console.log(error);
 
+      this.releaseConfigActionStatus = '';
+
       // Enable the form.
-      // this.releaseConfigTypeForm.enable();
+      this.releaseConfigBasicForm.enable();
+    });
+  }
+
+
+  /*
+    Delete Release Config details.
+  */
+    deleteReleaseConfigDetailsByTypeAndId(releaseConfigDetailType: string, id: string): void {
+
+    this.releaseService.deleteReleaseConfigDetailsByTypeAndId(releaseConfigDetailType, id).subscribe((response: any) => {
+      console.log(response);
+
+      // Get the member config details.
+      this.getReleasesConfigurations();
+
+    }, (error: Error) => {
+      console.log(error);
     });
   }
   

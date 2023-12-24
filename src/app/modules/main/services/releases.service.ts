@@ -24,7 +24,15 @@ export class ReleasesService {
         Add release Configuration Types.
     */
     updateReleaseConfigDetails(releaseConfigDetails: any): any {
-        return this._httpClient.post(`${environment.basePath}/api/releaseConfig`, releaseConfigDetails);
+        return this._httpClient.put(`${environment.basePath}/api/releaseConfig`, releaseConfigDetails);
+    }
+
+
+    /*
+        Delete release Configuration details by type and ID.
+    */
+    deleteReleaseConfigDetailsByTypeAndId(releaseConfigDetailType: string, id: string): any {
+        return this._httpClient.delete(`${environment.basePath}/api/releaseConfig/${releaseConfigDetailType}/${id}`);
     }
 
 
