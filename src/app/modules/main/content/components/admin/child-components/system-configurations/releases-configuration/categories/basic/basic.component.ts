@@ -66,30 +66,38 @@ export class ReleaseConfigBasicCategoryComponent implements OnInit {
     /*
     Add release type configuration.
   */
-  updateReleaseConfigBasicDetails(type: string): void {
+  updateReleaseConfigBasicDetails(releaseConfigParam: string): void {
 
     // Validate form based on the release configuration type.
 
 
     // Set the payload details.
     const releaseConfigBasicTypePayload = {
-      [type] : this.releaseConfigBasicForm?.get(type)?.value
+      releaseConfigId: this.releaseConfig._id,
+      releaseConfigDetails: {
+        [releaseConfigParam] : [
+          {
+            value: this.releaseConfigBasicForm.get(releaseConfigParam)?.value,
+            isMandatory: true
+          }
+        ]
+      }
     }
 
     console.log(releaseConfigBasicTypePayload);
 
-    // this.releaseService.addReleaseConfigType(releaseConfigBasicTypePayload).subscribe((response: any) => {
-    //   console.log(response);
+    this.releaseService.updateReleaseConfigDetails(releaseConfigBasicTypePayload).subscribe((response: any) => {
+      console.log(response);
 
-    //   // Get the member config details.
-    //   this.getReleasesConfigurations();
+      // Get the member config details.
+      this.getReleasesConfigurations();
 
-    // }, (error: Error) => {
-    //   console.log(error);
+    }, (error: Error) => {
+      console.log(error);
 
-    //   // Enable the form.
-    //   // this.releaseConfigTypeForm.enable();
-    // });
+      // Enable the form.
+      // this.releaseConfigTypeForm.enable();
+    });
   }
   
 }

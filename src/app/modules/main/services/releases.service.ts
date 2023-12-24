@@ -23,6 +23,14 @@ export class ReleasesService {
     /*
         Add release Configuration Types.
     */
+    updateReleaseConfigDetails(releaseConfigDetails: any): any {
+        return this._httpClient.post(`${environment.basePath}/api/releaseConfig`, releaseConfigDetails);
+    }
+
+
+    /*
+        Add release Configuration Types.
+    */
     addReleaseConfigType(releaseTypePayload: any): any {
         return this._httpClient.post(`${environment.basePath}/api/releaseConfig/types`, releaseTypePayload);
     }
