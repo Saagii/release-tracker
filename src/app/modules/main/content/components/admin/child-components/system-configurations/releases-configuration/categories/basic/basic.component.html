@@ -17,7 +17,7 @@
     </div>
 
     <div class="w-6/12 mt-3 border border-gray-200 rounded-md" *ngIf="releaseConfig?.types?.length">
-        <div class="w-full flex justify-between items-center py-1 px-3 border-b border-gray-200" *ngFor="let type of releaseConfig.types">
+        <div class="w-full flex justify-between items-center px-3 border-b border-gray-200 hover:bg-gray-50" *ngFor="let type of releaseConfig.types">
             <div class="w-6/12">{{type.value}}</div>
             <div class="w-auto flex items-center">
                 <div class="rounded-full px-3 py-0.5 flex items-center text-xs" [ngClass]="getStatusStyle(type.status)">{{type.status}}</div>
@@ -48,7 +48,7 @@
     </div>
 
     <div class="w-6/12 mt-3 border border-gray-200 rounded-md" *ngIf="releaseConfig?.targets.length">
-        <div class="w-full flex justify-between items-center py-1 px-3 border-b border-gray-200" *ngFor="let target of releaseConfig.targets">
+        <div class="w-full flex justify-between items-center px-3 border-b border-gray-200 hover:bg-gray-50" *ngFor="let target of releaseConfig.targets">
             <div class="w-6/12">{{target.value}}</div>
             <div class="w-auto flex items-center">
                 <button mat-icon-button color="warn" class="!ml-3" (click)="deleteReleaseConfigDetailsByTypeAndId('targets', target._id)">
@@ -78,7 +78,7 @@
     </div>
 
     <div class="w-6/12 mt-3 border border-gray-200 rounded-md" *ngIf="releaseConfig?.status.length">
-        <div class="w-full flex justify-between items-center py-1 px-3 border-b border-gray-200" *ngFor="let status of releaseConfig.status">
+        <div class="w-full flex justify-between items-center px-3 border-b border-gray-200 hover:bg-gray-50" *ngFor="let status of releaseConfig.status">
             <div class="w-6/12">{{status.value}}</div>
             <div class="w-auto flex items-center">
                 <button mat-icon-button color="warn" class="!ml-3" (click)="deleteReleaseConfigDetailsByTypeAndId('status', status._id)">
@@ -108,7 +108,7 @@
     </div>
 
     <div class="w-6/12 mt-3 border border-gray-200 rounded-md" *ngIf="releaseConfig?.priorities.length">
-        <div class="w-full flex justify-between items-center py-1 px-3 border-b border-gray-200" *ngFor="let priority of releaseConfig.priorities">
+        <div class="w-full flex justify-between items-center px-3 border-b border-gray-200 hover:bg-gray-50" *ngFor="let priority of releaseConfig.priorities">
             <div class="w-6/12">{{priority.value}}</div>
             <div class="w-auto flex items-center">
                 <button mat-icon-button color="warn" class="!ml-3" (click)="deleteReleaseConfigDetailsByTypeAndId('priorities', priority._id)">
