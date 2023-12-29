@@ -254,6 +254,18 @@ export class ReleasesConfigurationComponent implements OnInit {
 
 
   /*
+    Set or Remove the local storage for release configuration active category.
+  */
+  releaseConfigLocalStorageActions(action: string): void {
+    if(action === 'set') {
+      localStorage.setItem('activeReleaseCategory', this.activeReleaseCategory);
+    } else {
+      localStorage.removeItem('activeReleaseCategory');
+    }
+  }
+
+
+  /*
     Dialog Method: Nav New Menu
   */
   navigationActions(actionData: any, actionType: string): any {

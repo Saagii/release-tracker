@@ -12,12 +12,16 @@ export class ReleaseConfigBasicCategoryComponent implements OnInit {
   releaseConfigBasicForm: FormGroup | any;
   releaseConfig: any;
   releaseConfigActionStatus: string = '';
+  activeReleaseConfigCategory: string = '';
 
   constructor(
     private statusService: StatusService,
     private releaseService: ReleasesService,
     private fb: FormBuilder,
-  ) {}
+  ) {
+    console.log(JSON.stringify(this.releaseConfigLocalStorageActions()));
+    this.activeReleaseConfigCategory = this.releaseConfigLocalStorageActions();
+  }
 
   ngOnInit(): void {
 
@@ -40,7 +44,7 @@ export class ReleaseConfigBasicCategoryComponent implements OnInit {
       priorities: [''],
       compatibilities: [''],
       usabilities: [''],
-      localization: ['']
+      localizationLanguages: ['']
     });
   }
 
@@ -62,6 +66,16 @@ export class ReleaseConfigBasicCategoryComponent implements OnInit {
       this.releaseConfig = releaseConfig;
     });
   }
+
+
+  /*
+    Get the local storage for release configuration active category.
+  */
+  releaseConfigLocalStorageActions(): any {
+    return localStorage.getItem('activeReleaseCategory');
+  }
+
+
 
 
   /*
