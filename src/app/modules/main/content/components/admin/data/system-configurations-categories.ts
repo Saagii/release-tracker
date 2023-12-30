@@ -17,7 +17,7 @@ export const systemConfigurationsCategories = {
                 type: 'CORE'
             },
             {
-                title: 'Performance, Deployment',
+                title: 'Deployment Plan',
                 type: 'STRATEGY'
             },
             {

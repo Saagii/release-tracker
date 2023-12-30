@@ -44,7 +44,10 @@ export class ReleaseConfigBasicCategoryComponent implements OnInit {
       priorities: [''],
       compatibilities: [''],
       usabilities: [''],
-      localizationLanguages: ['']
+      localizationLanguages: [''],
+      deploymentTypes: [''],
+      rollbackPlanTypes: [''],
+      userSupportTypes: ['']
     });
   }
 

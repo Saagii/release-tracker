@@ -33,8 +33,8 @@
             <!-- CORE -->
             <div class="w-full border border-gray-200 rounded-lg p-4 mt-4">
                 <div class="text-xs text-gray-600">CORE</div>
-                <div class="w-full cursor-pointer hover:text-blue-600 hover:font-bold" (click)="activeReleaseCategory = category.title; "  *ngFor="let category of releaseCategories.releases.categories">
-                    <div class="w-full flex items-center" *ngIf="category.type === 'CORE' ">
+                <div class="w-full cursor-pointer hover:text-blue-600 hover:font-bold"  *ngFor="let category of releaseCategories.releases.categories">
+                    <div class="w-full flex items-center" *ngIf="category.type === 'CORE' "(click)="activeComponent = releaseCategories.releases.component; activeReleaseCategory = category.title; releaseConfigLocalStorageActions('set')">
                         <div class="w-11/12">
                             <div class="mt-2">{{category.title}}</div>
                         </div>
@@ -53,8 +53,8 @@
             <!-- STRATEGY -->
             <div class="w-full border border-gray-200 rounded-lg p-4">
                 <div class="text-xs text-gray-600">STRATEGY</div>
-                <div class="w-full cursor-pointer hover:text-blue-600 hover:font-bold" (click)="activeReleaseCategory = category.title; "  *ngFor="let category of releaseCategories.releases.categories">
-                    <div class="w-full flex items-center" *ngIf="category.type === 'STRATEGY' ">
+                <div class="w-full cursor-pointer hover:text-blue-600 hover:font-bold"  *ngFor="let category of releaseCategories.releases.categories">
+                    <div class="w-full flex items-center" *ngIf="category.type === 'STRATEGY' " (click)="activeComponent = releaseCategories.releases.component; activeReleaseCategory = category.title; releaseConfigLocalStorageActions('set')">
                         <div class="w-11/12">
                             <div class="mt-2">{{category.title}}</div>
                         </div>

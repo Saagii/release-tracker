@@ -213,3 +213,97 @@
         </div>
     </div>
 </ng-container>
+
+<ng-container *ngIf="activeReleaseConfigCategory === 'Deployment Plan' ">
+    <!-- Release Deployment Config Content -->
+    <div class="w-full mt-4 p-4 border border-gray-200 rounded-lg">
+        <div class="text-base">Release  <span class="text-gray-600 font-bold">Deployment Types</span></div>
+        <div class="text-gray-500 text-xs">Provides software deployment type options.</div>
+
+        <div class="w-6/12 flex items-center my-3" [formGroup]="releaseConfigBasicForm">
+            <mat-form-field class="w-9/12" appearance="outline">
+                <mat-label>Add Release Deployment Type</mat-label>
+                <input type="text" matInput placeholder="Add Deployment Type" #releaseDeploymentTypeInput formControlName="deploymentTypes" >
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="releaseConfigActionStatus === '' " (click)="updateReleaseConfigBasicDetails('deploymentTypes')">+ Add</button>
+            <div class="flex items-center" *ngIf="releaseConfigActionStatus === 'deploymentTypes' ">
+                <mat-spinner [diameter]="20"></mat-spinner>
+                <span class="ml-2">Adding...</span>
+            </div>
+        </div>
+
+        <div class="w-6/12 mt-3 border border-gray-200 rounded-md" *ngIf="releaseConfig?.deploymentTypes.length">
+            <div class="w-full flex justify-between items-center px-3 border-b border-gray-200 hover:bg-gray-50" *ngFor="let type of releaseConfig.deploymentTypes">
+                <div class="w-6/12">{{type.value}}</div>
+                <div class="w-auto flex items-center">
+                    <button mat-icon-button color="warn" class="!ml-3" (click)="deleteReleaseConfigDetailsByTypeAndId('deploymentTypes', type._id)">
+                        <mat-icon>remove_circle_outline</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="activeReleaseConfigCategory === 'Rollback Plan, User Support' ">
+    <!-- Release Rollback Config Content -->
+    <div class="w-full mt-4 p-4 border border-gray-200 rounded-lg">
+        <div class="text-base">Release  <span class="text-gray-600 font-bold">Rollback Plan</span></div>
+        <div class="text-gray-500 text-xs">Provides software release rollback strategy options.</div>
+
+        <div class="w-6/12 flex items-center my-3" [formGroup]="releaseConfigBasicForm">
+            <mat-form-field class="w-9/12" appearance="outline">
+                <mat-label>Add Release Rollback Type</mat-label>
+                <input type="text" matInput placeholder="Add Rollback Type" #releaseDeploymentTypeInput formControlName="rollbackPlanTypes" >
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="releaseConfigActionStatus === '' " (click)="updateReleaseConfigBasicDetails('rollbackPlanTypes')">+ Add</button>
+            <div class="flex items-center" *ngIf="releaseConfigActionStatus === 'rollbackPlanTypes' ">
+                <mat-spinner [diameter]="20"></mat-spinner>
+                <span class="ml-2">Adding...</span>
+            </div>
+        </div>
+
+        <div class="w-6/12 mt-3 border border-gray-200 rounded-md" *ngIf="releaseConfig?.rollbackPlanTypes.length">
+            <div class="w-full flex justify-between items-center px-3 border-b border-gray-200 hover:bg-gray-50" *ngFor="let type of releaseConfig.rollbackPlanTypes">
+                <div class="w-6/12">{{type.value}}</div>
+                <div class="w-auto flex items-center">
+                    <button mat-icon-button color="warn" class="!ml-3" (click)="deleteReleaseConfigDetailsByTypeAndId('rollbackPlanTypes', type._id)">
+                        <mat-icon>remove_circle_outline</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Release User Support Config Content -->
+    <div class="w-full mt-4 p-4 border border-gray-200 rounded-lg">
+        <div class="text-base">Release  <span class="text-gray-600 font-bold">User Support</span></div>
+        <div class="text-gray-500 text-xs">Provides software release user support strategy options.</div>
+
+        <div class="w-6/12 flex items-center my-3" [formGroup]="releaseConfigBasicForm">
+            <mat-form-field class="w-9/12" appearance="outline">
+                <mat-label>Add Release User Support Type</mat-label>
+                <input type="text" matInput placeholder="Add Rollback Type" #releaseDeploymentTypeInput formControlName="userSupportTypes" >
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="releaseConfigActionStatus === '' " (click)="updateReleaseConfigBasicDetails('userSupportTypes')">+ Add</button>
+            <div class="flex items-center" *ngIf="releaseConfigActionStatus === 'userSupportTypes' ">
+                <mat-spinner [diameter]="20"></mat-spinner>
+                <span class="ml-2">Adding...</span>
+            </div>
+        </div>
+
+        <div class="w-6/12 mt-3 border border-gray-200 rounded-md" *ngIf="releaseConfig?.userSupportTypes.length">
+            <div class="w-full flex justify-between items-center px-3 border-b border-gray-200 hover:bg-gray-50" *ngFor="let type of releaseConfig.userSupportTypes">
+                <div class="w-6/12">{{type.value}}</div>
+                <div class="w-auto flex items-center">
+                    <button mat-icon-button color="warn" class="!ml-3" (click)="deleteReleaseConfigDetailsByTypeAndId('userSupportTypes', type._id)">
+                        <mat-icon>remove_circle_outline</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
