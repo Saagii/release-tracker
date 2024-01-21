@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { StatusService } from 'src/app/modules/shared/services/status.service';
 import { requirementsListMockData } from '../../../../data/requirements-list-mock-data';
 
@@ -9,12 +9,12 @@ import { requirementsListMockData } from '../../../../data/requirements-list-moc
 })
 export class ClientCreateRequirementsComponent implements OnInit {
 
-    clientCreateRequirementsForm: FormGroup;
+    clientCreateRequirementsForm: UntypedFormGroup;
     // <!-- Title, Desc, Project, Type, Links, Start Date, End Date, Status -->
 
   constructor(
     private statusService: StatusService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
   ) {
      // Prepare Instance Form
      this.clientCreateRequirementsForm = this.fb.group({

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ClientsService } from 'src/app/modules/main/services/clients.service';
 import { DialogSharedComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
@@ -12,13 +12,13 @@ import { StatusService } from 'src/app/modules/shared/services/status.service';
 export class ClientsConfigurationComponent implements OnInit {
 
   clientConfig: any;
-  clientConfigTypeForm: FormGroup;
+  clientConfigTypeForm: UntypedFormGroup;
   clientConfigTypeLoader: boolean = false;
 
   constructor(
     private statusService: StatusService,
     private clientService: ClientsService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     public dialog: MatDialog,
   ) {
     // Prepare Sign In Form

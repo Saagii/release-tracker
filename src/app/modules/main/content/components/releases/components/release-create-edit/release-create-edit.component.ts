@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
@@ -15,7 +15,7 @@ import { StatusService } from 'src/app/modules/shared/services/status.service';
 })
 export class ReleaseCreateEditComponent implements OnInit {
 
-    releaseCreateEditForm: FormGroup;
+    releaseCreateEditForm: UntypedFormGroup;
     clientsList: any;
     membersList: any;
     releaseConfigDetails: any;
@@ -26,7 +26,7 @@ export class ReleaseCreateEditComponent implements OnInit {
 
   constructor(
     private statusService: StatusService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private clientService: ClientsService,
     private releaseService: ReleasesService,
     private membersService: MembersService,

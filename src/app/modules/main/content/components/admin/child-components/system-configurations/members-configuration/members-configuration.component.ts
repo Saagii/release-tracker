@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MembersService } from 'src/app/modules/main/services/members.service';
 import { DialogSharedComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
@@ -12,13 +12,13 @@ import { StatusService } from 'src/app/modules/shared/services/status.service';
 export class MembersConfigurationComponent implements OnInit {
   
   memberConfig: any;
-  memberConfigTitleForm: FormGroup;
+  memberConfigTitleForm: UntypedFormGroup;
   memberConfigTitleLoader: boolean = false;
 
   constructor(
     private statusService: StatusService,
     private membersService: MembersService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     public dialog: MatDialog,
   ) {
     // Prepare Sign In Form

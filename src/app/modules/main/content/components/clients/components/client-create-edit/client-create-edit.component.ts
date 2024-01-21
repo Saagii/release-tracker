@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ClientsService } from 'src/app/modules/main/services/clients.service';
 import { MembersService } from 'src/app/modules/main/services/members.service';
 import { StatusService } from 'src/app/modules/shared/services/status.service';
@@ -13,14 +13,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ClientCreateEditComponent implements OnInit {
 
-    clientCreateEditForm: FormGroup;
+    clientCreateEditForm: UntypedFormGroup;
     clientConfig: ClientConfigurationResponse | undefined;
     membersList: MembersListResponse[] | undefined;
 
 
   constructor(
     private statusService: StatusService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private membersService: MembersService,
     private clientsService: ClientsService,
     private router: Router,

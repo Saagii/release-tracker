@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import * as bcrypt from 'bcryptjs';
 import { environment } from 'src/environments/environment';
@@ -12,8 +12,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class SignInComponent implements OnInit {
 
-  signinForm: FormGroup;
-  orgSearchForm: FormGroup;
+  signinForm: UntypedFormGroup;
+  orgSearchForm: UntypedFormGroup;
   hideLoginPassword: boolean = true;
   isUniqueTagVerified: boolean = false
   orgUniqueTagVerificationLoader: boolean = false;
@@ -22,7 +22,7 @@ export class SignInComponent implements OnInit {
   isUniqueTagVerifiedText: string = 'Required!!';
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private authService: AuthService,
     private router: Router,
     private _snackBar: MatSnackBar

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ProjectsService } from 'src/app/modules/main/services/projects.service';
 import { DialogSharedComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
@@ -13,9 +13,9 @@ export class ProjectsConfigurationComponent implements OnInit {
 
   projectConfig: any;
   enableMembersLimitEditForm: boolean = false;
-  projectConfigTypeForm: FormGroup;
-  projectConfigStatusForm: FormGroup;
-  projectConfigMembersLimitForm: FormGroup;
+  projectConfigTypeForm: UntypedFormGroup;
+  projectConfigStatusForm: UntypedFormGroup;
+  projectConfigMembersLimitForm: UntypedFormGroup;
   projectConfigTypeLoader: boolean = false;
   projectConfigStatusLoader: boolean = false;
   projectConfigMembersLimitLoader: boolean = false;
@@ -23,7 +23,7 @@ export class ProjectsConfigurationComponent implements OnInit {
   constructor(
     private statusService: StatusService,
     private projectService: ProjectsService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     public dialog: MatDialog,
   ) {
     // Prepare Project Type Form

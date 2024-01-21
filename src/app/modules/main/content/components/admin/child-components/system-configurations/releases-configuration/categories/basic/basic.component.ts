@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { ReleasesService } from 'src/app/modules/main/services/releases.service';
 import { StatusService } from 'src/app/modules/shared/services/status.service';
 
@@ -9,7 +9,7 @@ import { StatusService } from 'src/app/modules/shared/services/status.service';
 })
 export class ReleaseConfigBasicCategoryComponent implements OnInit {
 
-  releaseConfigBasicForm: FormGroup | any;
+  releaseConfigBasicForm: UntypedFormGroup | any;
   releaseConfig: any;
   releaseConfigActionStatus: string = '';
   activeReleaseConfigCategory: string = '';
@@ -17,7 +17,7 @@ export class ReleaseConfigBasicCategoryComponent implements OnInit {
   constructor(
     private statusService: StatusService,
     private releaseService: ReleasesService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
   ) {
     console.log(JSON.stringify(this.releaseConfigLocalStorageActions()));
     this.activeReleaseConfigCategory = this.releaseConfigLocalStorageActions();

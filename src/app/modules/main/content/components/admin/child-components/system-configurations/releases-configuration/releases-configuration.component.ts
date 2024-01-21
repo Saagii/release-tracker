@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ReleasesService } from 'src/app/modules/main/services/releases.service';
 import { DialogSharedComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
@@ -18,9 +18,9 @@ export class ReleasesConfigurationComponent implements OnInit {
 
   releaseConfig: any;
   enableTargetEditForm: boolean = false;
-  releaseConfigTypeForm: FormGroup;
-  releaseConfigStatusForm: FormGroup;
-  releaseConfigTargetForm: FormGroup;
+  releaseConfigTypeForm: UntypedFormGroup;
+  releaseConfigStatusForm: UntypedFormGroup;
+  releaseConfigTargetForm: UntypedFormGroup;
   releaseConfigTypeLoader: boolean = false;
   releaseConfigStatusLoader: boolean = false;
   releaseConfigTargetLoader: boolean = false;
@@ -28,7 +28,7 @@ export class ReleasesConfigurationComponent implements OnInit {
   constructor(
     private statusService: StatusService,
     private releaseService: ReleasesService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     public dialog: MatDialog,
   ) {
     // Prepare Release Type Form

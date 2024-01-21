@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { verifyAndCreateAccount } from '../../model/verifyAndAccountCreation.model';
 import { AccountVerificationResponse } from '../../model/accountCreationResponse.model';
@@ -13,9 +13,9 @@ import { environment } from 'src/environments/environment';
 })
 export class OnboardingComponent implements OnInit {
 
-  orgInfoForm: FormGroup;
-  adminInfoForm: FormGroup;
-  verificationForm: FormGroup;
+  orgInfoForm: UntypedFormGroup;
+  adminInfoForm: UntypedFormGroup;
+  verificationForm: UntypedFormGroup;
   hidePassword = true;
   navCount: number = 5;
   onBoardingState: number = 1;
@@ -25,7 +25,7 @@ export class OnboardingComponent implements OnInit {
   accountVerificationResponse: AccountVerificationResponse | undefined;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private authService: AuthService,
     private router: Router,
   ) {

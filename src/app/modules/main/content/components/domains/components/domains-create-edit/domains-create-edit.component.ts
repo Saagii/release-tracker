@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { StatusService } from 'src/app/modules/shared/services/status.service';
 
 @Component({
@@ -8,12 +8,12 @@ import { StatusService } from 'src/app/modules/shared/services/status.service';
 })
 export class DomainCreateEditComponent implements OnInit {
 
-    domainCreateEditForm: FormGroup;
+    domainCreateEditForm: UntypedFormGroup;
 
 
   constructor(
     private statusService: StatusService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
   ) {
      // Prepare domain Form
      this.domainCreateEditForm = this.fb.group({

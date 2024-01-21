@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClientsService } from 'src/app/modules/main/services/clients.service';
 import { MembersService } from 'src/app/modules/main/services/members.service';
@@ -12,7 +12,7 @@ import { StatusService } from 'src/app/modules/shared/services/status.service';
 })
 export class ProjectCreateEditComponent implements OnInit {
 
-  projectCreateEditForm: FormGroup;
+  projectCreateEditForm: UntypedFormGroup;
   clientsList: any;
   membersList: any;
   memberConfig: any;
@@ -21,7 +21,7 @@ export class ProjectCreateEditComponent implements OnInit {
 
   constructor(
     private statusService: StatusService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private clientsService: ClientsService,
     private membersService: MembersService,
     private projectsService: ProjectsService,

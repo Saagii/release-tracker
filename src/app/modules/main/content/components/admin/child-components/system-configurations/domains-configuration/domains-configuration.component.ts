@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DomainsService } from 'src/app/modules/main/services/domains.service';
 import { DialogSharedComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
@@ -12,15 +12,15 @@ import { StatusService } from 'src/app/modules/shared/services/status.service';
 export class DomainsConfigurationComponent implements OnInit {
 
   domainConfig: any;
-  domainConfigTypeForm: FormGroup;
-  domainConfigStatusForm: FormGroup;
+  domainConfigTypeForm: UntypedFormGroup;
+  domainConfigStatusForm: UntypedFormGroup;
   domainConfigTypeLoader: boolean = false;
   domainConfigStatusLoader: boolean = false;
 
   constructor(
     private statusService: StatusService,
     private domainService: DomainsService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     public dialog: MatDialog,
   ) {
     // Prepare Domain Type Form
