@@ -34,7 +34,10 @@
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "bcryptjs"
+           ]
           },
           "configurations": {
             "production": {
@@ -69,18 +72,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "release-tracker:build"
+            "buildTarget": "release-tracker:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "release-tracker:build:production"
+              "buildTarget": "release-tracker:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "release-tracker:build"
+            "buildTarget": "release-tracker:build"
           }
         },
         "test": {

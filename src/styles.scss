@@ -29,7 +29,7 @@ background-image: radial-gradient(circle at center center, rgb(81,60,114),rgb(31
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; }
 
 // Custom CSS overriding Angular Material Styles
 .mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary {
@@ -63,4 +63,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 ::ng-deep mat-tab-header {
   align-self: center;
+}
+
+.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field .mdc-notched-outline__notch {
+  border-right-style: hidden;
+}
+.mat-mdc-input-element {
+  box-shadow: none !important;
+}
+
+.mat-mdc-button .mdc-button__label, .mat-mdc-unelevated-button .mdc-button__label, .mat-mdc-raised-button .mdc-button__label, .mat-mdc-outlined-button .mdc-button__label {
+    letter-spacing: normal !important;
+}
+
+.mat-mdc-tab .mdc-tab__text-label {
+    letter-spacing: normal !important;
 }

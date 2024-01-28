@@ -6,12 +6,12 @@
         *ngFor="let menu of contentMenuOption"
         (click)="activeContentMenu = menu.name" >
             <a [routerLink]="[menu.route]">
-                <div class="flex content-center px-4 pt-1 rounded-md cursor-pointer border border-gray-700 hover:border-gray-500"
+                <div class="flex items-center px-4 py-0.5 rounded-md cursor-pointer border border-gray-700 hover:border-gray-500"
                 [ngClass]="{'bg-gray-550 border-gray-600': activeContentMenu === menu.name}">
-                    <div class="">
-                        <mat-icon class=" text-sm">{{menu.icon}}</mat-icon>
+                    <div class="flex items-center">
+                        <mat-icon class="text-base">{{menu.icon}}</mat-icon>
                     </div>
-                    <div class="">{{menu.name}}</div>
+                    <div class="text-sm">{{menu.name}}</div>
                 </div>
             </a>
         </div>

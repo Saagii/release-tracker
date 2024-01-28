@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const DialogMetaData = [{\n  type: 'navMenu',\n  title: 'Create New',\n  subtitle: 'Begin with creating new record in either of the modules.'\n}, {\n  type: 'confirmation',\n  title: 'Confirmation',\n  subtitle: 'Requires your confirmation to proceed further.'\n}];","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}
