@@ -48,9 +48,9 @@ export class NavigationComponent implements OnInit {
     console.log(this.authService.memberIdValue);
 
     this.membersService.getMemberDetails(this.authService.memberIdValue).subscribe((response: any) => {
-      console.log(response.memberDetails);
+      console.log(response);
 
-      this.memberDetails = response.memberDetails;
+      this.memberDetails = response;
     });
   }
 
@@ -58,16 +58,29 @@ export class NavigationComponent implements OnInit {
   /*
     Sign Out Method.
   */
-  memberSignOut(): void {
-    if(this.authService.memberSignOut()) {
-      this.router.navigate(['/signIn']);
+  memberSignOut(memberId: string): void {
 
+    this.authService.memberSignOut(memberId).subscribe((response: any) => {
+      localStorage.removeItem('token');
+      this.router.navigate(['/signIn']);
       // Call snackbar method.
       this._snackBar.open('Signed-out Successfully', 'Ok', {
-        horizontalPosition: 'right',
-        verticalPosition: 'top',
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
       });
-    }
+    });
+
+    // Navigating to Sign out page temporarily.
+
+    // if(this.authService.memberSignOut(memberId)) {
+    //   this.router.navigate(['/signIn']);
+
+    //   // Call snackbar method.
+    //   this._snackBar.open('Signed-out Successfully', 'Ok', {
+    //     horizontalPosition: 'right',
+    //     verticalPosition: 'top',
+    //   });
+    // }
 
   }
 

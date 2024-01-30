@@ -42,9 +42,8 @@ export class AuthService {
     /*
         Remove token from local storage for logging out.
     */
-    memberSignOut(): boolean {
-        localStorage.removeItem('token');
-        return true;
+    memberSignOut(memberId: string): any {
+        return this._httpClient.post(`${environment.basePath}/api/members/${memberId}/logout`, {});
     }
 
     

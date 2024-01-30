@@ -15,18 +15,18 @@
             </button>
             <div class="rounded-full py-1.5 px-3 bg-yellow-100 text-yellow-700 font-bold shadow-md ml-6 cursor-pointer" [matMenuTriggerFor]="menu">S</div>
             <mat-menu #menu="matMenu">
-                <div class="w-56 text-gray-700">
+                <div class="w-64 text-gray-700">
                     <div class="w-full border-b border-gray-200 bg-gray-100 px-4 py-2 -mt-2">
                         <div class="text-xs text-gray-600">Logged in as</div>
-                        <div class="font-bold text-gray-800 mt-1 text-sm">{{memberDetails?.firstName}}</div>
+                        <div class="font-bold text-gray-800 mt-1 text-xs">{{memberDetails?.firstName}} {{memberDetails?.lastName}}</div>
                     </div>
-                    <div class="w-full px-4 py-3 flex items-center cursor-pointer hover:text-blue-500">
+                    <div class="w-full px-4 py-3 flex text-sm items-center cursor-pointer hover:text-blue-500">
                         <mat-icon class="mr-2 text-base">person</mat-icon> Profile
                     </div>
-                    <div class="w-full px-4 py-3 flex items-center cursor-pointer hover:text-blue-500">
+                    <div class="w-full px-4 py-3 flex text-sm items-center cursor-pointer hover:text-blue-500">
                         <mat-icon class="mr-2 text-base">settings</mat-icon> Settings
                     </div>
-                    <div class="w-full px-4 py-3 flex items-center cursor-pointer hover:text-blue-500" (click)="memberSignOut()">
+                    <div class="w-full px-4 py-3 flex text-sm items-center cursor-pointer hover:text-blue-500" (click)="memberSignOut(memberDetails?.id)">
                         <mat-icon class="mr-2 text-base">logout</mat-icon> Logout
                     </div>
                 </div>
