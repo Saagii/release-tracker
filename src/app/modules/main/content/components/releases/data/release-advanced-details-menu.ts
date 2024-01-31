@@ -1,9 +1,11 @@
+import { ReleaseObjectivesComponent } from "../components/release-view/child-components/objectives/objectives.component";
+
 export const releaseAdvancedDetailsMenu = [
     {
         title: 'Objectives',
         description: 'List the specific goals and objectives that this release is intended to achieve',
         icon: '',
-        component: ''
+        component: ReleaseObjectivesComponent
     },
     {
         title: 'Enhancements & Innovations',

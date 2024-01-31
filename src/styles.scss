@@ -79,3 +79,7 @@ body { margin: 0; }
 .mat-mdc-tab .mdc-tab__text-label {
     letter-spacing: normal !important;
 }
+
+.mdc-text-field--outlined .mdc-floating-label {
+    font-size: 0.85rem !important;
+}

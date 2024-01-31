@@ -25,6 +25,8 @@ export class ReleaseViewComponent implements OnInit {
   membersList: any;
   projectDetails: any;
   advancedDetailsMenu = releaseAdvancedDetailsMenu;
+  activeComponent: any = '';
+  activeComponentInputs: any;
 
   constructor(
     private statusService: StatusService,

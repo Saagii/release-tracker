@@ -108,7 +108,7 @@
                 <div class="w-full text-lg">Advanced Details</div>
 
                 <!-- Advanced Details Cards -->
-                <div class="w-full flex flex-wrap justify-start items-stretch">
+                <div class="w-full flex flex-wrap justify-start items-stretch mt-2" *ngIf="activeComponent === '' ">
                     <div class="w-6/12 p-2" *ngFor="let menu of advancedDetailsMenu">
                         <div class="w-full flex items-center text-gray-800 border border-gray-200 rounded-lg p-4 cursor-pointer hover:border-blue-400 hover:text-blue-600 hover:font-bold">
                             <div class="w-11/12">
@@ -116,12 +116,23 @@
                                 <div class="w-full text-xs text-gray-600 mt-3 font-normal">{{menu.description}}</div>
                             </div>
                             <div class="w-1/12 flex justify-end">
-                                <button mat-icon-button class="" color="primary">
+                                <button mat-icon-button class="" color="primary" (click)="activeComponent = menu.component; activeComponentInputs = menu;">
                                     <mat-icon>keyboard_arrow_right</mat-icon>
                                 </button>
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <!-- Render advanced release details component. -->
+                <div class="w-full p-2 mt-2" *ngIf="activeComponent != '' ">
+                    <div class="mb-4">
+                        <button mat-button class="" (click)="activeComponent = ''">
+                            <mat-icon class="mr-2">keyboard_arrow_left</mat-icon> Back
+                        </button>
+                    </div>
+                    
+                    <ng-container *ngComponentOutlet="activeComponent; inputs:activeComponentInputs"></ng-container>
                 </div>
                 
             </div>
