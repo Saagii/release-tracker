@@ -223,7 +223,7 @@
         <div class="w-6/12 flex items-center my-3" [formGroup]="releaseConfigBasicForm">
             <mat-form-field class="w-9/12" appearance="outline">
                 <mat-label>Add Release Deployment Type</mat-label>
-                <input type="text" matInput placeholder="Add Deployment Type" #releaseDeploymentTypeInput formControlName="deploymentTypes" >
+                <input type="text" matInput placeholder="Add Deployment Type"  formControlName="deploymentTypes" >
             </mat-form-field>
 
             <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="releaseConfigActionStatus === '' " (click)="updateReleaseConfigBasicDetails('deploymentTypes')">+ Add</button>
@@ -255,7 +255,7 @@
         <div class="w-6/12 flex items-center my-3" [formGroup]="releaseConfigBasicForm">
             <mat-form-field class="w-9/12" appearance="outline">
                 <mat-label>Add Release Rollback Type</mat-label>
-                <input type="text" matInput placeholder="Add Rollback Type" #releaseDeploymentTypeInput formControlName="rollbackPlanTypes" >
+                <input type="text" matInput placeholder="Add Rollback Type"  formControlName="rollbackPlanTypes" >
             </mat-form-field>
 
             <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="releaseConfigActionStatus === '' " (click)="updateReleaseConfigBasicDetails('rollbackPlanTypes')">+ Add</button>
@@ -285,7 +285,7 @@
         <div class="w-6/12 flex items-center my-3" [formGroup]="releaseConfigBasicForm">
             <mat-form-field class="w-9/12" appearance="outline">
                 <mat-label>Add Release User Support Type</mat-label>
-                <input type="text" matInput placeholder="Add Rollback Type" #releaseDeploymentTypeInput formControlName="userSupportTypes" >
+                <input type="text" matInput placeholder="Add Rollback Type"  formControlName="userSupportTypes" >
             </mat-form-field>
 
             <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="releaseConfigActionStatus === '' " (click)="updateReleaseConfigBasicDetails('userSupportTypes')">+ Add</button>
@@ -309,6 +309,37 @@
 </ng-container>
 
 <ng-container *ngIf="activeReleaseConfigCategory === 'Objectives, Enhancements, Defects' ">
+
+    <!-- Release Objectives Status Config Content -->
+    <div class="w-full mt-4 p-4 border border-gray-200 rounded-lg">
+        <div class="text-base">Release  <span class="text-gray-600 font-bold">Objectives Status</span></div>
+        <div class="text-gray-500 text-xs">Define each release objective with status options.</div>
+
+        <div class="w-6/12 flex items-center my-3" [formGroup]="releaseConfigBasicForm">
+            <mat-form-field class="w-9/12" appearance="outline">
+                <mat-label>Add Release Objectives Status</mat-label>
+                <input type="text" matInput placeholder="Add Release Objectives Status"  formControlName="objectiveStatus" >
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="releaseConfigActionStatus === '' " (click)="updateReleaseConfigBasicDetails('objectiveStatus')">+ Add</button>
+            <div class="flex items-center" *ngIf="releaseConfigActionStatus === 'objectiveStatus' ">
+                <mat-spinner [diameter]="20"></mat-spinner>
+                <span class="ml-2">Adding...</span>
+            </div>
+        </div>
+
+        <div class="w-6/12 mt-3 border border-gray-200 rounded-md" *ngIf="releaseConfig?.objectiveStatus.length">
+            <div class="w-full flex justify-between items-center px-3 border-b border-gray-200 hover:bg-gray-50" *ngFor="let status of releaseConfig.objectiveStatus">
+                <div class="w-6/12">{{status.value}}</div>
+                <div class="w-auto flex items-center">
+                    <button mat-icon-button color="warn" class="!ml-3" (click)="deleteReleaseConfigDetailsByTypeAndId('objectiveStatus', status._id)">
+                        <mat-icon>remove_circle_outline</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Release Enhancements Config Content -->
     <div class="w-full mt-4 p-4 border border-gray-200 rounded-lg">
         <div class="text-base">Release  <span class="text-gray-600 font-bold">Enhancements Categories</span></div>
@@ -317,7 +348,7 @@
         <div class="w-6/12 flex items-center my-3" [formGroup]="releaseConfigBasicForm">
             <mat-form-field class="w-9/12" appearance="outline">
                 <mat-label>Add Release Enhancements Categories</mat-label>
-                <input type="text" matInput placeholder="Add Enhancement Category" #releaseDeploymentTypeInput formControlName="enhancementsCategories" >
+                <input type="text" matInput placeholder="Add Enhancement Category"  formControlName="enhancementsCategories" >
             </mat-form-field>
 
             <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="releaseConfigActionStatus === '' " (click)="updateReleaseConfigBasicDetails('enhancementsCategories')">+ Add</button>
@@ -347,7 +378,7 @@
         <div class="w-6/12 flex items-center my-3" [formGroup]="releaseConfigBasicForm">
             <mat-form-field class="w-9/12" appearance="outline">
                 <mat-label>Add Release Defect Types Type</mat-label>
-                <input type="text" matInput placeholder="Add Rollback Type" #releaseDeploymentTypeInput formControlName="defectTypes" >
+                <input type="text" matInput placeholder="Add Rollback Type"  formControlName="defectTypes" >
             </mat-form-field>
 
             <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="releaseConfigActionStatus === '' " (click)="updateReleaseConfigBasicDetails('defectTypes')">+ Add</button>
@@ -377,7 +408,7 @@
         <div class="w-6/12 flex items-center my-3" [formGroup]="releaseConfigBasicForm">
             <mat-form-field class="w-9/12" appearance="outline">
                 <mat-label>Add Release Defect Status Type</mat-label>
-                <input type="text" matInput placeholder="Add Rollback Type" #releaseDeploymentTypeInput formControlName="defectStatus" >
+                <input type="text" matInput placeholder="Add Rollback Type"  formControlName="defectStatus" >
             </mat-form-field>
 
             <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="releaseConfigActionStatus === '' " (click)="updateReleaseConfigBasicDetails('defectStatus')">+ Add</button>
@@ -409,7 +440,7 @@
         <div class="w-6/12 flex items-center my-3" [formGroup]="releaseConfigBasicForm">
             <mat-form-field class="w-9/12" appearance="outline">
                 <mat-label>Add Release SignOff Modes</mat-label>
-                <input type="text" matInput placeholder="Add SignOff Modes" #releaseDeploymentTypeInput formControlName="sigOffModes" >
+                <input type="text" matInput placeholder="Add SignOff Modes"  formControlName="sigOffModes" >
             </mat-form-field>
 
             <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="releaseConfigActionStatus === '' " (click)="updateReleaseConfigBasicDetails('sigOffModes')">+ Add</button>

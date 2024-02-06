@@ -48,6 +48,7 @@ export class ReleaseConfigBasicCategoryComponent implements OnInit {
       deploymentTypes: [''],
       rollbackPlanTypes: [''],
       userSupportTypes: [''],
+      objectiveStatus: [''],
       enhancementsCategories: [''],
       defectTypes: [''],
       defectStatus: [''],
