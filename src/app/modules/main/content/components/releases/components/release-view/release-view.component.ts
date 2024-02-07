@@ -8,6 +8,8 @@ import { ClientsService } from 'src/app/modules/main/services/clients.service';
 import { MembersService } from 'src/app/modules/main/services/members.service';
 import { ProjectsService } from 'src/app/modules/main/services/projects.service';
 import { releaseAdvancedDetailsMenu } from '../../data/release-advanced-details-menu';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import MiniSearch from 'minisearch';
 
 @Component({
   selector: 'app-release-view',
@@ -27,6 +29,7 @@ export class ReleaseViewComponent implements OnInit {
   advancedDetailsMenu = releaseAdvancedDetailsMenu;
   activeComponent: any = '';
   activeComponentInputs: any;
+  releaseDetailSearchForm: UntypedFormGroup;
 
   constructor(
     private statusService: StatusService,
@@ -35,7 +38,13 @@ export class ReleaseViewComponent implements OnInit {
     private clientsService: ClientsService,
     private membersService: MembersService,
     private projectsService: ProjectsService,
-  ) {}
+    private fb: UntypedFormBuilder
+  ) {
+    // Prepare Sign In Form
+    this.releaseDetailSearchForm = this.fb.group({
+      releaseDetailSearchText: ['']
+    });
+  }
 
   ngOnInit(): void {
     for(const statusMenu of statusListMockDataMenu) {
@@ -176,6 +185,38 @@ export class ReleaseViewComponent implements OnInit {
          return client._id === id;
       })[0].clientName;
     }
+  }
+
+
+  /*
+    Search Advanced details option.
+  */
+  searchAdvancedDetailOption(): void {
+    console.log(this.releaseDetailSearchForm.get('releaseDetailSearchText')?.value);
+
+    if(this.releaseDetailSearchForm.get('releaseDetailSearchText')?.value === '') {
+      this.advancedDetailsMenu = releaseAdvancedDetailsMenu;
+      return;
+    }
+
+    let tempAdvancedDetailList: any = [];
+    for(const menu of this.advancedDetailsMenu) {
+      if(menu.title.toLocaleLowerCase().includes(this.releaseDetailSearchForm.get('releaseDetailSearchText')?.value.toLocaleLowerCase())) {
+         console.log(menu);
+         tempAdvancedDetailList.push(menu);
+      }
+    }
+
+    this.advancedDetailsMenu = tempAdvancedDetailList;
+  }
+
+
+  /*
+    Clear search input.
+  */
+  clearSearchInput(): void {
+    this.releaseDetailSearchForm.get('releaseDetailSearchText')?.setValue('');
+    this.advancedDetailsMenu = releaseAdvancedDetailsMenu;
   }
   
 }

@@ -105,7 +105,21 @@
             <div class="w-full mt-4 border border-gray-200 rounded-lg p-4">
 
                 <!-- Title -->
-                <div class="w-full text-lg">Advanced Details</div>
+                <div class="w-full flex justify-between">
+                    <div class="w-full text-lg">Advanced Details</div>
+                    <div class="w-6/12 flex justify-end">
+                        <div class="w-6/12 flex justify-end">
+                            <form [formGroup]="releaseDetailSearchForm" class="w-full flex justify-end items-center relative">
+                                <input class="border border-gray-200 rounded-md p-2 outline-none" type="text" placeholder="Search" (keyup)="searchAdvancedDetailOption()" formControlName="releaseDetailSearchText">
+                                <mat-icon class="text-base text-red-300 absolute right-0 top-1.5 cursor-pointer" *ngIf="releaseDetailSearchForm.get('releaseDetailSearchText')?.value !== '' " (click)="clearSearchInput()">cancel</mat-icon>
+                            </form>
+                        </div>
+                        <div class="ml-4 flex justify-end">
+                            <button mat-flat-button color="primary" class="">Proceed for Sign-off  <mat-icon class="ml-2" iconPositionEnd>keyboard_arrow_right</mat-icon></button>
+                        </div>
+                    </div>
+                </div>
+                
 
                 <!-- Advanced Details Cards -->
                 <div class="w-full flex flex-wrap justify-start items-stretch mt-2" *ngIf="activeComponent === '' ">
@@ -125,7 +139,7 @@
                 </div>
 
                 <!-- Render advanced release details component. -->
-                <div class="w-full p-2 mt-2" *ngIf="activeComponent != '' ">
+                <div class="w-full mt-2" *ngIf="activeComponent != '' ">
                     <div class="mb-4">
                         <button mat-button class="" (click)="activeComponent = ''">
                             <mat-icon class="mr-2">keyboard_arrow_left</mat-icon> Back
