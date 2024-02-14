@@ -107,7 +107,7 @@
                 <!-- Title -->
                 <div class="w-full flex justify-between">
                     <div class="w-full text-lg">Advanced Details</div>
-                    <div class="w-6/12 flex justify-end">
+                    <div class="w-6/12 flex justify-end" *ngIf="activeComponent === '' ">
                         <div class="w-6/12 flex justify-end">
                             <form [formGroup]="releaseDetailSearchForm" class="w-full flex justify-end items-center relative">
                                 <input class="border border-gray-200 rounded-md p-2 outline-none" type="text" placeholder="Search" (keyup)="searchAdvancedDetailOption()" formControlName="releaseDetailSearchText">
@@ -140,13 +140,33 @@
 
                 <!-- Render advanced release details component. -->
                 <div class="w-full mt-2" *ngIf="activeComponent != '' ">
-                    <div class="mb-4">
-                        <button mat-button class="" (click)="activeComponent = ''">
-                            <mat-icon class="mr-2">keyboard_arrow_left</mat-icon> Back
-                        </button>
+
+                    <div class="w-full flex border border-gray-200 rounded-lg">
+                        
+                        <!-- Left Block of active component rendered. -->
+                        <div class="w-3/12 min-h-96 bg-gray-100">
+
+                            <!-- Back Button -->
+                            <div class="mb-4 py-4">
+                                <button mat-button class="-mr-4" (click)="activeComponent = ''">
+                                    <mat-icon class="mr-1">keyboard_arrow_left</mat-icon> Back
+                                </button>
+                            </div>
+
+                            <!-- Active Component Title -->
+                            <div class="w-full text-2xl mb-4 px-4">{{activeComponentInputs.title}}</div>
+
+                            <!-- Active Component Description -->
+                            <div class="w-full text-sm text-gray-700 mb-4 px-4">{{activeComponentInputs.description}}</div>
+                        </div>
+
+                        <!-- Active Component Outlet -->
+                        <div class="w-9/12 min-h-72 p-4">
+                            <div class="w-full">
+                                <ng-container *ngComponentOutlet="activeComponent; inputs:activeComponentInputs"></ng-container>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <ng-container *ngComponentOutlet="activeComponent; inputs:activeComponentInputs"></ng-container>
                 </div>
                 
             </div>

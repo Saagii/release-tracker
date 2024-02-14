@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSliderModule} from '@angular/material/slider';
+import {MatRippleModule} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { NavMenuComponent } from './components/dialog/child-components/nav-menu/nav-menu.component';
 import { RouterModule } from '@angular/router';
@@ -49,7 +50,8 @@ import { ConfirmationComponent } from './components/dialog/child-components/conf
     MatSnackBarModule,
     MatSliderModule,
     RouterModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatRippleModule
   ],
   exports: [
 
@@ -75,6 +77,7 @@ import { ConfirmationComponent } from './components/dialog/child-components/conf
     MatSliderModule,
     MatDatepickerModule,
     RouterModule,
+    MatRippleModule,
 
     // Components Exports
     NavMenuComponent,

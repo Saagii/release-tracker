@@ -6,6 +6,7 @@ import { ReleasesService } from 'src/app/modules/main/services/releases.service'
 import { ClientsService } from 'src/app/modules/main/services/clients.service';
 import { MembersService } from 'src/app/modules/main/services/members.service';
 import { ProjectsService } from 'src/app/modules/main/services/projects.service';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-release-view-objectives',
@@ -15,6 +16,8 @@ export class ReleaseObjectivesComponent implements OnInit {
 
   @Input() title?: string;
   @Input() description?: string;
+  releaseId: string = '';
+  releaseObjectivesForm: UntypedFormGroup;
 
   constructor(
     private statusService: StatusService,
@@ -23,9 +26,19 @@ export class ReleaseObjectivesComponent implements OnInit {
     private clientsService: ClientsService,
     private membersService: MembersService,
     private projectsService: ProjectsService,
-  ) {}
+    private fb: UntypedFormBuilder
+  ) {
+    // Prepare Objectives Form
+    this.releaseObjectivesForm = this.fb.group({
+      title: [''],
+      description: [''],
+      status: ['']
+    });
+  }
 
   ngOnInit(): void {
-    console.log('Inside ReleaseObjectivesComponent')
+    console.log('Inside ReleaseObjectivesComponent');
+
+    this.releaseId = this._activatedRoute.snapshot.params['id'];
   }
 }
