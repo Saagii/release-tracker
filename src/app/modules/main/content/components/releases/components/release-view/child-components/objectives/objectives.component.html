@@ -1,22 +1,57 @@
 <!-- If no objectives are present. -->
-<div class="w-full flex flex-wrap mt-14">
+<div class="w-full flex flex-wrap mt-14" *ngIf="releaseDetails && !releaseDetails?.releaseObjectives.length && formViewType === '' ">
     <div class="w-full py-6 text-center text-gray-700">Hey, currently there are no objectives added for this release.</div>
     <div class="w-full flex justify-center">
-        <button mat-flat-button class="" color="primary">Let's start adding Release Objectives</button>
+        <button mat-flat-button class="" color="primary" (click)="formViewType = 'add';">Let's start adding Release Objectives</button>
     </div>
 </div>
 
 <!-- Loading Block -->
-<div class="w-full mt-14 flex items-center justify-center">
+<div class="w-full mt-14 flex items-center justify-center" *ngIf="fetchLoader">
     <mat-spinner class="mr-2" diameter="22"></mat-spinner> Fetching release objectives...
 </div>
 
 <!-- View Block -->
-<div class="w-full"></div>
+<div class="w-full" *ngIf="releaseDetails && releaseDetails?.releaseObjectives?.length"></div>
 
 <!-- Form Block -->
-<div class="w-full">
+<div class="w-full" *ngIf="formViewType !== '' ">
 
     <!-- Title -->
-    <div class="w-full text-lg">Add Release Objective</div>
+    <div class="w-full text-lg">{{ formViewType === 'add' ? 'Add' : 'Edit'}} Release Objective</div>
+    <div class="w-full text-xs text-gray-600">Enter all the requied fields*</div>
+
+    <!-- Form Block -->
+    <div class="w-full mt-8">
+        <div class="w-10/12 flex flex-wrap items-center my-3" [formGroup]="releaseObjectivesForm">
+
+            <!-- Title -->
+            <mat-form-field class="w-full mb-2" appearance="outline">
+                <mat-label>Objective Title</mat-label>
+                <input type="text" matInput placeholder="Add Objective Title"  formControlName="title" required>
+            </mat-form-field>
+
+            <!-- Description -->
+            <mat-form-field class="w-full mb-2" appearance="outline">
+                <mat-label>Objective Description</mat-label>
+                <textarea type="text" matInput placeholder="Add Objective Description"  formControlName="description" required></textarea>
+            </mat-form-field>
+
+            <!-- Status -->
+            <mat-form-field class="w-full mb-2" appearance="outline">
+                <mat-label>Objective Initial Status</mat-label>
+                <mat-select placeholder="Select Objective Status" formControlName="status" required>
+                    <mat-option *ngFor="let status of releaseConfigDetails.objectiveStatus" [value]="status._id">
+                      {{status.value}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <!-- Form Actions -->
+            <div class="w-full flex justify-end mt-8">
+                <button mat-stroked-button class="" (click)="formViewType = '';">Cancel</button>
+                <button mat-flat-button class="ml-4" color="primary">Add</button>
+            </div>
+        </div>
+    </div>
 </div>

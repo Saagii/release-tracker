@@ -16,8 +16,12 @@ export class ReleaseObjectivesComponent implements OnInit {
 
   @Input() title?: string;
   @Input() description?: string;
+  fetchLoader: boolean = false;
   releaseId: string = '';
+  releaseDetails: any;
+  releaseConfigDetails: any;
   releaseObjectivesForm: UntypedFormGroup;
+  formViewType: string = '';
 
   constructor(
     private statusService: StatusService,
@@ -40,5 +44,38 @@ export class ReleaseObjectivesComponent implements OnInit {
     console.log('Inside ReleaseObjectivesComponent');
 
     this.releaseId = this._activatedRoute.snapshot.params['id'];
+
+    // Get release config.
+    this.getReleaseConfigDetails();
+  }
+
+
+  /*
+    Get release config details.
+  */
+  getReleaseConfigDetails(): any {
+    this.fetchLoader = true;
+    this.releasesService.getReleasesConfig().subscribe((releaseConfig: any) => {
+      console.log(releaseConfig);
+
+      this.releaseConfigDetails = releaseConfig;
+      
+      // Get Releases details.
+      this.getReleasesDetails();
+    });
+  }
+
+
+    /*
+    Get Releases details.
+  */
+  getReleasesDetails(): any {
+    this.releasesService.getReleaseDetails(this.releaseId).subscribe((releaseDetails: any) => {
+      console.log(releaseDetails);
+
+      this.fetchLoader = false;
+      
+      this.releaseDetails = releaseDetails;
+    });
   }
 }
