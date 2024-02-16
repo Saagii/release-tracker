@@ -12,7 +12,9 @@
 </div>
 
 <!-- View Block -->
-<div class="w-full" *ngIf="releaseDetails && releaseDetails?.releaseObjectives?.length"></div>
+<div class="w-full" *ngIf="releaseDetails && releaseDetails?.releaseObjectives?.length">
+    {{releaseDetails?.releaseObjectives | json}}
+</div>
 
 <!-- Form Block -->
 <div class="w-full" *ngIf="formViewType !== '' ">
@@ -50,7 +52,7 @@
             <!-- Form Actions -->
             <div class="w-full flex justify-end mt-8">
                 <button mat-stroked-button class="" (click)="formViewType = '';">Cancel</button>
-                <button mat-flat-button class="ml-4" color="primary">Add</button>
+                <button mat-flat-button class="ml-4" color="primary" (click)="addReleaseObjectives()">Add</button>
             </div>
         </div>
     </div>

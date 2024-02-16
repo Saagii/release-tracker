@@ -103,7 +103,7 @@ export class ReleasesService {
     /*
         Add release Configuration Status.
     */
-    updateReleaseDetails(releaseDetailsPayload: any): any {
-        return this._httpClient.put(`${environment.basePath}/api/releases`, releaseDetailsPayload);
+    updateReleaseDetails(releaseId: string, releaseDetailsPayload: any): any {
+        return this._httpClient.put(`${environment.basePath}/api/releases/${releaseId}`, releaseDetailsPayload);
     }
 }

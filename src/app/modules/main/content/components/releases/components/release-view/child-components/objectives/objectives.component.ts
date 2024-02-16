@@ -78,4 +78,37 @@ export class ReleaseObjectivesComponent implements OnInit {
       this.releaseDetails = releaseDetails;
     });
   }
+
+
+  /*
+    Add Release Objectives.
+  */
+  addReleaseObjectives(): void {
+
+    // Set the payload details.
+    const releaseDetailsPayload = {
+      releaseId: this.releaseDetails._id,
+      releaseDetailsUpdatePayload: {
+        releaseObjectives : [
+          {
+            title: this.releaseObjectivesForm.get('title')?.value,
+            description: this.releaseObjectivesForm.get('description')?.value,
+            status: this.releaseObjectivesForm.get('status')?.value
+          }
+        ]
+      }
+    }
+
+    console.log(releaseDetailsPayload);
+
+    this.releasesService.updateReleaseDetails(this.releaseDetails._id, releaseDetailsPayload).subscribe((response: any) => {
+      console.log(response);
+
+      this.formViewType = '';
+
+      this.fetchLoader = true;
+
+      this.getReleasesDetails();
+    })
+  }
 }
