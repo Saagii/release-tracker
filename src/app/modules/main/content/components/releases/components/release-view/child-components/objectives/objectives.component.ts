@@ -22,6 +22,7 @@ export class ReleaseObjectivesComponent implements OnInit {
   releaseConfigDetails: any;
   releaseObjectivesForm: UntypedFormGroup;
   formViewType: string = '';
+  expandedObjectiveId: string = '';
 
   constructor(
     private statusService: StatusService,

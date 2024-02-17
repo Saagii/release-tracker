@@ -2,7 +2,7 @@
 <div class="w-full flex flex-wrap mt-14" *ngIf="releaseDetails && !releaseDetails?.releaseObjectives.length && formViewType === '' ">
     <div class="w-full py-6 text-center text-gray-700">Hey, currently there are no objectives added for this release.</div>
     <div class="w-full flex justify-center">
-        <button mat-flat-button class="" color="primary" (click)="formViewType = 'add';">Let's start adding Release Objectives</button>
+        <button mat-flat-button class="" color="primary" (click)="formViewType = 'Add';">Let's start adding Release Objectives</button>
     </div>
 </div>
 
@@ -12,16 +12,29 @@
 </div>
 
 <!-- View Block -->
-<div class="w-full" *ngIf="releaseDetails && releaseDetails?.releaseObjectives?.length">
-    <button mat-button class="" color="primary"  (click)="formViewType = 'add';">Add</button>
-    {{releaseDetails?.releaseObjectives | json}}
+<div class="w-full" *ngIf="releaseDetails && releaseDetails?.releaseObjectives?.length && formViewType === '' ">
 
-    <div class="w-full px-4 py-2 border border-gray-200 rounded-md" *ngFor="let objective of releaseDetails?.releaseObjectives">
+    <!-- View Block Title and Actions -->
+    <div class="w-full flex flex-wrap justify-between items-center mb-4">
+        <div class="w-10/12 text-lg">
+            <div class="w-full">Release Objectives</div>
+            <div class="w-full text-xs text-gray-600">Click on <span class="font-bold italic">Show more</span> to view objective description and perform other actions.</div>
+        </div>
+        <div class="w-2/12 flex justify-end">
+            <button mat-stroked-button class="" color="primary" (click)="formViewType = 'Add';">+ Add Objectives</button>
+        </div>
+    </div>
+
+    <!-- View Block Objectives list -->
+    <div class="w-full px-4 py-2 border border-gray-200 rounded-md mb-4" *ngFor="let objective of releaseDetails?.releaseObjectives; let i = index;">
 
         <!-- Objective Title & Action Block -->
         <div class="w-full flex justify-between items-center">
-            <div class="w-8/12 text-lg">{{objective.title}}</div>
-            <div class="w-2/12 flex justify-end items-center">
+            <div class="w-8/12">
+                <div class="text-xs text-gray-600">#{{i+1}}</div>
+                <div class="">{{objective.title}}</div>
+            </div>
+            <div class="w-4/12 flex justify-end items-center">
                 <div mat-flat-button class="select-none cursor-pointer rounded-full px-3 pr-2 py-1 flex items-center text-xs uppercase" [ngClass]="getStatusStyle(filterRequiredIds('status', objective.status))" [matMenuTriggerFor]="matObjectivesStatusMenu">
                     {{filterRequiredIds('status', objective.status)}} <mat-icon class="cursor-pointer bg-white rounded-full ml-3">arrow_drop_down</mat-icon>
                 </div>
@@ -30,32 +43,39 @@
                         <div class="text-xs p-3 uppercase hover:bg-gray-100 cursor-pointer hover:font-bold hover:text-blue-800 hover:border-l-2 hover:border-blue-800">{{status.value}}</div>
                     </div>
                 </mat-menu>
-                <button mat-icon-button class="ml-2" matTooltip="More">
+                <button mat-icon-button class="ml-2" matTooltip="Show More" *ngIf="expandedObjectiveId !== objective._id" (click)="expandedObjectiveId = objective._id">
                     <mat-icon>keyboard_arrow_down</mat-icon>
                 </button>
-            </div>
-        </div>
-
-        <!-- Objective Description, Delete & Edit Actions Block -->
-        <div class="w-full">
-            <div class="w-full py-4 text-gray-600">{{objective.description}}</div>
-        </div>
-
-        <!-- Modification Details -->
-        <div class="w-full flex justify-end items-center">
-            <div class="w-10/12 mt-4">
-                <div class="text-xs text-gray-600"><span class="font-bold">Last Modified Date:</span> {{objective.lastModifiedDate | date}}</div>
-                <div class="text-xs text-gray-600"><span class="font-bold">Last Modified By:</span> {{objective.lastModifiedById}}</div>
-            </div>
-            <div class="w-2/12 flex justify-end">
-                <button mat-icon-button class="" color="warn">
-                    <mat-icon class="mr-2">delete</mat-icon>
-                </button>
-                <button mat-icon-button class="">
-                    <mat-icon class="mr-2">edit</mat-icon>
+                <button mat-icon-button class="ml-2" matTooltip="Show Less" *ngIf="expandedObjectiveId !== '' && expandedObjectiveId === objective._id" (click)="expandedObjectiveId = '' ">
+                    <mat-icon>keyboard_arrow_up</mat-icon>
                 </button>
             </div>
         </div>
+
+        <!-- Expanded Block -->
+        <div class="w-full" *ngIf="expandedObjectiveId === objective._id ">
+            <!-- Objective Description, Delete & Edit Actions Block -->
+            <div class="w-full">
+                <div class="w-full py-4 text-gray-600 text-xs">{{objective.description}}</div>
+            </div>
+
+            <!-- Modification Details -->
+            <div class="w-full flex justify-end items-center">
+                <div class="w-10/12 mt-4">
+                    <div class="text-xs text-gray-600"><span class="font-semibold">Modified Date:</span> {{objective.lastModifiedDate | date}}</div>
+                    <div class="text-xs text-gray-600"><span class="font-semibold">Modified By:</span> {{objective.lastModifiedById}}</div>
+                </div>
+                <div class="w-2/12 flex justify-end">
+                    <button mat-icon-button class="" color="warn">
+                        <mat-icon class="mr-2">delete</mat-icon>
+                    </button>
+                    <button mat-icon-button class="" (click)="formViewType = 'Edit' ">
+                        <mat-icon class="mr-2">edit</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
         
     </div>
 </div>
@@ -64,7 +84,7 @@
 <div class="w-full" *ngIf="formViewType !== '' ">
 
     <!-- Title -->
-    <div class="w-full text-lg">{{ formViewType === 'add' ? 'Add' : 'Edit'}} Release Objective</div>
+    <div class="w-full text-lg">{{ formViewType}} Release Objective</div>
     <div class="w-full text-xs text-gray-600">Enter all the requied fields*</div>
 
     <!-- Form Block -->
