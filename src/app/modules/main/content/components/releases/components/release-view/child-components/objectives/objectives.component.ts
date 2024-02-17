@@ -51,6 +51,14 @@ export class ReleaseObjectivesComponent implements OnInit {
 
 
   /*
+    Get Status Style
+  */
+  getStatusStyle(statusValue: string): any {
+    return this.statusService.getStatusStyle(statusValue);
+  }
+
+
+  /*
     Get release config details.
   */
   getReleaseConfigDetails(): any {
@@ -110,5 +118,33 @@ export class ReleaseObjectivesComponent implements OnInit {
 
       this.getReleasesDetails();
     })
+  }
+
+
+    /*
+    Filter clients, release config IDs.
+  */
+  filterRequiredIds(type: string, id: string): any {
+
+    // Return Status value.
+    if(type === 'status') {
+      return this.releaseConfigDetails.objectiveStatus.filter((status: any) => {
+         return status._id === id;
+      })[0]?.value;
+    }
+
+    // Return Target value.
+    if(type === 'target') {
+      return this.releaseConfigDetails.targets.filter((target: any) => {
+         return target._id === id;
+      })[0]?.value;
+    }
+
+    // Return Type value.
+    if(type === 'type') {
+      return this.releaseConfigDetails.types.filter((type: any) => {
+         return type._id === id;
+      })[0]?.value;
+    }
   }
 }

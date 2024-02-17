@@ -20,9 +20,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatRippleModule} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { ConfirmationComponent } from './components/dialog/child-components/confirmation/confirmation.component';
 import { NavMenuComponent } from './components/dialog/child-components/nav-menu/nav-menu.component';
 import { RouterModule } from '@angular/router';
-import { ConfirmationComponent } from './components/dialog/child-components/confirmation/confirmation.component';
 
 @NgModule({
   declarations: [
@@ -49,9 +49,9 @@ import { ConfirmationComponent } from './components/dialog/child-components/conf
     MatProgressSpinnerModule,
     MatSnackBarModule,
     MatSliderModule,
-    RouterModule,
     MatDatepickerModule,
-    MatRippleModule
+    MatRippleModule,
+    RouterModule 
   ],
   exports: [
 
@@ -76,8 +76,8 @@ import { ConfirmationComponent } from './components/dialog/child-components/conf
     MatSnackBarModule,
     MatSliderModule,
     MatDatepickerModule,
-    RouterModule,
     MatRippleModule,
+    RouterModule,
 
     // Components Exports
     NavMenuComponent,
