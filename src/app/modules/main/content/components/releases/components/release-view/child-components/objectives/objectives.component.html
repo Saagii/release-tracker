@@ -43,7 +43,7 @@
                         <div class="text-xs p-3 uppercase hover:bg-gray-100 cursor-pointer hover:font-bold hover:text-blue-800 hover:border-l-2 hover:border-blue-800">{{status.value}}</div>
                     </div>
                 </mat-menu>
-                <button mat-icon-button class="ml-2" matTooltip="Show More" *ngIf="expandedObjectiveId !== objective._id" (click)="expandedObjectiveId = objective._id">
+                <button mat-icon-button class="ml-2" matTooltip="Show More" *ngIf="expandedObjectiveId !== objective._id" (click)="expandedObjectiveId = objective._id;">
                     <mat-icon>keyboard_arrow_down</mat-icon>
                 </button>
                 <button mat-icon-button class="ml-2" matTooltip="Show Less" *ngIf="expandedObjectiveId !== '' && expandedObjectiveId === objective._id" (click)="expandedObjectiveId = '' ">
@@ -69,7 +69,7 @@
                     <button mat-icon-button class="" color="warn">
                         <mat-icon class="mr-2">delete</mat-icon>
                     </button>
-                    <button mat-icon-button class="" (click)="formViewType = 'Edit' ">
+                    <button mat-icon-button class="" (click)="formViewType = 'Edit'; editObjectiveId = objective._id; editObjectives(objective) ">
                         <mat-icon class="mr-2">edit</mat-icon>
                     </button>
                 </div>
@@ -116,7 +116,7 @@
             <!-- Form Actions -->
             <div class="w-full flex justify-end mt-8">
                 <button mat-stroked-button class="" (click)="formViewType = '';">Cancel</button>
-                <button mat-flat-button class="ml-4" color="primary" (click)="addReleaseObjectives()">Add</button>
+                <button mat-flat-button class="ml-4" color="primary" (click)="updateReleaseObjectives()">{{formViewType === 'Add' ? 'Add' : 'Update'}}</button>
             </div>
         </div>
     </div>

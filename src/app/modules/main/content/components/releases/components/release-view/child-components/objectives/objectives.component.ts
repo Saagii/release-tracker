@@ -22,6 +22,7 @@ export class ReleaseObjectivesComponent implements OnInit {
   releaseConfigDetails: any;
   releaseObjectivesForm: UntypedFormGroup;
   formViewType: string = '';
+  editObjectiveId: string = '';
   expandedObjectiveId: string = '';
 
   constructor(
@@ -92,13 +93,17 @@ export class ReleaseObjectivesComponent implements OnInit {
   /*
     Add Release Objectives.
   */
-  addReleaseObjectives(): void {
+  updateReleaseObjectives(): void {
+
+    const paramToBeUpdatedValue = 'releaseObjectives';
 
     // Set the payload details.
-    const releaseDetailsPayload = {
+    let releaseDetailsPayload = {
       releaseId: this.releaseDetails._id,
+      paramToBeUpdatedValue: paramToBeUpdatedValue,
+      actionType: this.formViewType.toLowerCase(),
       releaseDetailsUpdatePayload: {
-        releaseObjectives : [
+        [paramToBeUpdatedValue] : [
           {
             title: this.releaseObjectivesForm.get('title')?.value,
             description: this.releaseObjectivesForm.get('description')?.value,
@@ -108,17 +113,34 @@ export class ReleaseObjectivesComponent implements OnInit {
       }
     }
 
+    if(this.formViewType === 'Edit') {
+      console.log(this.editObjectiveId);
+      releaseDetailsPayload = {...releaseDetailsPayload, ...{"releaseObjectParam": this.editObjectiveId}}
+      // releaseDetailsPayload['releaseObjectiveToBeUpdatedId'] = objectiveId;
+    }
+
     console.log(releaseDetailsPayload);
 
     this.releasesService.updateReleaseDetails(this.releaseDetails._id, releaseDetailsPayload).subscribe((response: any) => {
       console.log(response);
+      console.log('++++++++++++++++');
 
-      this.formViewType = '';
+      this.formViewType = ''; 
+      this.editObjectiveId = '';
 
       this.fetchLoader = true;
 
       this.getReleasesDetails();
     })
+  }
+
+
+  /*
+    Edit Objectives.
+  */
+  editObjectives(objective: any): void {
+    console.log(objective);
+    this.releaseObjectivesForm.setValue(objective);
   }
 
 
