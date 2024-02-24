@@ -14,7 +14,6 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {}
 
   hideNavMenu(): any {
-    console.log('Working');
     this.overlayOnclick = false;
   }
 }

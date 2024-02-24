@@ -7,6 +7,8 @@ import { ClientsService } from 'src/app/modules/main/services/clients.service';
 import { MembersService } from 'src/app/modules/main/services/members.service';
 import { ProjectsService } from 'src/app/modules/main/services/projects.service';
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { DialogSharedComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-release-view-objectives',
@@ -23,7 +25,10 @@ export class ReleaseObjectivesComponent implements OnInit {
   releaseObjectivesForm: UntypedFormGroup;
   formViewType: string = '';
   editObjectiveId: string = '';
+  deleteObjectiveId: string = '';
   expandedObjectiveId: string = '';
+  formActionLoader: boolean = false;
+  objectiveModifiedName: any;
 
   constructor(
     private statusService: StatusService,
@@ -32,7 +37,8 @@ export class ReleaseObjectivesComponent implements OnInit {
     private clientsService: ClientsService,
     private membersService: MembersService,
     private projectsService: ProjectsService,
-    private fb: UntypedFormBuilder
+    private fb: UntypedFormBuilder,
+    public dialog: MatDialog,
   ) {
     // Prepare Objectives Form
     this.releaseObjectivesForm = this.fb.group({
@@ -91,14 +97,39 @@ export class ReleaseObjectivesComponent implements OnInit {
 
 
   /*
+    Dialog Method: Delete Objective
+  */
+  objectiveDeleteActions(titleData: any): any {
+    this.dialog.open(DialogSharedComponent, {
+      panelClass: ['w-5/12'],
+      data: {
+        type: 'confirmation',
+        confirmationContent: {
+          title: 'Are you sure you want to delete ' + '"' + titleData + '"' + ' from release objectives ?',
+          subtitle: ''
+        }
+      },
+    }).afterClosed().subscribe((result: boolean) => {
+      console.log(result);
+
+      if(result) {
+        this.formViewType = 'Delete'; 
+        this.updateReleaseObjectives();
+      }
+    });
+  }
+
+
+  /*
     Add Release Objectives.
   */
   updateReleaseObjectives(): void {
 
     const paramToBeUpdatedValue = 'releaseObjectives';
+    this.formActionLoader = true;
 
     // Set the payload details.
-    let releaseDetailsPayload = {
+    let releaseDetailsPayload: any = {
       releaseId: this.releaseDetails._id,
       paramToBeUpdatedValue: paramToBeUpdatedValue,
       actionType: this.formViewType.toLowerCase(),
@@ -115,23 +146,53 @@ export class ReleaseObjectivesComponent implements OnInit {
 
     if(this.formViewType === 'Edit') {
       console.log(this.editObjectiveId);
-      releaseDetailsPayload = {...releaseDetailsPayload, ...{"releaseObjectParam": this.editObjectiveId}}
-      // releaseDetailsPayload['releaseObjectiveToBeUpdatedId'] = objectiveId;
+      releaseDetailsPayload = {...releaseDetailsPayload, ...{"releaseObjectParamId": this.editObjectiveId}}
+    }
+
+    // For deleting the objective.
+    if(this.formViewType === 'Delete') {
+      console.log(this.editObjectiveId);
+      this.fetchLoader = true;
+      delete releaseDetailsPayload.releaseDetailsUpdatePayload;
+      releaseDetailsPayload = {...releaseDetailsPayload, ...{"releaseObjectParamId": this.deleteObjectiveId}}
     }
 
     console.log(releaseDetailsPayload);
 
+    // Disable the form.
+    this.releaseObjectivesForm.disable();
+
     this.releasesService.updateReleaseDetails(this.releaseDetails._id, releaseDetailsPayload).subscribe((response: any) => {
       console.log(response);
-      console.log('++++++++++++++++');
 
-      this.formViewType = ''; 
-      this.editObjectiveId = '';
+      setTimeout(() => {
+        this.formActionLoader = false;
 
-      this.fetchLoader = true;
+        this.formViewType = ''; 
+        this.editObjectiveId = '';
 
-      this.getReleasesDetails();
+        this.fetchLoader = true;
+
+        this.releaseObjectivesForm.enable();
+
+        this.getReleasesDetails();
+      }, 1000);
+      
+      
     })
+  }
+
+
+  /*
+    Get member details by ID
+  */
+  getMemberDetails(memberId: string): void {
+    this.objectiveModifiedName = null;
+    this.membersService.getMemberDetails(memberId).subscribe((response: any) => {
+      console.log(response);
+
+      this.objectiveModifiedName = response;
+    });
   }
 
 
