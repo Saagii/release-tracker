@@ -1,3 +1,4 @@
+import { ReleaseDefectsBugsObservationsComponent } from "../components/release-view/child-components/defects-bugs-observations/defects-bugs-observations.component";
 import { ReleaseObjectivesComponent } from "../components/release-view/child-components/objectives/objectives.component";
 
 export const releaseAdvancedDetailsMenu = [
@@ -20,7 +21,7 @@ export const releaseAdvancedDetailsMenu = [
         title: 'Defects, Bugs & Observations',
         description: 'List and describe issues or bugs that were addressed and resolved in this release.',
         icon: '',
-        component: ''
+        component: ReleaseDefectsBugsObservationsComponent
     },
     {
         id: 4,

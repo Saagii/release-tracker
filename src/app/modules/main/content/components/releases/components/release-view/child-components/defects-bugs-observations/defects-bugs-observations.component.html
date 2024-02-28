@@ -1,0 +1,29 @@
+<!-- If no objectives are present. -->
+<div class="w-full flex flex-wrap mt-14" *ngIf="releaseDetails && !releaseDetails?.releaseDefects.length">
+    <div class="w-full py-6 text-center text-gray-700">Hey, currently there are no defects or bugs or observations added for this release.</div>
+    <div class="w-full flex justify-center">
+        <button mat-flat-button class="" color="primary" >Let's start listing</button>
+    </div>
+</div>
+
+<!-- View Block -->
+<div class="w-full">
+
+    <!-- View Block Title and Actions -->
+    <div class="w-full flex flex-wrap justify-between items-center mb-4">
+        <div class="w-10/12 text-lg">
+            <div class="w-full">Defects, Bugs & Observations</div>
+            <div class="w-full text-xs text-gray-600">Click on <span class="font-bold italic">Show more</span> to view the description and perform other actions.</div>
+        </div>
+        <div class="w-2/12 flex justify-end">
+            <button mat-stroked-button class="" color="primary">+ Add</button>
+        </div>
+    </div>
+
+    <!-- Loading Block -->
+    <div class="w-full mt-14 flex items-center justify-center" *ngIf="fetchLoader">
+        <mat-spinner class="mr-2" diameter="22"></mat-spinner> Fetching Defects, Bugs & Observations...
+    </div>
+
+
+</div>

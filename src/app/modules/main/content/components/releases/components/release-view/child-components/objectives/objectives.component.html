@@ -10,7 +10,7 @@
 <div class="w-full">
 
     <!-- View Block Title and Actions -->
-    <div class="w-full flex flex-wrap justify-between items-center mb-4">
+    <div class="w-full flex flex-wrap justify-between items-center mb-4" *ngIf="!['Add', 'Edit'].includes(formViewType)">
         <div class="w-10/12 text-lg">
             <div class="w-full">Release Objectives</div>
             <div class="w-full text-xs text-gray-600">Click on <span class="font-bold italic">Show more</span> to view objective description and perform other actions.</div>
