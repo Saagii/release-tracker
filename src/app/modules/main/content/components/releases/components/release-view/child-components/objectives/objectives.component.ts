@@ -195,6 +195,12 @@ export class ReleaseObjectivesComponent implements OnInit {
     });
   }
 
+  /* 
+    Reset form.
+  */
+  resetForm(): void {
+    this.releaseObjectivesForm.reset();
+  }
 
   /*
     Edit Objectives.

@@ -1,8 +1,8 @@
 <!-- If no objectives are present. -->
-<div class="w-full flex flex-wrap mt-14" *ngIf="releaseDetails && !releaseDetails?.releaseDefects.length">
+<div class="w-full flex flex-wrap mt-14" *ngIf="releaseDetails && !releaseDetails?.releaseDefects.length && formViewType === '' ">
     <div class="w-full py-6 text-center text-gray-700">Hey, currently there are no defects or bugs or observations added for this release.</div>
     <div class="w-full flex justify-center">
-        <button mat-flat-button class="" color="primary" >Let's start listing</button>
+        <button mat-flat-button class="" color="primary" (click)="formViewType = 'Add'; resetForm();">Let's start listing</button>
     </div>
 </div>
 
@@ -10,13 +10,13 @@
 <div class="w-full">
 
     <!-- View Block Title and Actions -->
-    <div class="w-full flex flex-wrap justify-between items-center mb-4">
+    <div class="w-full flex flex-wrap justify-between items-center mb-4" *ngIf="!['Add', 'Edit'].includes(formViewType) && releaseDetails?.releaseDefects?.length">
         <div class="w-10/12 text-lg">
             <div class="w-full">Defects, Bugs & Observations</div>
             <div class="w-full text-xs text-gray-600">Click on <span class="font-bold italic">Show more</span> to view the description and perform other actions.</div>
         </div>
         <div class="w-2/12 flex justify-end">
-            <button mat-stroked-button class="" color="primary">+ Add</button>
+            <button mat-stroked-button class="" color="primary" (click)="formViewType = 'Add'; resetForm();">+ Add</button>
         </div>
     </div>
 
@@ -25,5 +25,147 @@
         <mat-spinner class="mr-2" diameter="22"></mat-spinner> Fetching Defects, Bugs & Observations...
     </div>
 
+    <!-- View Block Objectives list -->
+    <div class="w-full" *ngIf="releaseDetails && releaseDetails?.releaseDefects?.length && formViewType === '' ">
+        <div class="py-4 text-xs">
+            <span class="font-bold">Total:</span><span class="text-gray-800 ml-1">{{releaseDetails?.releaseDefects.length}}</span>
+        </div>
+        <div class="w-full px-4 py-2 border border-gray-200 rounded-md mb-4" *ngFor="let defect of releaseDetails?.releaseDefects; let i = index;">
 
+            <!-- defect Title & Action Block -->
+            <div class="w-full flex justify-between items-center">
+                <div class="w-8/12">
+                    <div class="text-xs text-gray-600">#{{i+1}}</div>
+                    <div class="text-base">{{defect.title}}</div>
+                </div>
+                <div class="w-4/12 flex justify-end items-center">
+                    <div mat-flat-button class="select-none cursor-pointer rounded-full px-3 pr-2 py-1 flex items-center text-xs uppercase" [ngClass]="getStatusStyle(filterRequiredIds('status', defect.status))" [matMenuTriggerFor]="matDefectsStatusMenu">
+                        {{filterRequiredIds('status', defect.status)}} <mat-icon class="cursor-pointer bg-white rounded-full ml-3">arrow_drop_down</mat-icon>
+                    </div>
+                    <mat-menu #matDefectsStatusMenu="matMenu">
+                        <div class="" *ngFor="let status of releaseConfigDetails.defectStatus">
+                            <div class="text-xs p-3 uppercase hover:bg-gray-100 cursor-pointer hover:font-bold hover:text-blue-800 hover:border-l-2 hover:border-blue-800">{{status.value}}</div>
+                        </div>
+                    </mat-menu>
+                    <button mat-icon-button class="ml-2" matTooltip="Show More" *ngIf="expandedDefectId !== defect._id" (click)="expandedDefectId = defect._id; getMemberDetails(defect.lastModifiedById)">
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+                    </button>
+                    <button mat-icon-button class="ml-2" matTooltip="Show Less" *ngIf="expandedDefectId !== '' && expandedDefectId === defect._id" (click)="expandedDefectId = '' ">
+                        <mat-icon>keyboard_arrow_up</mat-icon>
+                    </button>
+                </div>
+            </div>
+    
+            <!-- Expanded Block -->
+            <div class="w-full mt-4" *ngIf="expandedDefectId === defect._id ">
+                <!-- Defect Description -->
+                <div class="w-full">
+                    <div class="text-xs text-gray-600 font-bold">DESCRIPTION</div>
+                    <div class="w-full pb-6 text-gray-600 text-xs">{{defect.description}}</div>
+                </div>
+
+                <!-- Defect Reference Links -->
+                <div class="w-full">
+                    <div class="text-xs text-gray-600 font-bold">REFERENCE LINKS</div>
+                    <div class="w-full pb-6 text-gray-600 text-xs">{{defect.referenceLinks}}</div>
+                </div>
+
+                <!-- Defect Comments / Remarks -->
+                <div class="w-full">
+                    <div class="text-xs text-gray-600 font-bold">COMMENTS/REMARKS</div>
+                    <div class="w-full pb-6 text-gray-600 text-xs">{{defect.comments}}</div>
+                </div>
+    
+                <!-- Modification Details -->
+                <div class="w-full flex justify-end items-center">
+                    <div class="w-10/12 mt-8">
+                        <div class="text-xs text-gray-600"><span class="font-semibold">Modified Date:</span> {{defect.lastModifiedDate | date}}</div>
+                        <div class="text-xs text-gray-600 flex items-center mt-1"><span class="font-semibold">Modified By:</span> <mat-spinner [diameter]="20" *ngIf="!defectModifiedName"></mat-spinner> <span class="ml-1 hover:underline hover:text-blue-600 cursor-pointer" *ngIf="defectModifiedName" [routerLink]="['../../admin/members', defect.lastModifiedById]">{{defectModifiedName?.firstName}} {{defectModifiedName?.lastName}}</span></div>
+                    </div>
+                    <div class="w-2/12 flex justify-end">
+                        <button mat-icon-button class="" color="warn" (click)="deleteDefectId = defect._id; defectsBugsObservationDeleteActions(defect.title);">
+                            <mat-icon class="mr-2">delete</mat-icon>
+                        </button>
+                        <button mat-icon-button class="" (click)="formViewType = 'Edit'; editDefectId = defect._id; editDefects(defect) ">
+                            <mat-icon class="mr-2">edit</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+
+
+</div>
+
+<!-- Form Block -->
+<div class="w-full" *ngIf="['Add', 'Edit'].includes(formViewType)">
+
+    <!-- Title -->
+    <div class="w-full text-lg">{{formViewType}} Release Defects, Bugs & Observations</div>
+    <div class="w-full text-xs text-gray-600">Enter all the requied fields*</div>
+
+    <!-- Form Block -->
+    <div class="w-full mt-8">
+        <div class="w-10/12 flex flex-wrap items-center my-3" [formGroup]="defectsBugsObservationsForm">
+
+            <!-- Type -->
+            <mat-form-field class="w-full mb-2" appearance="outline">
+                <mat-label>Defect Type</mat-label>
+                <mat-select placeholder="Select Defect Type" formControlName="type" required>
+                    <mat-option *ngFor="let type of releaseConfigDetails.defectTypes" [value]="type._id">
+                      {{type.value}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <!-- Title -->
+            <mat-form-field class="w-full mb-2" appearance="outline">
+                <mat-label>Defect Title</mat-label>
+                <input type="text" matInput placeholder="Add Defect Title"  formControlName="title" required>
+            </mat-form-field>
+
+            <!-- Description -->
+            <mat-form-field class="w-full mb-2" appearance="outline">
+                <mat-label>Defect Description</mat-label>
+                <textarea type="text" matInput placeholder="Add Defect Description"  formControlName="description" required></textarea>
+            </mat-form-field>
+
+            <!-- Reference Links -->
+            <mat-form-field class="w-full mb-2" appearance="outline">
+                <mat-label>Reference Links</mat-label>
+                <textarea type="text" matInput placeholder="Add Defect Reference Links"  formControlName="referenceLinks" required></textarea>
+            </mat-form-field>
+
+            <!-- Comments -->
+            <mat-form-field class="w-full mb-2" appearance="outline">
+                <mat-label>Comments/Remarks</mat-label>
+                <textarea type="text" matInput placeholder="Add Comments/Remarks"  formControlName="comments" required></textarea>
+            </mat-form-field>
+
+            <!-- Status -->
+            <mat-form-field class="w-full mb-2" appearance="outline">
+                <mat-label>Defect Status</mat-label>
+                <mat-select placeholder="Select Defect Status" formControlName="status" required>
+                    <mat-option *ngFor="let status of releaseConfigDetails.defectStatus" [value]="status._id">
+                      {{status.value}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <!-- Form Actions -->
+            <div class="w-full flex justify-end mt-8" *ngIf="!formActionLoader">
+                <button mat-stroked-button class="" (click)="formViewType = '';">Cancel</button>
+                <button mat-flat-button class="ml-4" color="primary" (click)="updateReleaseDefectsBugsObservations()" [disabled]="defectsBugsObservationsForm.invalid">{{formViewType === 'Add' ? 'Add' : 'Update'}}</button>
+            </div>
+
+            <!-- Form action loader -->
+            <div class="w-full flex justify-end mt-8" *ngIf="formActionLoader">
+                <mat-spinner [diameter]="20"></mat-spinner>
+                <span class="ml-2">{{formViewType}}ing Release Defect ...</span>
+            </div>
+        </div>
+    </div>
 </div>

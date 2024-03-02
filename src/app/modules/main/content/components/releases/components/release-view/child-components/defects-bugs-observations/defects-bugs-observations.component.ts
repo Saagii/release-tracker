@@ -22,7 +22,13 @@ export class ReleaseDefectsBugsObservationsComponent implements OnInit {
   releaseId: string = '';
   releaseDetails: any;
   releaseConfigDetails: any;
-  objectiveModifiedName: any;
+  formViewType: string = '';
+  editDefectId: string = '';
+  deleteDefectId: string = '';
+  formActionLoader: boolean = false;
+  expandedDefectId: string = '';
+  defectsBugsObservationsForm: UntypedFormGroup;
+  defectModifiedName: any;
 
   constructor(
     private statusService: StatusService,
@@ -33,7 +39,17 @@ export class ReleaseDefectsBugsObservationsComponent implements OnInit {
     private projectsService: ProjectsService,
     private fb: UntypedFormBuilder,
     public dialog: MatDialog,
-  ) {}
+  ) {
+    // Prepare Objectives Form
+    this.defectsBugsObservationsForm = this.fb.group({
+      type: [''],
+      title: [''],
+      description: [''],
+      status: [''],
+      referenceLinks: [''],
+      comments: ['']
+    });
+  }
 
   ngOnInit(): void {
     console.log('Inside ReleaseDefectsBugsObservationsComponent');
@@ -100,7 +116,8 @@ export class ReleaseDefectsBugsObservationsComponent implements OnInit {
       console.log(result);
 
       if(result) {
-        
+        this.formViewType = 'Delete'; 
+        this.updateReleaseDefectsBugsObservations();
       }
     });
   }
@@ -110,12 +127,92 @@ export class ReleaseDefectsBugsObservationsComponent implements OnInit {
     Get member details by ID
   */
   getMemberDetails(memberId: string): void {
-    this.objectiveModifiedName = null;
+    this.defectModifiedName = null;
     this.membersService.getMemberDetails(memberId).subscribe((response: any) => {
       console.log(response);
 
-      this.objectiveModifiedName = response;
+      this.defectModifiedName = response;
     });
+  }
+
+
+    /*
+    Add Release Objectives.
+  */
+  updateReleaseDefectsBugsObservations(): void {
+
+    const paramToBeUpdatedValue = 'releaseDefects';
+    this.formActionLoader = true;
+
+    // Set the payload details.
+    let releaseDetailsPayload: any = {
+      releaseId: this.releaseDetails._id,
+      paramToBeUpdatedValue: paramToBeUpdatedValue,
+      actionType: this.formViewType.toLowerCase(),
+      releaseDetailsUpdatePayload: {
+        [paramToBeUpdatedValue] : [
+          {
+            type: this.defectsBugsObservationsForm.get('type')?.value,
+            title: this.defectsBugsObservationsForm.get('title')?.value,
+            description: this.defectsBugsObservationsForm.get('description')?.value,
+            referenceLinks: this.defectsBugsObservationsForm.get('referenceLinks')?.value,
+            comments: this.defectsBugsObservationsForm.get('title')?.value,
+            status: this.defectsBugsObservationsForm.get('status')?.value
+          }
+        ]
+      }
+    }
+
+    if(this.formViewType === 'Edit') {
+      releaseDetailsPayload = {...releaseDetailsPayload, ...{"releaseObjectParamId": this.editDefectId}}
+    }
+
+    // For deleting the objective.
+    if(this.formViewType === 'Delete') {
+      this.fetchLoader = true;
+      delete releaseDetailsPayload.releaseDetailsUpdatePayload;
+      releaseDetailsPayload = {...releaseDetailsPayload, ...{"releaseObjectParamId": this.deleteDefectId}}
+    }
+
+    console.log(releaseDetailsPayload);
+
+    // Disable the form.
+    this.defectsBugsObservationsForm.disable();
+
+    this.releasesService.updateReleaseDetails(this.releaseDetails._id, releaseDetailsPayload).subscribe((response: any) => {
+      console.log(response);
+
+      setTimeout(() => {
+        this.formActionLoader = false;
+
+        this.formViewType = ''; 
+        this.editDefectId = '';
+
+        this.fetchLoader = true;
+
+        this.defectsBugsObservationsForm.enable();
+
+        this.getReleasesDetails();
+      }, 1000);
+      
+      
+    })
+  }
+
+  /* 
+    Reset form.
+  */
+  resetForm(): void {
+    this.defectsBugsObservationsForm.reset();
+  }
+
+
+  /*
+    Edit Defects.
+  */
+  editDefects(defect: any): void {
+    console.log(defect);
+    this.defectsBugsObservationsForm.setValue(defect);
   }
 
 
@@ -126,7 +223,7 @@ export class ReleaseDefectsBugsObservationsComponent implements OnInit {
 
     // Return Status value.
     if(type === 'status') {
-      return this.releaseConfigDetails.objectiveStatus.filter((status: any) => {
+      return this.releaseConfigDetails.defectStatus.filter((status: any) => {
          return status._id === id;
       })[0]?.value;
     }
