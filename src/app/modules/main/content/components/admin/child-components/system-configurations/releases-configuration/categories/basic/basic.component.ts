@@ -50,6 +50,7 @@ export class ReleaseConfigBasicCategoryComponent implements OnInit {
       userSupportTypes: [''],
       objectiveStatus: [''],
       enhancementsCategories: [''],
+      enhancementStatus: [''],
       defectTypes: [''],
       defectStatus: [''],
       sigOffModes: ['']

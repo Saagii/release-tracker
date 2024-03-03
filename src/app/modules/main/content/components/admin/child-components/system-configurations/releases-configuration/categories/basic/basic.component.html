@@ -340,6 +340,36 @@
         </div>
     </div>
 
+    <!-- Release Enhancements Status Content -->
+    <div class="w-full mt-4 p-4 border border-gray-200 rounded-lg">
+        <div class="text-base">Release  <span class="text-gray-600 font-bold">Enhancements Status</span></div>
+        <div class="text-gray-500 text-xs">List of Enhancement status options.</div>
+
+        <div class="w-6/12 flex items-center my-3" [formGroup]="releaseConfigBasicForm">
+            <mat-form-field class="w-9/12" appearance="outline">
+                <mat-label>Add Release Enhancements Status</mat-label>
+                <input type="text" matInput placeholder="Add Enhancement Status"  formControlName="enhancementStatus" >
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="releaseConfigActionStatus === '' " (click)="updateReleaseConfigBasicDetails('enhancementStatus')">+ Add</button>
+            <div class="flex items-center" *ngIf="releaseConfigActionStatus === 'enhancementStatus' ">
+                <mat-spinner [diameter]="20"></mat-spinner>
+                <span class="ml-2">Adding...</span>
+            </div>
+        </div>
+
+        <div class="w-6/12 mt-3 border border-gray-200 rounded-md" *ngIf="releaseConfig?.enhancementStatus.length">
+            <div class="w-full flex justify-between items-center px-3 border-b border-gray-200 hover:bg-gray-50" *ngFor="let status of releaseConfig.enhancementStatus">
+                <div class="w-6/12">{{status.value}}</div>
+                <div class="w-auto flex items-center">
+                    <button mat-icon-button color="warn" class="!ml-3" (click)="deleteReleaseConfigDetailsByTypeAndId('enhancementStatus', status._id)">
+                        <mat-icon>remove_circle_outline</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Release Enhancements Config Content -->
     <div class="w-full mt-4 p-4 border border-gray-200 rounded-lg">
         <div class="text-base">Release  <span class="text-gray-600 font-bold">Enhancements Categories</span></div>

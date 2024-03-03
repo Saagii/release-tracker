@@ -25,6 +25,7 @@ import { DomainsConfigurationComponent } from './content/components/admin/child-
 import { ReleaseConfigBasicCategoryComponent } from './content/components/admin/child-components/system-configurations/releases-configuration/categories/basic/basic.component';
 import { ReleaseObjectivesComponent } from './content/components/releases/components/release-view/child-components/objectives/objectives.component';
 import { ReleaseDefectsBugsObservationsComponent } from './content/components/releases/components/release-view/child-components/defects-bugs-observations/defects-bugs-observations.component';
+import { ReleaseEnhancementsInnovationsComponent } from './content/components/releases/components/release-view/child-components/enhancements-innovations/enhancements-innovations.component';
 
 
 
@@ -52,7 +53,8 @@ import { ReleaseDefectsBugsObservationsComponent } from './content/components/re
     DomainsConfigurationComponent,
     ReleaseConfigBasicCategoryComponent,
     ReleaseObjectivesComponent,
-    ReleaseDefectsBugsObservationsComponent
+    ReleaseDefectsBugsObservationsComponent,
+    ReleaseEnhancementsInnovationsComponent
   ],
   imports: [
     CommonModule,
@@ -82,7 +84,8 @@ import { ReleaseDefectsBugsObservationsComponent } from './content/components/re
     DomainsConfigurationComponent,
     ReleaseConfigBasicCategoryComponent,
     ReleaseObjectivesComponent,
-    ReleaseDefectsBugsObservationsComponent
+    ReleaseDefectsBugsObservationsComponent,
+    ReleaseEnhancementsInnovationsComponent
   ]
 })
 export class MainModule { }

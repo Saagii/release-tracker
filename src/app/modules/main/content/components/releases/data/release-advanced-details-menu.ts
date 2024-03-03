@@ -1,4 +1,5 @@
 import { ReleaseDefectsBugsObservationsComponent } from "../components/release-view/child-components/defects-bugs-observations/defects-bugs-observations.component";
+import { ReleaseEnhancementsInnovationsComponent } from "../components/release-view/child-components/enhancements-innovations/enhancements-innovations.component";
 import { ReleaseObjectivesComponent } from "../components/release-view/child-components/objectives/objectives.component";
 
 export const releaseAdvancedDetailsMenu = [
@@ -14,7 +15,7 @@ export const releaseAdvancedDetailsMenu = [
         title: 'Enhancements & Innovations',
         description: 'Improvements or enhancements made to existing features, processes, or systems.',
         icon: '',
-        component: ''
+        component: ReleaseEnhancementsInnovationsComponent
     },
     {
         id: 3,

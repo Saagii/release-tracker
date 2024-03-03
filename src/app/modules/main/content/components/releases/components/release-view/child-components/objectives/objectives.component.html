@@ -67,8 +67,12 @@
                 <!-- Modification Details -->
                 <div class="w-full flex justify-end items-center">
                     <div class="w-10/12 mt-4">
-                        <div class="text-xs text-gray-600"><span class="font-semibold">Modified Date:</span> {{objective.lastModifiedDate | date}}</div>
-                        <div class="text-xs text-gray-600 flex items-center mt-1"><span class="font-semibold">Modified By:</span> <mat-spinner [diameter]="20" *ngIf="!objectiveModifiedName"></mat-spinner> <span class="ml-1 hover:underline hover:text-blue-600 cursor-pointer" *ngIf="objectiveModifiedName" [routerLink]="['../../admin/members', objective.lastModifiedById]">{{objectiveModifiedName?.firstName}} {{objectiveModifiedName?.lastName}}</span></div>
+                        <div class="text-xs text-gray-600 flex items-center mt-1">
+                            <span class="font-semibold">Created By:</span> <mat-spinner [diameter]="20" *ngIf="!objectiveModifiedName"></mat-spinner> <span class="ml-1 hover:underline hover:text-blue-600 cursor-pointer" *ngIf="objectiveModifiedName" [routerLink]="['../../admin/members', objective.createdById]">{{objectiveModifiedName?.firstName}} {{objectiveModifiedName?.lastName}} </span><span class="italic">, On {{objective.createdOnDate | date:'medium'}}</span>
+                        </div>
+                        <div class="text-xs text-gray-600 flex items-center mt-1">
+                            <span class="font-semibold">Modified By:</span> <mat-spinner [diameter]="20" *ngIf="!objectiveModifiedName"></mat-spinner> <span class="ml-1 hover:underline hover:text-blue-600 cursor-pointer" *ngIf="objectiveModifiedName" [routerLink]="['../../admin/members', objective.lastModifiedById]">{{objectiveModifiedName?.firstName}} {{objectiveModifiedName?.lastName}} </span><span class="italic">, On {{objective.lastModifiedDate | date:'medium'}}</span>
+                        </div>
                     </div>
                     <div class="w-2/12 flex justify-end">
                         <button mat-icon-button class="" color="warn" (click)="deleteObjectiveId = objective._id; objectiveDeleteActions(objective.title);">

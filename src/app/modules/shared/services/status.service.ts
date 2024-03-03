@@ -10,7 +10,7 @@ export class StatusService {
         Get status style
     */
     getStatusStyle(statusValue: string): any {
-        if(['Success', 'Completed', 'Done', 'Resolved'].includes(statusValue)) {
+        if(['Success', 'Completed', 'Done', 'Resolved', 'New Feature', 'New Enhancement'].includes(statusValue)) {
             return 'bg-blue-100 text-blue-600 font-bold border border-blue-400'
         }
         if(['Delayed', 'Failed', 'Rejected', 'Stopped', 'Terminated', 'Backlog'].includes(statusValue)) {
@@ -22,7 +22,7 @@ export class StatusService {
         if(['Active', 'On Track', 'In Progress'].includes(statusValue)) {
             return 'bg-green-200 text-green-700 font-bold border border-green-400'
         }
-        if(['Initiated', 'To Be Discussed', 'Partial Fix'].includes(statusValue)) {
+        if(['Initiated', 'To Be Discussed', 'Partial Fix', 'Beta Feature', 'Partial Enhancement'].includes(statusValue)) {
             return 'bg-yellow-100 text-yellow-600 font-bold border border-yellow-400'
         }
     }

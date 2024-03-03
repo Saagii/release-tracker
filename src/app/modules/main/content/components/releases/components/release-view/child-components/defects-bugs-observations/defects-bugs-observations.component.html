@@ -79,8 +79,12 @@
                 <!-- Modification Details -->
                 <div class="w-full flex justify-end items-center">
                     <div class="w-10/12 mt-8">
-                        <div class="text-xs text-gray-600"><span class="font-semibold">Modified Date:</span> {{defect.lastModifiedDate | date}}</div>
-                        <div class="text-xs text-gray-600 flex items-center mt-1"><span class="font-semibold">Modified By:</span> <mat-spinner [diameter]="20" *ngIf="!defectModifiedName"></mat-spinner> <span class="ml-1 hover:underline hover:text-blue-600 cursor-pointer" *ngIf="defectModifiedName" [routerLink]="['../../admin/members', defect.lastModifiedById]">{{defectModifiedName?.firstName}} {{defectModifiedName?.lastName}}</span></div>
+                        <div class="text-xs text-gray-600 flex items-center mt-1">
+                            <span class="font-semibold">Created By:</span> <mat-spinner [diameter]="20" *ngIf="!defectModifiedName"></mat-spinner> <span class="ml-1 hover:underline hover:text-blue-600 cursor-pointer" *ngIf="defectModifiedName" [routerLink]="['../../admin/members', defect.createdById]">{{defectModifiedName?.firstName}} {{defectModifiedName?.lastName}} </span><span class="italic">, On {{defect.createdOnDate | date:'medium'}}</span>
+                        </div>
+                        <div class="text-xs text-gray-600 flex items-center mt-1">
+                            <span class="font-semibold">Modified By:</span> <mat-spinner [diameter]="20" *ngIf="!defectModifiedName"></mat-spinner> <span class="ml-1 hover:underline hover:text-blue-600 cursor-pointer" *ngIf="defectModifiedName" [routerLink]="['../../admin/members', defect.lastModifiedById]">{{defectModifiedName?.firstName}} {{defectModifiedName?.lastName}} </span><span class="italic">, On {{defect.lastModifiedDate | date:'medium'}}</span>
+                        </div>
                     </div>
                     <div class="w-2/12 flex justify-end">
                         <button mat-icon-button class="" color="warn" (click)="deleteDefectId = defect._id; defectsBugsObservationDeleteActions(defect.title);">
@@ -136,13 +140,13 @@
             <!-- Reference Links -->
             <mat-form-field class="w-full mb-2" appearance="outline">
                 <mat-label>Reference Links</mat-label>
-                <textarea type="text" matInput placeholder="Add Defect Reference Links"  formControlName="referenceLinks" required></textarea>
+                <textarea type="text" matInput placeholder="Add Defect Reference Links"  formControlName="referenceLinks"></textarea>
             </mat-form-field>
 
             <!-- Comments -->
             <mat-form-field class="w-full mb-2" appearance="outline">
                 <mat-label>Comments/Remarks</mat-label>
-                <textarea type="text" matInput placeholder="Add Comments/Remarks"  formControlName="comments" required></textarea>
+                <textarea type="text" matInput placeholder="Add Comments/Remarks"  formControlName="comments"></textarea>
             </mat-form-field>
 
             <!-- Status -->
