@@ -26,6 +26,7 @@ import { ReleaseConfigBasicCategoryComponent } from './content/components/admin/
 import { ReleaseObjectivesComponent } from './content/components/releases/components/release-view/child-components/objectives/objectives.component';
 import { ReleaseDefectsBugsObservationsComponent } from './content/components/releases/components/release-view/child-components/defects-bugs-observations/defects-bugs-observations.component';
 import { ReleaseEnhancementsInnovationsComponent } from './content/components/releases/components/release-view/child-components/enhancements-innovations/enhancements-innovations.component';
+import { ReleaseCompatibilityInteroperabilityComponent } from './content/components/releases/components/release-view/child-components/compatibility-interoperability/compatibility-interoperability.component';
 
 
 
@@ -54,7 +55,8 @@ import { ReleaseEnhancementsInnovationsComponent } from './content/components/re
     ReleaseConfigBasicCategoryComponent,
     ReleaseObjectivesComponent,
     ReleaseDefectsBugsObservationsComponent,
-    ReleaseEnhancementsInnovationsComponent
+    ReleaseEnhancementsInnovationsComponent,
+    ReleaseCompatibilityInteroperabilityComponent
   ],
   imports: [
     CommonModule,
@@ -85,7 +87,8 @@ import { ReleaseEnhancementsInnovationsComponent } from './content/components/re
     ReleaseConfigBasicCategoryComponent,
     ReleaseObjectivesComponent,
     ReleaseDefectsBugsObservationsComponent,
-    ReleaseEnhancementsInnovationsComponent
+    ReleaseEnhancementsInnovationsComponent,
+    ReleaseCompatibilityInteroperabilityComponent
   ]
 })
 export class MainModule { }

@@ -1,3 +1,4 @@
+import { ReleaseCompatibilityInteroperabilityComponent } from "../components/release-view/child-components/compatibility-interoperability/compatibility-interoperability.component";
 import { ReleaseDefectsBugsObservationsComponent } from "../components/release-view/child-components/defects-bugs-observations/defects-bugs-observations.component";
 import { ReleaseEnhancementsInnovationsComponent } from "../components/release-view/child-components/enhancements-innovations/enhancements-innovations.component";
 import { ReleaseObjectivesComponent } from "../components/release-view/child-components/objectives/objectives.component";
@@ -29,7 +30,7 @@ export const releaseAdvancedDetailsMenu = [
         title: 'Compatibility and Interoperability',
         description: 'Objectives to ensure the software is compatible with various platforms, devices, browsers, OS.',
         icon: '',
-        component: ''
+        component: ReleaseCompatibilityInteroperabilityComponent
     },
     {
         id: 5,
