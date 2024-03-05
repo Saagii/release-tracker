@@ -165,7 +165,7 @@ export class ReleaseCompatibilityInteroperabilityComponent implements OnInit {
             category: this.compatibilityInteroperabilityForm.get('category')?.value,
             title: this.compatibilityInteroperabilityForm.get('title')?.value,
             description: this.compatibilityInteroperabilityForm.get('description')?.value,
-            comments: this.compatibilityInteroperabilityForm.get('title')?.value
+            comments: this.compatibilityInteroperabilityForm.get('comments')?.value
           }
         ]
       }

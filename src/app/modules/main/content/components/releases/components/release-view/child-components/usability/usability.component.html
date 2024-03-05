@@ -1,0 +1,150 @@
+<!-- If no objectives are present. -->
+<div class="w-full flex flex-wrap mt-14" *ngIf="releaseDetails && !releaseDetails?.releaseUsability.length && formViewType === '' ">
+    <div class="w-full py-6 text-center text-gray-700">Hey, currently there are no Usability added for this release.</div>
+    <div class="w-full flex justify-center">
+        <button mat-flat-button class="" color="primary" (click)="formViewType = 'Add'; resetForm();">Let's Start Adding</button>
+    </div>
+</div>
+
+<!-- View Block -->
+<div class="w-full">
+
+    <!-- View Block Title and Actions -->
+    <div class="w-full flex flex-wrap justify-between items-center mb-4" *ngIf="!['Add', 'Edit'].includes(formViewType) && releaseDetails?.releaseUsability?.length">
+        <div class="w-10/12 text-lg">
+            <div class="w-full">Release Usability</div>
+            <div class="w-full text-xs text-gray-600">Click on <span class="font-bold italic">Show more</span> to view the description and perform other actions.</div>
+        </div>
+        <div class="w-2/12 flex justify-end">
+            <button mat-stroked-button class="" color="primary" (click)="formViewType = 'Add'; resetForm();">+ Add</button>
+        </div>
+    </div>
+
+    <!-- Loading Block -->
+    <div class="w-full mt-14 flex items-center justify-center" *ngIf="fetchLoader">
+        <mat-spinner class="mr-2" diameter="22"></mat-spinner> Fetching Usability...
+    </div>
+
+    <!-- View Block Objectives list -->
+    <div class="w-full" *ngIf="releaseDetails && releaseDetails?.releaseUsability?.length && formViewType === '' ">
+        <div class="py-4 text-xs">
+            <span class="font-bold">Total:</span><span class="text-gray-800 ml-1">{{releaseDetails?.releaseUsability.length}}</span>
+        </div>
+        <div class="w-full px-4 py-2 border border-gray-200 rounded-md mb-4" *ngFor="let usability of releaseDetails?.releaseUsability; let i = index;">
+
+            <!-- Compatibility Title & Action Block -->
+            <div class="w-full flex justify-between items-center">
+                <div class="w-8/12">
+                    <div class="text-xs text-gray-600 flex items-center">#{{i+1}}</div>
+                    <div class="text-base mt-2">{{usability.title}}</div>
+                </div>
+                <div class="w-4/12 flex justify-end items-center">
+                    <button mat-icon-button class="ml-2" matTooltip="Show More" *ngIf="expandedUsabilityId !== usability._id" (click)="expandedUsabilityId = usability._id; getMemberDetails(usability.lastModifiedById)">
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+                    </button>
+                    <button mat-icon-button class="ml-2" matTooltip="Show Less" *ngIf="expandedUsabilityId !== '' && expandedUsabilityId === usability._id" (click)="expandedUsabilityId = '' ">
+                        <mat-icon>keyboard_arrow_up</mat-icon>
+                    </button>
+                </div>
+            </div>
+    
+            <!-- Expanded Block -->
+            <div class="w-full mt-4" *ngIf="expandedUsabilityId === usability._id ">
+
+                <!-- Usability Description -->
+                <div class="w-full">
+                    <div class="text-xs text-gray-600 font-bold">DESCRIPTION</div>
+                    <div class="w-full pb-6 text-gray-600 text-xs">{{usability.description}}</div>
+                </div>
+
+                <!-- Usability Comments / Remarks -->
+                <div class="w-full">
+                    <div class="text-xs text-gray-600 font-bold">COMMENTS/REMARKS</div>
+                    <div class="w-full pb-6 text-gray-600 text-xs">{{usability.comments}}</div>
+                </div>
+    
+                <!-- Modification Details -->
+                <div class="w-full flex justify-end items-center">
+                    <div class="w-10/12 mt-8">
+                        <div class="text-xs text-gray-600 flex items-center mt-1">
+                            <span class="font-semibold">Created By:</span> <mat-spinner [diameter]="20" *ngIf="!usabilityModifiedName"></mat-spinner> <span class="ml-1 hover:underline hover:text-blue-600 cursor-pointer" *ngIf="usabilityModifiedName" [routerLink]="['../../admin/members', usability.createdById]">{{usabilityModifiedName?.firstName}} {{usabilityModifiedName?.lastName}} </span><span class="italic">, On {{usability.createdOnDate | date:'medium'}}</span>
+                        </div>
+                        <div class="text-xs text-gray-600 flex items-center mt-1">
+                            <span class="font-semibold">Modified By:</span> <mat-spinner [diameter]="20" *ngIf="!usabilityModifiedName"></mat-spinner> <span class="ml-1 hover:underline hover:text-blue-600 cursor-pointer" *ngIf="usabilityModifiedName" [routerLink]="['../../admin/members', usability.lastModifiedById]">{{usabilityModifiedName?.firstName}} {{usabilityModifiedName?.lastName}} </span><span class="italic">, On {{usability.lastModifiedDate | date:'medium'}}</span>
+                        </div>
+                    </div>
+                    <div class="w-2/12 flex justify-end">
+                        <button mat-icon-button class="" color="warn" (click)="deleteUsabilityId = usability._id; usabilityComponentDeleteActions(usability.title);">
+                            <mat-icon class="mr-2">delete</mat-icon>
+                        </button>
+                        <button mat-icon-button class="" (click)="formViewType = 'Edit'; editUsabilityId = usability._id; editUsabilityForm(usability) ">
+                            <mat-icon class="mr-2">edit</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+
+
+</div>
+
+<!-- Form Block -->
+<div class="w-full" *ngIf="['Add', 'Edit'].includes(formViewType)">
+
+    <!-- Title -->
+    <div class="w-full text-lg">{{formViewType}} Release Usability</div>
+    <div class="w-full text-xs text-gray-600">Enter all the requied fields*</div>
+
+    <!-- Form Block -->
+    <div class="w-full mt-8">
+        <div class="w-10/12 flex flex-wrap items-center my-3" [formGroup]="usabilityForm">
+
+            <!-- Type -->
+            <mat-form-field class="w-full mb-2" appearance="outline">
+                <mat-label>Usability Type</mat-label>
+                <mat-select placeholder="Select Usability Type" formControlName="type" (selectionChange)="getTypeIdOnSelection($event)" required>
+                    <mat-option *ngFor="let type of releaseConfigDetails.usabilities" [value]="type._id">
+                      {{type.value}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <div class="w-full"  *ngIf="selectedTypeId !== ''">
+                <!-- Title -->
+                <mat-form-field class="w-full mb-2" appearance="outline">
+                    <mat-label>{{filterRequiredIds('usability', selectedTypeId)}} Usability</mat-label>
+                    <input type="text" matInput placeholder="Add Usability {{filterRequiredIds('category', selectedTypeId)}}"  formControlName="title" required>
+                </mat-form-field>
+
+                <!-- Description -->
+                <mat-form-field class="w-full mb-2" appearance="outline">
+                    <mat-label>Usability Description</mat-label>
+                    <textarea type="text" matInput placeholder="Add Usability Description"  formControlName="description" required></textarea>
+                </mat-form-field>
+
+                <!-- Comments -->
+                <mat-form-field class="w-full mb-2" appearance="outline">
+                    <mat-label>Comments/Remarks</mat-label>
+                    <textarea type="text" matInput placeholder="Add Comments/Remarks"  formControlName="comments"></textarea>
+                </mat-form-field>
+
+                <!-- Form Actions -->
+                <div class="w-full flex justify-end mt-8" *ngIf="!formActionLoader">
+                    <button mat-stroked-button class="" (click)="formViewType = '';">Cancel</button>
+                    <button mat-flat-button class="ml-4" color="primary" (click)="updateUsability()" [disabled]="usabilityForm.invalid">{{formViewType === 'Add' ? 'Add' : 'Update'}}</button>
+                </div>
+            </div>
+
+            
+
+            <!-- Form action loader -->
+            <div class="w-full flex justify-end mt-8" *ngIf="formActionLoader">
+                <mat-spinner [diameter]="20"></mat-spinner>
+                <span class="ml-2">{{formViewType}}ing Release usability ...</span>
+            </div>
+        </div>
+    </div>
+</div>

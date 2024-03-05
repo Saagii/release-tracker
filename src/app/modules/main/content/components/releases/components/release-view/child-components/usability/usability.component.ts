@@ -9,12 +9,13 @@ import { ProjectsService } from 'src/app/modules/main/services/projects.service'
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { DialogSharedComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
-  selector: 'app-release-view-enhancements-innovations',
-  templateUrl: './enhancements-innovations.component.html'
+  selector: 'app-release-view-usability',
+  templateUrl: './usability.component.html'
 })
-export class ReleaseEnhancementsInnovationsComponent implements OnInit {
+export class ReleaseUsabilityComponent implements OnInit {
 
   @Input() title?: string;
   @Input() description?: string;
@@ -23,12 +24,13 @@ export class ReleaseEnhancementsInnovationsComponent implements OnInit {
   releaseDetails: any;
   releaseConfigDetails: any;
   formViewType: string = '';
-  editEnhancementInnovationId: string = '';
-  deleteEnhancementInnovationId: string = '';
+  selectedTypeId: string = '';
+  editUsabilityId: string = '';
+  deleteUsabilityId: string = '';
   formActionLoader: boolean = false;
-  expandedEnhancementInnovationId: string = '';
-  enhancementsInnovationsForm: UntypedFormGroup;
-  enhancementInnovationsModifiedName: any;
+  expandedUsabilityId: string = '';
+  usabilityForm: UntypedFormGroup;
+  usabilityModifiedName: any;
 
   constructor(
     private statusService: StatusService,
@@ -41,18 +43,16 @@ export class ReleaseEnhancementsInnovationsComponent implements OnInit {
     public dialog: MatDialog,
   ) {
     // Prepare Objectives Form
-    this.enhancementsInnovationsForm = this.fb.group({
-      category: [''],
+    this.usabilityForm = this.fb.group({
+      type: [''],
       title: [''],
       description: [''],
-      benefits: [''],
-      comments: [''],
-      status: ['']
+      comments: ['']
     });
   }
 
   ngOnInit(): void {
-    console.log('Inside ReleaseEnhancementsInnovationsComponent');
+    console.log('Inside ReleaseUsabilityComponent');
 
     this.releaseId = this._activatedRoute.snapshot.params['id'];
 
@@ -102,13 +102,13 @@ export class ReleaseEnhancementsInnovationsComponent implements OnInit {
   /*
     Dialog Method: Delete Defects, Bugs, Observations
   */
-  enhancementsInnovationsComponentDeleteActions(titleData: any): any {
+  usabilityComponentDeleteActions(titleData: any): any {
     this.dialog.open(DialogSharedComponent, {
       panelClass: ['w-5/12'],
       data: {
         type: 'confirmation',
         confirmationContent: {
-          title: 'Are you sure you want to delete ' + '"' + titleData + '"' + ' from release enhancements & innovations ?',
+          title: 'Are you sure you want to delete ' + '"' + titleData + '"' + ' from release usabilities ?',
           subtitle: ''
         }
       },
@@ -117,7 +117,7 @@ export class ReleaseEnhancementsInnovationsComponent implements OnInit {
 
       if(result) {
         this.formViewType = 'Delete'; 
-        this.updateReleaseEnhancementsInnovations();
+        this.updateUsability();
       }
     });
   }
@@ -127,21 +127,31 @@ export class ReleaseEnhancementsInnovationsComponent implements OnInit {
     Get member details by ID
   */
   getMemberDetails(memberId: string): void {
-    this.enhancementInnovationsModifiedName = null;
+    this.usabilityModifiedName = null;
     this.membersService.getMemberDetails(memberId).subscribe((response: any) => {
       console.log(response);
 
-      this.enhancementInnovationsModifiedName = response;
+      this.usabilityModifiedName = response;
     });
+  }
+
+
+  /*
+    Get Category id on selection.
+  */
+  getTypeIdOnSelection(event: MatSelectChange): void {
+    console.log(event);
+
+    this.selectedTypeId = event.value;
   }
 
 
     /*
     Add Release Objectives.
   */
-  updateReleaseEnhancementsInnovations(): void {
+  updateUsability(): void {
 
-    const paramToBeUpdatedValue = 'releaseEnhancements';
+    const paramToBeUpdatedValue = 'releaseUsability';
     this.formActionLoader = true;
 
     // Set the payload details.
@@ -152,32 +162,30 @@ export class ReleaseEnhancementsInnovationsComponent implements OnInit {
       releaseDetailsUpdatePayload: {
         [paramToBeUpdatedValue] : [
           {
-            category: this.enhancementsInnovationsForm.get('category')?.value,
-            title: this.enhancementsInnovationsForm.get('title')?.value,
-            description: this.enhancementsInnovationsForm.get('description')?.value,
-            benefits: this.enhancementsInnovationsForm.get('benefits')?.value,
-            comments: this.enhancementsInnovationsForm.get('comments')?.value,
-            status: this.enhancementsInnovationsForm.get('status')?.value
+            type: this.usabilityForm.get('type')?.value,
+            title: this.usabilityForm.get('title')?.value,
+            description: this.usabilityForm.get('description')?.value,
+            comments: this.usabilityForm.get('comments')?.value
           }
         ]
       }
     }
 
     if(this.formViewType === 'Edit') {
-      releaseDetailsPayload = {...releaseDetailsPayload, ...{"releaseObjectParamId": this.editEnhancementInnovationId}}
+      releaseDetailsPayload = {...releaseDetailsPayload, ...{"releaseObjectParamId": this.editUsabilityId}}
     }
 
     // For deleting the objective.
     if(this.formViewType === 'Delete') {
       this.fetchLoader = true;
       delete releaseDetailsPayload.releaseDetailsUpdatePayload;
-      releaseDetailsPayload = {...releaseDetailsPayload, ...{"releaseObjectParamId": this.deleteEnhancementInnovationId}}
+      releaseDetailsPayload = {...releaseDetailsPayload, ...{"releaseObjectParamId": this.deleteUsabilityId}}
     }
 
     console.log(releaseDetailsPayload);
 
     // Disable the form.
-    this.enhancementsInnovationsForm.disable();
+    this.usabilityForm.disable();
 
     this.releasesService.updateReleaseDetails(this.releaseDetails._id, releaseDetailsPayload).subscribe((response: any) => {
       console.log(response);
@@ -186,11 +194,11 @@ export class ReleaseEnhancementsInnovationsComponent implements OnInit {
         this.formActionLoader = false;
 
         this.formViewType = ''; 
-        this.editEnhancementInnovationId = '';
+        this.editUsabilityId = '';
 
         this.fetchLoader = true;
 
-        this.enhancementsInnovationsForm.enable();
+        this.usabilityForm.enable();
 
         this.getReleasesDetails();
       }, 1000);
@@ -203,16 +211,16 @@ export class ReleaseEnhancementsInnovationsComponent implements OnInit {
     Reset form.
   */
   resetForm(): void {
-    this.enhancementsInnovationsForm.reset();
+    this.usabilityForm.reset();
   }
 
 
   /*
-    Edit enhancement.
+    Edit compatibility.
   */
-  editEnhancementInnovationsForm(enhancement: any): void {
-    console.log(enhancement);
-    this.enhancementsInnovationsForm.setValue(enhancement);
+  editUsabilityForm(usability: any): void {
+    console.log(usability);
+    this.usabilityForm.setValue(usability);
   }
 
 
@@ -222,31 +230,10 @@ export class ReleaseEnhancementsInnovationsComponent implements OnInit {
   filterRequiredIds(type: string, id: string): any {
 
     // Return Status value.
-    if(type === 'status') {
-      return this.releaseConfigDetails.enhancementStatus.filter((status: any) => {
-         return status._id === id;
-      })[0]?.value;
-    }
-
-    // Return Status value.
-    if(type === 'category') {
-        return this.releaseConfigDetails.enhancementsCategories.filter((category: any) => {
-           return category._id === id;
+    if(type === 'usability') {
+        return this.releaseConfigDetails.usabilities.filter((usability: any) => {
+           return usability._id === id;
         })[0]?.value;
-      }
-
-    // Return Target value.
-    if(type === 'target') {
-      return this.releaseConfigDetails.targets.filter((target: any) => {
-         return target._id === id;
-      })[0]?.value;
-    }
-
-    // Return Type value.
-    if(type === 'type') {
-      return this.releaseConfigDetails.types.filter((type: any) => {
-         return type._id === id;
-      })[0]?.value;
     }
   }
 }

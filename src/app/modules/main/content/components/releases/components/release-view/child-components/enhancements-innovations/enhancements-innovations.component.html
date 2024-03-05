@@ -35,8 +35,8 @@
             <!-- Enhancement Title & Action Block -->
             <div class="w-full flex justify-between items-center">
                 <div class="w-8/12">
-                    <div class="text-xs text-gray-600">#{{i+1}}</div>
-                    <div class="text-base">{{enhancement.title}}</div>
+                    <div class="text-xs text-gray-600 flex items-center">#{{i+1}} <div class="w-fit text-gray-600 text-xs py-1 px-2 rounded-md bg-gray-100 border border-gray-200 ml-2">{{filterRequiredIds('category', enhancement.category)}}</div></div>
+                    <div class="text-base mt-2">{{enhancement.title}}</div>
                 </div>
                 <div class="w-4/12 flex justify-end items-center">
                     <div mat-flat-button class="select-none cursor-pointer rounded-full px-3 pr-2 py-1 flex items-center text-xs uppercase" [ngClass]="getStatusStyle(filterRequiredIds('status', enhancement.status))" [matMenuTriggerFor]="matEnhancementStatusMenu">
@@ -58,11 +58,6 @@
     
             <!-- Expanded Block -->
             <div class="w-full mt-4" *ngIf="expandedEnhancementInnovationId === enhancement._id ">
-                <!-- Enhancement Category -->
-                <div class="w-full">
-                    <div class="text-xs text-gray-600 font-bold">ENHANCEMENT CATEGORY</div>
-                    <div class="w-fit mb-6 text-gray-600 text-xs py-1 px-2 rounded-md bg-gray-100">{{filterRequiredIds('category', enhancement.category)}}</div>
-                </div>
 
                 <!-- Enhancement Description -->
                 <div class="w-full">

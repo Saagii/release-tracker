@@ -27,6 +27,7 @@ import { ReleaseObjectivesComponent } from './content/components/releases/compon
 import { ReleaseDefectsBugsObservationsComponent } from './content/components/releases/components/release-view/child-components/defects-bugs-observations/defects-bugs-observations.component';
 import { ReleaseEnhancementsInnovationsComponent } from './content/components/releases/components/release-view/child-components/enhancements-innovations/enhancements-innovations.component';
 import { ReleaseCompatibilityInteroperabilityComponent } from './content/components/releases/components/release-view/child-components/compatibility-interoperability/compatibility-interoperability.component';
+import { ReleaseUsabilityComponent } from './content/components/releases/components/release-view/child-components/usability/usability.component';
 
 
 
@@ -56,7 +57,8 @@ import { ReleaseCompatibilityInteroperabilityComponent } from './content/compone
     ReleaseObjectivesComponent,
     ReleaseDefectsBugsObservationsComponent,
     ReleaseEnhancementsInnovationsComponent,
-    ReleaseCompatibilityInteroperabilityComponent
+    ReleaseCompatibilityInteroperabilityComponent,
+    ReleaseUsabilityComponent
   ],
   imports: [
     CommonModule,
@@ -88,7 +90,8 @@ import { ReleaseCompatibilityInteroperabilityComponent } from './content/compone
     ReleaseObjectivesComponent,
     ReleaseDefectsBugsObservationsComponent,
     ReleaseEnhancementsInnovationsComponent,
-    ReleaseCompatibilityInteroperabilityComponent
+    ReleaseCompatibilityInteroperabilityComponent,
+    ReleaseUsabilityComponent
   ]
 })
 export class MainModule { }

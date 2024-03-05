@@ -156,7 +156,7 @@ export class ReleaseDefectsBugsObservationsComponent implements OnInit {
             title: this.defectsBugsObservationsForm.get('title')?.value,
             description: this.defectsBugsObservationsForm.get('description')?.value,
             referenceLinks: this.defectsBugsObservationsForm.get('referenceLinks')?.value,
-            comments: this.defectsBugsObservationsForm.get('title')?.value,
+            comments: this.defectsBugsObservationsForm.get('comments')?.value,
             status: this.defectsBugsObservationsForm.get('status')?.value
           }
         ]

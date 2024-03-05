@@ -2,6 +2,7 @@ import { ReleaseCompatibilityInteroperabilityComponent } from "../components/rel
 import { ReleaseDefectsBugsObservationsComponent } from "../components/release-view/child-components/defects-bugs-observations/defects-bugs-observations.component";
 import { ReleaseEnhancementsInnovationsComponent } from "../components/release-view/child-components/enhancements-innovations/enhancements-innovations.component";
 import { ReleaseObjectivesComponent } from "../components/release-view/child-components/objectives/objectives.component";
+import { ReleaseUsabilityComponent } from "../components/release-view/child-components/usability/usability.component";
 
 export const releaseAdvancedDetailsMenu = [
     {
@@ -35,9 +36,9 @@ export const releaseAdvancedDetailsMenu = [
     {
         id: 5,
         title: 'Usability',
-        description: 'Objectives aimed at improving the overall user interface, usability, and user experience (UX) of the software.',
+        description: 'Objectives aimed at improving the overall user interface, user experience (UX), user-friendlyness, being intuitive, and meets the needs of its intended users of the software.',
         icon: '',
-        component: ''
+        component: ReleaseUsabilityComponent
     },
     {
         id: 6,

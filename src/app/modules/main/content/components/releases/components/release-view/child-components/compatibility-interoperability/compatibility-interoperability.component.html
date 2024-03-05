@@ -35,8 +35,8 @@
             <!-- Compatibility Title & Action Block -->
             <div class="w-full flex justify-between items-center">
                 <div class="w-8/12">
-                    <div class="text-xs text-gray-600">#{{i+1}}</div>
-                    <div class="text-base">{{compatibility.title}}</div>
+                    <div class="text-xs text-gray-600 flex items-center">#{{i+1}} <div class="w-fit text-gray-600 text-xs py-1 px-2 rounded-md bg-gray-100 border border-gray-200 ml-2">{{filterRequiredIds('category', compatibility.category)}}</div></div>
+                    <div class="text-base mt-2">{{compatibility.title}}</div>
                 </div>
                 <div class="w-4/12 flex justify-end items-center">
                     <button mat-icon-button class="ml-2" matTooltip="Show More" *ngIf="expandedCompatibilityInteroperabilityId !== compatibility._id" (click)="expandedCompatibilityInteroperabilityId = compatibility._id; getMemberDetails(compatibility.lastModifiedById)">
@@ -50,11 +50,6 @@
     
             <!-- Expanded Block -->
             <div class="w-full mt-4" *ngIf="expandedCompatibilityInteroperabilityId === compatibility._id ">
-                <!-- compatibility Category -->
-                <div class="w-full">
-                    <div class="text-xs text-gray-600 font-bold">CATEGORY</div>
-                    <div class="w-fit mb-6 text-gray-600 text-xs py-1 px-2 rounded-md bg-gray-100">{{filterRequiredIds('category', compatibility.category)}}</div>
-                </div>
 
                 <!-- compatibility Description -->
                 <div class="w-full">
