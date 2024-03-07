@@ -1,0 +1,89 @@
+<!-- If no objectives are present. -->
+<div class="w-full flex flex-wrap mt-14" *ngIf="releaseDetails && !releaseDetails?.releaseLocalization.length && formViewType === '' ">
+    <div class="w-full py-6 text-center text-gray-700">Hey, currently there are no Localization & Internalization added for this release.</div>
+    <div class="w-full flex justify-center">
+        <button mat-flat-button class="" color="primary" (click)="formViewType = 'Add'; resetForm();">Let's Start Adding</button>
+    </div>
+</div>
+
+<!-- View Block -->
+<div class="w-full">
+
+    <!-- View Block Title and Actions -->
+    <div class="w-full flex flex-wrap justify-between items-center mb-4" *ngIf="!['Add', 'Edit'].includes(formViewType) && releaseDetails?.releaseLocalization?.length">
+        <div class="w-10/12 text-lg">
+            <div class="w-full">Release Localization & Internalization</div>
+            <div class="w-full text-xs text-gray-600">Click on <span class="font-bold italic">Show more</span> to view the description and perform other actions.</div>
+        </div>
+        <div class="w-2/12 flex justify-end">
+            <button mat-stroked-button class="" color="primary" (click)="formViewType = 'Add'; resetForm();">+ Add</button>
+        </div>
+    </div>
+
+    <!-- Loading Block -->
+    <div class="w-full mt-14 flex items-center justify-center" *ngIf="fetchLoader">
+        <mat-spinner class="mr-2" diameter="22"></mat-spinner> Fetching Localization & Internalization Details...
+    </div>
+
+    <!-- View Block Objectives list -->
+    <div class="w-full" *ngIf="releaseDetails && releaseDetails?.releaseLocalization?.length && formViewType === '' ">
+        <div class="py-4 text-xs">
+            <span class="font-bold">Total:</span><span class="text-gray-800 ml-1">{{releaseDetails?.releaseLocalization.length}}</span>
+        </div>
+        
+        <div class="w-full flex flex-wrap justify-start my-4">
+            <div class="w-3/12 border border-gray-200 rounded-md p-4 flex items-center justify-between ml-4" *ngFor="let localization of releaseDetails?.releaseLocalization">
+                <div class="w-10/12">{{filterRequiredIds('language', localization.languageId)}}</div>
+                <div class="w-2/12 flex justify-end">
+                    <button mat-icon-button class="" color="warn" (click)="deleteLocalizationInternalizationId = localization._id; localizationInternalizationComponentDeleteActions(filterRequiredIds('language', localization.languageId));">
+                        <mat-icon class="mr-2">delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<!-- Form Block -->
+<div class="w-full" *ngIf="['Add', 'Edit'].includes(formViewType)">
+
+    <!-- Title -->
+    <div class="w-full text-lg">{{formViewType}} Release Localization</div>
+    <div class="w-full text-xs text-gray-600">Enter all the requied fields*</div>
+
+    <!-- Form Block -->
+    <div class="w-full mt-8">
+        <div class="w-10/12 flex flex-wrap items-center my-3" [formGroup]="localizationInternalizationForm">
+
+            <!-- Type -->
+            <mat-form-field class="w-full mb-2" appearance="outline">
+                <mat-label>Language Type</mat-label>
+                <mat-select placeholder="Select Language Type" formControlName="languageId" required>
+                    <mat-option *ngFor="let language of releaseConfigDetails.localizationLanguages" [value]="language._id">
+                      {{language.value}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <!-- Comments -->
+            <mat-form-field class="w-full mb-2" appearance="outline">
+                <mat-label>Comments/Remarks</mat-label>
+                <textarea type="text" matInput placeholder="Add Comments/Remarks"  formControlName="comments"></textarea>
+            </mat-form-field>
+
+            <!-- Form Actions -->
+            <div class="w-full flex justify-end mt-8" *ngIf="!formActionLoader">
+                <button mat-stroked-button class="" (click)="formViewType = '';">Cancel</button>
+                <button mat-flat-button class="ml-4" color="primary" (click)="updateLocalizationInternalization()" [disabled]="localizationInternalizationForm.invalid">{{formViewType === 'Add' ? 'Add' : 'Update'}}</button>
+            </div>
+
+            <!-- Form action loader -->
+            <div class="w-full flex justify-end mt-8" *ngIf="formActionLoader">
+                <mat-spinner [diameter]="20"></mat-spinner>
+                <span class="ml-2">{{formViewType}}ing Release Localization ...</span>
+            </div>
+        </div>
+    </div>
+</div>

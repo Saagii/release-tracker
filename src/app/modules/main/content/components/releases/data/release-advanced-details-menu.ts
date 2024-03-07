@@ -1,6 +1,7 @@
 import { ReleaseCompatibilityInteroperabilityComponent } from "../components/release-view/child-components/compatibility-interoperability/compatibility-interoperability.component";
 import { ReleaseDefectsBugsObservationsComponent } from "../components/release-view/child-components/defects-bugs-observations/defects-bugs-observations.component";
 import { ReleaseEnhancementsInnovationsComponent } from "../components/release-view/child-components/enhancements-innovations/enhancements-innovations.component";
+import { ReleaseLocalizationInternalizationComponent } from "../components/release-view/child-components/localization-internalization/localization-internalization.component";
 import { ReleaseObjectivesComponent } from "../components/release-view/child-components/objectives/objectives.component";
 import { ReleaseUsabilityComponent } from "../components/release-view/child-components/usability/usability.component";
 
@@ -52,7 +53,7 @@ export const releaseAdvancedDetailsMenu = [
         title: 'Localization and Internationalization',
         description: 'Objectives to make the software available in multiple languages and adapt it to different regions and cultures.',
         icon: '',
-        component: ''
+        component: ReleaseLocalizationInternalizationComponent
     },
     {
         id: 8,

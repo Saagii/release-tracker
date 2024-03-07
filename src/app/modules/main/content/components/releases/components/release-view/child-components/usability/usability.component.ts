@@ -211,6 +211,7 @@ export class ReleaseUsabilityComponent implements OnInit {
     Reset form.
   */
   resetForm(): void {
+    this.selectedTypeId = '';
     this.usabilityForm.reset();
   }
 
@@ -220,6 +221,7 @@ export class ReleaseUsabilityComponent implements OnInit {
   */
   editUsabilityForm(usability: any): void {
     console.log(usability);
+    this.selectedTypeId = usability._id;
     this.usabilityForm.setValue(usability);
   }
 
