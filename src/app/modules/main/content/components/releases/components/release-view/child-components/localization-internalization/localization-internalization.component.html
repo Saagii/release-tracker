@@ -27,18 +27,23 @@
 
     <!-- View Block Objectives list -->
     <div class="w-full" *ngIf="releaseDetails && releaseDetails?.releaseLocalization?.length && formViewType === '' ">
-        <div class="py-4 text-xs">
-            <span class="font-bold">Total:</span><span class="text-gray-800 ml-1">{{releaseDetails?.releaseLocalization.length}}</span>
+        
+        <div class="w-full text-base mt-2">Languages Supported</div>
+        <div class="pb-4 text-xs">
+            <span class="text-gray-600 font-bold">Total:</span><span class="text-gray-600 ml-1">{{releaseDetails?.releaseLocalization.length}}</span>
         </div>
         
-        <div class="w-full flex flex-wrap justify-start my-4">
-            <div class="w-3/12 border border-gray-200 rounded-md p-4 flex items-center justify-between ml-4" *ngFor="let localization of releaseDetails?.releaseLocalization">
-                <div class="w-10/12">{{filterRequiredIds('language', localization.languageId)}}</div>
-                <div class="w-2/12 flex justify-end">
-                    <button mat-icon-button class="" color="warn" (click)="deleteLocalizationInternalizationId = localization._id; localizationInternalizationComponentDeleteActions(filterRequiredIds('language', localization.languageId));">
-                        <mat-icon class="mr-2">delete</mat-icon>
-                    </button>
+        <div class="w-full flex flex-wrap justify-start my-2">
+            <div class="w-3/12 pr-2" *ngFor="let localization of releaseDetails?.releaseLocalization">
+                <div class="w-full border border-gray-200 rounded-md px-4 py-2 flex items-center justify-between mb-2">
+                    <div class="w-10/12">{{filterRequiredIds('language', localization.languageId)}}</div>
+                    <div class="w-2/12 flex justify-end">
+                        <button mat-icon-button class="" color="warn" (click)="deleteLocalizationInternalizationId = localization._id; localizationInternalizationComponentDeleteActions(filterRequiredIds('language', localization.languageId));">
+                            <mat-icon class="mr-2">delete</mat-icon>
+                        </button>
+                    </div>
                 </div>
+                
             </div>
         </div>
     </div>

@@ -3,6 +3,7 @@ import { ReleaseDefectsBugsObservationsComponent } from "../components/release-v
 import { ReleaseEnhancementsInnovationsComponent } from "../components/release-view/child-components/enhancements-innovations/enhancements-innovations.component";
 import { ReleaseLocalizationInternalizationComponent } from "../components/release-view/child-components/localization-internalization/localization-internalization.component";
 import { ReleaseObjectivesComponent } from "../components/release-view/child-components/objectives/objectives.component";
+import { ReleaseRollbackPlansComponent } from "../components/release-view/child-components/rollback-plan/rollback-plan.component";
 import { ReleaseUsabilityComponent } from "../components/release-view/child-components/usability/usability.component";
 
 export const releaseAdvancedDetailsMenu = [
@@ -60,7 +61,7 @@ export const releaseAdvancedDetailsMenu = [
         title: 'Rollback Plan',
         description: 'A rollback plan helps in tracking and reverting the process in case any critical issues arise post-deployment.',
         icon: '',
-        component: ''
+        component: ReleaseRollbackPlansComponent
     },
     {
         id: 9,
