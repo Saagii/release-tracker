@@ -66,7 +66,7 @@
                 <div class="w-full pb-6">
                     <div class="text-xs text-gray-600 font-bold mb-1">ROLLBACK TEAM MEMBERS</div>
                     <div class="w-full mb-1" *ngFor="let member of rollbackPlan.rollbackTeam">
-                        <div class="w-fit text-gray-600 text-xs py-1 px-2 rounded-md bg-gray-100 border border-gray-200 mr-2 cursor-pointer hover:bg-blue-100 hover:border-blue-300">{{member}}</div>
+                        <div class="w-fit text-gray-600 text-xs py-1 px-2 rounded-md bg-gray-100 border border-gray-200 mr-2 cursor-pointer hover:bg-blue-100 hover:border-blue-300">{{filterRequiredIds('members', member)}}</div>
                     </div>
                 </div>
 
@@ -159,7 +159,7 @@
             <div class="w-full">
                 <div class="w-full mb-2">
                     <div class="">
-                        <div class="text-xs font-bold text-gray-800">Selected Team Members: {{teamMembers | json}}</div>
+                        <div class="text-xs font-bold text-gray-800">Selected Team Members:</div>
                         <div class="w-fit flex flex-wrap mt-1">
                             <div class="w-fit mb-1" *ngFor="let member of teamMembers; let i = index;">
                                 <div class="w-fit text-gray-600 text-xs py-1 px-2 rounded-md bg-gray-100 border border-gray-200 mr-2 hover:bg-blue-100 hover:border-blue-300">{{member.firstName + ' ' + member.lastName}} <span class="ml-2 hover:text-red-600 font-bold cursor-pointer"  (click)="manageTeamMembers(member, 'remove', i)" matTooltip="Remove" matTooltipPosition="above">&#x58;</span></div>
@@ -186,9 +186,9 @@
                                 </div>
                                 <div class="w-full flex justify-end mt-1 p-2 bg-white rounded-b-lg border-t border-blue-200" [ngClass]="{'border-green-200' : !filterSelectedMembersFromSearchResults(member._id)}">
                                     <button mat-button color="primary" (click)="manageTeamMembers(member, 'save')"  *ngIf="filterSelectedMembersFromSearchResults(member._id)">Add +</button>
-                                    <button mat-icon-button class="text-green-600 pointer-events-none" *ngIf="!filterSelectedMembersFromSearchResults(member._id)">
+                                    <div class="text-green-600 pointer-events-none" *ngIf="!filterSelectedMembersFromSearchResults(member._id)">
                                         <mat-icon>check_circle</mat-icon>
-                                    </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

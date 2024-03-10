@@ -31,6 +31,7 @@ export class ReleaseRollbackPlansComponent implements OnInit {
   rollbackPlanModifiedName: any;
   membersList: any;
   teamMembers: any[] = [];
+  internalMembers: any;
 
   constructor(
     private statusService: StatusService,
@@ -85,6 +86,9 @@ export class ReleaseRollbackPlansComponent implements OnInit {
       
       // Get Releases details.
       this.getReleasesDetails();
+
+      // Get members list.
+      this.getMembersList();
     });
   }
 
@@ -99,6 +103,18 @@ export class ReleaseRollbackPlansComponent implements OnInit {
       this.fetchLoader = false;
       
       this.releaseDetails = releaseDetails;
+    });
+  }
+
+
+  /*
+    Get Members List.
+  */
+  getMembersList(): void {
+    this.membersService.getMembersListByType('Internal').subscribe((response: any[]) => {
+      console.log(response);
+      
+      this.internalMembers = response;
     });
   }
 
@@ -225,8 +241,16 @@ export class ReleaseRollbackPlansComponent implements OnInit {
   */
   editRollbackPlan(rollback: any): void {
     console.log(rollback);
-    this.teamMembers = rollback.rollbackTeam;
-    this.rollbackPlanForm.setValue(rollback);
+    for(const teamMemberId of rollback.rollbackTeam) {
+      for(const internalMember of this.internalMembers) {
+        if(teamMemberId === internalMember._id) {
+          this.teamMembers.push(internalMember);
+        }
+      }
+    }
+    let rollbackDetails = rollback;
+    rollbackDetails.rollbackTeam = [];
+    this.rollbackPlanForm.setValue(rollbackDetails);
   }
 
 
@@ -241,6 +265,21 @@ export class ReleaseRollbackPlansComponent implements OnInit {
          return type._id === id;
       })[0]?.value;
     }
+
+    // Return Type value.
+    if(type === 'members') {
+      const memberDetails = this.internalMembers.filter((member: any) => {
+         return member._id === id;
+      })[0];
+
+      if(memberDetails) {
+        return memberDetails.firstName + ' ' + memberDetails.lastName;
+      } else {
+        return '-NA-';
+      }
+
+      
+    }
   }
 
 
@@ -250,7 +289,7 @@ export class ReleaseRollbackPlansComponent implements OnInit {
   searchMember(event: any): void {
     console.log(event.target.value);
 
-    if(event.target.value === '') {
+    if(event.target.value === '' || /^\s*$/.test(event.target.value)) {
       this.membersList = [];
       return;
     }
