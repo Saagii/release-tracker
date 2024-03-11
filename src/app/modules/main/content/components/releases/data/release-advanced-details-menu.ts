@@ -1,5 +1,6 @@
 import { ReleaseCompatibilityInteroperabilityComponent } from "../components/release-view/child-components/compatibility-interoperability/compatibility-interoperability.component";
 import { ReleaseDefectsBugsObservationsComponent } from "../components/release-view/child-components/defects-bugs-observations/defects-bugs-observations.component";
+import { ReleaseDeploymentPlanComponent } from "../components/release-view/child-components/deployment-plan/deployment-plan.component";
 import { ReleaseEnhancementsInnovationsComponent } from "../components/release-view/child-components/enhancements-innovations/enhancements-innovations.component";
 import { ReleaseLocalizationInternalizationComponent } from "../components/release-view/child-components/localization-internalization/localization-internalization.component";
 import { ReleaseObjectivesComponent } from "../components/release-view/child-components/objectives/objectives.component";
@@ -73,9 +74,9 @@ export const releaseAdvancedDetailsMenu = [
     {
         id: 10,
         title: 'Deployment Strategy',
-        description: 'Plan how the patch will be deployed, considering the timing and method of distribution. This may include phased or staged rollouts.',
+        description: 'Plan how the release will be deployed, considering the timing and method of distribution. This may include phased or staged rollouts.',
         icon: '',
-        component: ''
+        component: ReleaseDeploymentPlanComponent
     },
     {
         id: 11,

@@ -164,6 +164,7 @@
                             <div class="w-fit mb-1" *ngFor="let member of teamMembers; let i = index;">
                                 <div class="w-fit text-gray-600 text-xs py-1 px-2 rounded-md bg-gray-100 border border-gray-200 mr-2 hover:bg-blue-100 hover:border-blue-300">{{member.firstName + ' ' + member.lastName}} <span class="ml-2 hover:text-red-600 font-bold cursor-pointer"  (click)="manageTeamMembers(member, 'remove', i)" matTooltip="Remove" matTooltipPosition="above">&#x58;</span></div>
                             </div>
+                            <div class="w-full italic text-gray-600 text-xs py-2" *ngIf="!teamMembers.length">** No Rollback Team members added. Enter Member First name / Last Name / Email ...**</div>
                         </div>
                     </div>
                 </div>

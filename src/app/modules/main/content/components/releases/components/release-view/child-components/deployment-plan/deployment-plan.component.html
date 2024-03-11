@@ -1,0 +1,201 @@
+<!-- If no objectives are present. -->
+<div class="w-full flex flex-wrap mt-14" *ngIf="releaseDetails && !releaseDetails?.releaseDeploymentStrategy.length && formViewType === '' ">
+    <div class="w-full py-6 text-center text-gray-700">Hey, currently there are no Deployment Strategy added for this release.</div>
+    <div class="w-full flex justify-center">
+        <button mat-flat-button class="" color="primary" (click)="formViewType = 'Add'; resetForm();">Let's Start Adding</button>
+    </div>
+</div>
+
+<!-- View Block -->
+<div class="w-full">
+
+    <!-- View Block Title and Actions -->
+    <div class="w-full flex flex-wrap justify-between items-center mb-4" *ngIf="!['Add', 'Edit'].includes(formViewType) && releaseDetails?.releaseDeploymentStrategy?.length">
+        <div class="w-10/12 text-lg">
+            <div class="w-full">Deployment Strategy</div>
+            <div class="w-full text-xs text-gray-600">Click on <span class="font-bold italic">Show more</span> to view the description and perform other actions.</div>
+        </div>
+        <div class="w-2/12 flex justify-end">
+            <button mat-stroked-button class="" color="primary" (click)="formViewType = 'Add'; resetForm();">+ Add</button>
+        </div>
+    </div>
+
+    <!-- Loading Block -->
+    <div class="w-full mt-14 flex items-center justify-center" *ngIf="fetchLoader">
+        <mat-spinner class="mr-2" diameter="22"></mat-spinner> Fetching Deployment Strategy...
+    </div>
+
+    <!-- View Block Objectives list -->
+    <div class="w-full" *ngIf="releaseDetails && releaseDetails?.releaseDeploymentStrategy?.length && formViewType === '' ">
+        <div class="py-4 text-xs">
+            <span class="font-bold">Total:</span><span class="text-gray-800 ml-1">{{releaseDetails?.releaseDeploymentStrategy.length}}</span>
+        </div>
+        <div class="w-full px-4 py-2 border border-gray-200 rounded-md mb-4" *ngFor="let deploymentStrategy of releaseDetails?.releaseDeploymentStrategy; let i = index;">
+
+            <!-- Deployment Strategy Title & Action Block -->
+            <div class="w-full flex justify-between items-center">
+                <div class="w-8/12">
+                    <div class="text-xs text-gray-600 flex items-center">#{{i+1}}</div>
+                    <div class="text-base mt-2">{{filterRequiredIds('type', deploymentStrategy.type)}}</div>
+                </div>
+                <div class="w-4/12 flex justify-end items-center">
+                    <button mat-icon-button class="ml-2" matTooltip="Show More" *ngIf="expandedDeploymentPlanId !== deploymentStrategy._id" (click)="expandedDeploymentPlanId = deploymentStrategy._id; getMemberDetails(deploymentStrategy.lastModifiedById)">
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+                    </button>
+                    <button mat-icon-button class="ml-2" matTooltip="Show Less" *ngIf="expandedDeploymentPlanId !== '' && expandedDeploymentPlanId === deploymentStrategy._id" (click)="expandedDeploymentPlanId = '' ">
+                        <mat-icon>keyboard_arrow_up</mat-icon>
+                    </button>
+                </div>
+            </div>
+    
+            <!-- Expanded Block -->
+            <div class="w-full mt-4" *ngIf="expandedDeploymentPlanId === deploymentStrategy._id ">
+
+                <!-- Deployment Strategy Comments / Remarks -->
+                <div class="w-full">
+                    <div class="text-xs text-gray-600 font-bold">DOMAIN</div>
+                    <div class="w-full pb-6 text-gray-600 text-xs">{{deploymentStrategy.deploymentDomainId}}</div>
+                </div>
+
+                <!-- Deployment Strategy Description -->
+                <div class="w-full">
+                    <div class="text-xs text-gray-600 font-bold">DEPLOYMENT DATE & TIME</div>
+                    <div class="w-full pb-6 text-gray-600 text-xs">{{deploymentStrategy.deploymentDate | date:'fullDate'}} at {{deploymentStrategy.deploymentTime}} {{deploymentStrategy.deploymentTimeMeridian}}</div>
+                </div>
+
+                <!-- Deployment Strategy Comments / Remarks -->
+                <div class="w-full">
+                    <div class="text-xs text-gray-600 font-bold">DOWN-TIME</div>
+                    <div class="w-full pb-6 text-gray-600 text-xs">{{deploymentStrategy.deploymentDownTime}} {{deploymentStrategy.deploymentDownTimeFormat}}</div>
+                </div>
+    
+                <!-- Modification Details -->
+                <div class="w-full flex justify-end items-center">
+                    <div class="w-10/12 mt-8">
+                        <div class="text-xs text-gray-600 flex items-center mt-1">
+                            <span class="font-semibold">Created By:</span> <mat-spinner [diameter]="20" *ngIf="!deploymentPlanModifiedName"></mat-spinner> <span class="ml-1 hover:underline hover:text-blue-600 cursor-pointer" *ngIf="deploymentPlanModifiedName" [routerLink]="['../../admin/members', deploymentStrategy.createdById]">{{deploymentPlanModifiedName?.firstName}} {{deploymentPlanModifiedName?.lastName}} </span><span class="italic">, On {{deploymentStrategy.createdOnDate | date:'medium'}}</span>
+                        </div>
+                        <div class="text-xs text-gray-600 flex items-center mt-1">
+                            <span class="font-semibold">Modified By:</span> <mat-spinner [diameter]="20" *ngIf="!deploymentPlanModifiedName"></mat-spinner> <span class="ml-1 hover:underline hover:text-blue-600 cursor-pointer" *ngIf="deploymentPlanModifiedName" [routerLink]="['../../admin/members', deploymentStrategy.lastModifiedById]">{{deploymentPlanModifiedName?.firstName}} {{deploymentPlanModifiedName?.lastName}} </span><span class="italic">, On {{deploymentStrategy.lastModifiedDate | date:'medium'}}</span>
+                        </div>
+                    </div>
+                    <div class="w-2/12 flex justify-end">
+                        <button mat-icon-button class="" color="warn" (click)="deleteDeploymentPlanId = deploymentStrategy._id; deploymentPlanComponentDeleteActions(deploymentStrategy.title);">
+                            <mat-icon class="mr-2">delete</mat-icon>
+                        </button>
+                        <button mat-icon-button class="" (click)="formViewType = 'Edit'; editDeploymentPlanId = deploymentStrategy._id; editDeploymentPlansForm(deploymentStrategy) ">
+                            <mat-icon class="mr-2">edit</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+
+
+</div>
+
+<!-- Form Block -->
+<div class="w-full" *ngIf="['Add', 'Edit'].includes(formViewType)">
+
+    <!-- Title -->
+    <div class="w-full text-lg">{{formViewType}} Release Defects, Bugs & Observations</div>
+    <div class="w-full text-xs text-gray-600">Enter all the requied fields*</div>
+
+    <!-- Form Block -->
+    <div class="w-full mt-8">
+        <div class="w-10/12 flex flex-wrap items-center my-3" [formGroup]="deploymentPlanForm">
+
+            <div class="w-full flex mb-2">
+                <!-- Deployment Type -->
+                <mat-form-field class="w-6/12" appearance="outline">
+                    <mat-label>Deployment Type</mat-label>
+                    <mat-select placeholder="Select Deployment Type" formControlName="type" required>
+                        <mat-option *ngFor="let type of releaseConfigDetails.deploymentTypes" [value]="type._id">
+                        {{type.value}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <!-- Deployment Date -->
+                <mat-form-field class="w-4/12 ml-4" appearance="outline">
+                    <mat-label>Deployment Date</mat-label>
+                    <input class="w-full" matInput [matDatepicker]="closingDatePicker" required formControlName="deploymentDate">
+
+                    <mat-datepicker-toggle matSuffix [for]="closingDatePicker">
+                        <mat-icon matDatepickerToggleIcon>date_range</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #closingDatePicker></mat-datepicker>
+                    <mat-error>Deployment Date is <strong>Required!</strong></mat-error>
+                </mat-form-field>
+            </div>
+            
+
+            <!-- Deployment Domain -->
+            <mat-form-field class="w-10/12 mb-2" appearance="outline">
+                <mat-label>Deployment Domain</mat-label>
+                <textarea type="text" matInput placeholder="Add Deployment Domain"  formControlName="deploymentDomainId" required></textarea>
+            </mat-form-field>
+
+            <!-- Deployment Type -->
+            <div class="w-full">
+
+                <div class="w-full flex justify-start">
+
+                    <!-- Deployment Time -->
+                    <div class="w-6/12 flex flex-wrap">
+                        <div class="w-full mb-1 text-gray-500">Deployment Time</div>
+                        <mat-form-field class="w-5/12" appearance="outline">
+                            <mat-select placeholder="Time" formControlName="time" required>
+                                <mat-option *ngFor="let time of timeArray" [value]="time">
+                                    {{time}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+        
+                        <mat-form-field class="w-4/12 ml-2" appearance="outline">
+                            <mat-select placeholder="Meridian" formControlName="meridian" required>
+                                <mat-option *ngFor="let meridian of ['AM', 'PM']" [value]="meridian">
+                                    {{meridian}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <!-- Deployment Down-Time -->
+                    <div class="w-5/12 flex flex-wrap">
+                        <div class="w-full mb-1 text-gray-500">Deployment Down-Time</div>
+
+                        <mat-form-field class="w-6/12" appearance="outline">
+                            <input type="number" matInput placeholder="Down-Time"  formControlName="deploymentDownTime" required>
+                        </mat-form-field>
+        
+                        <mat-form-field class="w-4/12 ml-2" appearance="outline">
+                            <mat-select placeholder="Format" formControlName="downTimeFormat" required>
+                                <mat-option *ngFor="let format of ['Minutes', 'Hours']" [value]="format">
+                                    {{format}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            
+
+            <!-- Form Actions -->
+            <div class="w-10/12 flex justify-end mt-8" *ngIf="!formActionLoader">
+                <button mat-stroked-button class="" (click)="formViewType = '';">Cancel</button>
+                <button mat-flat-button class="ml-4" color="primary" (click)="updateReleaseDeploymentStrategy()" [disabled]="deploymentPlanForm.invalid">{{formViewType === 'Add' ? 'Add' : 'Update'}}</button>
+            </div>
+
+            <!-- Form action loader -->
+            <div class="w-10/12 flex justify-end mt-8" *ngIf="formActionLoader">
+                <mat-spinner [diameter]="20"></mat-spinner>
+                <span class="ml-2">{{formViewType}}ing Release Deployment Strategy ...</span>
+            </div>
+        </div>
+    </div>
+</div>

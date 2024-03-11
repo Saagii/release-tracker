@@ -30,6 +30,7 @@ import { ReleaseCompatibilityInteroperabilityComponent } from './content/compone
 import { ReleaseUsabilityComponent } from './content/components/releases/components/release-view/child-components/usability/usability.component';
 import { ReleaseLocalizationInternalizationComponent } from './content/components/releases/components/release-view/child-components/localization-internalization/localization-internalization.component';
 import { ReleaseRollbackPlansComponent } from './content/components/releases/components/release-view/child-components/rollback-plan/rollback-plan.component';
+import { ReleaseDeploymentPlanComponent } from './content/components/releases/components/release-view/child-components/deployment-plan/deployment-plan.component';
 
 
 
@@ -62,7 +63,8 @@ import { ReleaseRollbackPlansComponent } from './content/components/releases/com
     ReleaseCompatibilityInteroperabilityComponent,
     ReleaseUsabilityComponent,
     ReleaseLocalizationInternalizationComponent,
-    ReleaseRollbackPlansComponent
+    ReleaseRollbackPlansComponent,
+    ReleaseDeploymentPlanComponent
   ],
   imports: [
     CommonModule,
@@ -97,7 +99,8 @@ import { ReleaseRollbackPlansComponent } from './content/components/releases/com
     ReleaseCompatibilityInteroperabilityComponent,
     ReleaseUsabilityComponent,
     ReleaseLocalizationInternalizationComponent,
-    ReleaseRollbackPlansComponent
+    ReleaseRollbackPlansComponent,
+    ReleaseDeploymentPlanComponent
   ]
 })
 export class MainModule { }

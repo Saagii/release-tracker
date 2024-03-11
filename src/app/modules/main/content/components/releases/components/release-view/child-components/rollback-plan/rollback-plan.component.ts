@@ -249,8 +249,9 @@ export class ReleaseRollbackPlansComponent implements OnInit {
       }
     }
     let rollbackDetails = rollback;
-    rollbackDetails.rollbackTeam = [];
-    this.rollbackPlanForm.setValue(rollbackDetails);
+    // rollbackDetails.rollbackTeam = [];
+    this.rollbackPlanForm.patchValue(rollbackDetails);
+    this.rollbackPlanForm.get('rollbackTeam')?.setValue('');
   }
 
 
