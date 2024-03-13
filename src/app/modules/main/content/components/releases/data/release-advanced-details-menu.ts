@@ -4,6 +4,7 @@ import { ReleaseDeploymentPlanComponent } from "../components/release-view/child
 import { ReleaseEnhancementsInnovationsComponent } from "../components/release-view/child-components/enhancements-innovations/enhancements-innovations.component";
 import { ReleaseLocalizationInternalizationComponent } from "../components/release-view/child-components/localization-internalization/localization-internalization.component";
 import { ReleaseObjectivesComponent } from "../components/release-view/child-components/objectives/objectives.component";
+import { ReleasePerformanceOptimizationComponent } from "../components/release-view/child-components/performance-optimization/performance-optimization.component";
 import { ReleaseRollbackPlansComponent } from "../components/release-view/child-components/rollback-plan/rollback-plan.component";
 import { ReleaseUsabilityComponent } from "../components/release-view/child-components/usability/usability.component";
 
@@ -67,9 +68,9 @@ export const releaseAdvancedDetailsMenu = [
     {
         id: 9,
         title: 'Performance Optimization',
-        description: 'Aimed at improving the software performances.',
+        description: 'project release performance strategy involves careful planning, coordination, and execution to ensure that the release meets stakeholder expectations while maintaining quality and efficiency.',
         icon: '',
-        component: ''
+        component: ReleasePerformanceOptimizationComponent
     },
     {
         id: 10,
@@ -102,7 +103,7 @@ export const releaseAdvancedDetailsMenu = [
     {
         id: 14,
         title: 'Prioritization',
-        description: 'Prioritize patch fixes based on severity and impact to users.',
+        description: 'project release performance strategy involves careful planning, coordination, and execution to ensure that the release meets stakeholder expectations while maintaining quality and efficiency.',
         icon: '',
         component: ''
     },

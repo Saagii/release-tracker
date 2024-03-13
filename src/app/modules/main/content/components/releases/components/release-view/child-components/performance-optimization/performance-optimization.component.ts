@@ -11,10 +11,10 @@ import { DialogSharedComponent } from 'src/app/modules/shared/components/dialog/
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-release-view-deployment-plan',
-  templateUrl: './deployment-plan.component.html'
+  selector: 'app-release-view-performance-optimization',
+  templateUrl: './performance-optimization.component.html'
 })
-export class ReleaseDeploymentPlanComponent implements OnInit {
+export class ReleasePerformanceOptimizationComponent implements OnInit {
 
   @Input() title?: string;
   @Input() description?: string;
@@ -23,12 +23,12 @@ export class ReleaseDeploymentPlanComponent implements OnInit {
   releaseDetails: any;
   releaseConfigDetails: any;
   formViewType: string = '';
-  editDeploymentPlanId: string = '';
-  deleteDeploymentPlanId: string = '';
+  editPerformanceOptimizationPlanId: string = '';
+  deletePerformanceOptimizationId: string = '';
   formActionLoader: boolean = false;
-  expandedDeploymentPlanId: string = '';
-  deploymentPlanForm: UntypedFormGroup;
-  deploymentPlanModifiedName: any;
+  expandedPerformanceOptimizationId: string = '';
+  performanceOptimizationForm: UntypedFormGroup;
+  performanceOptimizationModifiedName: any;
   timeArray: string[] = [];
 
   constructor(
@@ -42,19 +42,25 @@ export class ReleaseDeploymentPlanComponent implements OnInit {
     public dialog: MatDialog,
   ) {
     // Prepare Objectives Form
-    this.deploymentPlanForm = this.fb.group({
-      type: [''],
-      deploymentDate: [''],
-      deploymentDownTime: [''],
-      deploymentDomainId: [''],
-      deploymentTime: [''],
-      deploymentTimeMeridian: [''],
-      deploymentDownTimeFormat: ['']
+    this.performanceOptimizationForm = this.fb.group({
+      responseTime: [''],
+      throughput: [''],
+      errorRate: [''],
+      cpuMemoryUsage: [''],
+      networkLatency: [''],
+      pageLoadTime: [''],
+      algorithimicOptimization: [''],
+      cachingStrategies: [''],
+      databaseOptimization: [''],
+      codeOptimization: [''],
+      resourceUtilizationOptimization: [''],
+      newtorkOptimization: [''],
+      frontEndOptimization: ['']
     });
   }
 
   ngOnInit(): void {
-    console.log('Inside ReleaseDeploymentPlanComponent');
+    console.log('Inside ReleasePerformanceOptimizationComponent');
 
     this.releaseId = this._activatedRoute.snapshot.params['id'];
 
@@ -104,6 +110,8 @@ export class ReleaseDeploymentPlanComponent implements OnInit {
       this.fetchLoader = false;
       
       this.releaseDetails = releaseDetails;
+
+      this.getMemberDetails(this.releaseDetails.releasePerformanceStrategy[0].lastModifiedById);
     });
   }
 
@@ -111,13 +119,13 @@ export class ReleaseDeploymentPlanComponent implements OnInit {
   /*
     Dialog Method: Delete Defects, Bugs, Observations
   */
-  deploymentPlanComponentDeleteActions(titleData: any): any {
+  performanceOptimizationComponentDeleteActions(titleData: any): any {
     this.dialog.open(DialogSharedComponent, {
       panelClass: ['w-5/12'],
       data: {
         type: 'confirmation',
         confirmationContent: {
-          title: 'Are you sure you want to delete ' + '"' + titleData + '"' + ' from release enhancements & innovations ?',
+          title: 'Are you sure you want to delete ' + '"' + titleData + '"' + ' from release performance details ?',
           subtitle: ''
         }
       },
@@ -126,7 +134,7 @@ export class ReleaseDeploymentPlanComponent implements OnInit {
 
       if(result) {
         this.formViewType = 'Delete'; 
-        this.updateReleaseDeploymentStrategy();
+        this.updatePerformanceOptimization();
       }
     });
   }
@@ -136,11 +144,11 @@ export class ReleaseDeploymentPlanComponent implements OnInit {
     Get member details by ID
   */
   getMemberDetails(memberId: string): void {
-    this.deploymentPlanModifiedName = null;
+    this.performanceOptimizationModifiedName = null;
     this.membersService.getMemberDetails(memberId).subscribe((response: any) => {
       console.log(response);
 
-      this.deploymentPlanModifiedName = response;
+      this.performanceOptimizationModifiedName = response;
     });
   }
 
@@ -148,9 +156,9 @@ export class ReleaseDeploymentPlanComponent implements OnInit {
     /*
     Add Release Objectives.
   */
-  updateReleaseDeploymentStrategy(): void {
+  updatePerformanceOptimization(): void {
 
-    const paramToBeUpdatedValue = 'releaseDeploymentStrategy';
+    const paramToBeUpdatedValue = 'releasePerformanceStrategy';
     this.formActionLoader = true;
 
     // Set the payload details.
@@ -161,33 +169,39 @@ export class ReleaseDeploymentPlanComponent implements OnInit {
       releaseDetailsUpdatePayload: {
         [paramToBeUpdatedValue] : [
           {
-            type: this.deploymentPlanForm.get('type')?.value,
-            deploymentDate: this.deploymentPlanForm.get('deploymentDate')?.value,
-            deploymentTime: this.deploymentPlanForm.get('deploymentTime')?.value,
-            deploymentTimeMeridian: this.deploymentPlanForm.get('deploymentTimeMeridian')?.value,
-            deploymentDownTime: this.deploymentPlanForm.get('deploymentDownTime')?.value,
-            deploymentDownTimeFormat: this.deploymentPlanForm.get('deploymentDownTimeFormat')?.value,
-            deploymentDomainId: this.deploymentPlanForm.get('deploymentDomainId')?.value
+            responseTime: this.performanceOptimizationForm.get('responseTime')?.value,
+            throughput: this.performanceOptimizationForm.get('throughput')?.value,
+            errorRate: this.performanceOptimizationForm.get('errorRate')?.value,
+            cpuMemoryUsage: this.performanceOptimizationForm.get('cpuMemoryUsage')?.value,
+            networkLatency: this.performanceOptimizationForm.get('networkLatency')?.value,
+            pageLoadTime: this.performanceOptimizationForm.get('pageLoadTime')?.value,
+            algorithimicOptimization: this.performanceOptimizationForm.get('algorithimicOptimization')?.value,
+            cachingStrategies: this.performanceOptimizationForm.get('cachingStrategies')?.value,
+            databaseOptimization: this.performanceOptimizationForm.get('databaseOptimization')?.value,
+            codeOptimization: this.performanceOptimizationForm.get('codeOptimization')?.value,
+            resourceUtilizationOptimization: this.performanceOptimizationForm.get('resourceUtilizationOptimization')?.value,
+            newtorkOptimization: this.performanceOptimizationForm.get('newtorkOptimization')?.value,
+            frontEndOptimization: this.performanceOptimizationForm.get('frontEndOptimization')?.value
           }
         ]
       }
     }
 
     if(this.formViewType === 'Edit') {
-      releaseDetailsPayload = {...releaseDetailsPayload, ...{"releaseObjectParamId": this.editDeploymentPlanId}}
+      releaseDetailsPayload = {...releaseDetailsPayload, ...{"releaseObjectParamId": this.editPerformanceOptimizationPlanId}}
     }
 
     // For deleting the objective.
     if(this.formViewType === 'Delete') {
       this.fetchLoader = true;
       delete releaseDetailsPayload.releaseDetailsUpdatePayload;
-      releaseDetailsPayload = {...releaseDetailsPayload, ...{"releaseObjectParamId": this.deleteDeploymentPlanId}}
+      releaseDetailsPayload = {...releaseDetailsPayload, ...{"releaseObjectParamId": this.deletePerformanceOptimizationId}}
     }
 
     console.log(releaseDetailsPayload);
 
     // Disable the form.
-    this.deploymentPlanForm.disable();
+    this.performanceOptimizationForm.disable();
 
     this.releasesService.updateReleaseDetails(this.releaseDetails._id, releaseDetailsPayload).subscribe((response: any) => {
       console.log(response);
@@ -196,11 +210,11 @@ export class ReleaseDeploymentPlanComponent implements OnInit {
         this.formActionLoader = false;
 
         this.formViewType = ''; 
-        this.editDeploymentPlanId = '';
+        this.editPerformanceOptimizationPlanId = '';
 
         this.fetchLoader = true;
 
-        this.deploymentPlanForm.enable();
+        this.performanceOptimizationForm.enable();
 
         this.getReleasesDetails();
       }, 1000);
@@ -213,16 +227,16 @@ export class ReleaseDeploymentPlanComponent implements OnInit {
     Reset form.
   */
   resetForm(): void {
-    this.deploymentPlanForm.reset();
+    this.performanceOptimizationForm.reset();
   }
 
 
   /*
     Edit enhancement.
   */
-  editDeploymentPlansForm(deploymentPLan: any): void {
-    console.log(deploymentPLan);
-    this.deploymentPlanForm.patchValue(deploymentPLan);
+  editPerformanceOptimizationForm(performanceOptimization: any): void {
+    console.log(performanceOptimization);
+    this.performanceOptimizationForm.patchValue(performanceOptimization);
   }
 
 

@@ -1,0 +1,270 @@
+<!-- If no objectives are present. -->
+<div class="w-full flex flex-wrap mt-14" *ngIf="releaseDetails && !releaseDetails?.releasePerformanceStrategy.length && formViewType === '' ">
+    <div class="w-full py-6 text-center text-gray-700">Hey, currently there are no Performance Details added for this release.</div>
+    <div class="w-full flex justify-center">
+        <button mat-flat-button class="" color="primary" (click)="formViewType = 'Add'; resetForm();">Let's Start Adding</button>
+    </div>
+</div>
+
+<!-- View Block -->
+<div class="w-full">
+
+    <!-- View Block Title and Actions -->
+    <div class="w-full flex flex-wrap justify-between items-center mb-4" *ngIf="!['Add', 'Edit'].includes(formViewType) && releaseDetails?.releasePerformanceStrategy?.length">
+        <div class="w-10/12 text-lg">
+            <div class="w-full">Performance Details</div>
+            <div class="w-full text-xs text-gray-600">Click on <span class="font-bold italic">Show more</span> to view the description and perform other actions.</div>
+        </div>
+        <!-- <div class="w-2/12 flex justify-end">
+            <button mat-stroked-button class="" color="primary" (click)="formViewType = 'Add'; resetForm();">+ Add</button>
+        </div> -->
+    </div>
+
+    <!-- Loading Block -->
+    <div class="w-full mt-14 flex items-center justify-center" *ngIf="fetchLoader">
+        <mat-spinner class="mr-2" diameter="22"></mat-spinner> Fetching Performance Strategy...
+    </div>
+
+    <!-- View Block Objectives list -->
+    <div class="w-full" *ngIf="releaseDetails && releaseDetails?.releasePerformanceStrategy?.length && formViewType === '' ">
+        <div class="w-full mb-2" *ngFor="let performanceStrategy of releaseDetails?.releasePerformanceStrategy; let i = index;">
+
+            <div class="w-full border border-gray-200 rounded-md p-4">
+                <div class="w-full text-base">Performance Metrics</div>
+                <div class="w-full flex flex-wrap mt-2">
+                    <div class="w-6/12 mb-4">
+                        <div class="text-xs mb-1">Response Time</div>
+                        <div class="w-full">{{performanceStrategy.responseTime}}</div>
+                    </div>
+
+                    <div class="w-6/12 mb-4">
+                        <div class="text-xs mb-1">Throughput</div>
+                        <div class="w-full">{{performanceStrategy.throughput}}</div>
+                    </div>
+
+                    <div class="w-6/12 mb-4">
+                        <div class="text-xs mb-1">Error Rate</div>
+                        <div class="w-full">{{performanceStrategy.errorRate}}</div>
+                    </div>
+
+                    <div class="w-6/12 mb-4">
+                        <div class="text-xs mb-1">CPU Memory Usage</div>
+                        <div class="w-full">{{performanceStrategy.cpuMemoryUsage}}</div>
+                    </div>
+
+                    <div class="w-6/12 mb-4">
+                        <div class="text-xs mb-1">Network Latency</div>
+                        <div class="w-full">{{performanceStrategy.networkLatency}}</div>
+                    </div>
+
+                    <div class="w-6/12 mb-4">
+                        <div class="text-xs mb-1">Page Load Time</div>
+                        <div class="w-full">{{performanceStrategy.pageLoadTime}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full border border-gray-200 rounded-md p-4 mt-4">
+                <div class="w-full text-base">Performance Optimizations</div>
+                <div class="w-full flex flex-wrap mt-2">
+                    <div class="w-full mb-4">
+                        <div class="text-xs mb-1">Algorithimic Optimization</div>
+                        <div class="w-full">{{performanceStrategy.algorithimicOptimization}}</div>
+                    </div>
+
+                    <div class="w-full mb-4">
+                        <div class="text-xs mb-1">Caching Optimization</div>
+                        <div class="w-full">{{performanceStrategy.cachingStrategies}}</div>
+                    </div>
+
+                    <div class="w-full mb-4">
+                        <div class="text-xs mb-1">Database Optimization</div>
+                        <div class="w-full">{{performanceStrategy.databaseOptimization}}</div>
+                    </div>
+
+                    <div class="w-full mb-4">
+                        <div class="text-xs mb-1">Code Optimization</div>
+                        <div class="w-full">{{performanceStrategy.codeOptimization}}</div>
+                    </div>
+
+                    <div class="w-full mb-4">
+                        <div class="text-xs mb-1">Resource Utilization Optimization</div>
+                        <div class="w-full">{{performanceStrategy.resourceUtilizationOptimization}}</div>
+                    </div>
+
+                    <div class="w-full mb-4">
+                        <div class="text-xs mb-1">Network Optimization</div>
+                        <div class="w-full">{{performanceStrategy.newtorkOptimization}}</div>
+                    </div>
+
+                    <div class="w-full mb-4">
+                        <div class="text-xs mb-1">Front-end Optimization</div>
+                        <div class="w-full">{{performanceStrategy.frontEndOptimization}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modification Details -->
+            <div class="w-full flex justify-end items-end">
+                <div class="w-10/12 mt-8">
+                    <div class="text-xs text-gray-600 flex items-center mt-1">
+                        <span class="font-semibold">Created By:</span> <mat-spinner [diameter]="20" *ngIf="!performanceOptimizationModifiedName"></mat-spinner> <span class="ml-1 hover:underline hover:text-blue-600 cursor-pointer" *ngIf="performanceOptimizationModifiedName" [routerLink]="['../../admin/members', performanceStrategy.createdById]">{{performanceOptimizationModifiedName?.firstName}} {{performanceOptimizationModifiedName?.lastName}} </span><span class="italic">, On {{performanceStrategy.createdOnDate | date:'medium'}}</span>
+                    </div>
+                    <div class="text-xs text-gray-600 flex items-center mt-1">
+                        <span class="font-semibold">Modified By:</span> <mat-spinner [diameter]="20" *ngIf="!performanceOptimizationModifiedName"></mat-spinner> <span class="ml-1 hover:underline hover:text-blue-600 cursor-pointer" *ngIf="performanceOptimizationModifiedName" [routerLink]="['../../admin/members', performanceStrategy.lastModifiedById]">{{performanceOptimizationModifiedName?.firstName}} {{performanceOptimizationModifiedName?.lastName}} </span><span class="italic">, On {{performanceStrategy.lastModifiedDate | date:'medium'}}</span>
+                    </div>
+                </div>
+                <div class="w-2/12 flex justify-end">
+                    <button mat-icon-button class="" color="warn" (click)="deletePerformanceOptimizationId = performanceStrategy._id; performanceOptimizationComponentDeleteActions(performanceStrategy.title);">
+                        <mat-icon class="mr-2">delete</mat-icon>
+                    </button>
+                    <button mat-icon-button class="" (click)="formViewType = 'Edit'; editPerformanceOptimizationPlanId = performanceStrategy._id; editPerformanceOptimizationForm(performanceStrategy) ">
+                        <mat-icon class="mr-2">edit</mat-icon>
+                    </button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+
+</div>
+
+<!-- Form Block -->
+<div class="w-full" *ngIf="['Add', 'Edit'].includes(formViewType)">
+
+    <!-- Title -->
+    <div class="w-full text-lg">{{formViewType}} Release Performance Strategies</div>
+    <div class="w-full text-xs text-gray-600">Enter all the requied fields*</div>
+
+    <!-- Form Block -->
+    <div class="w-full mt-8">
+        <div class="w-10/12 flex flex-wrap items-center my-3" [formGroup]="performanceOptimizationForm">
+
+            <div class="w-full flex flex-wrap">
+
+                <!-- Performance Optimization Form -->
+                <div class="w-full mt-2 mb-2 text-base">Performance Metrics</div>
+
+                <!-- Response Time -->
+                <div class="w-6/12 pr-4">
+                    <div class="w-full flex items-center mb-1">Response Time <mat-icon class="text-blue-600 ml-2" matTooltip="The time taken to respond to user requests.">info_outline</mat-icon></div>
+                    <mat-form-field class="w-full" appearance="outline">
+                        <input type="number" matInput placeholder="Enter Response Time"  formControlName="responseTime" required>
+                    </mat-form-field>
+                </div>
+
+                <!-- Throughput -->
+                <div class="w-6/12">
+                    <div class="w-full flex items-center mb-1">Throughput <mat-icon class="text-blue-600 ml-2" matTooltip="The number of requests processed per unit of time.">info_outline</mat-icon></div>
+                    <mat-form-field class="w-full" appearance="outline">
+                        <input type="number" matInput placeholder="Enter Throughput"  formControlName="throughput" required>
+                    </mat-form-field>
+                </div>
+                
+                <!-- Error Rate -->
+                <div class="w-6/12 pr-4">
+                    <div class="w-full flex items-center mb-1">Error Rate <mat-icon class="text-blue-600 ml-2" matTooltip="The frequency of errors or failures encountered.">info_outline</mat-icon></div>
+                    <mat-form-field class="w-full" appearance="outline">
+                        <input type="number" matInput placeholder="Enter Error Rate"  formControlName="errorRate" required>
+                    </mat-form-field>
+                </div>
+
+                <!-- CPU Memory Usage -->
+                <div class="w-6/12">
+                    <div class="w-full flex items-center mb-1">CPU Memory Usage <mat-icon class="text-blue-600 ml-2" matTooltip="Resource utilization metrics indicating system load.">info_outline</mat-icon></div>
+                    <mat-form-field class="w-full" appearance="outline">
+                        <input type="number" matInput placeholder="Enter CPU Memory Usage"  formControlName="cpuMemoryUsage" required>
+                    </mat-form-field>
+                </div>
+
+                <!-- Network Latency -->
+                <div class="w-6/12 pr-4">
+                    <div class="w-full flex items-center mb-1">Network Latency <mat-icon class="text-blue-600 ml-2" matTooltip="The time taken for data to travel between client and server.">info_outline</mat-icon></div>
+                    <mat-form-field class="w-full" appearance="outline">
+                        <input type="number" matInput placeholder="Enter Network Latency"  formControlName="networkLatency" required>
+                    </mat-form-field>
+                </div>
+
+                <!-- Page Load Time -->
+                <div class="w-6/12">
+                    <div class="w-full flex items-center mb-1">Page Load Time <mat-icon class="text-blue-600 ml-2" matTooltip=" The time taken for web pages to load in the browser.">info_outline</mat-icon></div>
+                    <mat-form-field class="w-full" appearance="outline">
+                        <input type="number" matInput placeholder="Enter Page Load Time"  formControlName="pageLoadTime" required>
+                    </mat-form-field>
+                </div>
+
+                <!-- Performance Optimization Form -->
+                <div class="w-full mt-6 mb-2 text-base">Performance Optimization</div>
+
+                <!-- Algorithimic Optimization -->
+                <div class="w-6/12 pr-4">
+                    <div class="w-full flex items-center mb-1">Algorithimic Optimization <mat-icon class="text-blue-600 ml-2" matTooltip="Improvements to the efficiency of algorithms and data structures.">info_outline</mat-icon></div>
+                    <mat-form-field class="w-full" appearance="outline">
+                        <textarea type="number" matInput placeholder="Enter Algorithimic Optimization"  formControlName="algorithimicOptimization" required></textarea>
+                    </mat-form-field>
+                </div>
+
+                <!-- Caching Optimization -->
+                <div class="w-6/12">
+                    <div class="w-full flex items-center mb-1">Caching Optimization <mat-icon class="text-blue-600 ml-2" matTooltip="Use of caching mechanisms to store and retrieve frequently accessed data.">info_outline</mat-icon></div>
+                    <mat-form-field class="w-full" appearance="outline">
+                        <textarea type="number" matInput placeholder="Enter Caching Optimization"  formControlName="cachingStrategies" required></textarea>
+                    </mat-form-field>
+                </div>
+
+                <!-- Database Optimization -->
+                <div class="w-6/12 pr-4">
+                    <div class="w-full flex items-center mb-1">Database Optimization <mat-icon class="text-blue-600 ml-2" matTooltip="Indexing, query optimization, and database schema design improvements.">info_outline</mat-icon></div>
+                    <mat-form-field class="w-full" appearance="outline">
+                        <textarea type="number" matInput placeholder="Enter Database Optimization"  formControlName="databaseOptimization" required></textarea>
+                    </mat-form-field>
+                </div>
+
+                <!-- Code Optimization -->
+                <div class="w-6/12">
+                    <div class="w-full flex items-center mb-1">Code Optimization <mat-icon class="text-blue-600 ml-2" matTooltip="Refactoring code for improved readability, maintainability, and performance.">info_outline</mat-icon></div>
+                    <mat-form-field class="w-full" appearance="outline">
+                        <textarea type="number" matInput placeholder="Enter Code Optimization"  formControlName="codeOptimization" required></textarea>
+                    </mat-form-field>
+                </div>
+
+                <!-- Resource utilization Optimization -->
+                <div class="w-6/12 pr-4">
+                    <div class="w-full flex items-center mb-1">Resource utilization Optimization <mat-icon class="text-blue-600 ml-2" matTooltip="Optimizing CPU, memory, and disk usage to reduce overhead.">info_outline</mat-icon></div>
+                    <mat-form-field class="w-full" appearance="outline">
+                        <textarea type="number" matInput placeholder="Enter Resource utilization Optimization"  formControlName="resourceUtilizationOptimization" required></textarea>
+                    </mat-form-field>
+                </div>
+
+                <!-- Network Optimization -->
+                <div class="w-6/12">
+                    <div class="w-full flex items-center mb-1">Network Optimization <mat-icon class="text-blue-600 ml-2" matTooltip="Minimizing network latency through compression, caching, or content delivery networks (CDNs).">info_outline</mat-icon></div>
+                    <mat-form-field class="w-full" appearance="outline">
+                        <textarea type="number" matInput placeholder="Enter Network Optimization"  formControlName="newtorkOptimization" required></textarea>
+                    </mat-form-field>
+                </div>
+
+                <!-- Front-end Optimization -->
+                <div class="w-6/12 pr-4">
+                    <div class="w-full flex items-center mb-1">Front-end Optimization <mat-icon class="text-blue-600 ml-2" matTooltip="Techniques such as minification, bundling, and lazy loading to optimize client-side performance.">info_outline</mat-icon></div>
+                    <mat-form-field class="w-full" appearance="outline">
+                        <textarea type="number" matInput placeholder="Enter Front-end Optimization"  formControlName="frontEndOptimization" required></textarea>
+                    </mat-form-field>
+                </div>
+            </div>            
+
+            <!-- Form Actions -->
+            <div class="w-full flex justify-end mt-8" *ngIf="!formActionLoader">
+                <button mat-stroked-button class="" (click)="formViewType = '';">Cancel</button>
+                <button mat-flat-button class="ml-4" color="primary" (click)="updatePerformanceOptimization()" [disabled]="performanceOptimizationForm.invalid">{{formViewType === 'Add' ? 'Add' : 'Update'}}</button>
+            </div>
+
+            <!-- Form action loader -->
+            <div class="w-full flex justify-end mt-8" *ngIf="formActionLoader">
+                <mat-spinner [diameter]="20"></mat-spinner>
+                <span class="ml-2">{{formViewType}}ing Release Performance Strategy ...</span>
+            </div>
+        </div>
+    </div>
+</div>

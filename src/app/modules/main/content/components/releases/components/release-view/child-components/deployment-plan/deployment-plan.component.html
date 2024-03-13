@@ -148,7 +148,7 @@
                     <div class="w-6/12 flex flex-wrap">
                         <div class="w-full mb-1 text-gray-500">Deployment Time</div>
                         <mat-form-field class="w-5/12" appearance="outline">
-                            <mat-select placeholder="Time" formControlName="time" required>
+                            <mat-select placeholder="Time" formControlName="deploymentTime" required>
                                 <mat-option *ngFor="let time of timeArray" [value]="time">
                                     {{time}}
                                 </mat-option>
@@ -156,7 +156,7 @@
                         </mat-form-field>
         
                         <mat-form-field class="w-4/12 ml-2" appearance="outline">
-                            <mat-select placeholder="Meridian" formControlName="meridian" required>
+                            <mat-select placeholder="Meridian" formControlName="deploymentTimeMeridian" required>
                                 <mat-option *ngFor="let meridian of ['AM', 'PM']" [value]="meridian">
                                     {{meridian}}
                                 </mat-option>
@@ -173,7 +173,7 @@
                         </mat-form-field>
         
                         <mat-form-field class="w-4/12 ml-2" appearance="outline">
-                            <mat-select placeholder="Format" formControlName="downTimeFormat" required>
+                            <mat-select placeholder="Format" formControlName="deploymentDownTimeFormat" required>
                                 <mat-option *ngFor="let format of ['Minutes', 'Hours']" [value]="format">
                                     {{format}}
                                 </mat-option>
