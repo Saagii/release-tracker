@@ -7,6 +7,7 @@ import { ReleaseObjectivesComponent } from "../components/release-view/child-com
 import { ReleasePerformanceOptimizationComponent } from "../components/release-view/child-components/performance-optimization/performance-optimization.component";
 import { ReleaseRollbackPlansComponent } from "../components/release-view/child-components/rollback-plan/rollback-plan.component";
 import { ReleaseUsabilityComponent } from "../components/release-view/child-components/usability/usability.component";
+import { ReleaseUserSupportComponent } from "../components/release-view/child-components/user-support/user-support.component";
 
 export const releaseAdvancedDetailsMenu = [
     {
@@ -91,7 +92,7 @@ export const releaseAdvancedDetailsMenu = [
         title: 'User Support',
         description: 'Providing support to users who may encounter issues related to the patch or need assistance with its installation.',
         icon: '',
-        component: ''
+        component: ReleaseUserSupportComponent
     },
     {
         id: 13,

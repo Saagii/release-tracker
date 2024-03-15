@@ -32,6 +32,7 @@ import { ReleaseLocalizationInternalizationComponent } from './content/component
 import { ReleaseRollbackPlansComponent } from './content/components/releases/components/release-view/child-components/rollback-plan/rollback-plan.component';
 import { ReleaseDeploymentPlanComponent } from './content/components/releases/components/release-view/child-components/deployment-plan/deployment-plan.component';
 import { ReleasePerformanceOptimizationComponent } from './content/components/releases/components/release-view/child-components/performance-optimization/performance-optimization.component';
+import { ReleaseUserSupportComponent } from './content/components/releases/components/release-view/child-components/user-support/user-support.component';
 
 
 
@@ -66,7 +67,8 @@ import { ReleasePerformanceOptimizationComponent } from './content/components/re
     ReleaseLocalizationInternalizationComponent,
     ReleaseRollbackPlansComponent,
     ReleaseDeploymentPlanComponent,
-    ReleasePerformanceOptimizationComponent
+    ReleasePerformanceOptimizationComponent,
+    ReleaseUserSupportComponent
   ],
   imports: [
     CommonModule,
@@ -103,7 +105,8 @@ import { ReleasePerformanceOptimizationComponent } from './content/components/re
     ReleaseLocalizationInternalizationComponent,
     ReleaseRollbackPlansComponent,
     ReleaseDeploymentPlanComponent,
-    ReleasePerformanceOptimizationComponent
+    ReleasePerformanceOptimizationComponent,
+    ReleaseUserSupportComponent
   ]
 })
 export class MainModule { }

@@ -1,0 +1,243 @@
+<!-- If no objectives are present. -->
+<div class="w-full flex flex-wrap mt-14" *ngIf="releaseDetails && !releaseDetails?.releaseUserSupport.length && formViewType === '' ">
+    <div class="w-full py-6 text-center text-gray-700">Hey, currently there are no User Support details added for this release.</div>
+    <div class="w-full flex justify-center">
+        <button mat-flat-button class="" color="primary" (click)="formViewType = 'Add'; resetForm();">Let's Start Adding</button>
+    </div>
+</div>
+
+<!-- View Block -->
+<div class="w-full">
+
+    <!-- View Block Title and Actions -->
+    <div class="w-full flex flex-wrap justify-between items-center mb-4" *ngIf="!['Add', 'Edit'].includes(formViewType) && releaseDetails?.releaseUserSupport?.length">
+        <div class="w-10/12 text-lg">
+            <div class="w-full">User Support</div>
+            <div class="w-full text-xs text-gray-600">Click on <span class="font-bold italic">Show more</span> to view the description and perform other actions.</div>
+        </div>
+        <div class="w-2/12 flex justify-end">
+            <button mat-stroked-button class="" color="primary" (click)="formViewType = 'Add'; resetForm();">+ Add</button>
+        </div>
+    </div>
+
+    <!-- Loading Block -->
+    <div class="w-full mt-14 flex items-center justify-center" *ngIf="fetchLoader">
+        <mat-spinner class="mr-2" diameter="22"></mat-spinner> Fetching User Supports...
+    </div>
+
+    <!-- View Block Objectives list -->
+    <div class="w-full" *ngIf="releaseDetails && releaseDetails?.releaseUserSupport?.length && formViewType === '' ">
+        <div class="py-4 text-xs">
+            <span class="font-bold">Total:</span><span class="text-gray-800 ml-1">{{releaseDetails?.releaseUserSupport.length}}</span>
+        </div>
+        <div class="w-full px-4 py-2 border border-gray-200 rounded-md mb-4" *ngFor="let userSupport of releaseDetails?.releaseUserSupport; let i = index;">
+
+            <!-- defect Title & Action Block -->
+            <div class="w-full flex justify-between items-center">
+                <div class="w-8/12">
+                    <div class="text-xs text-gray-600">#{{i+1}}</div>
+                    <div class="text-base">{{filterRequiredIds('type', userSupport.userSupportType)}}</div>
+                </div>
+                <div class="w-4/12 flex justify-end items-center">
+                    <button mat-icon-button class="ml-2" matTooltip="Show More" *ngIf="expandedUserSupportId !== userSupport._id" (click)="expandedUserSupportId = userSupport._id; getMemberDetails(userSupport.lastModifiedById)">
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+                    </button>
+                    <button mat-icon-button class="ml-2" matTooltip="Show Less" *ngIf="expandedUserSupportId !== '' && expandedUserSupportId === userSupport._id" (click)="expandedUserSupportId = '' ">
+                        <mat-icon>keyboard_arrow_up</mat-icon>
+                    </button>
+                </div>
+            </div>
+    
+            <!-- Expanded Block -->
+            <div class="w-full mt-4" *ngIf="expandedUserSupportId === userSupport._id ">
+
+                <!-- USER SUPPORT Team Members -->
+                <div class="w-full pb-6">
+                    <div class="text-xs text-gray-600 font-bold mb-1">USER SUPPORT TEAM MEMBERS</div>
+                    <div class="w-full mb-1" *ngFor="let member of userSupport.userSupportMembers">
+                        <div class="w-fit text-gray-600 text-xs py-1 px-2 rounded-md bg-gray-100 border border-gray-200 mr-2 cursor-pointer hover:bg-blue-100 hover:border-blue-300">{{filterRequiredIds('members', member)}}</div>
+                    </div>
+                </div>
+
+                <!-- USER SUPPORT DURATION -->
+                <div class="w-full">
+                    <div class="text-xs text-gray-600 font-bold">USER SUPPORT DURATION</div>
+                    <div class="w-full pb-6 text-gray-600 text-xs">{{userSupport.userSupportDurationValue}} {{userSupport.userSupportDurationFormat}}</div>
+                </div>
+
+                <div class="w-full flex">
+                    <!-- USER SUPPORT START DATE -->
+                    <div class="w-3/12">
+                        <div class="text-xs text-gray-600 font-bold">USER SUPPORT START DATE</div>
+                        <div class="w-full pb-6 text-gray-600 text-xs">{{userSupport.userSupportStartDate | date:'fullDate'}}</div>
+                    </div>
+
+                    <!-- USER SUPPORT END DATE -->
+                    <div class="w-3/12">
+                        <div class="text-xs text-gray-600 font-bold">USER SUPPORT END DATE</div>
+                        <div class="w-full pb-6 text-gray-600 text-xs">{{userSupport.userSupportEndDate | date:'fullDate'}}</div>
+                    </div>
+                </div>
+
+                
+
+                <!-- USER SUPPORT Comments -->
+                <div class="w-full">
+                    <div class="text-xs text-gray-600 font-bold">COMMENTS/REMARKS</div>
+                    <div class="w-full pb-6 text-gray-600 text-xs">{{userSupport.comments}}</div>
+                </div>
+    
+                <!-- Modification Details -->
+                <div class="w-full flex justify-end items-center">
+                    <div class="w-10/12 mt-8">
+                        <div class="text-xs text-gray-600 flex items-center mt-1">
+                            <span class="font-semibold">Created By:</span> <mat-spinner [diameter]="20" *ngIf="!userSupportModifiedName"></mat-spinner> <span class="ml-1 hover:underline hover:text-blue-600 cursor-pointer" *ngIf="userSupportModifiedName" [routerLink]="['../../admin/members', userSupport.createdById]">{{userSupportModifiedName?.firstName}} {{userSupportModifiedName?.lastName}} </span><span class="italic">, On {{userSupport.createdOnDate | date:'medium'}}</span>
+                        </div>
+                        <div class="text-xs text-gray-600 flex items-center mt-1">
+                            <span class="font-semibold">Modified By:</span> <mat-spinner [diameter]="20" *ngIf="!userSupportModifiedName"></mat-spinner> <span class="ml-1 hover:underline hover:text-blue-600 cursor-pointer" *ngIf="userSupportModifiedName" [routerLink]="['../../admin/members', userSupport.lastModifiedById]">{{userSupportModifiedName?.firstName}} {{userSupportModifiedName?.lastName}} </span><span class="italic">, On {{userSupport.lastModifiedDate | date:'medium'}}</span>
+                        </div>
+                    </div>
+                    <div class="w-2/12 flex justify-end">
+                        <button mat-icon-button class="" color="warn" (click)="deleteUserSupportId = userSupport._id; userSupportDeleteActions(filterRequiredIds('type', userSupport.type));">
+                            <mat-icon class="mr-2">delete</mat-icon>
+                        </button>
+                        <button mat-icon-button class="" (click)="formViewType = 'Edit'; editUserSupportId = userSupport._id; editUserSupport(userSupport) ">
+                            <mat-icon class="mr-2">edit</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+
+
+</div>
+
+<!-- Form Block -->
+<div class="w-full" *ngIf="['Add', 'Edit'].includes(formViewType)">
+
+    <!-- Title -->
+    <div class="w-full text-lg">{{formViewType}} Release User Support</div>
+    <div class="w-full text-xs text-gray-600">Enter all the requied fields*</div>
+
+    <!-- Form Block -->
+    <div class="w-full mt-8">
+        <div class="w-10/12 flex flex-wrap items-center my-3" [formGroup]="userSupportForm">
+
+            <!-- User Support Type -->
+            <mat-form-field class="w-6/12 mb-2" appearance="outline">
+                <mat-label>User Support Type</mat-label>
+                <mat-select placeholder="Select User Support Type" formControlName="userSupportType" required>
+                    <mat-option *ngFor="let type of releaseConfigDetails.userSupportTypes" [value]="type._id">
+                      {{type.value}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <!-- User Support team members -->
+            <div class="w-full">
+                <div class="w-full mb-2">
+                    <div class="">
+                        <div class="text-xs font-bold text-gray-800">Selected Team Members:</div>
+                        <div class="w-fit flex flex-wrap mt-1">
+                            <div class="w-fit mb-1" *ngFor="let member of teamMembers; let i = index;">
+                                <div class="w-fit text-gray-600 text-xs py-1 px-2 rounded-md bg-gray-100 border border-gray-200 mr-2 hover:bg-blue-100 hover:border-blue-300">{{member.firstName + ' ' + member.lastName}} <span class="ml-2 hover:text-red-600 font-bold cursor-pointer"  (click)="manageTeamMembers(member, 'remove', i)" matTooltip="Remove" matTooltipPosition="above">&#x58;</span></div>
+                            </div>
+                            <div class="w-full italic text-gray-600 text-xs py-2" *ngIf="!teamMembers.length">** No User Support Team members added. Enter Member First name / Last Name / Email ...**</div>
+                        </div>
+                    </div>
+                </div>
+
+                <mat-form-field class="w-full mb-1" appearance="outline">
+                    <mat-label>User Support Team</mat-label>
+                    <input type="text" matInput placeholder="Enter First Name / Last Name / Email"  formControlName="userSupportMembers"  (keyup)="searchMember($event)">
+                </mat-form-field>
+
+                <!-- Display member based on response. -->
+                <div class="w-full mb-4">
+                    <div class="w-full flex flex-wrap">
+                        <div class="w-3/12" *ngFor="let member of membersList">
+                            <div class="border border-blue-200 rounded-lg bg-blue-50 mr-3" [ngClass]="{'bg-green-50 border-green-200' : !filterSelectedMembersFromSearchResults(member._id)}">
+                                <div class="w-full flex items-center px-2 py-2">
+                                    <div class="">
+                                        <div class="text-gray-800 text-xs font-bold">{{member.firstName + ' ' + member.lastName}}</div>
+                                        <div class="text-gray-500 text-xs">{{member.title}}</div>
+                                    </div>
+                                </div>
+                                <div class="w-full flex justify-end mt-1 p-2 bg-white rounded-b-lg border-t border-blue-200" [ngClass]="{'border-green-200' : !filterSelectedMembersFromSearchResults(member._id)}">
+                                    <button mat-button color="primary" (click)="manageTeamMembers(member, 'save')"  *ngIf="filterSelectedMembersFromSearchResults(member._id)">Add +</button>
+                                    <div class="text-green-600 pointer-events-none" *ngIf="!filterSelectedMembersFromSearchResults(member._id)">
+                                        <mat-icon>check_circle</mat-icon>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-6/12 flex flex-wrap mb-2">
+                <div class="w-full mb-1 text-gray-500">User Support Start & End Date</div>
+
+                <!-- User Support Start Date -->
+                <mat-form-field class="w-5/12" appearance="outline">
+                    <mat-label>Start Date</mat-label>
+                    <input class="w-full" matInput [matDatepicker]="startDatePicker" required formControlName="userSupportStartDate">
+
+                    <mat-datepicker-toggle matSuffix [for]="startDatePicker">
+                        <mat-icon matDatepickerToggleIcon>date_range</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #startDatePicker></mat-datepicker>
+                </mat-form-field>
+
+                <!-- User Support End Date -->
+                <mat-form-field class="w-5/12 ml-2" appearance="outline">
+                    <mat-label>End Date</mat-label>
+                    <input class="w-full" matInput [matDatepicker]="endDatePicker" required formControlName="userSupportEndDate">
+
+                    <mat-datepicker-toggle matSuffix [for]="endDatePicker">
+                        <mat-icon matDatepickerToggleIcon>date_range</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #endDatePicker></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <!-- User Support Working Duration  -->
+            <div class="w-5/12 flex flex-wrap mb-2">
+                <div class="w-full mb-1 text-gray-500">User Support Working Duration & Availibility</div>
+
+                <mat-form-field class="w-4/12" appearance="outline">
+                    <input type="number" matInput placeholder="Duration"  formControlName="userSupportDurationValue" required>
+                </mat-form-field>
+
+                <mat-form-field class="w-4/12 ml-2" appearance="outline">
+                    <mat-select placeholder="Format" formControlName="userSupportDurationFormat" required>
+                        <mat-option *ngFor="let format of ['Minutes', 'Hours']" [value]="format">
+                            {{format}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <!-- Comments -->
+            <mat-form-field class="w-full mb-2" appearance="outline">
+                <mat-label>Comments / Remarks</mat-label>
+                <textarea type="text" matInput placeholder="Add USER SUPPORT Timeline"  formControlName="comments"></textarea>
+            </mat-form-field>
+
+            <!-- Form Actions -->
+            <div class="w-full flex justify-end mt-8" *ngIf="!formActionLoader">
+                <button mat-stroked-button class="" (click)="formViewType = '';">Cancel</button>
+                <button mat-flat-button class="ml-4" color="primary" (click)="updateReleaseUserSupport()" [disabled]="userSupportForm.invalid">{{formViewType === 'Add' ? 'Add' : 'Update'}}</button>
+            </div>
+
+            <!-- Form action loader -->
+            <div class="w-full flex justify-end mt-8" *ngIf="formActionLoader">
+                <mat-spinner [diameter]="20"></mat-spinner>
+                <span class="ml-2">{{formViewType}}ing Release User Support ...</span>
+            </div>
+        </div>
+    </div>
+</div>
