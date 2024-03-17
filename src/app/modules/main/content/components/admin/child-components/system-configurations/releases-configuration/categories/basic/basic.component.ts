@@ -53,6 +53,11 @@ export class ReleaseConfigBasicCategoryComponent implements OnInit {
       enhancementStatus: [''],
       defectTypes: [''],
       defectStatus: [''],
+      systemHostedPlatform: [''],
+      technologies: [''],
+      codeRepositories: [''],
+      automatedTools: [''],
+      securityTestingTools: [''],
       sigOffModes: ['']
     });
   }

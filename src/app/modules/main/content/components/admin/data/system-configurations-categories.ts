@@ -21,7 +21,11 @@ export const systemConfigurationsCategories = {
                 type: 'STRATEGY'
             },
             {
-                title: 'Version Control, Compilance, Security',
+                title: 'Version Control',
+                type: 'CORE'
+            },
+            {
+                title: 'Compilance, Security',
                 type: 'CORE'
             },
             {

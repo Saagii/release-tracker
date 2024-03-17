@@ -461,6 +461,158 @@
     </div>
 </ng-container>
 
+<ng-container *ngIf="activeReleaseConfigCategory === 'Version Control' ">
+    <!-- Release Hosted Platforms Config Content -->
+    <div class="w-full mt-4 p-4 border border-gray-200 rounded-lg">
+        <div class="text-base">Release <span class="text-gray-600 font-bold">Hosted Platforms</span></div>
+        <div class="text-gray-500 text-xs">Define system hosted platforms options.</div>
+
+        <div class="w-6/12 flex items-center my-3" [formGroup]="releaseConfigBasicForm">
+            <mat-form-field class="w-9/12" appearance="outline">
+                <mat-label>Add System Hosted Platform</mat-label>
+                <input type="text" matInput placeholder="Add System Hosted Platform"  formControlName="systemHostedPlatform" >
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="releaseConfigActionStatus === '' " (click)="updateReleaseConfigBasicDetails('systemHostedPlatform')">+ Add</button>
+            <div class="flex items-center" *ngIf="releaseConfigActionStatus === 'systemHostedPlatform' ">
+                <mat-spinner [diameter]="20"></mat-spinner>
+                <span class="ml-2">Adding...</span>
+            </div>
+        </div>
+
+        <div class="w-6/12 mt-3 border border-gray-200 rounded-md" *ngIf="releaseConfig?.systemHostedPlatform.length">
+            <div class="w-full flex justify-between items-center px-3 border-b border-gray-200 hover:bg-gray-50" *ngFor="let mode of releaseConfig.systemHostedPlatform">
+                <div class="w-6/12">{{mode.value}}</div>
+                <div class="w-auto flex items-center">
+                    <button mat-icon-button color="warn" class="!ml-3" (click)="deleteReleaseConfigDetailsByTypeAndId('systemHostedPlatform', mode._id)">
+                        <mat-icon>remove_circle_outline</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Release Software Technologies Config Content -->
+    <div class="w-full mt-4 p-4 border border-gray-200 rounded-lg">
+        <div class="text-base">Release <span class="text-gray-600 font-bold">Software Technologies</span></div>
+        <div class="text-gray-500 text-xs">Set required software technology options.</div>
+
+        <div class="w-6/12 flex items-center my-3" [formGroup]="releaseConfigBasicForm">
+            <mat-form-field class="w-9/12" appearance="outline">
+                <mat-label>Add Software technology</mat-label>
+                <input type="text" matInput placeholder="Add Software technology"  formControlName="technologies" >
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="releaseConfigActionStatus === '' " (click)="updateReleaseConfigBasicDetails('technologies')">+ Add</button>
+            <div class="flex items-center" *ngIf="releaseConfigActionStatus === 'technologies' ">
+                <mat-spinner [diameter]="20"></mat-spinner>
+                <span class="ml-2">Adding...</span>
+            </div>
+        </div>
+
+        <div class="w-6/12 mt-3 border border-gray-200 rounded-md" *ngIf="releaseConfig?.technologies.length">
+            <div class="w-full flex justify-between items-center px-3 border-b border-gray-200 hover:bg-gray-50" *ngFor="let mode of releaseConfig.technologies">
+                <div class="w-6/12">{{mode.value}}</div>
+                <div class="w-auto flex items-center">
+                    <button mat-icon-button color="warn" class="!ml-3" (click)="deleteReleaseConfigDetailsByTypeAndId('technologies', mode._id)">
+                        <mat-icon>remove_circle_outline</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Release Code Repository Config Content -->
+    <div class="w-full mt-4 p-4 border border-gray-200 rounded-lg">
+        <div class="text-base">Release <span class="text-gray-600 font-bold">Code Repository</span></div>
+        <div class="text-gray-500 text-xs">Define code repository options.</div>
+
+        <div class="w-6/12 flex items-center my-3" [formGroup]="releaseConfigBasicForm">
+            <mat-form-field class="w-9/12" appearance="outline">
+                <mat-label>Add Code Repository</mat-label>
+                <input type="text" matInput placeholder="Add Code Repository"  formControlName="codeRepositories" >
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="releaseConfigActionStatus === '' " (click)="updateReleaseConfigBasicDetails('codeRepositories')">+ Add</button>
+            <div class="flex items-center" *ngIf="releaseConfigActionStatus === 'codeRepositories' ">
+                <mat-spinner [diameter]="20"></mat-spinner>
+                <span class="ml-2">Adding...</span>
+            </div>
+        </div>
+
+        <div class="w-6/12 mt-3 border border-gray-200 rounded-md" *ngIf="releaseConfig?.codeRepositories.length">
+            <div class="w-full flex justify-between items-center px-3 border-b border-gray-200 hover:bg-gray-50" *ngFor="let mode of releaseConfig.codeRepositories">
+                <div class="w-6/12">{{mode.value}}</div>
+                <div class="w-auto flex items-center">
+                    <button mat-icon-button color="warn" class="!ml-3" (click)="deleteReleaseConfigDetailsByTypeAndId('codeRepositories', mode._id)">
+                        <mat-icon>remove_circle_outline</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Release Automated Tools Config Content -->
+    <div class="w-full mt-4 p-4 border border-gray-200 rounded-lg">
+        <div class="text-base">Release <span class="text-gray-600 font-bold">Automated Tools</span></div>
+        <div class="text-gray-500 text-xs">Define automated tools options.</div>
+
+        <div class="w-6/12 flex items-center my-3" [formGroup]="releaseConfigBasicForm">
+            <mat-form-field class="w-9/12" appearance="outline">
+                <mat-label>Add Automated Tools</mat-label>
+                <input type="text" matInput placeholder="Add Automated Tools"  formControlName="automatedTools" >
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="releaseConfigActionStatus === '' " (click)="updateReleaseConfigBasicDetails('automatedTools')">+ Add</button>
+            <div class="flex items-center" *ngIf="releaseConfigActionStatus === 'automatedTools' ">
+                <mat-spinner [diameter]="20"></mat-spinner>
+                <span class="ml-2">Adding...</span>
+            </div>
+        </div>
+
+        <div class="w-6/12 mt-3 border border-gray-200 rounded-md" *ngIf="releaseConfig?.automatedTools.length">
+            <div class="w-full flex justify-between items-center px-3 border-b border-gray-200 hover:bg-gray-50" *ngFor="let mode of releaseConfig.automatedTools">
+                <div class="w-6/12">{{mode.value}}</div>
+                <div class="w-auto flex items-center">
+                    <button mat-icon-button color="warn" class="!ml-3" (click)="deleteReleaseConfigDetailsByTypeAndId('automatedTools', mode._id)">
+                        <mat-icon>remove_circle_outline</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Release Security Testing Tools Config Content -->
+    <div class="w-full mt-4 p-4 border border-gray-200 rounded-lg">
+        <div class="text-base">Release <span class="text-gray-600 font-bold">Security Testing Tools</span></div>
+        <div class="text-gray-500 text-xs">Set all the software security testing tools options.</div>
+
+        <div class="w-6/12 flex items-center my-3" [formGroup]="releaseConfigBasicForm">
+            <mat-form-field class="w-9/12" appearance="outline">
+                <mat-label>Add Security Testing Tools</mat-label>
+                <input type="text" matInput placeholder="Add Security Testing Tools"  formControlName="securityTestingTools" >
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" class="!-mt-5 !ml-3" *ngIf="releaseConfigActionStatus === '' " (click)="updateReleaseConfigBasicDetails('securityTestingTools')">+ Add</button>
+            <div class="flex items-center" *ngIf="releaseConfigActionStatus === 'securityTestingTools' ">
+                <mat-spinner [diameter]="20"></mat-spinner>
+                <span class="ml-2">Adding...</span>
+            </div>
+        </div>
+
+        <div class="w-6/12 mt-3 border border-gray-200 rounded-md" *ngIf="releaseConfig?.securityTestingTools.length">
+            <div class="w-full flex justify-between items-center px-3 border-b border-gray-200 hover:bg-gray-50" *ngFor="let mode of releaseConfig.securityTestingTools">
+                <div class="w-6/12">{{mode.value}}</div>
+                <div class="w-auto flex items-center">
+                    <button mat-icon-button color="warn" class="!ml-3" (click)="deleteReleaseConfigDetailsByTypeAndId('securityTestingTools', mode._id)">
+                        <mat-icon>remove_circle_outline</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
 <ng-container *ngIf="activeReleaseConfigCategory === 'Release Sign-off' ">
     <!-- Release SignOff Modes Config Content -->
     <div class="w-full mt-4 p-4 border border-gray-200 rounded-lg">
