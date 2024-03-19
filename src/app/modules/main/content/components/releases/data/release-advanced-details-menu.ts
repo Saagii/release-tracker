@@ -8,6 +8,7 @@ import { ReleasePerformanceOptimizationComponent } from "../components/release-v
 import { ReleaseRollbackPlansComponent } from "../components/release-view/child-components/rollback-plan/rollback-plan.component";
 import { ReleaseUsabilityComponent } from "../components/release-view/child-components/usability/usability.component";
 import { ReleaseUserSupportComponent } from "../components/release-view/child-components/user-support/user-support.component";
+import { ReleaseVersionControlComponent } from "../components/release-view/child-components/version-control/version-control.component";
 
 export const releaseAdvancedDetailsMenu = [
     {
@@ -85,7 +86,7 @@ export const releaseAdvancedDetailsMenu = [
         title: 'Version Control',
         description: 'Ensure that patch releases are well-managed in terms of version control, so users can easily identify the changes made in the patch.',
         icon: '',
-        component: ''
+        component: ReleaseVersionControlComponent
     },
     {
         id: 12,
@@ -98,20 +99,6 @@ export const releaseAdvancedDetailsMenu = [
         id: 13,
         title: 'Security Disclosure',
         description: 'Keeping track of security vulnerabilities',
-        icon: '',
-        component: ''
-    },
-    {
-        id: 14,
-        title: 'Prioritization',
-        description: 'project release performance strategy involves careful planning, coordination, and execution to ensure that the release meets stakeholder expectations while maintaining quality and efficiency.',
-        icon: '',
-        component: ''
-    },
-    {
-        id: 15,
-        title: 'Sign Off Details',
-        description: 'A formal way of signing off project release.',
         icon: '',
         component: ''
     }

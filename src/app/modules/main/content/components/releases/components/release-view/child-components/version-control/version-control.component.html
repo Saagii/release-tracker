@@ -1,0 +1,189 @@
+<!-- If no objectives are present. -->
+<div class="w-full flex flex-wrap mt-14" *ngIf="releaseDetails && !releaseDetails?.releaseVersionControl.length && formViewType === '' ">
+    <div class="w-full py-6 text-center text-gray-700">Hey, currently there are no Version Control added for this release.</div>
+    <div class="w-full flex justify-center">
+        <button mat-flat-button class="" color="primary" (click)="formViewType = 'Add'; resetForm();">Let's Start Adding</button>
+    </div>
+</div>
+
+<!-- View Block -->
+<div class="w-full">
+
+    <!-- View Block Title and Actions -->
+    <div class="w-full flex flex-wrap justify-between items-center mb-8" *ngIf="!['Add', 'Edit'].includes(formViewType) && releaseDetails?.releaseVersionControl?.length">
+        <div class="w-10/12 text-lg">
+            <div class="w-full">Version Control</div>
+            <div class="w-full text-xs text-gray-600">Click on <span class="font-bold italic">Show more</span> to view the description and perform other actions.</div>
+        </div>
+        <!-- <div class="w-2/12 flex justify-end">
+            <button mat-stroked-button class="" color="primary" (click)="formViewType = 'Add'; resetForm();">+ Add</button>
+        </div> -->
+    </div>
+
+    <!-- Loading Block -->
+    <div class="w-full mt-14 flex items-center justify-center" *ngIf="fetchLoader">
+        <mat-spinner class="mr-2" diameter="22"></mat-spinner> Fetching Version Control Details...
+    </div>
+
+    <!-- View Block Objectives list -->
+    <div class="w-full" *ngIf="releaseDetails && releaseDetails?.releaseVersionControl?.length && formViewType === '' ">
+        <div class="w-full mb-2" *ngFor="let versionControl of releaseDetails?.releaseVersionControl; let i = index;">
+
+            <div class="w-full border border-gray-200 rounded-md p-4">
+                <div class="w-full flex flex-wrap mt-2 text-xs">
+                    <div class="w-6/12 mb-8">
+                        <div class="text-xs mb-1 font-bold">SYSTEM HOSTED PLATFORMS</div>
+                        <div class="w-full flex">
+                            <div class="py-1 px-2 rounded-md border border-gray-200 bg-gray-50 text-gray-800 mr-2" *ngFor="let item of versionControl.systemHostedPlatform">{{filterRequiredIds('systemHostedPlatform', item)}}</div>
+                        </div>
+                    </div>
+
+                    <div class="w-6/12 mb-8">
+                        <div class="text-xs mb-1 font-bold">TECHNOLOGIES</div>
+                        <div class="w-full flex">
+                            <div class="w-fit py-1 px-2 rounded-md border border-gray-200 bg-gray-50 text-gray-800 mr-2" *ngFor="let item of versionControl.technologies">{{filterRequiredIds('technologies', item)}}</div>
+                        </div>
+                    </div>
+
+                    <div class="w-6/12 mb-8">
+                        <div class="text-xs mb-1 font-bold">CODE REPOSITORIES</div>
+                        <div class="w-full flex">
+                            <span class="py-1 px-2 rounded-md border border-gray-200 bg-gray-50 text-gray-800 mr-2" *ngFor="let item of versionControl.codeRepositories">{{filterRequiredIds('codeRepositories', item)}}</span>
+                        </div>
+                    </div>
+
+                    <div class="w-6/12 mb-8">
+                        <div class="text-xs mb-1 font-bold">AUTOMATED TOOLS</div>
+                        <div class="w-full flex">
+                            <span class="py-1 px-2 rounded-md border border-gray-200 bg-gray-50 text-gray-800 mr-2" *ngFor="let item of versionControl.automatedTools">{{filterRequiredIds('automatedTools', item)}}</span>
+                        </div>
+                    </div>
+
+                    <div class="w-6/12 mb-8">
+                        <div class="text-xs mb-1 font-bold">SECURITY TESTING TOOLS</div>
+                        <div class="w-full flex">
+                            <span class="py-1 px-2 rounded-md border border-gray-200 bg-gray-50 text-gray-800 mr-2" *ngFor="let item of versionControl.securityTestingTools">{{filterRequiredIds('securityTestingTools', item)}}</span>
+                        </div>
+                    </div>
+
+                    <div class="w-full mb-8">
+                        <div class="text-xs mb-1 font-bold">ADDITIONAL DETAILS</div>
+                        <div class="w-full flex text-gray-800">
+                            {{versionControl.additionalInputs}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modification Details -->
+            <div class="w-full flex justify-end items-end">
+                <div class="w-10/12 mt-8">
+                    <div class="text-xs text-gray-600 flex items-center mt-1">
+                        <span class="font-semibold">Created By:</span> <mat-spinner [diameter]="20" *ngIf="!versionControlModifiedName"></mat-spinner> <span class="ml-1 hover:underline hover:text-blue-600 cursor-pointer" *ngIf="versionControlModifiedName" [routerLink]="['../../admin/members', versionControl.createdById]">{{versionControlModifiedName?.firstName}} {{versionControlModifiedName?.lastName}} </span><span class="italic">, On {{versionControl.createdOnDate | date:'medium'}}</span>
+                    </div>
+                    <div class="text-xs text-gray-600 flex items-center mt-1">
+                        <span class="font-semibold">Modified By:</span> <mat-spinner [diameter]="20" *ngIf="!versionControlModifiedName"></mat-spinner> <span class="ml-1 hover:underline hover:text-blue-600 cursor-pointer" *ngIf="versionControlModifiedName" [routerLink]="['../../admin/members', versionControl.lastModifiedById]">{{versionControlModifiedName?.firstName}} {{versionControlModifiedName?.lastName}} </span><span class="italic">, On {{versionControl.lastModifiedDate | date:'medium'}}</span>
+                    </div>
+                </div>
+                <div class="w-2/12 flex justify-end">
+                    <button mat-icon-button class="" color="warn" (click)="deleteVersionControlId = versionControl._id; versionControlComponentDeleteActions(versionControl.title);">
+                        <mat-icon class="mr-2">delete</mat-icon>
+                    </button>
+                    <button mat-icon-button class="" (click)="formViewType = 'Edit'; editVersionControlPlanId = versionControl._id; editVersionControlForm(versionControl) ">
+                        <mat-icon class="mr-2">edit</mat-icon>
+                    </button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+
+</div>
+
+<!-- Form Block -->
+<div class="w-full" *ngIf="['Add', 'Edit'].includes(formViewType)">
+
+    <!-- Title -->
+    <div class="w-full text-lg">{{formViewType}} Release Version Control Details</div>
+    <div class="w-full text-xs text-gray-600">Enter all the requied fields*</div>
+
+    <!-- Form Block -->
+    <div class="w-full mt-8">
+        <div class="w-10/12 flex flex-wrap items-center my-3" [formGroup]="versionControlForm">
+
+            <div class="w-full flex flex-wrap">
+
+                <!-- System Hosted Platforms -->
+                <div class="w-6/12 pr-4">
+                    <div class="w-full flex items-center mb-1">System Hosted Platforms <mat-icon class="text-blue-600 ml-2" matTooltip="The time taken to respond to user requests.">info_outline</mat-icon></div>
+                    <mat-form-field class="w-full" appearance="outline">
+                        <mat-select multiple formControlName="systemHostedPlatform" required>
+                            <mat-option *ngFor="let platform of releaseConfigDetails.systemHostedPlatform" [value]="platform._id">{{platform.value}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <!-- Technologies -->
+                <div class="w-6/12">
+                    <div class="w-full flex items-center mb-1">Technologies <mat-icon class="text-blue-600 ml-2" matTooltip="The time taken to respond to user requests.">info_outline</mat-icon></div>
+                    <mat-form-field class="w-full" appearance="outline">
+                        <mat-select multiple formControlName="technologies" required>
+                            <mat-option *ngFor="let technology of releaseConfigDetails.technologies" [value]="technology._id">{{technology.value}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                
+                <!-- Code Repositories -->
+                <div class="w-6/12 pr-4">
+                    <div class="w-full flex items-center mb-1">Code Repositories <mat-icon class="text-blue-600 ml-2" matTooltip="The time taken to respond to user requests.">info_outline</mat-icon></div>
+                    <mat-form-field class="w-full" appearance="outline">
+                        <mat-select multiple formControlName="codeRepositories" required>
+                            <mat-option *ngFor="let codeRepository of releaseConfigDetails.codeRepositories" [value]="codeRepository._id">{{codeRepository.value}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <!-- Automated Tools -->
+                <div class="w-6/12">
+                    <div class="w-full flex items-center mb-1">Automated Tools <mat-icon class="text-blue-600 ml-2" matTooltip="The time taken to respond to user requests.">info_outline</mat-icon></div>
+                    <mat-form-field class="w-full" appearance="outline">
+                        <mat-select multiple formControlName="automatedTools" required>
+                            <mat-option *ngFor="let automatedTool of releaseConfigDetails.automatedTools" [value]="automatedTool._id">{{automatedTool.value}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <!-- Security Testing Tools -->
+                <div class="w-6/12 pr-4">
+                    <div class="w-full flex items-center mb-1">Security Testing Tools <mat-icon class="text-blue-600 ml-2" matTooltip="The time taken to respond to user requests.">info_outline</mat-icon></div>
+                    <mat-form-field class="w-full" appearance="outline">
+                        <mat-select multiple formControlName="securityTestingTools" required>
+                            <mat-option *ngFor="let securityTestingTool of releaseConfigDetails.securityTestingTools" [value]="securityTestingTool._id">{{securityTestingTool.value}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <!-- Additional Details -->
+                <div class="w-full mt-2">
+                    <div class="w-full flex items-center mb-1">Additional Details <mat-icon class="text-blue-600 ml-2" matTooltip=" The time taken for web pages to load in the browser.">info_outline</mat-icon></div>
+                    <mat-form-field class="w-full" appearance="outline">
+                        <textarea type="text" matInput placeholder="Enter Additional Details"  formControlName="additionalInputs" required></textarea>
+                    </mat-form-field>
+                </div>
+            </div>            
+
+            <!-- Form Actions -->
+            <div class="w-full flex justify-end mt-8" *ngIf="!formActionLoader">
+                <button mat-stroked-button class="" (click)="formViewType = '';">Cancel</button>
+                <button mat-flat-button class="ml-4" color="primary" (click)="updateVersionControl()" [disabled]="versionControlForm.invalid">{{formViewType === 'Add' ? 'Add' : 'Update'}}</button>
+            </div>
+
+            <!-- Form action loader -->
+            <div class="w-full flex justify-end mt-8" *ngIf="formActionLoader">
+                <mat-spinner [diameter]="20"></mat-spinner>
+                <span class="ml-2">{{formViewType}}ing Release Version Control ...</span>
+            </div>
+        </div>
+    </div>
+</div>
