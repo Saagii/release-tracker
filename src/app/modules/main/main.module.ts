@@ -34,6 +34,7 @@ import { ReleaseDeploymentPlanComponent } from './content/components/releases/co
 import { ReleasePerformanceOptimizationComponent } from './content/components/releases/components/release-view/child-components/performance-optimization/performance-optimization.component';
 import { ReleaseUserSupportComponent } from './content/components/releases/components/release-view/child-components/user-support/user-support.component';
 import { ReleaseVersionControlComponent } from './content/components/releases/components/release-view/child-components/version-control/version-control.component';
+import { ReleaseSecurityDisclosureComponent } from './content/components/releases/components/release-view/child-components/security-disclosure/security-disclosure.component';
 
 
 
@@ -70,7 +71,8 @@ import { ReleaseVersionControlComponent } from './content/components/releases/co
     ReleaseDeploymentPlanComponent,
     ReleasePerformanceOptimizationComponent,
     ReleaseUserSupportComponent,
-    ReleaseVersionControlComponent
+    ReleaseVersionControlComponent,
+    ReleaseSecurityDisclosureComponent
   ],
   imports: [
     CommonModule,
@@ -109,7 +111,8 @@ import { ReleaseVersionControlComponent } from './content/components/releases/co
     ReleaseDeploymentPlanComponent,
     ReleasePerformanceOptimizationComponent,
     ReleaseUserSupportComponent,
-    ReleaseVersionControlComponent
+    ReleaseVersionControlComponent,
+    ReleaseSecurityDisclosureComponent
   ]
 })
 export class MainModule { }

@@ -6,6 +6,7 @@ import { ReleaseLocalizationInternalizationComponent } from "../components/relea
 import { ReleaseObjectivesComponent } from "../components/release-view/child-components/objectives/objectives.component";
 import { ReleasePerformanceOptimizationComponent } from "../components/release-view/child-components/performance-optimization/performance-optimization.component";
 import { ReleaseRollbackPlansComponent } from "../components/release-view/child-components/rollback-plan/rollback-plan.component";
+import { ReleaseSecurityDisclosureComponent } from "../components/release-view/child-components/security-disclosure/security-disclosure.component";
 import { ReleaseUsabilityComponent } from "../components/release-view/child-components/usability/usability.component";
 import { ReleaseUserSupportComponent } from "../components/release-view/child-components/user-support/user-support.component";
 import { ReleaseVersionControlComponent } from "../components/release-view/child-components/version-control/version-control.component";
@@ -98,8 +99,8 @@ export const releaseAdvancedDetailsMenu = [
     {
         id: 13,
         title: 'Security Disclosure',
-        description: 'Keeping track of security vulnerabilities',
+        description: 'Crucial to capture comprehensive details to ensure clarity, transparency, and effective resolution',
         icon: '',
-        component: ''
+        component: ReleaseSecurityDisclosureComponent
     }
 ]
