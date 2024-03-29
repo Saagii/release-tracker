@@ -8,13 +8,13 @@
             <div class="w-full flex justify-between">
 
                 <!-- Title Content -->
-                <div class="w-8/12">
+                <div class="w-6/12">
                     <div class="w-fit font-bold" [routerLink]="['../']"><span class="text-blue-600 cursor-pointer uppercase hover:underline">Releases</span></div>
                     <div class="w-full text-2xl mt-1">{{releaseDetails.releaseTitle}}</div>
                 </div>
 
                 <!-- Release Actions Content -->
-                <div class="w-4/12 flex justify-end items-center">
+                <div class="w-6/12 flex justify-end items-center">
 
                     <!-- Release Status -->
                     <div class="" *ngIf="tempStatusValue !== '' ">
@@ -29,13 +29,18 @@
                     </div>
 
                     <!-- Release Edit -->
-                    <div class="">
+                    <div class="flex">
                         <!-- <button mat-icon-button class="!ml-4">
                             <mat-icon>more_vert</mat-icon>
                         </button> -->
                         <div class="ml-4">
                             <button mat-stroked-button class="text-gray-600 text-xs">
-                                <mat-icon class="text-sm mt-1 -ml-2">edit</mat-icon> Edit Release
+                                <mat-icon class="text-sm -mt-1" iconPositionStart>content_copy</mat-icon> Clone
+                            </button>
+                        </div>
+                        <div class="ml-4">
+                            <button mat-stroked-button class="text-gray-600 text-xs" [routerLink]="['../', releaseDetails._id, 'edit']">
+                                <mat-icon class="text-sm -mt-1" iconPositionStart>edit</mat-icon> Edit Release
                             </button>
                         </div>
                     </div>

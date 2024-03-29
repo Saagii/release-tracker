@@ -26,7 +26,7 @@ export class ReleaseViewComponent implements OnInit {
   releaseConfigDetails: any;
   membersList: any;
   projectDetails: any;
-  advancedDetailsMenu = releaseAdvancedDetailsMenu;
+  advancedDetailsMenu;
   activeComponent: any = '';
   activeComponentInputs: any;
   releaseDetailSearchForm: UntypedFormGroup;
@@ -44,6 +44,16 @@ export class ReleaseViewComponent implements OnInit {
     this.releaseDetailSearchForm = this.fb.group({
       releaseDetailSearchText: ['']
     });
+
+    let activeReleaseAdvancedDetailsMenu = [];
+
+    for(const advancedDetailsMenu of releaseAdvancedDetailsMenu) {
+      if(advancedDetailsMenu.isActive) {
+        activeReleaseAdvancedDetailsMenu.push(advancedDetailsMenu);
+      }
+    }
+
+    this.advancedDetailsMenu = activeReleaseAdvancedDetailsMenu;
   }
 
   ngOnInit(): void {

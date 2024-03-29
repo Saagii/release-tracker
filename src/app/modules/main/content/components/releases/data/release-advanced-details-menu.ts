@@ -17,6 +17,7 @@ export const releaseAdvancedDetailsMenu = [
         title: 'Objectives',
         description: 'List the specific goals and objectives that this release is intended to achieve',
         icon: '',
+        isActive: true,
         component: ReleaseObjectivesComponent
     },
     {
@@ -24,6 +25,7 @@ export const releaseAdvancedDetailsMenu = [
         title: 'Enhancements & Innovations',
         description: 'Improvements or enhancements made to existing features, processes, or systems.',
         icon: '',
+        isActive: true,
         component: ReleaseEnhancementsInnovationsComponent
     },
     {
@@ -31,6 +33,7 @@ export const releaseAdvancedDetailsMenu = [
         title: 'Defects, Bugs & Observations',
         description: 'List and describe issues or bugs that were addressed and resolved in this release.',
         icon: '',
+        isActive: true,
         component: ReleaseDefectsBugsObservationsComponent
     },
     {
@@ -38,6 +41,7 @@ export const releaseAdvancedDetailsMenu = [
         title: 'Compatibility and Interoperability',
         description: 'Objectives to ensure the software is compatible with various platforms, devices, browsers, OS.',
         icon: '',
+        isActive: true,
         component: ReleaseCompatibilityInteroperabilityComponent
     },
     {
@@ -45,6 +49,7 @@ export const releaseAdvancedDetailsMenu = [
         title: 'Usability',
         description: 'Objectives aimed at improving the overall user interface, user experience (UX), user-friendlyness, being intuitive, and meets the needs of its intended users of the software.',
         icon: '',
+        isActive: true,
         component: ReleaseUsabilityComponent
     },
     {
@@ -52,6 +57,7 @@ export const releaseAdvancedDetailsMenu = [
         title: 'Compliance & Regulatory Approvals',
         description: 'Objectives focused on ensuring compliance with data privacy regulations and industry-specific standards.',
         icon: '',
+        isActive: false,
         component: ''
     },
     {
@@ -59,6 +65,7 @@ export const releaseAdvancedDetailsMenu = [
         title: 'Localization and Internationalization',
         description: 'Objectives to make the software available in multiple languages and adapt it to different regions and cultures.',
         icon: '',
+        isActive: true,
         component: ReleaseLocalizationInternalizationComponent
     },
     {
@@ -66,6 +73,7 @@ export const releaseAdvancedDetailsMenu = [
         title: 'Rollback Plan',
         description: 'A rollback plan helps in tracking and reverting the process in case any critical issues arise post-deployment.',
         icon: '',
+        isActive: true,
         component: ReleaseRollbackPlansComponent
     },
     {
@@ -73,6 +81,7 @@ export const releaseAdvancedDetailsMenu = [
         title: 'Performance Optimization',
         description: 'project release performance strategy involves careful planning, coordination, and execution to ensure that the release meets stakeholder expectations while maintaining quality and efficiency.',
         icon: '',
+        isActive: true,
         component: ReleasePerformanceOptimizationComponent
     },
     {
@@ -80,6 +89,7 @@ export const releaseAdvancedDetailsMenu = [
         title: 'Deployment Strategy',
         description: 'Plan how the release will be deployed, considering the timing and method of distribution. This may include phased or staged rollouts.',
         icon: '',
+        isActive: true,
         component: ReleaseDeploymentPlanComponent
     },
     {
@@ -87,6 +97,7 @@ export const releaseAdvancedDetailsMenu = [
         title: 'Version Control',
         description: 'Ensure that patch releases are well-managed in terms of version control, so users can easily identify the changes made in the patch.',
         icon: '',
+        isActive: true,
         component: ReleaseVersionControlComponent
     },
     {
@@ -94,6 +105,7 @@ export const releaseAdvancedDetailsMenu = [
         title: 'User Support',
         description: 'Providing support to users who may encounter issues related to the patch or need assistance with its installation.',
         icon: '',
+        isActive: true,
         component: ReleaseUserSupportComponent
     },
     {
@@ -101,6 +113,7 @@ export const releaseAdvancedDetailsMenu = [
         title: 'Security Disclosure',
         description: 'Crucial to capture comprehensive details to ensure clarity, transparency, and effective resolution',
         icon: '',
+        isActive: true,
         component: ReleaseSecurityDisclosureComponent
     }
 ]

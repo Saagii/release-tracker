@@ -14,7 +14,7 @@
             <!-- Title -->
             <div class="w-full flex justify-between items-center">
                 <div class="">
-                    <div class="text-2xl text-gray-700 flex items-center">Create New Release</div>
+                    <div class="text-2xl text-gray-700 flex items-center">{{ releaseId !== '' ? 'Edit Release Details' : 'Create New Release'}}</div>
                 </div>
             </div>
 
@@ -52,7 +52,7 @@
                     <div class="w-full flex justify-start items-start mt-10 pb-4 border-b border-gray-200" *ngIf="projectsList.length">
                         <div class="w-3/12">
                             <div class="w-full text-lg">Project</div>
-                            <div class="w-full text-xs text-gray-500">Select project against which release has to be created.</div>
+                            <div class="w-full text-xs text-gray-500">Select project against which release has to be {{ releaseId !== '' ? 'edited' : 'created'}}.</div>
                         </div>
                         <div class="w-4/12 pl-6">
                             <!-- Project -->
@@ -145,8 +145,8 @@
 
                     <!-- Action Buttons -->
                     <div class="w-full flex justify-end p-6">
-                        <button mat-button class="">Cancel</button>
-                        <button mat-flat-button class="bg-blue-500 text-white" style="margin-left: 3%;" (click)="submiteReleaseDetails()">Create Release</button>
+                        <button mat-flat-button class="">Cancel</button>
+                        <button mat-flat-button color="primary" class="bg-blue-500 text-white" style="margin-left: 2%;" (click)="submiteReleaseDetails()">{{ releaseId !== '' ? 'Edit' : 'Create'}} Release</button>
                     </div>
                 </form>
                 

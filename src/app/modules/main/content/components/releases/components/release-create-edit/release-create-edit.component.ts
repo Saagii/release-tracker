@@ -23,6 +23,8 @@ export class ReleaseCreateEditComponent implements OnInit {
     selectedClientId: string = '';
     projectsList: any = [];
     isProjectIdSelected: boolean = false;
+    releaseId: string = '';
+    releaseDetails: any;
 
   constructor(
     private statusService: StatusService,
@@ -52,8 +54,10 @@ export class ReleaseCreateEditComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // Get Clients List
-    this.getClientsList();
+    if(window.location.href.includes('edit')) {
+      this.releaseId = this.activatedRoute.snapshot.params['id'];
+      console.log(this.releaseId);
+    }
 
     // Get release config details.
     this.getReleaseConfigDetails();
@@ -82,6 +86,9 @@ export class ReleaseCreateEditComponent implements OnInit {
       console.log(clients);
 
       this.clientsList = clients;
+
+      // Get Releases details.
+      this.getReleasesDetails();
     });
   }
 
@@ -94,7 +101,35 @@ export class ReleaseCreateEditComponent implements OnInit {
       console.log(releaseConfig);
 
       this.releaseConfigDetails = releaseConfig;
+
+      // Get Clients List
+      this.getClientsList();
     })
+  }
+
+  /*
+    Get Releases details.
+  */
+  getReleasesDetails(): any {
+    this.releaseService.getReleaseDetails(this.releaseId).subscribe((releaseDetails: any) => {
+      console.log(releaseDetails);
+      
+      this.releaseDetails = releaseDetails;
+
+      this.selectedClientId = this.releaseDetails.clientId;
+
+      // set the form fields values
+      this.releaseCreateEditForm.get('client')?.setValue(this.releaseDetails.clientId);
+      this.releaseCreateEditForm.get('project')?.setValue(this.releaseDetails.projectId);
+      this.releaseCreateEditForm.get('releaseTitle')?.setValue(this.releaseDetails.releaseTitle);
+      this.releaseCreateEditForm.get('releaseTarget')?.setValue(this.releaseDetails.releaseTargetId);
+      this.releaseCreateEditForm.get('releaseType')?.setValue(this.releaseDetails.releaseTypeId);
+      this.releaseCreateEditForm.get('releaseOwner')?.setValue(this.releaseDetails.releaseOwnerId);
+      this.releaseCreateEditForm.get('releasePriority')?.setValue(this.releaseDetails.releasePriority);
+      this.releaseCreateEditForm.get('releaseClosingDate')?.setValue(this.releaseDetails.releaseClosingDate);
+
+      this.getProjectsListByClientId(this.releaseDetails.clientId);
+    });
   }
 
 
@@ -140,6 +175,10 @@ export class ReleaseCreateEditComponent implements OnInit {
       console.log(projectsList);
 
       this.projectsList = projectsList;
+
+      if(this.releaseId !== '') {
+        this.isProjectIdSelected = true;
+      }
     });
   }
 

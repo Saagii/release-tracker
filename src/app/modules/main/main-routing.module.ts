@@ -29,6 +29,9 @@ const mainRoutes: Routes = [
     path: 'releases', component: ReleasesComponent
   },
   {
+    path: 'releases/:id/edit', component: ReleaseCreateEditComponent
+  },
+  {
     path: 'releases/create', component: ReleaseCreateEditComponent
   },
   {
