@@ -180,6 +180,13 @@ export class ReleaseViewComponent implements OnInit {
       })[0]?.value;
     }
 
+    // Return Type value.
+    if(type === 'priorities') {
+      return this.releaseConfigDetails.priorities.filter((priority: any) => {
+         return priority._id === id;
+      })[0]?.value;
+    }
+
     // Return Owner value.
     if(type === 'owner' || type === 'member') {
       const member = this.membersList.filter((member: any) => {

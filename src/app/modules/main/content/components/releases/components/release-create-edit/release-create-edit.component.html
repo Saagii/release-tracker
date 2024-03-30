@@ -145,7 +145,7 @@
 
                     <!-- Action Buttons -->
                     <div class="w-full flex justify-end p-6" *ngIf="!formActionLoader">
-                        <button mat-flat-button class="">Cancel</button>
+                        <button mat-flat-button class="" [routerLink]="['../']">Cancel</button>
                         <button mat-flat-button color="primary" class="bg-blue-500 text-white" style="margin-left: 2%;" (click)="actionHandlerMethods()">{{ releaseId !== '' ? 'Edit' : 'Create'}} Release</button>
                     </div>
 

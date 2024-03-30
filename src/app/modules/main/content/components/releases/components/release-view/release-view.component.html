@@ -11,6 +11,9 @@
                 <div class="w-6/12">
                     <div class="w-fit font-bold" [routerLink]="['../']"><span class="text-blue-600 cursor-pointer uppercase hover:underline">Releases</span></div>
                     <div class="w-full text-2xl mt-1">{{releaseDetails.releaseTitle}}</div>
+                    <div class="text-xs text-gray-600">
+                        Created by: <span class="hover:underline hover:text-blue-600 cursor-pointer w-fit" [routerLink]="['../../admin/members', releaseDetails.releaseCreatedById]">{{filterRequiredIds('member', releaseDetails.releaseCreatedById)}}</span> on {{releaseDetails.releaseCreatedOnDate | date:'medium'}}
+                    </div>
                 </div>
 
                 <!-- Release Actions Content -->
@@ -53,43 +56,17 @@
             <div class="w-full mt-4 border border-gray-200 rounded-lg p-4">
 
                 <!-- Title -->
-                <div class="w-full text-lg">Basic Details</div>
+                <div class="w-full">
+                    <div class="text-lg">Basic Details</div>
+                </div>
 
                 <!-- Basic Details Content Row 1-->
                 <div class="w-full flex flex-wrap justify-start mt-4">
 
-                    <!-- Release Owner -->
-                    <div class="w-3/12">
-                        <div class="text-xs uppercase text-gray-600">Release Owner</div>
-                        <div class="mt-1 hover:underline hover:text-blue-600 cursor-pointer w-fit" [routerLink]="['../../admin/members', releaseDetails.releaseOwnerId]">{{filterRequiredIds('member', releaseDetails.releaseOwnerId)}}</div>
-                    </div>
-
-                    <!-- Create On -->
-                    <div class="w-3/12">
-                        <div class="text-xs uppercase text-gray-600">Release Created On</div>
-                        <div class="mt-1">{{releaseDetails.releaseCreatedOnDate | date:'medium'}}</div>
-                    </div>
-
-                    <!-- Closing On -->
-                    <div class="w-3/12">
-                        <div class="text-xs uppercase text-gray-600">Release Closing On</div>
-                        <div class="mt-1">{{releaseDetails.releaseClosingDate | date}}</div>
-                    </div>
-
-                    <!-- Create By -->
-                    <div class="w-3/12">
-                        <div class="text-xs uppercase text-gray-600">Release Created By</div>
-                        <div class="mt-1 hover:underline hover:text-blue-600 cursor-pointer w-fit" [routerLink]="['../../admin/members', releaseDetails.releaseCreatedById]">{{filterRequiredIds('member', releaseDetails.releaseCreatedById)}}</div>
-                    </div>
-                </div>
-
-                <!-- Basic Details Content Row 2-->
-                <div class="w-full flex flex-wrap justify-start mt-6">
-
                     <!-- Client -->
                     <div class="w-3/12">
                         <div class="text-xs uppercase text-gray-600">Client</div>
-                        <div class="mt-1 hover:underline hover:text-blue-600 cursor-pointer w-fit" [routerLink]="['../../admin/members', releaseDetails.clientId]">{{filterRequiredIds('client', releaseDetails.clientId)}}</div>
+                        <div class="mt-1 hover:underline hover:text-blue-600 cursor-pointer w-fit" [routerLink]="['../../clients', releaseDetails.clientId]">{{filterRequiredIds('client', releaseDetails.clientId)}}</div>
                     </div>
 
                     <!-- Project Name -->
@@ -102,6 +79,48 @@
                     <div class="w-3/12">
                         <div class="text-xs uppercase text-gray-600">Project Manager</div>
                         <div class="mt-1 hover:underline hover:text-blue-600 cursor-pointer w-fit" [routerLink]="['../../admin/members', projectDetails.projectManagerId]">{{filterRequiredIds('member', projectDetails.projectManagerId)}}</div>
+                    </div>
+
+                    <!-- Release Priority -->
+                    <div class="w-3/12">
+                        <div class="text-xs uppercase text-gray-600">Release Priority</div>
+                        <div class="mt-1 w-fit">
+                            <span class="text-white text-xs py-1 px-3 rounded-full"
+                             [ngClass]="{'bg-red-600' : ['High', 'Highest', 'Critical'].includes(filterRequiredIds('priorities', releaseDetails.releasePriority)),
+                             'bg-green-600' : ['Medium'].includes(filterRequiredIds('priorities', releaseDetails.releasePriority)),
+                             'bg-black' : ['Blocker'].includes(filterRequiredIds('priorities', releaseDetails.releasePriority)),
+                             'bg-blue-600' : ['Low', 'Lowest'].includes(filterRequiredIds('priorities', releaseDetails.releasePriority))}">
+                             {{filterRequiredIds('priorities', releaseDetails.releasePriority)}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Basic Details Content Row 2-->
+                <div class="w-full flex flex-wrap justify-start mt-6">
+
+                    <!-- Release Owner -->
+                    <div class="w-3/12">
+                        <div class="text-xs uppercase text-gray-600">Release Owner</div>
+                        <div class="mt-1 hover:underline hover:text-blue-600 cursor-pointer w-fit" [routerLink]="['../../admin/members', releaseDetails.releaseOwnerId]">{{filterRequiredIds('member', releaseDetails.releaseOwnerId)}}</div>
+                    </div>
+
+                    <!-- Release Type -->
+                    <div class="w-3/12">
+                        <div class="text-xs uppercase text-gray-600">Release Type</div>
+                        <div class="mt-1">{{filterRequiredIds('type', releaseDetails.releaseTypeId)}} release</div>
+                    </div>
+
+                    <!-- Release Target -->
+                    <div class="w-3/12">
+                        <div class="text-xs uppercase text-gray-600">Release Target</div>
+                        <div class="mt-1">{{filterRequiredIds('target', releaseDetails.releaseTargetId)}}</div>
+                    </div>
+
+                    <!-- Closing On -->
+                    <div class="w-3/12">
+                        <div class="text-xs uppercase text-gray-600">Release Closing On</div>
+                        <div class="mt-1">{{releaseDetails.releaseClosingDate | date}}</div>
                     </div>
                 </div>
             </div>
