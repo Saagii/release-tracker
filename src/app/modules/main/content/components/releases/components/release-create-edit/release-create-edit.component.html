@@ -144,9 +144,15 @@
                     </div>
 
                     <!-- Action Buttons -->
-                    <div class="w-full flex justify-end p-6">
+                    <div class="w-full flex justify-end p-6" *ngIf="!formActionLoader">
                         <button mat-flat-button class="">Cancel</button>
-                        <button mat-flat-button color="primary" class="bg-blue-500 text-white" style="margin-left: 2%;" (click)="submiteReleaseDetails()">{{ releaseId !== '' ? 'Edit' : 'Create'}} Release</button>
+                        <button mat-flat-button color="primary" class="bg-blue-500 text-white" style="margin-left: 2%;" (click)="actionHandlerMethods()">{{ releaseId !== '' ? 'Edit' : 'Create'}} Release</button>
+                    </div>
+
+                    <!-- Form action loader -->
+                    <div class="w-full flex justify-end p-6" *ngIf="formActionLoader">
+                        <mat-spinner [diameter]="20"></mat-spinner>
+                        <span class="ml-2">{{ releaseId !== '' ? 'Edit' : 'Create'}}ing Release Details...</span>
                     </div>
                 </form>
                 

@@ -25,6 +25,7 @@ export class ReleaseCreateEditComponent implements OnInit {
     isProjectIdSelected: boolean = false;
     releaseId: string = '';
     releaseDetails: any;
+    formActionLoader: boolean = false;
 
   constructor(
     private statusService: StatusService,
@@ -184,6 +185,18 @@ export class ReleaseCreateEditComponent implements OnInit {
 
 
   /*
+    Action handler methods.
+  */
+  actionHandlerMethods(): void {
+    if(this.releaseId) {
+      this.updateReleaseDetails();
+    } else {
+      this.submiteReleaseDetails();
+    }
+  }
+
+
+  /*
     Submit release details.
   */
   submiteReleaseDetails(): any {
@@ -205,13 +218,59 @@ export class ReleaseCreateEditComponent implements OnInit {
 
     console.log(releaseDetailsPayload);
 
+    this.formActionLoader = true;
+
     this.releaseService.createReleaseDetails(releaseDetailsPayload).subscribe((response: any) => {
       console.log(response);
+
+      this.formActionLoader = false;
 
       this.router.navigate(['../', response], {relativeTo: this.activatedRoute});
 
       window.scrollTo(0, 0);
     });
+  }
+
+
+  /*
+    Update release details.
+  */
+  updateReleaseDetails(): void {
+    this.formActionLoader = true;
+
+    // Set the payload details.
+    let releaseDetailsPayload: any = {
+      releaseId: this.releaseDetails._id,
+      actionType: 'edit',
+      releaseDetailsUpdatePayload: {
+        clientId: this.releaseCreateEditForm.get('client')?.value,
+        projectId: this.releaseCreateEditForm.get('project')?.value,
+        releaseTitle: this.releaseCreateEditForm.get('releaseTitle')?.value,
+        releaseTypeId: this.releaseCreateEditForm.get('releaseType')?.value,
+        releaseTargetId: this.releaseCreateEditForm.get('releaseTarget')?.value,
+        releaseOwnerId: this.releaseCreateEditForm.get('releaseOwner')?.value,
+        releaseClosingDate: this.releaseCreateEditForm.get('releaseClosingDate')?.value,
+        releaseStatusId: this.releaseConfigDetails.status.filter((status: any) => { return status.value === 'Initiated' })[0]._id,
+        releasePriority: this.releaseCreateEditForm.get('releasePriority')?.value
+      }
+    }
+
+    // Disable the form.
+    this.releaseCreateEditForm.disable();
+
+    this.releaseService.updateReleaseDetails(this.releaseDetails._id, releaseDetailsPayload).subscribe((response: any) => {
+      console.log(response);
+
+      setTimeout(() => {
+        this.formActionLoader = false;
+
+        this.releaseCreateEditForm.enable();
+
+        this.router.navigate(['../', response], {relativeTo: this.activatedRoute});
+      }, 1000);
+      
+      
+    })
   }
   
 }
