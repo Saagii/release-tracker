@@ -225,7 +225,7 @@ export class ReleaseCreateEditComponent implements OnInit {
 
       this.formActionLoader = false;
 
-      this.router.navigate(['../', response], {relativeTo: this.activatedRoute});
+      this.router.navigate(['../'], {relativeTo: this.activatedRoute});
 
       window.scrollTo(0, 0);
     });
@@ -266,7 +266,7 @@ export class ReleaseCreateEditComponent implements OnInit {
 
         this.releaseCreateEditForm.enable();
 
-        this.router.navigate(['../', response], {relativeTo: this.activatedRoute});
+        this.router.navigate(['../'], {relativeTo: this.activatedRoute});
       }, 1000);
       
       

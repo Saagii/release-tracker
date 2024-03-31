@@ -58,10 +58,13 @@
                 <!-- Title -->
                 <div class="w-full">
                     <div class="text-lg">Basic Details</div>
+                    <div class="text-xs text-gray-600" *ngIf="releaseDetails.lastModifiedById">
+                        Last Modified by: <span class="hover:underline hover:text-blue-600 cursor-pointer w-fit" [routerLink]="['../../admin/members', releaseDetails.lastModifiedById]">{{filterRequiredIds('member', releaseDetails.lastModifiedById)}}</span> on {{releaseDetails.lastModifiedDate | date:'medium'}}
+                    </div>
                 </div>
 
                 <!-- Basic Details Content Row 1-->
-                <div class="w-full flex flex-wrap justify-start mt-4">
+                <div class="w-full flex flex-wrap justify-start mt-6">
 
                     <!-- Client -->
                     <div class="w-3/12">
@@ -108,7 +111,7 @@
                     <!-- Release Type -->
                     <div class="w-3/12">
                         <div class="text-xs uppercase text-gray-600">Release Type</div>
-                        <div class="mt-1">{{filterRequiredIds('type', releaseDetails.releaseTypeId)}} release</div>
+                        <div class="mt-1">{{filterRequiredIds('type', releaseDetails.releaseTypeId)}}</div>
                     </div>
 
                     <!-- Release Target -->
