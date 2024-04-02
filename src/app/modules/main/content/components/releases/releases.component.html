@@ -21,8 +21,8 @@
                     <div class="">
                         <div class="text-base text-gray-700">{{release.releaseTitle}}</div>
                         <div class="text-gray-600 text-xs flex mt-1">
-                            <span class="text-xs border border-gray-200 text-gray-600 bg-gray-50 py-0.5 px-2 cursor-pointer rounded-md hover:border-blue-400" [routerLink]="['../clients', release.clientId]">Client : {{filterRequiredIds('client', release.clientId)}}</span>
-                            <span class="text-xs border border-gray-200 text-gray-600 bg-gray-50 py-0.5 px-2 ml-2 cursor-pointer rounded-md hover:border-blue-400" [routerLink]="['../projects', release.projectId]">Project : {{filterRequiredIds('project', release.projectId)}}</span>
+                            <span class="text-xs border border-gray-200 text-gray-600 bg-gray-50 py-0.5 px-2 cursor-pointer rounded-full hover:border-blue-400" [routerLink]="['../clients', release.clientId]">Client : {{filterRequiredIds('client', release.clientId)}}</span>
+                            <span class="text-xs border border-gray-200 text-gray-600 bg-gray-50 py-0.5 px-2 ml-2 cursor-pointer rounded-full hover:border-blue-400" [routerLink]="['../projects', release.projectId]">Project : {{filterRequiredIds('project', release.projectId)}}</span>
                         </div>
                     </div>
                     <div class="flex content-center">

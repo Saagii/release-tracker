@@ -90,6 +90,88 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Project Details Tabs -->
+            <div class="w-full mt-4">
+                <mat-tab-group class=" border border-gray-200 rounded-md" mat-align-tabs="start">
+
+                    <!-- Releases Tab -->
+                    <mat-tab label="Releases">
+                        <div class="w-full p-4">
+                            <div class="w-full border border-gray-200 rounded-md">
+
+                                <!-- Filter Block -->
+                                <div class="w-full p-4 border-b border-gray-200">
+                                    <button mat-stroked-button class="" color="primary">+ Filter</button>
+                                </div>
+
+                                <!-- Release content -->
+                                <div class="w-full flex">
+
+                                    <!-- Release List -->
+                                    <div class="w-6/12 pr-2">
+                                        <div class="w-full border-b border-gray-200 py-2" *ngFor="let release of releasesList">
+                                            <div class="">
+                                                <div class="text-base text-gray-700">{{release.releaseTitle}}</div>
+                                                <div class="text-gray-600 text-xs flex mt-1">
+                                                    <span class="text-xs border border-gray-200 text-gray-600 bg-gray-50 py-0.5 px-2 cursor-pointer rounded-full hover:border-blue-400" [routerLink]="['../../clients', release.clientId]">Client : {{filterRequiredIds('client', release.clientId)}}</span>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="flex content-center">
+                                                <div class="">
+                                                    <div class="text-right">
+                                                        <span class="text-right text-xs px-3 rounded-full uppercase" [ngClass]="getStatusStyle(filterRequiredIds('status', release.releaseStatusId))">{{filterRequiredIds('status', release.releaseStatusId)}}</span>
+                                                    </div>
+                                                    <div class="mt-2 text-gray-400 text-xs flex items-center">Closing On: <span class="text-gray-500 ml-1">{{release.releaseClosingDate | date}}</span></div>
+                                                </div>
+                                                <div class="ml-4">
+                                                    <button mat-icon-button class="text-gray-600"  [routerLink]="['./', release._id]">
+                                                        <mat-icon>keyboard_arrow_right</mat-icon>
+                                                    </button>
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+
+                                    <!-- Release Quick View Details Block -->
+                                    <div class="w-6/12 pl-2">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+
+                    <!-- Projects Tab -->
+                    <mat-tab label="Team Members">
+                        Team Members List
+                    </mat-tab>
+
+                    <!-- Projects Tab -->
+                    <mat-tab label="Analytics">
+                        Analytics Content
+                    </mat-tab>
+    
+                    <!-- Timeline Tab -->
+                    <mat-tab label="Timeline">
+                        <div class="w-full flex flex-wrap items-center px-4">
+    
+                            <!-- In Pgoress -->
+                            <div class="w-full flex justify-center p-3 mt-6">
+                                <img class="w-3/12" src="assets/gifs/dev-progress.gif">
+                            </div>
+                            <div class="w-full text-center text-gray-600 -mt-28 font-bold">
+                                Feature Coming Soon...
+                            </div>
+                        </div>
+                    </mat-tab>
+
+                    <!-- Projects Tab -->
+                    <mat-tab label="Settings">
+                        Project Settings
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
         </div>
     </div>
 </div>

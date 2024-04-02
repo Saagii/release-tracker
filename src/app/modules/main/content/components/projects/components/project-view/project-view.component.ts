@@ -4,6 +4,7 @@ import { ProjectsService } from 'src/app/modules/main/services/projects.service'
 import { ActivatedRoute } from '@angular/router';
 import { ClientsService } from 'src/app/modules/main/services/clients.service';
 import { MembersService } from 'src/app/modules/main/services/members.service';
+import { ReleasesService } from 'src/app/modules/main/services/releases.service';
 
 @Component({
   selector: 'app-project-view',
@@ -18,21 +19,20 @@ export class ProjectViewComponent implements OnInit {
   tempStatusValue: string = '';
   teamMembersCount: number = 0;
   teamMembersDetailsList: any = [];
+  releasesList: any = [];
 
   constructor(
     private statusService: StatusService,
     private projectsService: ProjectsService,
     private _activatedRoute: ActivatedRoute,
     private clientsService: ClientsService,
-    private membersService: MembersService
+    private membersService: MembersService,
+    private releasesService: ReleasesService
   ) {}
 
   ngOnInit(): void {
 
     this.projectId = this._activatedRoute.snapshot.params['id'];
-
-    // Get clients list.
-    this.getClientsList();
 
     // Get project configurations.
     this.getProjectConfigurations();
@@ -60,8 +60,8 @@ export class ProjectViewComponent implements OnInit {
       // Set Status
       this.tempStatusValue = this.projectDetails.statusId;
 
-      // Get project team members details.
-      this.getMemberDetails();
+      // Get clients list.
+      this.getClientsList();
     })
   }
 
@@ -74,6 +74,9 @@ export class ProjectViewComponent implements OnInit {
       console.log(response);
       
       this.clientsList = response;
+
+      // Get project team members details.
+      this.getMemberDetails();
     });
   }
 
@@ -111,7 +114,22 @@ export class ProjectViewComponent implements OnInit {
       });
     } else {
       console.log(this.teamMembersDetailsList);
+
+      // Get Releases List based on project id.
+      this.getReleaseListByCustomFilter();
     }
+  }
+
+
+  /*
+    Get release list by custom filter params.
+  */
+  getReleaseListByCustomFilter(): void {
+    this.releasesService.getReleasesListByCustomFilter('project', this.projectId).subscribe((response: any) => {
+      console.log(response);
+
+      this.releasesList = response;
+    });
   }
 
 

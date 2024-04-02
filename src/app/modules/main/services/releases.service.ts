@@ -92,6 +92,14 @@ export class ReleasesService {
     }
 
 
+    /* 
+        Get release list by custom filter parameters
+    */
+    getReleasesListByCustomFilter(filterType: string, filterTypeId: string): any {
+        return this._httpClient.get(`${environment.basePath}/api/releases/${filterType}/${filterTypeId}`);
+    }
+
+
     /*
         Add release Configuration Status.
     */
