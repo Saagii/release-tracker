@@ -20,6 +20,8 @@ export class ProjectViewComponent implements OnInit {
   teamMembersCount: number = 0;
   teamMembersDetailsList: any = [];
   releasesList: any = [];
+  releaseConfigDetails: any;
+  selectedReleaseDetails: any;
 
   constructor(
     private statusService: StatusService,
@@ -36,6 +38,9 @@ export class ProjectViewComponent implements OnInit {
 
     // Get project configurations.
     this.getProjectConfigurations();
+
+    // Get Release Config details
+    this.getReleaseConfigDetails();
   }
 
   /*
@@ -63,6 +68,18 @@ export class ProjectViewComponent implements OnInit {
       // Get clients list.
       this.getClientsList();
     })
+  }
+
+
+    /*
+    Get release config details.
+  */
+  getReleaseConfigDetails(): any {
+    this.releasesService.getReleasesConfig().subscribe((releaseConfig: any) => {
+      console.log(releaseConfig);
+
+      this.releaseConfigDetails = releaseConfig;
+    });
   }
 
 
@@ -133,6 +150,14 @@ export class ProjectViewComponent implements OnInit {
   }
 
 
+  /*
+    Release quick view.
+  */
+  releaseQuickView(release: any): void {
+    this.selectedReleaseDetails = release;
+  }
+
+
     /*
     Filter clients, release config IDs.
   */
@@ -148,6 +173,13 @@ export class ProjectViewComponent implements OnInit {
     // Return project status.
     if(type === 'status') {
       return this.projectConfig.status.filter((status: any) => {
+        return status._id === id;
+      })[0].value;
+    }
+
+    // Return project status.
+    if(type === 'release_status') {
+      return this.releaseConfigDetails.status.filter((status: any) => {
         return status._id === id;
       })[0].value;
     }

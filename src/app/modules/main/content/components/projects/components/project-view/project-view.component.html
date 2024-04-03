@@ -109,33 +109,41 @@
                                 <div class="w-full flex">
 
                                     <!-- Release List -->
-                                    <div class="w-6/12 pr-2">
-                                        <div class="w-full border-b border-gray-200 py-2" *ngFor="let release of releasesList">
-                                            <div class="">
-                                                <div class="text-base text-gray-700">{{release.releaseTitle}}</div>
-                                                <div class="text-gray-600 text-xs flex mt-1">
-                                                    <span class="text-xs border border-gray-200 text-gray-600 bg-gray-50 py-0.5 px-2 cursor-pointer rounded-full hover:border-blue-400" [routerLink]="['../../clients', release.clientId]">Client : {{filterRequiredIds('client', release.clientId)}}</span>
+                                    <div class="w-6/12 pr-2"> 
+                                        <div class="w-full border-b border-r border-gray-200 cursor-pointer hover:bg-gray-50" *ngFor="let release of releasesList" (click)="releaseQuickView(release)">
+                                            <div class="w-full flex justify-between p-4" [ngClass]="{'border-l-4 border-blue-600 rounded-md' : release._id === selectedReleaseDetails?._id}">
+                                                <div class="">
+                                                    <div class="text-base text-gray-700">{{release.releaseTitle}}</div>
+                                                </div>
+                                                <div class="flex content-center">
+                                                    <div class="">
+                                                        <div class="text-right">
+                                                            <span class="text-right text-xs px-3 rounded-full uppercase" [ngClass]="getStatusStyle(filterRequiredIds('release_status', release.releaseStatusId))">{{filterRequiredIds('release_status', release.releaseStatusId)}}</span>
+                                                        </div>
+                                                        <div class="mt-2 text-gray-400 text-xs flex items-center">Closing On: <span class="text-gray-500 ml-1">{{release.releaseClosingDate | date}}</span></div>
+                                                    </div>
+                                                    <div class="ml-4">
+                                                        <button mat-icon-button class="text-gray-600"  [routerLink]="['../../releases', release._id]">
+                                                            <mat-icon>keyboard_arrow_right</mat-icon>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <!-- <div class="flex content-center">
-                                                <div class="">
-                                                    <div class="text-right">
-                                                        <span class="text-right text-xs px-3 rounded-full uppercase" [ngClass]="getStatusStyle(filterRequiredIds('status', release.releaseStatusId))">{{filterRequiredIds('status', release.releaseStatusId)}}</span>
-                                                    </div>
-                                                    <div class="mt-2 text-gray-400 text-xs flex items-center">Closing On: <span class="text-gray-500 ml-1">{{release.releaseClosingDate | date}}</span></div>
-                                                </div>
-                                                <div class="ml-4">
-                                                    <button mat-icon-button class="text-gray-600"  [routerLink]="['./', release._id]">
-                                                        <mat-icon>keyboard_arrow_right</mat-icon>
-                                                    </button>
-                                                </div>
-                                            </div> -->
                                         </div>
                                     </div>
 
                                     <!-- Release Quick View Details Block -->
                                     <div class="w-6/12 pl-2">
+                                        <div class="w-full p-4" *ngIf="selectedReleaseDetails">
 
+                                            <!-- Quick View Title -->
+                                            <div class="text-blue-600 font-bold text-xs">RELEASE QUICK VIEW</div>
+
+                                            <!-- Release Basic Details -->
+                                            <div class="w-full mt-2">
+                                                <div class="text-xl">{{selectedReleaseDetails.releaseTitle}}</div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
