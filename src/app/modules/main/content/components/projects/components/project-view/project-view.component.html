@@ -101,7 +101,7 @@
                             <div class="w-full border border-gray-200 rounded-md">
 
                                 <!-- Filter Block -->
-                                <div class="w-full p-4 border-b border-gray-200">
+                                <div class="w-full p-4 border-b border-gray-200 flex justify-end">
                                     <button mat-stroked-button class="" color="primary">+ Filter</button>
                                 </div>
 
@@ -109,9 +109,9 @@
                                 <div class="w-full flex">
 
                                     <!-- Release List -->
-                                    <div class="w-6/12 pr-2"> 
+                                    <div class="w-6/12"> 
                                         <div class="w-full border-b border-r border-gray-200 cursor-pointer hover:bg-gray-50" *ngFor="let release of releasesList" (click)="releaseQuickView(release)">
-                                            <div class="w-full flex justify-between p-4" [ngClass]="{'border-l-4 border-blue-600 rounded-md' : release._id === selectedReleaseDetails?._id}">
+                                            <div class="w-full flex justify-between p-4" [ngClass]="{'border-l-4 border-blue-600' : release._id === selectedReleaseDetails?._id}">
                                                 <div class="">
                                                     <div class="text-base text-gray-700">{{release.releaseTitle}}</div>
                                                 </div>
@@ -123,7 +123,7 @@
                                                         <div class="mt-2 text-gray-400 text-xs flex items-center">Closing On: <span class="text-gray-500 ml-1">{{release.releaseClosingDate | date}}</span></div>
                                                     </div>
                                                     <div class="ml-4">
-                                                        <button mat-icon-button class="text-gray-600"  [routerLink]="['../../releases', release._id]">
+                                                        <button mat-icon-button class="text-gray-600">
                                                             <mat-icon>keyboard_arrow_right</mat-icon>
                                                         </button>
                                                     </div>
@@ -133,17 +133,78 @@
                                     </div>
 
                                     <!-- Release Quick View Details Block -->
-                                    <div class="w-6/12 pl-2">
-                                        <div class="w-full p-4" *ngIf="selectedReleaseDetails">
+                                    <div class="w-6/12 p-4">
 
-                                            <!-- Quick View Title -->
-                                            <div class="text-blue-600 font-bold text-xs">RELEASE QUICK VIEW</div>
+                                        <div class="w-full p-4 border border-gray-200 rounded-lg">
+                                            <div class="w-full flex justify-between items-center" *ngIf="selectedReleaseDetails">
 
-                                            <!-- Release Basic Details -->
-                                            <div class="w-full mt-2">
-                                                <div class="text-xl">{{selectedReleaseDetails.releaseTitle}}</div>
+                                                <!-- Title -->
+                                                <div class="w-10/12">
+                                                    <!-- Quick View Title -->
+                                                    <div class="text-blue-600 font-bold text-xs">RELEASE QUICK VIEW</div>
+    
+                                                    <!-- Release Basic Details -->
+                                                    <div class="w-full mt-2">
+                                                        <div class="text-xl flex items-center">{{selectedReleaseDetails.releaseTitle}} <span class="text-right text-xs px-3 rounded-full uppercase ml-3" [ngClass]="getStatusStyle(filterRequiredIds('release_status', selectedReleaseDetails.releaseStatusId))">{{filterRequiredIds('release_status', selectedReleaseDetails.releaseStatusId)}}</span></div>
+                                                        <div class="text-xs text-gray-600">
+                                                            Created by: <span class="hover:underline hover:text-blue-600 cursor-pointer w-fit" [routerLink]="['../../admin/members', selectedReleaseDetails.releaseCreatedById]">{{filterRequiredIds('teamMember', selectedReleaseDetails.releaseCreatedById)}}</span> on {{selectedReleaseDetails.releaseCreatedOnDate | date:'medium'}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+    
+                                                <!-- View More Details: Release View Page Navigation -->
+                                                <div class="w-2/12 flex justify-end">
+                                                    <button mat-icon-button class="" matTooltip="View More Details" color="primary" [routerLink]="['../../releases', selectedReleaseDetails?._id]"><mat-icon>launch</mat-icon></button>
+                                                </div>
+                                            </div>
+    
+                                            <!-- Basic Details Content Row 1-->
+                                            <div class="w-full flex flex-wrap justify-start mt-10" *ngIf="selectedReleaseDetails">
+    
+                                                <!-- Release Priority -->
+                                                <div class="w-6/12 mb-6">
+                                                    <div class="text-xs uppercase text-gray-600">Release Priority</div>
+                                                    <div class="mt-1 w-fit">
+                                                        <span class="text-white text-xs py-1 px-3 rounded-full"
+                                                        [ngClass]="{'bg-red-600' : ['High', 'Highest', 'Critical'].includes(filterRequiredIds('priorities', selectedReleaseDetails.releasePriority)),
+                                                        'bg-green-600' : ['Medium'].includes(filterRequiredIds('priorities', selectedReleaseDetails.releasePriority)),
+                                                        'bg-black' : ['Blocker'].includes(filterRequiredIds('priorities', selectedReleaseDetails.releasePriority)),
+                                                        'bg-blue-600' : ['Low', 'Lowest'].includes(filterRequiredIds('priorities', selectedReleaseDetails.releasePriority))}">
+                                                        {{filterRequiredIds('priorities', selectedReleaseDetails.releasePriority)}}
+                                                        </span>
+                                                    </div>
+                                                </div>
+    
+                                                <!-- Release Owner -->
+                                                <div class="w-6/12 mb-6">
+                                                    <div class="text-xs uppercase text-gray-600">Release Owner</div>
+                                                    <div class="mt-1 hover:underline hover:text-blue-600 cursor-pointer w-fit" [routerLink]="['../../admin/members', selectedReleaseDetails.releaseOwnerId]">{{filterRequiredIds('teamMember', selectedReleaseDetails.releaseOwnerId)}}</div>
+                                                </div>
+    
+                                                <!-- Release Type -->
+                                                <div class="w-6/12 mb-6">
+                                                    <div class="text-xs uppercase text-gray-600">Release Type</div>
+                                                    <div class="mt-1">{{filterRequiredIds('type', selectedReleaseDetails.releaseTypeId)}}</div>
+                                                </div>
+    
+                                                <!-- Release Target -->
+                                                <div class="w-6/12 mb-6">
+                                                    <div class="text-xs uppercase text-gray-600">Release Target</div>
+                                                    <div class="mt-1">{{filterRequiredIds('target', selectedReleaseDetails.releaseTargetId)}}</div>
+                                                </div>
+    
+                                                <!-- Closing On -->
+                                                <div class="w-6/12 mb-6">
+                                                    <div class="text-xs uppercase text-gray-600">Release Closing On</div>
+                                                    <div class="mt-1">{{selectedReleaseDetails.releaseClosingDate | date}}</div>
+                                                </div>
+    
+                                                <div class="text-xs text-gray-600 mt-6" *ngIf="selectedReleaseDetails.lastModifiedById">
+                                                    Last Modified by: <span class="hover:underline hover:text-blue-600 cursor-pointer w-fit" [routerLink]="['../../admin/members', selectedReleaseDetails.lastModifiedById]">{{filterRequiredIds('teamMember', selectedReleaseDetails.lastModifiedById)}}</span> on {{selectedReleaseDetails.lastModifiedDate | date:'medium'}}
+                                                </div>
                                             </div>
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>

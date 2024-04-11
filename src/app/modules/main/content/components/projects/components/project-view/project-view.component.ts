@@ -146,6 +146,8 @@ export class ProjectViewComponent implements OnInit {
       console.log(response);
 
       this.releasesList = response;
+
+      this.selectedReleaseDetails = response[0];
     });
   }
 
@@ -182,6 +184,27 @@ export class ProjectViewComponent implements OnInit {
       return this.releaseConfigDetails.status.filter((status: any) => {
         return status._id === id;
       })[0].value;
+    }
+
+    // Return Target value.
+    if(type === 'target') {
+      return this.releaseConfigDetails.targets.filter((target: any) => {
+         return target._id === id;
+      })[0]?.value;
+    }
+
+    // Return Type value.
+    if(type === 'type') {
+      return this.releaseConfigDetails.types.filter((type: any) => {
+         return type._id === id;
+      })[0]?.value;
+    }
+
+    // Return Type value.
+    if(type === 'priorities') {
+      return this.releaseConfigDetails.priorities.filter((priority: any) => {
+         return priority._id === id;
+      })[0]?.value;
     }
 
     // Return member name.
