@@ -35,7 +35,7 @@
                         </button> -->
                         <div class="ml-4">
                             <button mat-stroked-button class="text-gray-600 text-xs">
-                                <mat-icon class="text-sm mt-1 -ml-2">edit</mat-icon> Edit Project
+                                <mat-icon class="text-sm -ml-2">edit</mat-icon> Edit Project
                             </button>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                     <!-- Client -->
                     <div class="w-2/12">
                         <div class="text-xs uppercase text-gray-600">Client</div>
-                        <div class="mt-1 hover:underline hover:text-blue-600 cursor-pointer w-fit" [routerLink]="['../../admin/members', projectDetails.projectManagerId]">{{filterRequiredIds('client', projectDetails.clientId)}}</div>
+                        <div class="mt-1 hover:underline hover:text-blue-600 cursor-pointer w-fit" [routerLink]="['../../clients', projectDetails.clientId]">{{filterRequiredIds('client', projectDetails.clientId)}}</div>
                     </div>
 
                     <!-- Project Manager -->
@@ -101,16 +101,23 @@
                             <div class="w-full border border-gray-200 rounded-md">
 
                                 <!-- Filter Block -->
-                                <div class="w-full p-4 border-b border-gray-200 flex justify-end">
-                                    <button mat-stroked-button class="" color="primary">+ Filter</button>
+                                <div class="w-full p-4 border-b border-gray-200 flex justify-between">
+                                    <div class="">
+                                        <div class="text-lg">Release List</div>
+                                        <div class="text-xs text-gray-500">Click on either of releases for quick view.</div>
+                                    </div>
+                                    <div class="">
+                                        <button mat-stroked-button class="" color="primary">+ Filter</button>
+                                    </div>
+                                    
                                 </div>
 
                                 <!-- Release content -->
                                 <div class="w-full flex">
 
                                     <!-- Release List -->
-                                    <div class="w-6/12"> 
-                                        <div class="w-full border-b border-r border-gray-200 cursor-pointer hover:bg-gray-50" *ngFor="let release of releasesList" (click)="releaseQuickView(release)">
+                                    <div class="w-6/12 border-r border-gray-200"> 
+                                        <div class="w-full border-b border-gray-200 cursor-pointer hover:bg-gray-50" *ngFor="let release of releasesList" (click)="releaseQuickView(release)">
                                             <div class="w-full flex justify-between p-4" [ngClass]="{'border-l-4 border-blue-600' : release._id === selectedReleaseDetails?._id}">
                                                 <div class="">
                                                     <div class="text-base text-gray-700">{{release.releaseTitle}}</div>
@@ -120,7 +127,7 @@
                                                         <div class="text-right">
                                                             <span class="text-right text-xs px-3 rounded-full uppercase" [ngClass]="getStatusStyle(filterRequiredIds('release_status', release.releaseStatusId))">{{filterRequiredIds('release_status', release.releaseStatusId)}}</span>
                                                         </div>
-                                                        <div class="mt-2 text-gray-400 text-xs flex items-center">Closing On: <span class="text-gray-500 ml-1">{{release.releaseClosingDate | date}}</span></div>
+                                                        <div class="mt-2 text-gray-500 text-xs flex items-center">Closing On: <span class="text-gray-500 ml-1">{{release.releaseClosingDate | date}}</span></div>
                                                     </div>
                                                     <div class="ml-4">
                                                         <button mat-icon-button class="text-gray-600">
@@ -133,9 +140,9 @@
                                     </div>
 
                                     <!-- Release Quick View Details Block -->
-                                    <div class="w-6/12 p-4">
+                                    <div class="w-6/12 p-4 bg-gray-50">
 
-                                        <div class="w-full p-4 border border-gray-200 rounded-lg">
+                                        <div class="w-full p-4 border border-gray-200 rounded-lg bg-white">
                                             <div class="w-full flex justify-between items-center" *ngIf="selectedReleaseDetails">
 
                                                 <!-- Title -->
