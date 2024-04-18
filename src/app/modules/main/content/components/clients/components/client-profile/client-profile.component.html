@@ -1,3 +1,75 @@
+<div class="w-full h-screen flex">
+
+    <!-- Basic details block -->
+    <div class="w-4/12 h-full border-r border-gray-200 py-4 pr-6 pl-8">
+
+        <!-- Title Content -->
+        <div class="w-full flex justify-between items-center">
+            <div class="w-fit font-bold flex items-center"><span class="text-blue-600 cursor-pointer uppercase hover:underline" [routerLink]="['../']">Clients</span> <span class="mx-2 font-bold text-3xl">&#xB7;</span> <span class="text-normal uppercase">View</span></div>
+            <div class="flex justify-end">
+                <button mat-icon-button class="">
+                    <mat-icon class="text-base">more_vert</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <!-- Client Logo -->
+        <div class="w-full flex mt-4">
+            <div class="p-4 bg-blue-500 font-bold text-white rounded-md border-4 border-gray-200">CN</div>
+        </div>
+
+        <!-- Client Name -->
+        <div class="text-xl mt-2">Client Name</div>
+
+        <!-- Client About -->
+        <div class="w-full mt-4">
+            <div class="uppercase text-gray-600 text-xs">About</div>
+            <div class="mt-2 text-xs">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="w-full flex justify-start my-5">
+            <div class="w-2/12 border border-gray-200"></div>
+        </div>
+
+        <!-- Client Location & Website -->
+        <div class="w-full mt-4">
+            <div class="uppercase text-gray-600 text-xs">Location & Website</div>
+            <div class="mt-2 text-xs flex items-center">
+                <mat-icon class="text-gray-400 text-base">location_on</mat-icon> Bangalore, Karnataka
+            </div>
+            <div class="mt-2 text-xs flex items-center">
+                <mat-icon class="text-gray-400 text-base">language</mat-icon> www.clientWebsite.com
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="w-full flex justify-start my-5">
+            <div class="w-2/12 border border-gray-200"></div>
+        </div>
+
+        <!-- Client Representatives -->
+        <div class="w-full mt-4">
+            <div class="uppercase text-gray-600 text-xs">Client Members</div>
+            <div class="w-full mt-2 flex flex-wrap">
+                <div class="mb-2 mr-2" *ngFor="let name of ['Akshay Kumar', 'Sachin G', 'Karthik Sharma', 'Chandra H']">
+                    <div class="w-fit flex items-center text-xs border border-gray-300 rounded-full p-1 pr-2 cursor-pointer hover:text-blue-600 hover:border-blue-600" >
+                        <span class="uppercase p-1 px-2 rounded-full bg-gray-200 mr-2 text-xs font-bold">{{name[0]}}</span> {{name}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- Advanced details block -->
+    <div class="w-8/12 h-full"></div>
+</div>
+
+
 <div class="w-full px-4">
     <div class="w-full my-2 p-4">
 
@@ -9,7 +81,7 @@
 
                 <!-- Title Content -->
                 <div class="w-8/12">
-                    <div class="w-fit font-bold" [routerLink]="['../']"><span class="text-blue-600 cursor-pointer uppercase hover:underline">Clients</span></div>
+                    <div class="w-fit font-bold flex items-center" [routerLink]="['../']"><span class="text-blue-600 cursor-pointer uppercase hover:underline">Clients</span> <span class="mx-2 font-bold text-3xl">&#xB7;</span> <span class="text-normal uppercase">View</span></div>
                 </div>
 
                 <!-- Project Actions Content -->
@@ -48,20 +120,10 @@
 
                 <!-- Client Name & Description on company -->
                 <div class="w-full flex items-start">
-                    <span class="p-4 bg-blue-500 font-bold text-white rounded-full border-4 border-gray-200">CN</span>
+                    <div class="p-4 bg-blue-500 font-bold text-white rounded-md border-4 border-gray-200">CN</div>
                     <div class="ml-4">
                         <div class="text-2xl">Client Name</div>
                         <div class="text-gray-500 text-xs w-10/12 mt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</div>
-                    </div>
-                </div>
-
-                <!-- Client Website, Representative -->
-                <div class="flex mt-8 px-20 items-center">
-                    <div class="text-gray-400 flex items-center">
-                        <mat-icon class="text-lg -mt-1">link</mat-icon> tailwindcss.com
-                    </div>
-                    <div class="ml-10 text-gray-400 flex items-center">
-                        <mat-icon class="text-lg -mt-1">person</mat-icon> Sagar Desai
                     </div>
                 </div>
 
