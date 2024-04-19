@@ -1,4 +1,4 @@
-<div class="w-full h-screen flex">
+<div class="w-full h-screen flex border-b border-gray-200">
 
     <!-- Basic details block -->
     <div class="w-4/12 h-full border-r border-gray-200 py-4 pr-6 pl-8">
@@ -7,9 +7,24 @@
         <div class="w-full flex justify-between items-center">
             <div class="w-fit font-bold flex items-center"><span class="text-blue-600 cursor-pointer uppercase hover:underline" [routerLink]="['../']">Clients</span> <span class="mx-2 font-bold text-3xl">&#xB7;</span> <span class="text-normal uppercase">View</span></div>
             <div class="flex justify-end">
-                <button mat-icon-button class="">
+                <button mat-icon-button class="" [matMenuTriggerFor]="clientProfileMenu">
                     <mat-icon class="text-base">more_vert</mat-icon>
                 </button>
+
+                <mat-menu #clientProfileMenu="matMenu">
+                    <div class="px-4 py-2 flex cursor-pointer items-center" matRipple>
+                      <mat-icon class="text-base mr-2">edit</mat-icon>
+                      <div class="text-sm">Edit</div>
+                    </div>
+                    <div class="px-4 py-2 flex cursor-pointer items-center" matRipple>
+                      <mat-icon class="text-lg mr-2">block</mat-icon>
+                      <div class="text-sm">Deactivate</div>
+                    </div>
+                    <div class="px-4 py-2 flex cursor-pointer items-center" matRipple>
+                        <mat-icon class="text-lg mr-2">settings</mat-icon>
+                        <div class="text-sm">Settings</div>
+                      </div>
+                </mat-menu>
             </div>
         </div>
 
@@ -66,343 +81,28 @@
     </div>
 
     <!-- Advanced details block -->
-    <div class="w-8/12 h-full"></div>
-</div>
+    <div class="w-8/12 h-full">
 
-
-<div class="w-full px-4">
-    <div class="w-full my-2 p-4">
-
-        <!-- Project Details Block -->
-        <div class="w-full">
-
-            <!-- Title & Project Actions -->
-            <div class="w-full flex justify-between items-center">
-
-                <!-- Title Content -->
-                <div class="w-8/12">
-                    <div class="w-fit font-bold flex items-center" [routerLink]="['../']"><span class="text-blue-600 cursor-pointer uppercase hover:underline">Clients</span> <span class="mx-2 font-bold text-3xl">&#xB7;</span> <span class="text-normal uppercase">View</span></div>
-                </div>
-
-                <!-- Project Actions Content -->
-                <div class="w-4/12 flex justify-end items-center">
-
-                    <!-- Project Status -->
-                    <div class="hidden" *ngIf="tempStatusValue !== '' ">
-                        <div mat-flat-button class="select-none cursor-pointer rounded-full px-3 pr-2 py-1 flex items-center text-xs uppercase" [ngClass]="getStatusStyle(filterRequiredIds('status', tempStatusValue))" [matMenuTriggerFor]="matStatusMenu">
-                            {{filterRequiredIds('status', tempStatusValue)}} <mat-icon class="cursor-pointer bg-white rounded-full ml-3">arrow_drop_down</mat-icon>
-                        </div>
-                        <mat-menu #matStatusMenu="matMenu">
-                            <div class="" *ngFor="let status of projectConfig.status">
-                                <div class="text-xs p-3 uppercase hover:bg-gray-100 cursor-pointer hover:font-bold hover:text-blue-800 hover:border-l-2 hover:border-blue-800" (click)="tempStatusValue = status._id;">{{status.value}}</div>
-                            </div>
-                        </mat-menu>
-                    </div>
-
-                    <!-- Project Edit -->
-                    <div class="">
-                        <!-- <button mat-icon-button class="!ml-4">
-                            <mat-icon>more_vert</mat-icon>
-                        </button> -->
-                        <div class="ml-4">
-                            <button mat-stroked-button class="text-gray-600 text-xs">
-                                <mat-icon class="text-sm -ml-2">edit</mat-icon> Edit Client
-                            </button>
-                        </div>
-                    </div>
-
-
-                </div>
+        <!-- Header -->
+        <div class="w-full p-4 flex justify-between items-center">
+            <div class="">
+                <div class="text-lg">Client Aspects</div>
+                <div class="text-xs text-gray-600">View all the aspects that align in terms of services or products.</div>
             </div>
-
-            <!-- View Client Content -->
-            <div class="w-full">
-
-                <!-- Client Name & Description on company -->
-                <div class="w-full flex items-start">
-                    <div class="p-4 bg-blue-500 font-bold text-white rounded-md border-4 border-gray-200">CN</div>
-                    <div class="ml-4">
-                        <div class="text-2xl">Client Name</div>
-                        <div class="text-gray-500 text-xs w-10/12 mt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</div>
-                    </div>
-                </div>
-
-                <!-- Client Associations: Projects, Domains, Releases, Demos -->
-                <div class="w-full py-6">
-                    <mat-tab-group class="border border-gray-200 rounded-md" mat-align-tabs="start">
-
-                        <!-- Projects Tab -->
-                        <mat-tab label="Projects">
-                            <div class="w-full p-4 flex flex-wrap">
-                                <div class="w-4/12 p-4" *ngFor="let data of clientProfileData.projects">
-                                    <div class="w-full border border-gray-200 rounded-md p-4 hover:border-gray-400">
-                                        <div class="text-base flex items-center">{{data.projectName}} <span class="bg-gray-100 px-1 text-xs rounded-md ml-2 border border-gray-200">{{data.projectType}}</span></div>
-                                        <div class="text-gray-500 text-xs">{{data.totalMembers}} Members</div>
-                                        <div class="w-full flex justify-between items-center mt-8">
-                                            <div class="">
-                                                <div class="text-gray-500 text-xs">Manager</div>
-                                                <div class="">Sagar Desai</div>
-                                            </div>
-                                            <div class="">
-                                                <button mat-icon-button class=""  [routerLink]="['../../', 'projects', 567]">
-                                                    <mat-icon>chevron_right</mat-icon>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </mat-tab>
-
-                        <!-- Domains Tab -->
-                        <mat-tab label="Domains">
-                            <div class="w-full p-4 flex flex-wrap">
-                                <div class="w-6/12 p-4" *ngFor="let domain of clientProfileData.domains">
-                                    <div class="flex justify-between items-center w-full border border-gray-200 rounded-md p-4 hover:border-gray-400">
-                                        <div class="">
-                                            <span class="text-xs text-xs rounded-lg">{{domain.type}}</span>
-                                            <div class="text-blue-500 font-bold pt-4">{{domain.path}}</div>
-                                            <div class="text-gray-500 text-xs text-gray-400 py-1">Branch: {{domain.branch}}</div>
-                                        </div>
-                                        <div class="flex items-start">
-                                            <div class="">
-                                                <div class="text-right">
-                                                    <span class="text-right text-xs px-3 py-0.5 rounded-full uppercase" [ngClass]="getStatusStyle(domain.status)">{{domain.status}}</span>
-                                                </div>
-                                                <div class="pt-1 text-gray-400 text-xs flex content-center"><mat-icon class="text-xs">date_range</mat-icon>Release Date: {{domain.createdDate}}</div>
-                                            </div>
-                                            <div class="ml-4">
-                                                <button mat-icon-button [matMenuTriggerFor]="instanceMenu">
-                                                    <mat-icon class="text-gray-700">more_vert</mat-icon>
-                                                </button>
-                                                <mat-menu #instanceMenu="matMenu">
-                                                    <button mat-menu-item>Edit</button>
-                                                    <button mat-menu-item>Delete</button>
-                                                </mat-menu>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </mat-tab>
-
-                        <!-- Releases Tab -->
-                        <mat-tab label="Releases">
-                            <div class="w-full flex justify-between px-6 mt-4 -mb-4">
-                                <div class="text-lg px-3 text-gray-800">All Releases</div>
-                                <button mat-button class="text-xs">
-                                    <mat-icon class="text-lg -mt-1 -ml-2">filter_list</mat-icon> Filter
-                                </button>
-                            </div>
-                            <div class="w-full p-4 flex justify-between items-start">
-
-                                <!-- Releases List -->
-                                <div class="w-6/12 p-4">
-                                    <div class="w-full border border-gray-200 rounded-md">
-                                        <div class="w-full flex justify-between items-center p-4 cursor-pointer border-b border-gray-200 hover:bg-gray-50" *ngFor="let release of clientProfileData.releases">
-                                            <div class="">
-                                                <div class=" text-gray-800">{{release.releaseTitle}}</div>
-                                                <div class="text-gray-400 text-xs py-2">{{release.releaseTag}}</div>
-                                                <div class="text-gray-400 text-xs">{{release.releaseInstance}}</div>
-                                            </div>
-                                            <div class="flex content-center">
-                                                <div class="">
-                                                    <div class="text-right">
-                                                        <span class="text-right text-xs px-3 py-0.5 rounded-full uppercase" [ngClass]="getStatusStyle(release.releaseStatus)">{{release.releaseStatus}}</span>
-                                                    </div>
-                                                    <div class="mt-1 text-gray-400 text-xs flex content-center"><mat-icon class="text-xs">date_range</mat-icon>Release Date {{release.releaseDate}}</div>
-                                                </div>
-                                                <div class="ml-4">
-                                                    <button mat-icon-button class="text-gray-600"  [routerLink]="['../../', 'releases', 567]">
-                                                        <mat-icon>keyboard_arrow_right</mat-icon>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-
-                                <!-- Release Details Quick View -->
-                                <div class="w-6/12 p-4">
-                                    <div class="w-full border border-gray-200 rounded-md p-4">
-                                        <div class="w-full flex justify-between items-center">
-                                            <div class="text-lg">Release Quick View</div>
-                                            <span class="text-blue-500 text-xs cursor-pointer hover:text-blue-800"   [routerLink]="['../../', 'releases', 567]">View More</span>
-                                        </div>
-                                        <div class="w-full">
-                                            <div class="w-full mt-6">
-                                                <div class="w-full text-base text-blue-800">#Release Version 1</div>
-                                                <div class="flex justify-between mt-4">
-                                                    <span class="">Client</span>
-                                                    <span class="text-gray-500">Client Name</span>
-                                                </div>
-                                                <div class="flex justify-between mt-4">
-                                                    <span class="">Target Release</span>
-                                                    <span class="text-gray-500">Platform</span>
-                                                </div>
-                                                <div class="flex justify-between mt-4">
-                                                    <span class="">Release Type</span>
-                                                    <span class=""><span class="px-3 bg-gray-50 border border-gray-200 rounded-full text-xs ml-2 italic">Patch</span></span>
-                                                </div>
-                                                <div class="flex justify-between mt-4">
-                                                    <span class="">Release Date</span>
-                                                    <span class="text-gray-500">31st March 2023</span>
-                                                </div>
-                                                <div class="flex justify-between mt-4">
-                                                    <span class="">Release Owner</span>
-                                                    <span class="text-gray-500">Sagar Desai</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </mat-tab>
-
-                        <!-- Requirements Tab -->
-                        <mat-tab label="Requirements">
-                            <div class="w-full flex flex-wrap items-center px-4">
-
-                                <mat-accordion class="w-full mt-4 mb-3 border border-gray-300 rounded" *ngFor="let phase of phases">
-                                    <mat-expansion-panel (opened)="requirementsPanelOpenState = true"
-                                                        (closed)="requirementsPanelOpenState = false">
-                                    <mat-expansion-panel-header>
-                                        <mat-panel-title>
-                                        #Phase {{phase.phaseNumber}}
-                                        </mat-panel-title>
-                                        <mat-panel-description class="text-xs">
-                                            {{phase.phaseStartDate}} - {{phase.phaseEndDate}}
-                                        </mat-panel-description>
-                                    </mat-expansion-panel-header>
-                                    
-                                    <!-- Panel Content -->
-                                    <div class="w-full">
-                                        <div class="w-full flex justify-between items-center p-4 border mb-4 border-gray-200 rounded-md"
-                                        *ngFor="let requirement of phase.requirements" [ngClass]="{'shadow-xl border-gray-300' : viewMoreReqDetails === requirement.id}">
-                                            <div class="w-11/12">
-                                                <!-- Title, Desc, Project, Type, Links, Start Date, End Date, Status -->
-                                                <div class="w-full text-lg">{{requirement.title}}</div>
-                                                <div class="w-full text-xs text-gray-500">{{requirement.description}}</div>
-                                                <div class="w-full pt-3" *ngIf="viewMoreReqDetails !== requirement.id " (click)="toggleRequirementView(requirement.id)"><span class=" text-xs text-blue-500 cursor-pointer">Show More Details</span></div>
-                                                <div class="w-full pt-3" *ngIf="viewMoreReqDetails === requirement.id" (click)="toggleRequirementView('')"><span class=" text-xs text-blue-500 cursor-pointer">View Less</span></div>
-                                                <div class="w-full flex mt-8" *ngIf="viewMoreReqDetails === requirement.id">
-                                                    <div class="mr-24">
-                                                        <div class="text-xs uppercase">Requirement Type</div>
-                                                        <div class="mt-2">{{requirement.type}}</div>
-                                                    </div>
-                                                    <div class="mr-24">
-                                                        <div class="text-xs uppercase">Project</div>
-                                                        <div class="mt-2">{{requirement.projectName}}</div>
-                                                    </div>
-                                                    <div class="mr-24">
-                                                        <div class="text-xs uppercase">Label</div>
-                                                        <div class="mt-2">{{requirement.label}}</div>
-                                                    </div>
-                                                    <div class="mr-24">
-                                                        <div class="text-xs uppercase">Start Date</div>
-                                                        <div class="mt-2">{{requirement.startDate}}</div>
-                                                    </div>
-                                                    <div class="mr-24">
-                                                        <div class="text-xs uppercase">End Date</div>
-                                                        <div class="mt-2">{{requirement.endDate}}</div>
-                                                    </div>
-                                                    <div class="mr-24">
-                                                        <div class="text-xs uppercase">Status</div>
-                                                        <div class=" mt-2">
-                                                            <span class="text-right text-xs px-3 py-0.5 rounded-full uppercase" [ngClass]="getStatusStyle(requirement.status)">{{requirement.status}}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="w-1/12 flex justify-end ">
-                                                <button mat-icon-button class="">
-                                                    <mat-icon>more_vert</mat-icon>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </mat-expansion-panel>
-                                </mat-accordion>
-                            </div>
-                        </mat-tab>
-
-                        <!-- Demos Tab -->
-                        <mat-tab label="Demos">
-                            <div class="w-full flex flex-wrap items-center px-4">
-
-                                <!-- In Pgoress -->
-                                <div class="w-full flex justify-center p-3 mt-6">
-                                    <img class="w-3/12" src="assets/gifs/dev-progress.gif">
-                                </div>
-                                <div class="w-full text-center text-gray-600 -mt-28 font-bold">
-                                    Feature Coming Soon...
-                                </div>
-                            </div>
-                        </mat-tab>
-
-                        <!-- Timeline Tab -->
-                        <mat-tab label="Timeline">
-                            <div class="w-full flex flex-wrap items-center px-4">
-
-                                <!-- In Pgoress -->
-                                <div class="w-full flex justify-center p-3 mt-6">
-                                    <img class="w-3/12" src="assets/gifs/dev-progress.gif">
-                                </div>
-                                <div class="w-full text-center text-gray-600 -mt-28 font-bold">
-                                    Feature Coming Soon...
-                                </div>
-                            </div>
-                        </mat-tab>
-                    </mat-tab-group>
-                </div>
-            </div>
+            <button mat-icon-button class="" matTooltip="View Client Analytics">
+                <mat-icon class="text-blue-600">assessment</mat-icon>
+            </button>
         </div>
-    </div>
-</div>
+        
 
-
-<div class="w-full px-4">
-    <div class="w-full my-2 p-4">
-        <!-- Back to clients list Navigation-->
-        <div class="" style="width: fit-content">
-            <a class=""  [routerLink]="['../']">
-                <div class="flex items-center hover:text-blue-500">
-                    <mat-icon class="text-base -ml-1 -mr-1">keyboard_arrow_left</mat-icon>Back
-                </div>
-            </a>
-        </div>
-    </div>
-
-    <!-- View Client Content -->
-    <div class="w-full px-4">
-
-        <!-- Client Name & Description on company -->
-        <div class="w-full flex items-start">
-            <span class="p-4 bg-blue-500 font-bold text-white rounded-full border-4 border-gray-200">CN</span>
-            <div class="ml-4">
-                <div class="text-2xl">Client Name</div>
-                <div class="text-gray-500 text-xs w-10/12 mt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</div>
-            </div>
-        </div>
-
-        <!-- Client Website, Representative -->
-        <div class="flex mt-8 px-20 items-center">
-            <div class="text-gray-400 flex items-center">
-                <mat-icon class="text-lg -mt-1">link</mat-icon> tailwindcss.com
-            </div>
-            <div class="ml-10 text-gray-400 flex items-center">
-                <mat-icon class="text-lg -mt-1">person</mat-icon> Sagar Desai
-            </div>
-        </div>
 
         <!-- Client Associations: Projects, Domains, Releases, Demos -->
-        <div class="w-full py-6">
-            <mat-tab-group class=" border border-gray-200 rounded-md" mat-align-tabs="start">
+        <div class="w-full h-full">
+            <mat-tab-group class="h-full border-t border-gray-200" mat-align-tabs="start">
 
                 <!-- Projects Tab -->
                 <mat-tab label="Projects">
-                    <div class="w-full p-4 flex flex-wrap">
+                    <div class="w-full px-4 flex flex-wrap border-t border-gray-200">
                         <div class="w-4/12 p-4" *ngFor="let data of clientProfileData.projects">
                             <div class="w-full border border-gray-200 rounded-md p-4 hover:border-gray-400">
                                 <div class="text-base flex items-center">{{data.projectName}} <span class="bg-gray-100 px-1 text-xs rounded-md ml-2 border border-gray-200">{{data.projectType}}</span></div>
@@ -425,7 +125,7 @@
 
                 <!-- Domains Tab -->
                 <mat-tab label="Domains">
-                    <div class="w-full p-4 flex flex-wrap">
+                    <div class="w-full px-4 flex flex-wrap border-t border-gray-200">
                         <div class="w-6/12 p-4" *ngFor="let domain of clientProfileData.domains">
                             <div class="flex justify-between items-center w-full border border-gray-200 rounded-md p-4 hover:border-gray-400">
                                 <div class="">
@@ -457,7 +157,7 @@
 
                 <!-- Releases Tab -->
                 <mat-tab label="Releases">
-                    <div class="w-full flex justify-between px-6 mt-4 -mb-4">
+                    <div class="w-full flex justify-between px-4 border-t border-gray-200">
                         <div class="text-lg px-3 text-gray-800">All Releases</div>
                         <button mat-button class="text-xs">
                             <mat-icon class="text-lg -mt-1 -ml-2">filter_list</mat-icon> Filter
@@ -531,7 +231,7 @@
 
                 <!-- Requirements Tab -->
                 <mat-tab label="Requirements">
-                    <div class="w-full flex flex-wrap items-center px-4">
+                    <div class="w-full flex flex-wrap items-center px-4 border-t border-gray-200">
 
                         <mat-accordion class="w-full mt-4 mb-3 border border-gray-300 rounded" *ngFor="let phase of phases">
                             <mat-expansion-panel (opened)="requirementsPanelOpenState = true"
@@ -598,7 +298,7 @@
 
                 <!-- Demos Tab -->
                 <mat-tab label="Demos">
-                    <div class="w-full flex flex-wrap items-center px-4">
+                    <div class="w-full flex flex-wrap items-center px-4 border-t border-gray-200">
 
                         <!-- In Pgoress -->
                         <div class="w-full flex justify-center p-3 mt-6">
@@ -612,7 +312,7 @@
 
                 <!-- Timeline Tab -->
                 <mat-tab label="Timeline">
-                    <div class="w-full flex flex-wrap items-center px-4">
+                    <div class="w-full flex flex-wrap items-center px-4 border-t border-gray-200">
 
                         <!-- In Pgoress -->
                         <div class="w-full flex justify-center p-3 mt-6">
@@ -627,3 +327,4 @@
         </div>
     </div>
 </div>
+
