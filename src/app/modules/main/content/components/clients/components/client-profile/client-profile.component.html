@@ -34,13 +34,13 @@
         </div>
 
         <!-- Client Name -->
-        <div class="text-xl mt-2">Client Name</div>
+        <div class="text-xl mt-2">{{clientDetails.clientName}}</div>
 
         <!-- Client About -->
         <div class="w-full mt-4">
             <div class="uppercase text-gray-600 text-xs">About</div>
             <div class="mt-2 text-xs">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                {{clientDetails.clientAbout}}
             </div>
         </div>
 
@@ -50,13 +50,13 @@
         </div>
 
         <!-- Client Location & Website -->
-        <div class="w-full mt-4">
+        <div class="w-full my-8">
             <div class="uppercase text-gray-600 text-xs">Location & Website</div>
             <div class="mt-2 text-xs flex items-center">
                 <mat-icon class="text-gray-400 text-base">location_on</mat-icon> Bangalore, Karnataka
             </div>
             <div class="mt-2 text-xs flex items-center">
-                <mat-icon class="text-gray-400 text-base">language</mat-icon> www.clientWebsite.com
+                <mat-icon class="text-gray-400 text-base">language</mat-icon> {{clientDetails.clientWebsite}}
             </div>
         </div>
 
@@ -66,7 +66,7 @@
         </div>
 
         <!-- Client Representatives -->
-        <div class="w-full mt-4">
+        <div class="w-full my-8">
             <div class="uppercase text-gray-600 text-xs">Client Members</div>
             <div class="w-full mt-2 flex flex-wrap">
                 <div class="mb-2 mr-2" *ngFor="let name of ['Akshay Kumar', 'Sachin G', 'Karthik Sharma', 'Chandra H']">
@@ -98,26 +98,55 @@
 
         <!-- Client Associations: Projects, Domains, Releases, Demos -->
         <div class="w-full h-full">
-            <mat-tab-group class="h-full border-t border-gray-200" mat-align-tabs="start">
+            <mat-tab-group class="h-full" mat-align-tabs="start">
 
                 <!-- Projects Tab -->
                 <mat-tab label="Projects">
-                    <div class="w-full px-4 flex flex-wrap border-t border-gray-200">
-                        <div class="w-4/12 p-4" *ngFor="let data of clientProfileData.projects">
-                            <div class="w-full border border-gray-200 rounded-md p-4 hover:border-gray-400">
-                                <div class="text-base flex items-center">{{data.projectName}} <span class="bg-gray-100 px-1 text-xs rounded-md ml-2 border border-gray-200">{{data.projectType}}</span></div>
-                                <div class="text-gray-500 text-xs">{{data.totalMembers}} Members</div>
-                                <div class="w-full flex justify-between items-center mt-8">
-                                    <div class="">
-                                        <div class="text-gray-500 text-xs">Manager</div>
-                                        <div class="">Sagar Desai</div>
+                    <div class="w-full p-2 border-t border-gray-200">
+                        <div class="w-full border border-gray-200 rounded-md" *ngIf="projectsList?.length">
+                            <div class="w-full flex text-xs font-bold justify-between items-center px-4 py-2 rounded-t-md border-b border-gray-100 bg-gray-50 text-gray-600">
+                                <div class="w-4/12">Project Name</div>
+                                <div class="w-3/12">Project Manager</div>
+                                <div class="w-2/12">Team Members</div>
+                                <div class="w-2/12">Status</div>
+                                <div class="w-1/12">Action</div>
+                            </div>
+                            <div class="w-full px-4 py-2 border-b border-gray-200" *ngFor="let project of projectsList">
+                                <div class="w-full text-xs flex justify-between items-center">
+                                    <div class="w-4/12">
+                                        <span class="hover:underline hover:text-blue-600 cursor-pointer w-fit" [routerLink]="['../../projects', project._id]">{{project.projectName}}</span>
                                     </div>
-                                    <div class="">
-                                        <button mat-icon-button class=""  [routerLink]="['../../', 'projects', 567]">
-                                            <mat-icon>chevron_right</mat-icon>
+                                    <div class="w-3/12">
+                                        <span class="hover:underline hover:text-blue-600 cursor-pointer w-fit" [routerLink]="['../../admin/members', project.projectManagerId]">{{filterRequiredIds('teamMember', project.projectManagerId)}}</span>
+                                    </div>
+                                    <div class="w-2/12">{{project.teamMembers.length}} Members</div>
+                                    <div class="w-2/12">
+                                        <div class="w-fit px-2 py-0.5 uppercase text-xs rounded-full" [ngClass]="getStatusStyle(filterRequiredIds('project_status', project.statusId))">{{filterRequiredIds('project_status', project.statusId)}}</div>
+                                    </div>
+                                    <div class="w-1/12 flex">
+                                        <button mat-icon-button class="text-gray-600" [matMenuTriggerFor]="clientProjectMenu">
+                                            <mat-icon class="text-base">more_vert</mat-icon>
                                         </button>
+                                        <mat-menu #clientProjectMenu="matMenu">
+                                            <div class="px-4 py-2 flex cursor-pointer items-center" matRipple [routerLink]="['../../projects', project._id]">
+                                                <mat-icon class="text-base mr-2">remove_red_eye</mat-icon>
+                                                <div class="text-sm">View</div>
+                                              </div>
+                                            <div class="px-4 py-2 flex cursor-pointer items-center" matRipple>
+                                              <mat-icon class="text-base mr-2">edit</mat-icon>
+                                              <div class="text-sm">Edit</div>
+                                            </div>
+                                        </mat-menu>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+
+                        <!-- If no projects created under client -->
+                        <div class="w-full py-14" *ngIf="!projectsList?.length">
+                            <div class="text-gray-600 text-center">Start with your first project.</div>
+                            <div class="mt-4 flex justify-center">
+                                <button mat-flat-button class="" color="primary" [routerLink]="['../../projects/create']">Create New Project</button>
                             </div>
                         </div>
                     </div>

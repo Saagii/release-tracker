@@ -18,8 +18,9 @@ export class ClientProfileComponent implements OnInit {
   requirementsPanelOpenState = false;
   viewMoreReqDetails: string = '';
   phases = requirementsListMockData;
+  clientId: string = '';
   projectId: string = '';
-  projectDetails: any;
+  projectsList: any;
   projectConfig: any;
   clientsList: any;
   tempStatusValue: string = '';
@@ -28,6 +29,8 @@ export class ClientProfileComponent implements OnInit {
   releasesList: any = [];
   releaseConfigDetails: any;
   selectedReleaseDetails: any;
+  membersList: any;
+  clientDetails: any;
 
   constructor(
     private statusService: StatusService,
@@ -39,11 +42,17 @@ export class ClientProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+    this.clientId = this._activatedRoute.snapshot.params['id'];
+
     // Get project configurations.
     this.getProjectConfigurations();
 
     // Get Release Config details
     this.getReleaseConfigDetails();
+
+    // Get Client Details.
+    this.getClientDetailsByID();
   }
 
   /*
@@ -61,6 +70,16 @@ export class ClientProfileComponent implements OnInit {
   }
 
 
+  /*
+    Get client details by ID.
+  */
+  getClientDetailsByID(): void {
+    this.clientsService.getClientDetailsByID(this.clientId).subscribe((response: any) => {
+      this.clientDetails = response;
+    });
+  }
+
+
     /* 
     Get Project Configurations.
   */
@@ -69,7 +88,23 @@ export class ClientProfileComponent implements OnInit {
       console.log(projectConfig);
 
       this.projectConfig = projectConfig;
+
+      this.getMembersList();
     })
+  }
+
+
+  /*
+    Get Members List.
+  */
+  getMembersList(): void {
+    this.membersService.getMembersListByType('Internal').subscribe((response: any[]) => {
+      console.log(response);
+      
+      this.membersList = response;
+
+      this.getProjectListByClientId();
+    });
   }
 
 
@@ -97,6 +132,18 @@ export class ClientProfileComponent implements OnInit {
   }
 
 
+  /*
+    Get projects list by Client ID.
+  */
+  getProjectListByClientId(): void {
+    this.projectsService.getProjectDetailsByClientId(this.clientId).subscribe((response: any[]) => {
+      console.log(response);
+
+      this.projectsList = response;
+    })
+  }
+
+
       /*
     Filter clients, release config IDs.
   */
@@ -110,7 +157,7 @@ export class ClientProfileComponent implements OnInit {
     }
 
     // Return project status.
-    if(type === 'status') {
+    if(type === 'project_status') {
       return this.projectConfig.status.filter((status: any) => {
         return status._id === id;
       })[0].value;
@@ -146,10 +193,10 @@ export class ClientProfileComponent implements OnInit {
 
     // Return member name.
     if(type === 'teamMember') {
-      console.log(this.teamMembersDetailsList);
-      const memberDetails = this.teamMembersDetailsList.filter((member: any) => {
-        return member.id === id;
+      const memberDetails = this.membersList.filter((member: any) => {
+        return member._id === id;
       })[0];
+      console.log(memberDetails);
 
       return memberDetails.firstName + ' ' + memberDetails.lastName;
     }

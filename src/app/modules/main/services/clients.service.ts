@@ -50,4 +50,12 @@ export class ClientsService {
     saveClientDetails(clientPayload: any): any {
         return this._httpClient.post(`${environment.basePath}/api/clients`, clientPayload);
     }
+
+
+    /*
+        Get Client details by ID.
+    */
+    getClientDetailsByID(clientId: string): any {
+        return this._httpClient.get(`${environment.basePath}/api/clients/${clientId}`);
+    }
 }
