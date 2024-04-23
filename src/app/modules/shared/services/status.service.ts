@@ -22,7 +22,7 @@ export class StatusService {
         if(['Active', 'On Track', 'In Progress'].includes(statusValue)) {
             return 'bg-green-200 text-green-700 font-bold border border-green-400'
         }
-        if(['Initiated', 'To Be Discussed', 'Partial Fix', 'Beta Feature', 'Partial Enhancement'].includes(statusValue)) {
+        if(['Initiated', 'To Be Discussed', 'Partial Fix', 'Beta Feature', 'Partial Enhancement', 'Onboarded'].includes(statusValue)) {
             return 'bg-yellow-100 text-yellow-600 font-bold border border-yellow-400'
         }
     }

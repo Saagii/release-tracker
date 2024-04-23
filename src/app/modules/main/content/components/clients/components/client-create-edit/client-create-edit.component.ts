@@ -16,7 +16,8 @@ export class ClientCreateEditComponent implements OnInit {
     clientCreateEditForm: UntypedFormGroup;
     clientConfig: ClientConfigurationResponse | undefined;
     membersList: MembersListResponse[] | undefined;
-
+    teamMembers: any[] = [];
+    memberConfig: any;
 
   constructor(
     private statusService: StatusService,
@@ -31,10 +32,14 @@ export class ClientCreateEditComponent implements OnInit {
       clientName: ['', [Validators.required]],
       clientAbout: ['', [Validators.required]],
       clientType: ['', [Validators.required]],
-      representative: ['', [Validators.required]],
+      clientMembers: ['', [Validators.required]],
       website: ['', [Validators.required]],
       email: ['', [Validators.required]],
-      clientStatus: ['', [Validators.required]]
+      clientStatus: ['', [Validators.required]],
+      clientCountry: ['', [Validators.required]],
+      clientState: ['', [Validators.required]],
+      clientCity: ['', [Validators.required]],
+      searchString: ['']
     });
   }
 
@@ -78,18 +83,85 @@ export class ClientCreateEditComponent implements OnInit {
   }
 
 
+    /*
+    Search Member.
+  */
+  searchMember(event: any): void {
+    console.log(event.target.value);
+
+    if(event.target.value === '') {
+      this.membersList = [];
+      return;
+    }
+
+    const membersSearchPayload = {
+      memberType: '',
+      firstName: this.clientCreateEditForm.get('searchString')?.value,
+      lastName: this.clientCreateEditForm.get('searchString')?.value,
+      email: this.clientCreateEditForm.get('searchString')?.value,
+      title: '',
+    }
+
+    this.membersService.getMembersListBySearch(membersSearchPayload).subscribe((response: any) => {
+      console.log(response);
+
+      this.membersList = response;
+    });
+  }
+
+
+    /*
+    Manage Team Members: Update action.
+  */
+  manageTeamMembers(teamMember: any, action: string, index?: any): void {
+    if(action === 'save') {
+      this.teamMembers.push(teamMember);
+      this.membersList = [];
+      this.clientCreateEditForm.get('searchString')?.setValue('');
+    }
+
+    if(action === 'remove') {
+      this.membersList = [];
+      this.clientCreateEditForm.get('searchString')?.setValue('');
+      this.teamMembers.splice(index, 1);
+    }
+  }
+
+
+    /*
+    Filter selected members from search results.
+  */
+  filterSelectedMembersFromSearchResults(memberId: string): boolean {
+    for(const member of this.teamMembers) {
+      if(member._id === memberId) { return false; }
+    }
+    return true;
+  }
+
+
   /*
     Save Client Details.
   */
   saveClientDetails(): void {
+
+    // Filter Team members id into a list.
+    const teamMembersList = [];
+
+    for(const teamMember of this.teamMembers) {
+      teamMembersList.push(teamMember._id);
+    }
+
     const clientPayload = {
       clientName: this.clientCreateEditForm.get('clientName')?.value,
       clientAbout:  this.clientCreateEditForm.get('clientAbout')?.value,
       clientType:  this.clientCreateEditForm.get('clientType')?.value,
       clientWebsite:  this.clientCreateEditForm.get('website')?.value,
       clientContactEmail:  this.clientCreateEditForm.get('email')?.value,
-      clientRepresentative:  this.clientCreateEditForm.get('representative')?.value,
-      clientStatus:  this.clientCreateEditForm.get('clientStatus')?.value
+      clientMembers:  teamMembersList,
+      clientStatus:  this.clientCreateEditForm.get('clientStatus')?.value,
+      clientCountry:  this.clientCreateEditForm.get('clientCountry')?.value,
+      clientState:  this.clientCreateEditForm.get('clientState')?.value,
+      clientCity:  this.clientCreateEditForm.get('clientCity')?.value
     };
 
     console.log(clientPayload);
@@ -97,7 +169,7 @@ export class ClientCreateEditComponent implements OnInit {
     this.clientsService.saveClientDetails(clientPayload).subscribe((response: any) => {
       console.log(response);
 
-      this.router.navigate(['../'], {relativeTo: this.activatedRoute});
+      this.router.navigate(['../', response._id], {relativeTo: this.activatedRoute});
     });
 
   }

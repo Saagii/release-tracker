@@ -68,17 +68,6 @@
                                 <mat-error>Client Contact Email is <strong>Required!</strong></mat-error>
                             </mat-form-field>
 
-                            <!-- Client Representative -->
-                            <mat-form-field class="w-full mt-4" appearance="outline" *ngIf="membersList">
-                                <mat-label>Client Representative</mat-label>
-                                <mat-select placeholder="Select Client Representative" required  formControlName="representative">
-                                    <mat-option *ngFor="let representative of membersList" [value]="representative._id">
-                                      {{representative.firstName}} {{representative.lastName}}
-                                    </mat-option>
-                                </mat-select>
-                                <mat-error>Client Representative is <strong>Required!</strong></mat-error>
-                            </mat-form-field>
-
                             <!-- Client Status -->
                             <mat-form-field class="w-full mt-4" appearance="outline">
                                 <mat-label>Client Status</mat-label>
@@ -89,13 +78,97 @@
                                 </mat-select>
                                 <mat-error>Client Status is <strong>Required!</strong></mat-error>
                             </mat-form-field>
+
+                            <!-- Client Country -->
+                            <mat-form-field class="w-full" appearance="outline">
+                                <mat-label>Country</mat-label>
+                                <input type="text" matInput placeholder="Country" formControlName="clientCountry" required>
+                                <mat-error>Country is <strong>Required!</strong></mat-error>
+                            </mat-form-field>
+
+                            <!-- Client State -->
+                            <mat-form-field class="w-full" appearance="outline">
+                                <mat-label>State</mat-label>
+                                <input type="text" matInput placeholder="State" formControlName="clientState" required>
+                                <mat-error>State is <strong>Required!</strong></mat-error>
+                            </mat-form-field>
+
+                            <!-- Client City -->
+                            <mat-form-field class="w-full" appearance="outline">
+                                <mat-label>City</mat-label>
+                                <input type="text" matInput placeholder="City" formControlName="clientCity" required>
+                                <mat-error>City is <strong>Required!</strong></mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <!-- Client Members -->
+                    <div class="w-full flex justify-start items-start mt-10 pb-10 border-b border-gray-200">
+                        <div class="w-3/12">
+                            <div class="w-full text-lg">Client Members</div>
+                            <div class="w-full text-xs text-gray-500">Add respective client members.</div>
+                        </div>
+                        <div class="w-8/12">
+                            <div class="w-full flex">
+                                <!-- Member Name -->
+                                <mat-form-field class="w-6/12" appearance="outline">
+                                    <input type="text" matInput placeholder="Enter First Name / Last Name / Email" formControlName="searchString" (keyup)="searchMember($event)">
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Display member based on response. -->
+                            <div class="w-full">
+                                <div class="w-full flex flex-wrap">
+                                    <div class="w-3/12" *ngFor="let member of membersList">
+                                        <div class="border border-blue-200 rounded-lg bg-blue-50 mr-3" [ngClass]="{'bg-green-50 border-green-200' : !filterSelectedMembersFromSearchResults(member._id)}">
+                                            <div class="w-full flex items-center px-2 py-4">
+                                                <div class="">
+                                                    <div class="rounded-full border-2 border-gray-300 p-4 bg-blue-600 text-white font-bold text-sm" [ngClass]="{'bg-green-600' : !filterSelectedMembersFromSearchResults(member._id)}">
+                                                        {{member.firstName[0]+member.lastName[0]}}
+                                                    </div>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <div class="text-gray-800 text-xs font-bold">{{member.firstName + ' ' + member.lastName}}</div>
+                                                    <div class="text-gray-500 text-xs">{{member.title}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="w-full flex justify-end mt-1 p-2 bg-white rounded-b-lg border-t border-blue-200" [ngClass]="{'border-green-200' : !filterSelectedMembersFromSearchResults(member._id)}">
+                                                <button mat-button color="primary" (click)="manageTeamMembers(member, 'save')"  *ngIf="filterSelectedMembersFromSearchResults(member._id)">Add +</button>
+                                                <button mat-icon-button class="text-green-600 pointer-events-none" *ngIf="!filterSelectedMembersFromSearchResults(member._id)">
+                                                    <mat-icon>check_circle</mat-icon>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Selected Client Members -->
+                            <div class="w-full mt-4" *ngIf="teamMembers.length">
+                                <div class="font-semibold">Selected Client Members</div>
+                                <div class="text-gray-500 text-xs">Total: {{teamMembers.length}} members</div>
+                                <div class="w-6/12 border border-gray-200 rounded-lg my-2">
+                                    <div class="flex justify-between items-center border-b border-gray-200 p-4" *ngFor="let member of teamMembers; let i = index;">
+                                        <div class="w-10/12">
+                                            <div class="">{{member.firstName + ' ' + member.lastName}}</div>
+                                            <div class="text-gray-500 text-xs">{{member.email}} <span class="mx-1">|</span> {{member.title}}</div>
+                                        </div>
+                                        <div class="w-2/12 flex justify-end items-center">
+                                            <button mat-icon-button color="warn" (click)="manageTeamMembers(member, 'remove', i)" matTooltip="Remove" matTooltipPosition="right">
+                                                <mat-icon>remove_circle_outline</mat-icon>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Action Buttons -->
                     <div class="w-full flex justify-end p-6">
-                        <button mat-button class="">Cancel</button>
-                        <button mat-flat-button class="bg-blue-500 text-white" style="margin-left: 3%;" (click)="saveClientDetails()">Create Client</button>
+                        <button mat-stroked-button class="">Cancel</button>
+                        <button mat-flat-button color="primary" class="bg-blue-500 text-white ml-6" (click)="saveClientDetails()">Create Client</button>
                     </div>
                 </form>
                 

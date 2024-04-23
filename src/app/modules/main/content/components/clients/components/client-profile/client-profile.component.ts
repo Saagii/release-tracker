@@ -31,6 +31,7 @@ export class ClientProfileComponent implements OnInit {
   selectedReleaseDetails: any;
   membersList: any;
   clientDetails: any;
+  clientConfig: any;
 
   constructor(
     private statusService: StatusService,
@@ -51,6 +52,9 @@ export class ClientProfileComponent implements OnInit {
     // Get Release Config details
     this.getReleaseConfigDetails();
 
+    // Get Clients Configurations.
+    this.getClientConfigurations();
+
     // Get Client Details.
     this.getClientDetailsByID();
   }
@@ -67,6 +71,18 @@ export class ClientProfileComponent implements OnInit {
   */
   toggleRequirementView(toggleValue: any): void {
     this.viewMoreReqDetails = toggleValue;
+  }
+
+
+    /*
+    Get Client Configurations.
+  */
+  getClientConfigurations(): void {
+    this.clientsService.getClientsConfig().subscribe((response: any) => {
+      console.log(response);
+
+      this.clientConfig = response;
+    });
   }
 
 
@@ -154,6 +170,13 @@ export class ClientProfileComponent implements OnInit {
       return this.clientsList.filter((client: any) => {
          return client._id === id;
       })[0].clientName;
+    }
+
+    // Return project status.
+    if(type === 'client_status') {
+      return this.clientConfig.status.filter((status: any) => {
+        return status === id;
+      })[0];
     }
 
     // Return project status.
