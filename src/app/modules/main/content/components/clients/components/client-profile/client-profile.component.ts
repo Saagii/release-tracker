@@ -132,6 +132,23 @@ export class ClientProfileComponent implements OnInit {
       console.log(releaseConfig);
 
       this.releaseConfigDetails = releaseConfig;
+
+      // Get Releases List based on project id.
+      this.getReleaseListByCustomFilter();
+    });
+  }
+
+
+    /*
+    Get release list by custom filter params.
+  */
+  getReleaseListByCustomFilter(): void {
+    this.releasesService.getReleasesListByCustomFilter('client', this.clientId).subscribe((response: any) => {
+      console.log(response);
+
+      this.releasesList = response;
+
+      this.selectedReleaseDetails = response[0];
     });
   }
 
@@ -157,6 +174,14 @@ export class ClientProfileComponent implements OnInit {
 
       this.projectsList = response;
     })
+  }
+
+
+    /*
+    Release quick view.
+  */
+  releaseQuickView(release: any): void {
+    this.selectedReleaseDetails = release;
   }
 
 
