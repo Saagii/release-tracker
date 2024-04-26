@@ -2,14 +2,14 @@
     <div class="w-full my-2 p-4">
 
         <!-- Project Details Block -->
-        <div class="w-full mt-2" *ngIf="projectDetails">
+        <div class="w-full" *ngIf="projectDetails">
 
             <!-- Title & Project Actions -->
             <div class="w-full flex justify-between">
 
                 <!-- Title Content -->
                 <div class="w-8/12">
-                    <div class="w-fit font-bold" [routerLink]="['../']"><span class="text-blue-600 cursor-pointer uppercase hover:underline">Projects</span></div>
+                    <div class="w-fit font-bold flex items-center"><span class="text-blue-600 cursor-pointer uppercase hover:underline" [routerLink]="['../']">Projects</span> <span class="mx-2 font-bold text-3xl">&#xB7;</span> <span class="text-normal uppercase">View</span></div>
                     <div class="w-full text-2xl mt-1">{{projectDetails.projectName}}</div>
                 </div>
 
@@ -98,7 +98,7 @@
                     <!-- Releases Tab -->
                     <mat-tab label="Releases">
                         <div class="w-full p-4">
-                            <div class="w-full border border-gray-200 rounded-md">
+                            <div class="w-full border border-gray-200 rounded-md" *ngIf="releasesList?.length">
 
                                 <!-- Filter Block -->
                                 <div class="w-full p-4 border-b border-gray-200 flex justify-between">
@@ -213,6 +213,14 @@
                                         </div>
                                         
                                     </div>
+                                </div>
+                            </div>
+
+                            <!-- If no releases created under client -->
+                            <div class="w-full py-14" *ngIf="!releasesList?.length">
+                                <div class="text-gray-600 text-center">No releases available for {{projectDetails.projectName}} project.</div>
+                                <div class="mt-4 flex justify-center">
+                                    <button mat-flat-button class="" color="primary" [routerLink]="['../../releases/create']">Create New Release</button>
                                 </div>
                             </div>
                         </div>

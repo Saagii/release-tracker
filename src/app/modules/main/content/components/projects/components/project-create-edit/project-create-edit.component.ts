@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { ClientsService } from 'src/app/modules/main/services/clients.service';
 import { MembersService } from 'src/app/modules/main/services/members.service';
 import { ProjectsService } from 'src/app/modules/main/services/projects.service';
@@ -18,6 +19,7 @@ export class ProjectCreateEditComponent implements OnInit {
   memberConfig: any;
   projectConfig: any;
   teamMembers: any[] = [];
+  memberId: any;
 
   constructor(
     private statusService: StatusService,
@@ -27,6 +29,7 @@ export class ProjectCreateEditComponent implements OnInit {
     private projectsService: ProjectsService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private authService: AuthService,
   ) {
      // Prepare Sign In Form
      this.projectCreateEditForm = this.fb.group({
@@ -47,6 +50,9 @@ export class ProjectCreateEditComponent implements OnInit {
 
     // Get project config.
     this.getProjectConfigurations();
+
+    // Get User details.
+    this.memberId = this.authService.memberIdValue;
   }
 
   /*
@@ -173,7 +179,8 @@ export class ProjectCreateEditComponent implements OnInit {
       projectManagerId: teamMembersList[0],
       teamMembers: teamMembersList,
       statusId: status._id,
-      createdOn: new Date()
+      createdOn: new Date(),
+      createdById: this.memberId
     }
 
     console.log(projectDetailsPayload);
