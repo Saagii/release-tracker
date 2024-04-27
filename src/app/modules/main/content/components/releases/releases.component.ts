@@ -148,9 +148,9 @@ export class ReleasesComponent implements OnInit {
     if(type === 'project') {
       const project = this.projectsList.filter((project: any) => {
          return project._id === id;
-      })[0].projectName;
+      })[0]?.projectName;
 
-      return project ? project : '';
+      return project ? project : '-NA-';
     }
   }
   
