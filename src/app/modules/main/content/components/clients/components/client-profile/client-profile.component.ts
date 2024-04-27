@@ -32,6 +32,7 @@ export class ClientProfileComponent implements OnInit {
   membersList: any;
   clientDetails: any;
   clientConfig: any;
+  projectsListGlobal: any;
 
   constructor(
     private statusService: StatusService,
@@ -119,7 +120,11 @@ export class ClientProfileComponent implements OnInit {
       
       this.membersList = response;
 
+      // Get projects list associated with client Id
       this.getProjectListByClientId();
+
+      // Get projects list Globally.
+      this.getProjectListGlobally();
     });
   }
 
@@ -173,6 +178,18 @@ export class ClientProfileComponent implements OnInit {
       console.log(response);
 
       this.projectsList = response;
+    })
+  }
+
+
+    /*
+    Get projects list by Client ID.
+  */
+  getProjectListGlobally(): void {
+    this.projectsService.getProjectsList().subscribe((response: any[]) => {
+      console.log(response);
+
+      this.projectsListGlobal = response;
     })
   }
 
@@ -247,6 +264,15 @@ export class ClientProfileComponent implements OnInit {
       console.log(memberDetails);
 
       return memberDetails.firstName + ' ' + memberDetails.lastName;
+    }
+
+    // Return project name.
+    if(type === 'project') {
+      const project = this.projectsListGlobal.filter((project: any) => {
+         return project._id === id;
+      })[0]?.projectName;
+
+      return project ? project : '-NA-';
     }
   }
   

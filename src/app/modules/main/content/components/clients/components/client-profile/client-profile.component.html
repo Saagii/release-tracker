@@ -221,7 +221,7 @@
                                                     </div>
                                                     <div class="mt-2 text-gray-500 text-xs flex items-center">Closing On: <span class="text-gray-500 ml-1">{{release.releaseClosingDate | date}}</span></div>
                                                 </div>
-                                                <div class="ml-4">
+                                                <div class="ml-4 hidden">
                                                     <button mat-icon-button class="text-gray-600">
                                                         <mat-icon>keyboard_arrow_right</mat-icon>
                                                     </button>
@@ -244,7 +244,7 @@
 
                                                 <!-- Release Basic Details -->
                                                 <div class="w-full mt-2">
-                                                    <div class="text-xl flex items-center">{{selectedReleaseDetails.releaseTitle}} <span class="text-right text-xs px-3 rounded-full uppercase ml-3" [ngClass]="getStatusStyle(filterRequiredIds('release_status', selectedReleaseDetails.releaseStatusId))">{{filterRequiredIds('release_status', selectedReleaseDetails.releaseStatusId)}}</span></div>
+                                                    <div class="text-xl flex items-center">{{selectedReleaseDetails.releaseTitle}}</div>
                                                     <div class="text-xs text-gray-600">
                                                         Created by: <span class="hover:underline hover:text-blue-600 cursor-pointer w-fit" [routerLink]="['../../admin/members', selectedReleaseDetails.releaseCreatedById]">{{filterRequiredIds('teamMember', selectedReleaseDetails.releaseCreatedById)}}</span> on {{selectedReleaseDetails.releaseCreatedOnDate | date:'medium'}}
                                                     </div>
@@ -256,6 +256,9 @@
                                                 <button mat-icon-button class="" matTooltip="View More Details" color="primary" [routerLink]="['../../releases', selectedReleaseDetails?._id]"><mat-icon>launch</mat-icon></button>
                                             </div>
                                         </div>
+
+                                        <!-- Project Name -->
+                                        <div class="w-fit mt-6 text-gray-800 px-2 py-1 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-50 text-xs hover:border-gray-300" [routerLink]="['../../projects', selectedReleaseDetails?.projectId]">PROJECT: {{filterRequiredIds('project', selectedReleaseDetails.projectId)}}</div>
 
                                         <!-- Basic Details Content Row 1-->
                                         <div class="w-full flex flex-wrap justify-start mt-10" *ngIf="selectedReleaseDetails">
@@ -272,6 +275,12 @@
                                                     {{filterRequiredIds('priorities', selectedReleaseDetails.releasePriority)}}
                                                     </span>
                                                 </div>
+                                            </div>
+
+                                            <!-- Release Status -->
+                                            <div class="w-6/12 mb-6">
+                                                <div class="text-xs uppercase text-gray-600">Release Status</div>
+                                                <span class="text-right text-xs px-3 rounded-full uppercase" [ngClass]="getStatusStyle(filterRequiredIds('release_status', selectedReleaseDetails.releaseStatusId))">{{filterRequiredIds('release_status', selectedReleaseDetails.releaseStatusId)}}</span>
                                             </div>
 
                                             <!-- Release Owner -->
