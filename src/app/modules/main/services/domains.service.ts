@@ -50,4 +50,20 @@ export class DomainsService {
     deleteDomainConfigStatus(domainStatusPayload: any): any {
         return this._httpClient.put(`${environment.basePath}/api/domainConfig/status`, domainStatusPayload);
     }
+
+
+    /* 
+        Get all domains list
+    */
+    getAllDomainsList(): any {
+        return this._httpClient.get(`${environment.basePath}/api/domains`);
+    }
+
+
+    /*
+        Create domain details.
+    */
+    createDomainDetails(domainPayload: any): any {
+        return this._httpClient.post(`${environment.basePath}/api/domains`, domainPayload);
+    }
 }

@@ -27,27 +27,54 @@
                             <div class="w-full text-lg">Client</div>
                             <div class="w-full text-xs text-gray-500">Select client for the Domain.</div>
                         </div>
-                        <div class="w-4/12">
+                        <div class="w-4/12 pl-6">
                             <!-- Client -->
                             <mat-form-field class="w-full" appearance="outline">
                                 <mat-label>Client</mat-label>
-                                <mat-select placeholder="Select Client" required>
-                                    <mat-option *ngFor="let client of [0,1,2,3,4]; let i=index;" [value]="i+1">
-                                      Client {{i+1}}
+                                <mat-select placeholder="Select Client" formControlName="clientId" (selectionChange)="getClientIdOnSelection($event)" required>
+                                    <mat-option *ngFor="let client of clientsList;" [value]="client._id">
+                                      {{client.clientName}}
                                     </mat-option>
                                 </mat-select>
                                 <mat-error>Client is <strong>Required!</strong></mat-error>
+                            </mat-form-field>
+
+                            <!-- Render if projects are not available for selected client -->
+                            <div class="w-full mt-4" *ngIf="selectedClientId && !projectsList.length">
+                                <div class="w-full flex items-center border border-red-200 bg-red-50 text-red-500 rounded-lg p-4 font-bold">
+                                    <mat-icon class="mr-2">info</mat-icon> Note: <span class="font-normal ml-2">Projects are currently not available for selected client.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Selection -->
+                    <div class="w-full flex justify-start items-start mt-10 pb-4 border-b border-gray-200" *ngIf="projectsList.length">
+                        <div class="w-3/12">
+                            <div class="w-full text-lg">Project</div>
+                            <div class="w-full text-xs text-gray-500">Select project against which release has to be created.</div>
+                        </div>
+                        <div class="w-4/12 pl-6">
+                            <!-- Project -->
+                            <mat-form-field class="w-full" appearance="outline">
+                                <mat-label>Select Project</mat-label>
+                                <mat-select placeholder="Select Project" required formControlName="projectId" (selectionChange)="getProjectIdOnSelection($event)">
+                                    <mat-option *ngFor="let project of projectsList" [value]="project._id">
+                                      {{project.projectName}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>Project is <strong>Required!</strong></mat-error>
                             </mat-form-field>
                         </div>
                     </div>
 
                     <!-- domain Details -->
-                    <div class="w-full flex justify-start items-start mt-10 pb-4 border-b border-gray-200">
+                    <div class="w-full flex justify-start items-start mt-10 pb-4 border-b border-gray-200" *ngIf="domainsConfig && projectsList.length">
                         <div class="w-3/12">
                             <div class="w-full text-lg">Domain Details</div>
                             <div class="w-full text-xs text-gray-500">Enter all the required details. </div>
                         </div>
-                        <div class="w-4/12">
+                        <div class="w-4/12 pl-6">
                             <!-- domain URL -->
                             <mat-form-field class="w-full" appearance="outline">
                                 <mat-label>Domain URL</mat-label>
@@ -55,12 +82,19 @@
                                 <mat-error>Domain URL is <strong>Required!</strong></mat-error>
                             </mat-form-field>
 
+                            <!-- domain URL -->
+                            <mat-form-field class="w-full" appearance="outline">
+                                <mat-label>Domain Description</mat-label>
+                                <textarea type="text" matInput placeholder="Domain Description" formControlName="domainDescription" required></textarea>
+                                <mat-error>Domain Description is <strong>Required!</strong></mat-error>
+                            </mat-form-field>
+
                             <!-- Domain Type -->
                             <mat-form-field class="w-full" appearance="outline">
                                 <mat-label>Domain Type</mat-label>
-                                <mat-select placeholder="Select Domain Type" required>
-                                    <mat-option *ngFor="let domain of ['UAT','Dev','QA','Pre-prod','Production']; let i=index;" [value]="i+1">
-                                      {{domain}}
+                                <mat-select placeholder="Select Domain Type" formControlName="environmentType" required>
+                                    <mat-option *ngFor="let type of domainsConfig.types"  [value]="type._id">
+                                      {{type.value}}
                                     </mat-option>
                                 </mat-select>
                                 <mat-error>Domain Type is <strong>Required!</strong></mat-error>
@@ -69,27 +103,45 @@
                             <!-- Domain Status -->
                             <mat-form-field class="w-full" appearance="outline">
                                 <mat-label>Domain Status</mat-label>
-                                <mat-select placeholder="Select Domain Status" required>
-                                    <mat-option *ngFor="let status of ['Active','Stalled','Stopped']; let i=index;" [value]="i+1">
-                                      {{status}}
+                                <mat-select placeholder="Select Domain Status" formControlName="status" required>
+                                    <mat-option *ngFor="let status of domainsConfig.status" [value]="status._id">
+                                      {{status.value}}
                                     </mat-option>
                                 </mat-select>
-                                <mat-error>Domain Type is <strong>Required!</strong></mat-error>
+                                <mat-error>Domain Status is <strong>Required!</strong></mat-error>
                             </mat-form-field>
 
                             <!-- Domain Branch -->
                             <mat-form-field class="w-full" appearance="outline">
-                                <mat-label>Domain Branch</mat-label>
-                                <input type="text" matInput placeholder="Domain Branch" formControlName="domainBranch" required>
-                                <mat-error>Domain Branch is <strong>Required!</strong></mat-error>
+                                <mat-label>Domain Branch/Tag</mat-label>
+                                <input type="text" matInput placeholder="Domain Branch/Tag" formControlName="branch" required>
+                                <mat-error>Domain Branch/Tag is <strong>Required!</strong></mat-error>
+                            </mat-form-field>
+
+                            <!-- Domain Deployment Date -->
+                            <mat-form-field class="w-full mt-4" appearance="outline">
+                                <mat-label>Deployment Date</mat-label>
+                                <input class="w-full" matInput [matDatepicker]="deploymentDatePicker" required formControlName="deploymentDate">
+                                <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+
+                                <mat-datepicker-toggle matSuffix [for]="deploymentDatePicker">
+                                    <mat-icon matDatepickerToggleIcon>date_range</mat-icon>
+                                  </mat-datepicker-toggle>
+                                <mat-datepicker #deploymentDatePicker></mat-datepicker>
+                                <mat-error>Deployment Date is <strong>Required!</strong></mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field class="w-full" appearance="outline">
+                                <mat-label>Notes</mat-label>
+                                <input type="text" matInput placeholder="Domain URL" formControlName="notes" >
                             </mat-form-field>
                         </div>
                     </div>
 
                     <!-- Action Buttons -->
                     <div class="w-full flex justify-end p-6">
-                        <button mat-button class="">Cancel</button>
-                        <button mat-flat-button class="bg-blue-500 text-white" style="margin-left: 3%;">Create Domain</button>
+                        <button mat-stroked-button class="">Cancel</button>
+                        <button mat-flat-button class="bg-blue-500 text-white ml-6" color="primary" (click)="createDomainDetails()">Create Domain</button>
                     </div>
                 </form>
                 
