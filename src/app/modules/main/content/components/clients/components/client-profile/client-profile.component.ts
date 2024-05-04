@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ClientsService } from 'src/app/modules/main/services/clients.service';
 import { MembersService } from 'src/app/modules/main/services/members.service';
 import { ProjectsService } from 'src/app/modules/main/services/projects.service';
+import { DomainsService } from 'src/app/modules/main/services/domains.service';
 
 @Component({
   selector: 'app-client-profile',
@@ -33,6 +34,8 @@ export class ClientProfileComponent implements OnInit {
   clientDetails: any;
   clientConfig: any;
   projectsListGlobal: any;
+  domainsConfig: any;
+  domainsList: any;
 
   constructor(
     private statusService: StatusService,
@@ -40,7 +43,8 @@ export class ClientProfileComponent implements OnInit {
     private _activatedRoute: ActivatedRoute,
     private clientsService: ClientsService,
     private membersService: MembersService,
-    private releasesService: ReleasesService
+    private releasesService: ReleasesService,
+    private domainsService: DomainsService,
   ) {}
 
   ngOnInit(): void {
@@ -58,6 +62,9 @@ export class ClientProfileComponent implements OnInit {
 
     // Get Client Details.
     this.getClientDetailsByID();
+
+    // Get domains configuration.
+    this.getDomainsConfig();
   }
 
   /*
@@ -87,6 +94,21 @@ export class ClientProfileComponent implements OnInit {
   }
 
 
+    /*
+    Get domains configurations.
+  */
+  getDomainsConfig(): void {
+    this.domainsService.getDomainsConfig().subscribe((response: any) => {
+      console.log(response);
+
+      this.domainsConfig = response;
+
+      // Get domains list by clientId.
+      this.getDomainsListByCustomFilter({clientId: this.clientId});
+    })
+  }
+
+
   /*
     Get client details by ID.
   */
@@ -108,6 +130,18 @@ export class ClientProfileComponent implements OnInit {
 
       this.getMembersList();
     })
+  }
+
+
+  /*
+    Get domains list based on custom input.
+  */
+  getDomainsListByCustomFilter(payload: any): void {
+    this.domainsService.getDomainsListByCustomFilter(payload).subscribe((response: any) => {
+      console.log(response);
+
+      this.domainsList = response;
+    });
   }
 
 
@@ -268,11 +302,32 @@ export class ClientProfileComponent implements OnInit {
 
     // Return project name.
     if(type === 'project') {
-      const project = this.projectsListGlobal.filter((project: any) => {
+      const project = this.projectsList.filter((project: any) => {
          return project._id === id;
       })[0]?.projectName;
 
       return project ? project : '-NA-';
+    }
+
+    // Return domain status value.
+    if(type === 'domain_status') {
+      return this.domainsConfig.status.filter((status: any) => {
+         return status._id === id;
+      })[0].value;
+    }
+
+    // Return domain type value.
+    if(type === 'domain_type') {
+      return this.domainsConfig.types.filter((type: any) => {
+         return type._id === id;
+      })[0].value;
+    }
+
+    // Return domain status value.
+    if(type === 'domain_status') {
+      return this.domainsConfig.status.filter((status: any) => {
+         return status._id === id;
+      })[0].value;
     }
   }
   

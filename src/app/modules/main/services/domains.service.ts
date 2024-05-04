@@ -60,6 +60,14 @@ export class DomainsService {
     }
 
 
+    /* 
+        Get all domains list
+    */
+    getDomainsListByCustomFilter(payload: any): any {
+        return this._httpClient.put(`${environment.basePath}/api/domains/custom-filters`, payload);
+    }
+
+
     /*
         Create domain details.
     */
