@@ -30,7 +30,9 @@
                     </div>
                     <div class="w-full flex justify-between items-center px-4 py-3 border-b border-gray-200 text-xs" *ngFor="let domain of domainList">
                         <div class="w-3/12">
-                            <div class="text-blue-600">{{domain.domainURL}}</div>
+                            <div class="text-blue-600">
+                                <a class="hover:text-blue-700 hover:underline" href="{{domain.domainURL}}" target="_blank">{{domain.domainURL}}</a>
+                            </div>
                             <div class="text-gray-600 mt-2"><span class="text-gray-700 font-bold">Version:</span> {{domain.branch}}</div>
                         </div>
                         <div class="w-2/12">

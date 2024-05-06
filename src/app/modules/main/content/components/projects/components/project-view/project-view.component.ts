@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ClientsService } from 'src/app/modules/main/services/clients.service';
 import { MembersService } from 'src/app/modules/main/services/members.service';
 import { ReleasesService } from 'src/app/modules/main/services/releases.service';
+import { DomainsService } from 'src/app/modules/main/services/domains.service';
 
 @Component({
   selector: 'app-project-view',
@@ -22,6 +23,8 @@ export class ProjectViewComponent implements OnInit {
   releasesList: any = [];
   releaseConfigDetails: any;
   selectedReleaseDetails: any;
+  domainsConfig: any;
+  domainsList: any;
 
   constructor(
     private statusService: StatusService,
@@ -29,7 +32,8 @@ export class ProjectViewComponent implements OnInit {
     private _activatedRoute: ActivatedRoute,
     private clientsService: ClientsService,
     private membersService: MembersService,
-    private releasesService: ReleasesService
+    private releasesService: ReleasesService,
+    private domainsService: DomainsService,
   ) {}
 
   ngOnInit(): void {
@@ -41,6 +45,9 @@ export class ProjectViewComponent implements OnInit {
 
     // Get Release Config details
     this.getReleaseConfigDetails();
+
+    // Get domains configuration.
+    this.getDomainsConfig();
   }
 
   /*
@@ -48,6 +55,33 @@ export class ProjectViewComponent implements OnInit {
   */
   getStatusStyle(statusValue: string): any {
     return this.statusService.getStatusStyle(statusValue);
+  }
+
+
+      /*
+    Get domains configurations.
+  */
+  getDomainsConfig(): void {
+    this.domainsService.getDomainsConfig().subscribe((response: any) => {
+      console.log(response);
+
+      this.domainsConfig = response;
+
+      // Get domains list by clientId.
+      this.getDomainsListByCustomFilter({projectId: this.projectId});
+    })
+  }
+
+
+    /*
+    Get domains list based on custom input.
+  */
+  getDomainsListByCustomFilter(payload: any): void {
+    this.domainsService.getDomainsListByCustomFilter(payload).subscribe((response: any) => {
+      console.log(response);
+
+      this.domainsList = response;
+    });
   }
 
 
@@ -214,7 +248,28 @@ export class ProjectViewComponent implements OnInit {
         return member.id === id;
       })[0];
 
-      return memberDetails.firstName + ' ' + memberDetails.lastName;
+      return memberDetails ? memberDetails.firstName + ' ' + memberDetails.lastName : '- NA -';
+    }
+
+    // Return domain status value.
+    if(type === 'domain_status') {
+      return this.domainsConfig.status.filter((status: any) => {
+         return status._id === id;
+      })[0].value;
+    }
+
+    // Return domain type value.
+    if(type === 'domain_type') {
+      return this.domainsConfig.types.filter((type: any) => {
+         return type._id === id;
+      })[0].value;
+    }
+
+    // Return domain status value.
+    if(type === 'domain_status') {
+      return this.domainsConfig.status.filter((status: any) => {
+         return status._id === id;
+      })[0].value;
     }
   }
   

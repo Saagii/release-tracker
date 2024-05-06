@@ -25,7 +25,7 @@
               </div>
 
               <!-- Content -->
-              <div class="w-full flex border-b border-gray-100 p-3 items-center" *ngFor="let project of projectsList">
+              <div class="w-full flex text-xs border-b border-gray-100 p-3 items-center" *ngFor="let project of projectsList">
                 <div class="w-3/12 cursor-pointer hover:text-blue-600" [routerLink]="[project._id]">{{project.projectName}}</div>
                 <div class="w-2/12">{{filterRequiredIds('client', project.clientId)}}</div>
                 <div class="w-2/12">{{project.teamMembers.length}} <span class="text-xs">Members</span></div>
