@@ -92,7 +92,7 @@
             </div>
 
             <!-- Project Details Tabs -->
-            <div class="w-full mt-4 bg-gray-100">
+            <div class="w-full mt-4 bg-gray-50">
                 <mat-tab-group class=" border border-gray-200 rounded-md" mat-align-tabs="start">
 
                     <!-- Releases Tab -->
@@ -230,36 +230,53 @@
                     <mat-tab label="Domains">
                         <div class="w-full h-full p-4 flex flex-wrap border-t border-gray-200">
                             <div class="w-full border border-gray-200 rounded-md bg-white" *ngIf="domainsList?.length">
-                                <div class="w-full flex justify-between px-4 py-2 bg-gray-50 border-b border-gray-200 rounded-t-md text-gray-800 font-bold text-xs">
-                                    <div class="w-4/12">Domain URL</div>
-                                    <div class="w-2/12">Environment</div>
-                                    <div class="w-3/12">Project</div>
-                                    <div class="w-2/12">Status</div>
-                                    <div class="w-1/12">Actions</div>
+
+                                <!-- Filter Block -->
+                                <div class="w-full p-4 border-b border-gray-200 flex justify-between">
+                                    <div class="">
+                                        <div class="text-lg">Domains List</div>
+                                        <div class="text-xs text-gray-500">Simplify Your Instance Management, the hub for all Environments types.</div>
+                                    </div>
+                                    <div class="">
+                                        <button mat-stroked-button class="" color="primary">+ Filter</button>
+                                    </div>
+                                    
                                 </div>
-                                <div class="w-full flex justify-between items-center px-4 py-3 border-b border-gray-200 text-xs" *ngFor="let domain of domainsList">
-                                    <div class="w-4/12">
-                                        <div class="text-blue-600">
-                                            <a class="hover:text-blue-700 hover:underline" href="{{domain.domainURL}}" target="_blank">{{domain.domainURL}}</a>
+
+                                <div class="w-full bg-white" *ngIf="domainsList?.length">
+                                    <div class="w-full flex justify-between px-4 py-2 bg-gray-50 border-b border-gray-200 rounded-t-md text-gray-800 font-bold text-xs">
+                                        <div class="w-4/12">Domain URL</div>
+                                        <div class="w-2/12">Environment</div>
+                                        <div class="w-3/12">Project</div>
+                                        <div class="w-2/12">Status</div>
+                                        <div class="w-1/12">Actions</div>
+                                    </div>
+                                    <div class="w-full flex justify-between items-center px-4 py-3 border-b border-gray-200 text-xs" *ngFor="let domain of domainsList">
+                                        <div class="w-4/12">
+                                            <div class="text-blue-600">
+                                                <a class="hover:text-blue-700 hover:underline" href="{{domain.domainURL}}" target="_blank">{{domain.domainURL}}</a>
+                                            </div>
+                                            <div class="text-gray-600 mt-2"><span class="text-gray-700 font-bold">Version:</span> {{domain.branch}}</div>
                                         </div>
-                                        <div class="text-gray-600 mt-2"><span class="text-gray-700 font-bold">Version:</span> {{domain.branch}}</div>
-                                    </div>
-                                    <div class="w-2/12">
-                                        <span class="px-2 py-1 bg-gray-50 border border-gray-200 rounded-md">{{filterRequiredIds('domain_type', domain.environmentType)}}</span>
-                                    </div>
-                                    <div class="w-3/12">
-                                        <span class="">{{projectDetails.projectName}}</span>
-                                    </div>
-                                    <div class="w-2/12">
-                                        <span class="w-fit rounded-full uppercase py.05 px-2 text-xs" [ngClass]="getStatusStyle(filterRequiredIds('domain_status', domain.status))">{{filterRequiredIds('domain_status', domain.status)}}</span>
-                                    </div>
-                                    <div class="w-1/12">
-                                        <button mat-icon-button>
-                                            <mat-icon>more_vert</mat-icon>
-                                        </button>
+                                        <div class="w-2/12">
+                                            <span class="px-2 py-1 bg-gray-50 border border-gray-200 rounded-md">{{filterRequiredIds('domain_type', domain.environmentType)}}</span>
+                                        </div>
+                                        <div class="w-3/12">
+                                            <span class="">{{projectDetails.projectName}}</span>
+                                        </div>
+                                        <div class="w-2/12">
+                                            <span class="w-fit rounded-full uppercase py.05 px-2 text-xs" [ngClass]="getStatusStyle(filterRequiredIds('domain_status', domain.status))">{{filterRequiredIds('domain_status', domain.status)}}</span>
+                                        </div>
+                                        <div class="w-1/12">
+                                            <button mat-icon-button>
+                                                <mat-icon>more_vert</mat-icon>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
+                            
     
                             <!-- If no projects created under client -->
                             <div class="w-full py-14" *ngIf="!domainsList?.length">
@@ -277,8 +294,8 @@
                     </mat-tab>
 
                     <!-- Projects Tab -->
-                    <mat-tab label="Analytics">
-                        Analytics Content
+                    <mat-tab label="Requirements">
+                        Requirements Content
                     </mat-tab>
     
                     <!-- Timeline Tab -->
