@@ -85,5 +85,29 @@ export class NavigationComponent implements OnInit {
   }
 
 
+  /*
+    Dialog Method: Nav New Menu
+  */
+  logOut(memberId: any): any {
+    this.dialog.open(DialogSharedComponent, {
+      panelClass: ['w-5/12'],
+      data: {
+        type: 'confirmation',
+        confirmationContent: {
+          title: 'Are you sure you want to Logout from this system ?',
+          subtitle: ''
+        }
+      },
+    }).afterClosed().subscribe((result: boolean) => {
+      console.log(result);
+
+      if(result) {
+        this.memberSignOut(memberId);
+      }
+      
+    });
+  }
+
+
   
 }

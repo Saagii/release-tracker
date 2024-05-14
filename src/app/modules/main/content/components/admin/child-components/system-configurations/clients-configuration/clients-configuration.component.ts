@@ -59,7 +59,6 @@ export class ClientsConfigurationComponent implements OnInit {
   addClientConfigType(): void {
 
     const clientConfigTypePayload = {
-      memberConfigId: this.clientConfig._id,
       types: [
         {
           value: this.clientConfigTypeForm.get('clientType')?.value,
