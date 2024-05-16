@@ -1,5 +1,5 @@
 <div class="w-full px-4">
-    <div class="w-full my-2 p-4" *ngIf="releaseDetails">
+    <div class="w-full p-4" *ngIf="releaseDetails">
 
         <!-- Release Content -->
         <div class="w-full mt-2">
@@ -9,7 +9,7 @@
 
                 <!-- Title Content -->
                 <div class="w-6/12">
-                    <div class="w-fit font-bold" [routerLink]="['../']"><span class="text-blue-600 cursor-pointer uppercase hover:underline">Releases</span></div>
+                    <div class="w-fit font-bold flex items-center" [routerLink]="['../']"><span class="text-blue-600 cursor-pointer uppercase hover:underline">Releases</span> <span class="mx-2 font-bold text-3xl">&#xB7;</span> <span class="text-normal uppercase">View</span></div>
                     <div class="w-full text-2xl mt-1">{{releaseDetails.releaseTitle}}</div>
                     <div class="text-xs text-gray-600">
                         Created by: <span class="hover:underline hover:text-blue-600 cursor-pointer w-fit" [routerLink]="['../../admin/members', releaseDetails.releaseCreatedById]">{{filterRequiredIds('member', releaseDetails.releaseCreatedById)}}</span> on {{releaseDetails.releaseCreatedOnDate | date:'medium'}}
@@ -128,12 +128,15 @@
                 </div>
             </div>
 
-            <!-- Release Advanced Details -->
+            <!-- Release Release Aspects -->
             <div class="w-full mt-4 border border-gray-200 rounded-lg p-4 mb-14">
 
                 <!-- Title -->
-                <div class="w-full flex justify-between">
-                    <div class="w-full text-lg">Advanced Details</div>
+                <div class="w-full flex justify-between items-center">
+                    <div class="w-6/12">
+                        <div class="text-lg">Release Aspects</div>
+                        <div class="text-xs text-gray-600">Examine & capture every angle aligned with your services or products release.</div>
+                    </div>
                     <div class="w-6/12 flex justify-end" *ngIf="activeComponent === '' ">
                         <div class="w-6/12 flex justify-end">
                             <form [formGroup]="releaseDetailSearchForm" class="w-full flex justify-end items-center relative">
@@ -148,8 +151,8 @@
                 </div>
                 
 
-                <!-- Advanced Details Cards -->
-                <div class="w-full flex flex-wrap justify-start items-stretch mt-2" *ngIf="activeComponent === '' ">
+                <!-- Release Aspects Cards -->
+                <div class="w-full flex flex-wrap justify-start items-stretch mt-4" *ngIf="activeComponent === '' ">
                     <div class="w-6/12 p-2" *ngFor="let menu of advancedDetailsMenu">
                         <div class="w-full flex items-center text-gray-800 border border-gray-200 rounded-lg p-4 cursor-pointer hover:border-blue-400 hover:text-blue-600 hover:font-bold">
                             <div class="w-11/12">
