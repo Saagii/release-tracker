@@ -1,0 +1,26 @@
+<div class="w-full px-4">
+    <div class="w-full p-4" *ngIf="releaseDetails">
+
+        <!-- Release Content -->
+        <div class="w-full mt-2">
+
+            <!-- Title & Release Actions -->
+            <div class="w-full flex justify-between">
+
+                <!-- Title Content -->
+                <div class="w-6/12">
+                    <div class="w-fit font-bold flex items-center" [routerLink]="['../../']"><span class="text-blue-600 cursor-pointer uppercase hover:underline">Releases</span> <span class="mx-2 font-bold text-3xl">&#xB7;</span> <span class="text-blue-600 cursor-pointer uppercase hover:underline"  [routerLink]="['../']">{{releaseDetails.releaseTitle}}</span> <span class="mx-2 font-bold text-3xl">&#xB7;</span> <span class="text-normal uppercase">Sign-Off</span></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Loader -->
+    <div class="w-full flex justify-center py-28" *ngIf="!releaseDetails">
+        <div class="flex items-center">
+            <mat-spinner [diameter]="20"></mat-spinner>
+            <span class="ml-2">Loading Release details. Please Wait ...</span>
+        </div>
+    </div>
+</div>

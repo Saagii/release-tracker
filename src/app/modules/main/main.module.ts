@@ -35,6 +35,7 @@ import { ReleasePerformanceOptimizationComponent } from './content/components/re
 import { ReleaseUserSupportComponent } from './content/components/releases/components/release-view/child-components/user-support/user-support.component';
 import { ReleaseVersionControlComponent } from './content/components/releases/components/release-view/child-components/version-control/version-control.component';
 import { ReleaseSecurityDisclosureComponent } from './content/components/releases/components/release-view/child-components/security-disclosure/security-disclosure.component';
+import { ReleaseSignOffComponent } from './content/components/releases/components/release-sign-off/release-sign-off.component';
 
 
 
@@ -72,7 +73,8 @@ import { ReleaseSecurityDisclosureComponent } from './content/components/release
     ReleasePerformanceOptimizationComponent,
     ReleaseUserSupportComponent,
     ReleaseVersionControlComponent,
-    ReleaseSecurityDisclosureComponent
+    ReleaseSecurityDisclosureComponent,
+    ReleaseSignOffComponent
   ],
   imports: [
     CommonModule,
@@ -112,7 +114,8 @@ import { ReleaseSecurityDisclosureComponent } from './content/components/release
     ReleasePerformanceOptimizationComponent,
     ReleaseUserSupportComponent,
     ReleaseVersionControlComponent,
-    ReleaseSecurityDisclosureComponent
+    ReleaseSecurityDisclosureComponent,
+    ReleaseSignOffComponent
   ]
 })
 export class MainModule { }

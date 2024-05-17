@@ -20,6 +20,7 @@ import { DomainsComponent } from './content/components/domains/domains.component
 import { DomainCreateEditComponent } from './content/components/domains/components/domains-create-edit/domains-create-edit.component';
 import { AuthGuard } from '../shared/authGaurd/auth.gaurd';
 import { SystemConfigurationsComponent } from './content/components/admin/child-components/system-configurations/system-configurations.component';
+import { ReleaseSignOffComponent } from './content/components/releases/components/release-sign-off/release-sign-off.component';
 
 const mainRoutes: Routes = [
   { 
@@ -86,7 +87,10 @@ const mainRoutes: Routes = [
   },
   {
     path: 'projects/:id', component: ProjectViewComponent
-  }
+  },
+  {
+    path: 'releases/:id/sign-off', component: ReleaseSignOffComponent
+  },
 
 ];
 
