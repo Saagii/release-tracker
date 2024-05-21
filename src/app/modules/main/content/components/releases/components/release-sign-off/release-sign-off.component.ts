@@ -6,6 +6,7 @@ import { MembersService } from 'src/app/modules/main/services/members.service';
 import { ProjectsService } from 'src/app/modules/main/services/projects.service';
 import { ReleasesService } from 'src/app/modules/main/services/releases.service';
 import { StatusService } from 'src/app/modules/shared/services/status.service';
+import { signOffProcessMenu } from './data/sign-off-process-menu';
 
 @Component({
     selector: 'app-release-sign-off',
@@ -23,6 +24,7 @@ import { StatusService } from 'src/app/modules/shared/services/status.service';
     projectDetails: any;
     activeComponent: any = '';
     activeComponentInputs: any;
+    signOffProcessMenu = signOffProcessMenu;
     
     constructor(
         private statusService: StatusService,
@@ -32,7 +34,9 @@ import { StatusService } from 'src/app/modules/shared/services/status.service';
         private membersService: MembersService,
         private projectsService: ProjectsService,
         private fb: UntypedFormBuilder
-    ) {}
+    ) {
+      this.activeComponent = signOffProcessMenu[0];
+    }
 
     ngOnInit(): void {
         this.releaseId = this._activatedRoute.snapshot.params['id'];
