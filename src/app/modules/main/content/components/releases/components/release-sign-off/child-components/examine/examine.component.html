@@ -1,18 +1,34 @@
 <div class="w-full">
-    <div class="w-full border-b border-gray-200 p-2 text-lg">Examine Release Aspects</div>
-    <div class="w-full p-4 mt-4">
+    <div class="w-full border-b border-gray-200 p-4">Examine Release Aspects</div>
+    <div class="w-full p-4">
         <div class="w-full flex">
             <div class="w-2/12 flex flex-wrap border border-gray-200 rounded-md mr-4">
-                <div class="w-full text-center text-2xl px-10 py-6">12</div>
+                <div class="w-full text-center text-2xl px-10 py-6">{{releaseAspectCount.total}}</div>
                 <div class="w-full text-center pb-2 text-gray-600 font-bold text-xs">TOTAL</div>
             </div>
             <div class="w-2/12 flex flex-wrap border border-gray-200 rounded-md mr-4">
-                <div class="w-full text-center text-2xl px-10 py-6">8</div>
+                <div class="w-full text-center text-2xl px-10 py-6">{{releaseAspectCount.completed}}</div>
                 <div class="w-full text-center pb-2 text-gray-600 font-bold text-xs">COMPLETED</div>
             </div>
             <div class="w-2/12 flex flex-wrap border border-gray-200 rounded-md mr-4">
-                <div class="w-full text-center text-2xl px-10 py-6">4</div>
+                <div class="w-full text-center text-2xl px-10 py-6">{{releaseAspectCount.pending}}</div>
                 <div class="w-full text-center pb-2 text-gray-600 font-bold text-xs">PENDING</div>
+            </div>
+        </div>
+
+        <div class="w-full flex mt-2">
+            <!-- Release Aspects Cards -->
+            <div class="w-full flex flex-wrap justify-start items-stretch mt-4">
+                <div class="w-6/12 p-2" *ngFor="let menu of advancedDetailsMenu">
+                    <div class="w-full flex items-center text-gray-800 border border-gray-200 rounded-lg p-4 cursor-pointer hover:border-blue-400 hover:text-blue-600 hover:font-bold">
+                        <div class="w-11/12">
+                            <div class="w-full">{{menu.title}}</div>
+                        </div>
+                        <div class="w-1/12 flex justify-end">
+                            <span class="border border-gray-200 px-2 py-1 rounded-md text-xs font-bold" [ngClass]="{'bg-yellow-200 text-yellow-700' : !validateReleaseAspects(menu.identifierName)}">{{validateReleaseAspects(menu.identifierName) ? 'COMPLETED' : 'PENDING'}}</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
