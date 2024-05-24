@@ -23,11 +23,14 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { ConfirmationComponent } from './components/dialog/child-components/confirmation/confirmation.component';
 import { NavMenuComponent } from './components/dialog/child-components/nav-menu/nav-menu.component';
 import { RouterModule } from '@angular/router';
+import { PieChartComponent } from './components/charts/pie-chart/pie-chart.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
     NavMenuComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    PieChartComponent
   ],
   imports: [
     HttpClientModule,
@@ -51,7 +54,8 @@ import { RouterModule } from '@angular/router';
     MatSliderModule,
     MatDatepickerModule,
     MatRippleModule,
-    RouterModule 
+    RouterModule,
+    NgApexchartsModule 
   ],
   exports: [
 
@@ -78,10 +82,12 @@ import { RouterModule } from '@angular/router';
     MatDatepickerModule,
     MatRippleModule,
     RouterModule,
+    NgApexchartsModule,
 
     // Components Exports
     NavMenuComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    PieChartComponent
   ]
 })
 export class SharedModule { }

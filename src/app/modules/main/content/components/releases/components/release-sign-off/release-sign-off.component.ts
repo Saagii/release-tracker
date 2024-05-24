@@ -35,7 +35,7 @@ import { signOffProcessMenu } from './data/sign-off-process-menu';
         private projectsService: ProjectsService,
         private fb: UntypedFormBuilder
     ) {
-      this.activeComponent = signOffProcessMenu[0];
+      this.activeComponent = signOffProcessMenu[0].component;
     }
 
     ngOnInit(): void {
