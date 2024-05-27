@@ -19,6 +19,7 @@ export class ReleasesComponent implements OnInit {
   releaseConfigDetails: any;
   membersList: any;
   projectsList: any;
+  releaseStatsObject: any;
 
   constructor(
     private statusService: StatusService,
@@ -111,8 +112,44 @@ export class ReleasesComponent implements OnInit {
       
       setTimeout(() => {
         this.releaseItems = releasesList;
+
+        // Get release status analystics.
+        this.getReleasesStatusAnalytics();
       }, 500);
     });
+  }
+
+
+  /* Release Status analytics */
+  getReleasesStatusAnalytics(): void {
+    const groups: any = {};
+    let finalStatusStats;
+    const series = [];
+    const labels = [];
+    this.releaseItems.forEach((obj: any) => {
+        const key = obj.releaseStatusId;
+        if (!groups[key]) {
+            groups[key] = [];
+        }
+        groups[key].push(obj);
+    });
+    finalStatusStats = Object.values(groups);
+
+    console.log('Final Status');
+    console.log(finalStatusStats);
+
+    for(const item of finalStatusStats) {
+      const obj:any = item;
+      series.push(obj.length);
+      labels.push(this.filterRequiredIds('status', obj[0].releaseStatusId));
+    }
+
+    console.log('Series: ', series);
+    console.log('Labels: ', labels);
+    this.releaseStatsObject = {
+      series: series,
+      labels: labels
+    }
   }
 
 

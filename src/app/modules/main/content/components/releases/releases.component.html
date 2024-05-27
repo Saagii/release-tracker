@@ -68,7 +68,10 @@
             <div class="w-full text-lg px-2 text-gray-800">Release Stats</div>
 
             <!-- Stats Block -->
-            <app-pie-chart></app-pie-chart>
+            <div class="w-full" *ngIf="releaseStatsObject">
+                <app-pie-chart [chartInputData]="releaseStatsObject"></app-pie-chart>
+            </div>
+            
             <!-- <div class="w-full flex mt-4 p-1">
                 <div class="w-3/12 p-1">
                     <div class="rounded-md p-4 py-2" [ngClass]="getStatusStyle('Completed')">
