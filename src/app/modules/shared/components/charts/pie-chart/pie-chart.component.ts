@@ -15,7 +15,7 @@ export type ChartOptions = {
 })
 export class PieChartComponent implements OnInit {
     @ViewChild('chart') chart!: ChartComponent;
-    @Input() chartInputData?: {series: number[], labels: string[]};
+    @Input() chartInputData?: {series: number[], labels: string[], colors: string[]};
     public chartOptions: Partial<ChartOptions> = {};
     isChartEnabled: boolean = false;
 
@@ -42,7 +42,7 @@ export class PieChartComponent implements OnInit {
           type: 'pie',
         },
         labels: this.chartInputData?.labels,
-        colors: ['#FF4560', '#008FFB', '#00E396', '#FEB019', '#775DD0'],
+        colors: this.chartInputData?.colors,
         responsive: [{
         breakpoint: 480,
         options: {
@@ -57,5 +57,5 @@ export class PieChartComponent implements OnInit {
       };
 
       this.isChartEnabled = true;
-    } 
+    }
 }

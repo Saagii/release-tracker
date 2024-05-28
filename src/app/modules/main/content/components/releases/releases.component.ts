@@ -20,6 +20,14 @@ export class ReleasesComponent implements OnInit {
   membersList: any;
   projectsList: any;
   releaseStatsObject: any;
+  releaseStatusColor = [
+    { statusValue: 'Initiated', color: '#cc8a29' },
+    { statusValue: 'On Track', color: '#458D4A' },
+    { statusValue: 'On Hold', color: '#5b5563' },
+    { statusValue: 'Delayed', color: '#EF4E7C' },
+    { statusValue: 'Completed', color: '#2563eb' },
+    { statusValue: 'Rejected', color: '#DD0000' }
+  ]
 
   constructor(
     private statusService: StatusService,
@@ -126,6 +134,7 @@ export class ReleasesComponent implements OnInit {
     let finalStatusStats;
     const series = [];
     const labels = [];
+    const colors = [];
     this.releaseItems.forEach((obj: any) => {
         const key = obj.releaseStatusId;
         if (!groups[key]) {
@@ -146,9 +155,21 @@ export class ReleasesComponent implements OnInit {
 
     console.log('Series: ', series);
     console.log('Labels: ', labels);
+
+    for(let label of labels) {
+      let color = this.releaseStatusColor.filter((status: any) => {
+        return status.statusValue === label;
+      })[0]?.color;
+
+      if(color) {
+        colors.push(color);
+      }
+    }
+
     this.releaseStatsObject = {
       series: series,
-      labels: labels
+      labels: labels,
+      colors: colors
     }
   }
 
