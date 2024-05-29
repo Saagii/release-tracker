@@ -114,4 +114,12 @@ export class ReleasesService {
     updateReleaseDetails(releaseId: string, releaseDetailsPayload: any): any {
         return this._httpClient.put(`${environment.basePath}/api/releases/${releaseId}`, releaseDetailsPayload);
     }
+
+
+    /*
+        Generate Release Notes.
+    */
+    generateReleaseNotes(releaseId: string, releaseNotesPayload: any): any {
+        return this._httpClient.post(`${environment.basePath}/api/releases/${releaseId}/releaseNotes/generate`, releaseNotesPayload, { responseType: 'blob' });
+    }
 }

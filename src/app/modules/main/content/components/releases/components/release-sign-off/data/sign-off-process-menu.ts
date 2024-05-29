@@ -1,4 +1,5 @@
 import { ExamineComponent } from "../child-components/examine/examine.component";
+import { PreviewReleaseNotesComponent } from "../child-components/preview/preview.component";
 
 export const signOffProcessMenu = [
     {
@@ -9,7 +10,7 @@ export const signOffProcessMenu = [
     {
         name: 'Preview: Release Notes',
         icon: 'view_list',
-        component: ''
+        component: PreviewReleaseNotesComponent
     },
     {
         name: 'Sign-Off Approvals',
