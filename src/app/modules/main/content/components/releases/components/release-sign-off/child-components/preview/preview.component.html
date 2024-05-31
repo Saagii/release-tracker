@@ -1,6 +1,14 @@
 <div class="w-full">
     <div class="w-full border-b border-gray-200 p-4">Preview: Release Notes</div>
     <div class="w-full p-4">
-        <button mat-flat-button class="" color="primary" (click)="generateReleaseNotes()">Generate Release Notes</button>
+        <button mat-flat-button class="" color="primary" *ngIf="generating" (click)="generateReleaseNotes()">Generate Release Notes</button>
+
+        <!-- Loader -->
+        <div class="w-full flex justify-center py-28" *ngIf="!generating">
+            <div class="flex items-center">
+                <mat-spinner [diameter]="20"></mat-spinner>
+                <span class="ml-2">Generating Release Notes. Please Wait ...</span>
+            </div>
+        </div>
     </div>
 </div>

@@ -10,6 +10,7 @@ import { ReleasesService } from 'src/app/modules/main/services/releases.service'
   export class PreviewReleaseNotesComponent implements OnInit  {
     
     releaseId: string = '';
+    generating: boolean = true;
 
     constructor(
       private _activatedRoute: ActivatedRoute,
@@ -26,6 +27,7 @@ import { ReleasesService } from 'src/app/modules/main/services/releases.service'
         Generate release notes.
     */
     generateReleaseNotes(): void {
+      this.generating = false;
         this.releasesService.generateReleaseNotes(this.releaseId, {}).subscribe((response: any) => {
             console.log(response);
             const blob = new Blob([response], { type: 'application/pdf' });
@@ -35,6 +37,7 @@ import { ReleasesService } from 'src/app/modules/main/services/releases.service'
             a.download = 'sample.pdf';
             a.click();
             window.URL.revokeObjectURL(url);
+            this.generating = true;
         })
     }
     
