@@ -3,15 +3,15 @@ import { PreviewReleaseNotesComponent } from "../child-components/preview/previe
 
 export const signOffProcessMenu = [
     {
-        name: 'Examine',
+        name: 'Examine & Preview',
         icon: 'my_library_books',
         component: ExamineComponent
     },
-    {
-        name: 'Preview: Release Notes',
-        icon: 'view_list',
-        component: PreviewReleaseNotesComponent
-    },
+    // {
+    //     name: 'Preview: Release Notes',
+    //     icon: 'view_list',
+    //     component: PreviewReleaseNotesComponent
+    // },
     {
         name: 'Sign-Off Approvals',
         icon: 'assignment_turned_in',

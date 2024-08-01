@@ -18,6 +18,7 @@ import { releaseAdvancedDetailsMenu } from '../../../../data/release-advanced-de
       completed: 0,
       pending: 0
     };
+    generating: boolean = true;
 
     constructor(
       private _activatedRoute: ActivatedRoute,
@@ -70,6 +71,25 @@ import { releaseAdvancedDetailsMenu } from '../../../../data/release-advanced-de
     */
     validateReleaseAspects(releaseAspect: string): boolean {
       return this.releaseDetails[releaseAspect].length ? true : false;
+    }
+
+
+    /*
+        Generate release notes.
+    */
+    generateReleaseNotes(): void {
+      this.generating = false;
+        this.releasesService.generateReleaseNotes(this.releaseId, {}).subscribe((response: any) => {
+            console.log(response);
+            const blob = new Blob([response], { type: 'application/pdf' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'sample.pdf';
+            a.click();
+            window.URL.revokeObjectURL(url);
+            this.generating = true;
+        })
     }
     
   }

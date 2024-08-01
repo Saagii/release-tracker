@@ -14,6 +14,14 @@
                 <div class="w-full text-center text-2xl px-10 py-6">{{releaseAspectCount.pending}}</div>
                 <div class="w-full text-center pb-2 text-gray-600 font-bold text-xs">PENDING</div>
             </div>
+            <div class="w-6/12 flex justify-end">
+                <button mat-flat-button class="" color="primary" *ngIf="generating" (click)="generateReleaseNotes()">Preview Release Notes</button>
+                <!-- Loader -->
+                <div class="w-full flex justify-end mt-2" *ngIf="!generating">
+                    <mat-spinner [diameter]="20"></mat-spinner>
+                    <span class="ml-2">Generating Release Notes. Please Wait ...</span>
+                </div>
+            </div>
         </div>
 
         <div class="w-full flex mt-2">
